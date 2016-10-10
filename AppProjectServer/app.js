@@ -11,18 +11,18 @@ var routes = require('./routes/index');
 
 var app = express();
 
-// mongoose.Promise = global.Promise;
-// mongoose.connect('mongodb://localhost/appProject', function(err) {
-//   if(err) {
-//     console.log("DB ERROR :", err);
-//     throw err;
-//   }
-//   else
-//     console.log("DB connected!");
-// });
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/appProject', function(err) {
+  if(err) {
+    console.log("DB ERROR :", err);
+    throw err;
+  }
+  else
+    console.log("DB connected!");
+});
 
-//require('./models/user_model');
-//var User = mongoose.model('User');
+// require('./models/user_model');
+// var User = mongoose.model('User');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
