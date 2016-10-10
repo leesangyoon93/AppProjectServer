@@ -15,7 +15,7 @@ var bcrypt = require('bcrypt-nodejs');
 
 var app = express();
 
-//mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/appProject', function(err) {
   if(err) {
     console.log("DB ERROR :", err);
