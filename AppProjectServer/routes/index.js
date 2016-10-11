@@ -5,6 +5,7 @@ var bcrypt = require("bcrypt-nodejs");
 var User = mongoose.model('User');
 var NursingHome = mongoose.model('NursingHome');
 var Patient = mongoose.model('Patient');
+var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {

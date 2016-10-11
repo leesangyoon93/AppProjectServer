@@ -7,8 +7,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
-var routes = require('./routes/index');
-
 var app = express();
 
 mongoose.Promise = global.Promise;
@@ -24,6 +22,7 @@ mongoose.connect('mongodb://localhost/appProject', function(err) {
 require('./models/model_user');
 require('./models/model_nursingHome');
 require('./models/model_patient');
+var User = mongoose.model('User');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -37,6 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var routes = require('./routes/index');
 app.use('/', routes);
 
 // catch 404 and forward to error handler
