@@ -69,6 +69,15 @@ router.post('/createNursingHome', function (req, res) {
     })
 });
 
+router.get('/getNursingHomeWorkers', function(req, res) {
+    var id = new ObjectId(req.query.nursingHomeId);
+    User.find({'nursingHome': id, 'auth': 1}, function(err, users) {
+        if(err) return res.json({'result': 'fail'});
+        if(users) return res.json(users);
+        else return res.json({'result': 'fail'});
+    })
+});
+
 router.post('/createWorker', function (req, res) {
     var id = new ObjectId(req.body.nursingHomeId);
     NursingHome.findById(id, function (err, nursingHome) {

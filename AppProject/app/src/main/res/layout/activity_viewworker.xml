@@ -24,4 +24,11 @@
             android:id="@+id/btn_createWorker"
             android:layout_gravity="center_vertical|right" />
     </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/list_worker"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

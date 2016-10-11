@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,19 +115,6 @@ public class Login extends AppCompatActivity {
                         User.getInstance().setNursingHomeId(response.getString("nursingHome"));
 
                         getNursingHomeToServer();
-
-                        SharedPreferences.Editor editor = userSession.edit();
-                        editor.putString("userId", User.getInstance().getUserId());
-                        editor.apply();
-
-                        if(response.getInt("auth") == 0) {
-                            Intent intent = new Intent(Login.this, ViewWorker.class);
-                            startActivity(intent);
-                        }
-                        else {
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            startActivity(intent);
-                        }
                     }
 
                 } catch (Exception e) {
@@ -165,22 +153,12 @@ public class Login extends AppCompatActivity {
                     }
                     else {
                         User.getInstance().setUserId(response.getString("userId"));
+                        User.getInstance().setUserName(response.getString("userName"));
+                        User.getInstance().setPhoneNumber(response.getString("phoneNumber"));
                         User.getInstance().setAuth(response.getInt("auth"));
                         User.getInstance().setNursingHomeId(response.getString("nursingHome"));
 
                         getNursingHomeToServer();
-                        SharedPreferences.Editor editor = userSession.edit();
-                        editor.putString("userId", User.getInstance().getUserId());
-                        editor.apply();
-
-                        if(response.getInt("auth") == 0) {
-                            Intent intent = new Intent(Login.this, ViewWorker.class);
-                            startActivity(intent);
-                        }
-                        else {
-                            Intent intent = new Intent(Login.this, MainActivity.class);
-                            startActivity(intent);
-                        }
 
                     }
 
@@ -201,10 +179,10 @@ public class Login extends AppCompatActivity {
 
     private void getNursingHomeToServer() throws Exception {
 
-        final String URL = "http://52.41.19.232/login";
+        final String URL = "http://52.41.19.232/getNursingHome";
 
         Map<String, String> postParam = new HashMap<String, String>();
-        postParam.put("userId", User.getInstance().getNursingHomeId());
+        postParam.put("nursingHomeId", User.getInstance().getNursingHomeId());
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {
@@ -219,6 +197,19 @@ public class Login extends AppCompatActivity {
                     }
                     else {
                         User.getInstance().setNursingHomeName(response.getString("homeName"));
+
+                        SharedPreferences.Editor editor = userSession.edit();
+                        editor.putString("userId", User.getInstance().getUserId());
+                        editor.apply();
+
+                        if(User.getInstance().getAuth() == 0) {
+                            Intent intent = new Intent(Login.this, ViewWorker.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            startActivity(intent);
+                        }
                         // 로그인 하면 가입되어잇는 요양원 객체 받아와서 싱글톤에 저장
                     }
 
