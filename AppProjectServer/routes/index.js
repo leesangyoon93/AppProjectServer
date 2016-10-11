@@ -30,7 +30,16 @@ router.post('/getUser', function(req, res) {
         if(user) return res.json(user);
         else return res.json({'result': 'fail'});
     })
-})
+});
+
+router.post('/getNursingHome', function(req, res) {
+    var id = new ObjectId(req.body.nursingHomeId);
+    NursingHome.findById(id, function(err, nursingHome) {
+        if(err) return res.json({'result': 'fail'});
+        if(nursingHome) return res.json(nursingHome);
+        else return res.json({'result': 'fail'});
+    })
+});
 
 router.post('/createNursingHome', function (req, res) {
     NursingHome.findOne({'homeName': req.body.homeName}, function (err, nursingHome) {

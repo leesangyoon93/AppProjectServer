@@ -97,7 +97,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-
                     if (response.toString().contains("result")) {
                         if (response.getString("result").equals("fail")) {
                             Toast.makeText(Login.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
@@ -114,15 +113,23 @@ public class Login extends AppCompatActivity {
                         User.getInstance().setAuth(response.getInt("auth"));
                         User.getInstance().setNursingHomeId(response.getString("nursingHome"));
 
+                        getNursingHomeToServer();
+
                         SharedPreferences.Editor editor = userSession.edit();
                         editor.putString("userId", User.getInstance().getUserId());
                         editor.apply();
 
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        startActivity(intent);
+                        if(response.getInt("auth") == 0) {
+                            Intent intent = new Intent(Login.this, ViewWorker.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            startActivity(intent);
+                        }
                     }
 
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -161,12 +168,58 @@ public class Login extends AppCompatActivity {
                         User.getInstance().setAuth(response.getInt("auth"));
                         User.getInstance().setNursingHomeId(response.getString("nursingHome"));
 
+                        getNursingHomeToServer();
                         SharedPreferences.Editor editor = userSession.edit();
                         editor.putString("userId", User.getInstance().getUserId());
                         editor.apply();
 
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        startActivity(intent);
+                        if(response.getInt("auth") == 0) {
+                            Intent intent = new Intent(Login.this, ViewWorker.class);
+                            startActivity(intent);
+                        }
+                        else {
+                            Intent intent = new Intent(Login.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("development", "Error: " + error.getMessage());
+                    }
+                });
+
+        volley.getInstance().addToRequestQueue(req);
+    }
+
+    private void getNursingHomeToServer() throws Exception {
+
+        final String URL = "http://52.41.19.232/login";
+
+        Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("userId", User.getInstance().getNursingHomeId());
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
+                new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.toString().contains("result")) {
+                        if (response.getString("result").equals("fail")) {
+                            Toast.makeText(Login.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        User.getInstance().setNursingHomeName(response.getString("homeName"));
+                        // 로그인 하면 가입되어잇는 요양원 객체 받아와서 싱글톤에 저장
                     }
 
                 } catch (JSONException e) {
