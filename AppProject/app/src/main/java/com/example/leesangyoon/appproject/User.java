@@ -9,7 +9,8 @@ import java.util.ArrayList;
  */
 public class User {
 
-    private String Id = null;
+    private String userId = null;
+    private String nursingHomeId = null;
     private int auth;
 
     private User() {
@@ -24,12 +25,20 @@ public class User {
         return Singleton.user;
     }
 
-    public String getId() {
-        return Id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(String id) {
-        Id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getNursingHomeId() {
+        return nursingHomeId;
+    }
+
+    public void setNursingHomeId(String nursingHomeId) {
+        this.nursingHomeId = nursingHomeId;
     }
 
     public int getAuth() {

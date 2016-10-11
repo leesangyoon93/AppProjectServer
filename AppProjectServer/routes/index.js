@@ -24,6 +24,14 @@ router.post('/login', function (req, res) {
     })
 });
 
+router.post('/getUser', function(req, res) {
+    User.findOne({'userId': req.body.userId}, function(err, user) {
+        if(err) return res.json({'result': 'fail'});
+        if(user) return res.json(user);
+        else return res.json({'result': 'fail'});
+    })
+})
+
 router.post('/createNursingHome', function (req, res) {
     NursingHome.findOne({'homeName': req.body.homeName}, function (err, nursingHome) {
         if (err) return res.json({'result': 'fail'});

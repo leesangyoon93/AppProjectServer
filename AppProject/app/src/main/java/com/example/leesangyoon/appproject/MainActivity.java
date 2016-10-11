@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.List;
 import java.util.Vector;
@@ -19,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     // 수급자 관리 또는 정보열람 버튼 넣기
 
+    TextView testText;
+
     BackPressCloseHandler backPressCloseHandler;
     int mCurrentFragmentIndex;
 
@@ -26,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        testText = (TextView)findViewById(R.id.text_userId);
+        testText.setText(User.getInstance().getUserId());
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 

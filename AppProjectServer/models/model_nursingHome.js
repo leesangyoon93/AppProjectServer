@@ -7,9 +7,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var NursingHomeSchema = new Schema({
-    host: {
-        type: {type: Schema.Types.ObjectId, ref: 'User'}
-    },
+    host: {type: Schema.Types.ObjectId, ref: 'User'},
     homeName: {
         type: String,
         unique: true
