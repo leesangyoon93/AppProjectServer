@@ -21,8 +21,9 @@ mongoose.connect('mongodb://localhost/appProject', function(err) {
     console.log("DB connected!");
 });
 
-// require('./models/user_model');
-// var User = mongoose.model('User');
+require('./models/model_user');
+require('./models/model_nursingHome');
+require('./models/model_patient');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_home"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/menu_intro"
+        android:title="소개" />
+
+    <item
+        android:id="@+id/menu_notice"
+        android:title="공지사항" />
+    <item
+        android:id="@+id/menu_schedule"
+        android:title="일정" />
+    <item
+        android:id="@+id/menu_gallery"
+        android:title="갤러리" />
+    <item
+        android:id="@+id/menu_QA"
+        android:title="Q/A" />
+</menu>
