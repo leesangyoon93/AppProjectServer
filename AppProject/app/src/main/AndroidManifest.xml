@@ -24,6 +24,7 @@
         <activity android:name=".CreateNursingHome"/>
         <activity android:name=".ViewWorker"/>
         <activity android:name=".CreateWorker"/>
+        <activity android:name=".EditWorker"/>
     </application>
 
 </manifest>

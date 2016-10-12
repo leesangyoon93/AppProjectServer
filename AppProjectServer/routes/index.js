@@ -24,19 +24,19 @@ router.post('/login', function (req, res) {
     })
 });
 
-router.post('/getUser', function(req, res) {
-    User.findOne({'userId': req.body.userId}, function(err, user) {
-        if(err) return res.json({'result': 'fail'});
-        if(user) return res.json(user);
+router.post('/getUser', function (req, res) {
+    User.findOne({'userId': req.body.userId}, function (err, user) {
+        if (err) return res.json({'result': 'fail'});
+        if (user) return res.json(user);
         else return res.json({'result': 'fail'});
     })
 });
 
-router.post('/getNursingHome', function(req, res) {
+router.post('/getNursingHome', function (req, res) {
     var id = new ObjectId(req.body.nursingHomeId);
-    NursingHome.findById(id, function(err, nursingHome) {
-        if(err) return res.json({'result': 'fail'});
-        if(nursingHome) return res.json(nursingHome);
+    NursingHome.findById(id, function (err, nursingHome) {
+        if (err) return res.json({'result': 'fail'});
+        if (nursingHome) return res.json(nursingHome);
         else return res.json({'result': 'fail'});
     })
 });
@@ -69,11 +69,11 @@ router.post('/createNursingHome', function (req, res) {
     })
 });
 
-router.get('/getNursingHomeWorkers', function(req, res) {
+router.get('/getNursingHomeWorkers', function (req, res) {
     var id = new ObjectId(req.query.nursingHomeId);
-    User.find({'nursingHome': id, 'auth': 1}, function(err, users) {
-        if(err) return res.json({'result': 'fail'});
-        if(users) return res.json(users);
+    User.find({'nursingHome': id, 'auth': 1}, function (err, users) {
+        if (err) return res.json({'result': 'fail'});
+        if (users) return res.json(users);
         else return res.json({'result': 'fail'});
     })
 });
@@ -88,7 +88,6 @@ router.post('/createWorker', function (req, res) {
                 if (user) return res.json({'result': 'overlap'});
                 else {
                     var newWorker = new User();
-                    // 여기서 제대로 안들어가는듯
                     newWorker.nursingHome = nursingHome;
                     newWorker.userId = req.body.workerId;
                     newWorker.userName = req.body.workerName;
@@ -96,7 +95,6 @@ router.post('/createWorker', function (req, res) {
                     newWorker.phoneNumber = req.body.workerPhoneNumber;
                     newWorker.auth = 1;
                     newWorker.role = "요양사";
-                    console.log(newWorker);
                     newWorker.save();
                     return res.json({'result': 'success'});
                 }
@@ -106,19 +104,49 @@ router.post('/createWorker', function (req, res) {
     })
 });
 
+router.post('/deleteUser', function (req, res) {
+    User.findOne({'userid': req.body.workerId}, function (err, user) {
+        if (err) return res.json({'result': 'fail'});
+        if (user) {
+            var id = new ObjectId(user._id);
+            if (user.auth == 1) {
+                Patient.find({'worker': id}, function (err, patients) {
+                    if (err) return res.json({'result': 'fail'});
+                    if (patients) {
+                        for (var i in patients)
+                            patients[i].worker = "";
+                    }
+                    user.remove();
+                    return res.json({'result': 'success'});
+                })
+            }
+            else if(user.auth == 2) {
+                Patient.findOne({'protector': id}, function(err, patient) {
+                    if(err) return res.json({'result': 'fail'});
+                    if(patient)
+                        patient.remove();
+                    user.remove();
+                    return res.json({'result': 'success'});
+                })
+            }
+        }
+        else return res.json({'result': 'fail'})
+    })
+});
+
 router.post('/createPatient', function (req, res) {
     var id = new ObjectId(req.body.nursingHomeId);
-    NursingHome.findById(id, function(err, nursingHome) {
-        if(err) return res.json({'result': 'fail'});
-        if(nursingHome) {
-            User.findOne({'userId': protectorId}, function(err, user) {
-                if(err) return res.json({'result': 'fail'});
-                if(user)
+    NursingHome.findById(id, function (err, nursingHome) {
+        if (err) return res.json({'result': 'fail'});
+        if (nursingHome) {
+            User.findOne({'userId': protectorId}, function (err, user) {
+                if (err) return res.json({'result': 'fail'});
+                if (user)
                     return res.json({'result': 'overlap'});
                 else {
-                    User.findOne({'userId': workerId}, function(err, worker) {
-                        if(err) return res.json({'result': 'fail'});
-                        if(worker) {
+                    User.findOne({'userId': workerId}, function (err, worker) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (worker) {
                             var protector = new User();
                             protector.nursingHome = nursingHome;
                             protector.userId = req.body.protectorId;

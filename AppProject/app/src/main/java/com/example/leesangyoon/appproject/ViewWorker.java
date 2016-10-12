@@ -32,11 +32,15 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
     AdapterWorkerList adapterWorkerList;
     ArrayList<JSONObject> workers = new ArrayList<JSONObject>();
 
+    BackPressCloseHandler backPressCloseHandler;
+
     // adapter list 달아야됨.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_viewworker);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
         createWorkerButton = (Button)findViewById(R.id.btn_createWorker);
@@ -73,14 +77,20 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String workerId = null;
+        String workerName = null;
+        String workerPhoneNumber = null;
         try {
             workerId = adapterWorkerList.getItem(position).getString("userId");
+            workerName = adapterWorkerList.getItem(position).getString("userName");
+            workerPhoneNumber = adapterWorkerList.getItem(position).getString("phoneNumber");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         Intent intent = new Intent(ViewWorker.this, EditWorker.class);
         intent.putExtra("workerId", workerId);
+        intent.putExtra("workerName", workerName);
+        intent.putExtra("workerPhoneNumber", workerPhoneNumber);
         startActivity(intent);
     }
 
@@ -109,4 +119,9 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         volley.getInstance().addToRequestQueue(req);
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        backPressCloseHandler.onBackPressed();
+    }
 }
