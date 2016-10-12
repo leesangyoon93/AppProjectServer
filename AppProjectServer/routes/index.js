@@ -105,7 +105,7 @@ router.post('/createWorker', function (req, res) {
 });
 
 router.post('/deleteUser', function (req, res) {
-    User.findOne({'userId': req.body.workerId}, function (err, user) {
+    User.findOne({'userId': req.body.userId}, function (err, user) {
         if (err) return res.json({'result': 'fail'});
         if (user) {
             var id = new ObjectId(user._id);
