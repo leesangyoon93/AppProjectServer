@@ -14,9 +14,13 @@ public class User {
     private String phoneNumber = null;
     private String nursingHomeId = null;
     private String nursingHomeName = null;
+    private String nursingHomeAddress = null;
+    private String nursingHomePhoneNumber = null;
     private int auth;
 
+
     private User() {
+
     }
 
     private static class Singleton {
@@ -75,4 +79,21 @@ public class User {
     public void setAuth(int auth) {
         this.auth = auth;
     }
+
+    public String getNursingHomeAddress() {
+        return nursingHomeAddress;
+    }
+
+    public void setNursingHomeAddress(String nursingHomeAddress) {
+        this.nursingHomeAddress = nursingHomeAddress;
+    }
+
+    public String getNursingHomePhoneNumber() {
+        return nursingHomePhoneNumber;
+    }
+
+    public void setNursingHomePhoneNumber(String nursingHomePhoneNumber) {
+        this.nursingHomePhoneNumber = nursingHomePhoneNumber;
+    }
+
 }

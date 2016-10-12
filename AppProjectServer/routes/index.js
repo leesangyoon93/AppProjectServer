@@ -24,6 +24,11 @@ router.post('/login', function (req, res) {
     })
 });
 
+router.get('/logout', function (req, res) {
+    req.logout();
+    return res.json({'result': 'success'});
+});
+
 router.post('/getUser', function (req, res) {
     User.findOne({'userId': req.body.userId}, function (err, user) {
         if (err) return res.json({'result': 'fail'});

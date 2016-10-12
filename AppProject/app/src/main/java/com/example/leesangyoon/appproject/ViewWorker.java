@@ -27,14 +27,13 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
     ListView workerList;
     TextView nursingHomeName;
-    Button createWorkerButton;
+    Button createWorkerButton, settingNursingHomeButton;
 
     AdapterWorkerList adapterWorkerList;
     ArrayList<JSONObject> workers = new ArrayList<JSONObject>();
 
     BackPressCloseHandler backPressCloseHandler;
 
-    // adapter list 달아야됨.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
@@ -44,6 +43,7 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
         createWorkerButton = (Button)findViewById(R.id.btn_createWorker);
+        settingNursingHomeButton = (Button)findViewById(R.id.btn_settingNursingHome);
 
         nursingHomeName.setText(User.getInstance().getNursingHomeName());
 
@@ -67,6 +67,14 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewWorker.this, CreateWorker.class);
+                startActivity(intent);
+            }
+        });
+
+        settingNursingHomeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewWorker.this, SettingNursingHome.class);
                 startActivity(intent);
             }
         });

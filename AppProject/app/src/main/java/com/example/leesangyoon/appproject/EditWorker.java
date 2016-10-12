@@ -1,7 +1,9 @@
 package com.example.leesangyoon.appproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -45,13 +47,31 @@ public class EditWorker extends AppCompatActivity {
         deleteWorkerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    deleteUserToServer(workerId.getText().toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                new AlertDialog.Builder(EditWorker.this)
+                        .setTitle("요양사 삭제 확인")
+                        .setMessage(" 요양사를 삭제하시겠습니까?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // yes 버튼 누르면
+                                try {
+                                    deleteUserToServer(workerId.getText().toString());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // no 버튼 누르면
+                            }
+                        })
+                        .show();
             }
         });
+
+
     }
 
     private void deleteUserToServer(final String userId) throws Exception {

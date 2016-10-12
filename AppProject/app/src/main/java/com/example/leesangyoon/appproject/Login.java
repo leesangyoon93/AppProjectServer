@@ -197,6 +197,8 @@ public class Login extends AppCompatActivity {
                     }
                     else {
                         User.getInstance().setNursingHomeName(response.getString("homeName"));
+                        User.getInstance().setNursingHomeAddress(response.getString("address"));
+                        User.getInstance().setNursingHomePhoneNumber(response.getString("phoneNumber"));
 
                         SharedPreferences.Editor editor = userSession.edit();
                         editor.putString("userId", User.getInstance().getUserId());
