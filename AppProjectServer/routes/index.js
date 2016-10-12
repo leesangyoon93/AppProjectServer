@@ -88,13 +88,15 @@ router.post('/createWorker', function (req, res) {
                 if (user) return res.json({'result': 'overlap'});
                 else {
                     var newWorker = new User();
+                    // 여기서 제대로 안들어가는듯
                     newWorker.nursingHome = nursingHome;
                     newWorker.userId = req.body.workerId;
-                    newWorker.userName = req.body.userName;
-                    newWorker.password = req.body.password;
-                    newWorker.phoneNumber = req.body.phoneNumber;
+                    newWorker.userName = req.body.workerName;
+                    newWorker.password = req.body.workerPassword;
+                    newWorker.phoneNumber = req.body.workerPhoneNumber;
                     newWorker.auth = 1;
                     newWorker.role = "요양사";
+                    console.log(newWorker);
                     newWorker.save();
                     return res.json({'result': 'success'});
                 }
