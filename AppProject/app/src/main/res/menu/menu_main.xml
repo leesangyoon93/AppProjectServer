@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appproject="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_home"
         android:title="홈" />
@@ -20,4 +21,9 @@
     <item
         android:id="@+id/menu_QA"
         android:title="Q/A" />
+    <item
+        android:id="@+id/menu_userSetting"
+        android:title="Setting"
+        android:icon="@android:drawable/ic_dialog_info"
+        appproject:showAsAction="ifRoom"/>
 </menu>

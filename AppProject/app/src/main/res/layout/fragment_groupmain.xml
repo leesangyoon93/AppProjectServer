@@ -9,4 +9,5 @@
         android:text="GroupMain"
         android:id="@+id/textView3"
         android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

@@ -41,6 +41,11 @@ public class Login extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.btn_login);
         registerButton = (Button) findViewById(R.id.btn_registerNursinHome);
 
+        userId = (EditText) findViewById(R.id.input_userId);
+        password = (EditText) findViewById(R.id.input_password);
+        userId.setLines(1);
+        password.setLines(1);
+
         userSession = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
 
         if(userSession.contains("userId")){
@@ -54,8 +59,6 @@ public class Login extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userId = (EditText) findViewById(R.id.input_userId);
-                password = (EditText) findViewById(R.id.input_password);
                 String id = userId.getText().toString();
                 String pw = password.getText().toString();
 

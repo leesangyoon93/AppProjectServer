@@ -3,6 +3,7 @@ package com.example.leesangyoon.appproject;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -33,6 +34,10 @@ public class EditWorker extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_editworker);
+
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         workerId = (TextView)findViewById(R.id.text_detailWorkerId);
         workerName = (TextView)findViewById(R.id.text_detailWorkerName);

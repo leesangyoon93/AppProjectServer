@@ -2,7 +2,10 @@ package com.example.leesangyoon.appproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,7 +30,6 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
     ListView workerList;
     TextView nursingHomeName;
-    Button createWorkerButton, settingNursingHomeButton;
 
     AdapterWorkerList adapterWorkerList;
     ArrayList<JSONObject> workers = new ArrayList<JSONObject>();
@@ -41,9 +43,11 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
-        createWorkerButton = (Button)findViewById(R.id.btn_createWorker);
-        settingNursingHomeButton = (Button)findViewById(R.id.btn_settingNursingHome);
 
         nursingHomeName.setText(User.getInstance().getNursingHomeName());
 
@@ -62,22 +66,30 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         adapterWorkerList.notifyDataSetChanged();
 
         workerList.setAdapter(adapterWorkerList);
+    }
 
-        createWorkerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_admin, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_addWorker:
                 Intent intent = new Intent(ViewWorker.this, CreateWorker.class);
                 startActivity(intent);
-            }
-        });
-
-        settingNursingHomeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewWorker.this, SettingNursingHome.class);
+                break;
+            case R.id.menu_adminSetting:
+                intent = new Intent(ViewWorker.this, SettingNursingHome.class);
                 startActivity(intent);
-            }
-        });
+                break;
+            case android.R.id.home:
+                backPressCloseHandler.onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void createListView() {}

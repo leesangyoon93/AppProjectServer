@@ -16,11 +16,13 @@ import android.widget.TextView;
 import java.util.List;
 import java.util.Vector;
 
+// 비밀번호 변경 다이얼로그에 입력 1개밖에 안뜸.
+// 비밀번호 변경 서버 api 구현
+
 public class MainActivity extends AppCompatActivity {
 
     // 수급자 관리 또는 정보열람 버튼 넣기
-
-    TextView testText;
+    // 보호자 프로필일 경우에는 연결된 수급자 정보까지 프로필에 띄워주기, 요양사는 그냥 자기정보만.??
 
     BackPressCloseHandler backPressCloseHandler;
     int mCurrentFragmentIndex;
@@ -30,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        testText = (TextView)findViewById(R.id.text_userId);
-        testText.setText(User.getInstance().getUserId());
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
@@ -103,6 +106,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_QA:
                 mCurrentFragmentIndex = 5;
+                break;
+            case R.id.menu_userSetting:
+                Intent intent = new Intent(MainActivity.this, Profile.class);
+                startActivity(intent);
+                break;
+            case android.R.id.home:
+                backPressCloseHandler.onBackPressed();
                 break;
         }
         fragmentReplace(mCurrentFragmentIndex);

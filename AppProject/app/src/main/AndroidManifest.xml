@@ -26,6 +26,8 @@
         <activity android:name=".CreateWorker"/>
         <activity android:name=".EditWorker"/>
         <activity android:name=".SettingNursingHome"/>
+        <activity android:name=".Profile"/>
+        <!--android:parentActivityName=".MainActivity"-->
     </application>
 
 </manifest>

@@ -24,9 +24,19 @@ router.post('/login', function (req, res) {
     })
 });
 
-router.get('/logout', function (req, res) {
-    req.logout();
-    return res.json({'result': 'success'});
+router.post('/changePassword', function (req, res) {
+    User.findOne({'userId': req.body.userId}, function (err, user) {
+        if (err) return res.json({'result': 'fail'});
+        if (user) {
+            if (bcrypt.compareSync(req.body.currentPassword, user.password)) {
+                user.password = req.body.newPassword1;
+                user.save();
+                return res.json({'result': 'success'});
+            }
+            else return res.json({'result': 'failPw'});
+        }
+        else return res.json({'resut': 'fail'});
+    })
 });
 
 router.post('/getUser', function (req, res) {
