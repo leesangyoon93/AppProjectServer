@@ -257,7 +257,7 @@ router.post('/saveArticle', function (req, res) {
                     notice.title = req.body.title;
                     notice.content = req.body.content;
                     var date = new Date().toISOString();
-                    notice.articleDate = date.slice(0, 10);
+                    notice.modified = date.slice(0, 10);
                     notice.save();
                     return res.json({'result': 'success', 'articleId': notice._id});
                 }
@@ -268,6 +268,7 @@ router.post('/saveArticle', function (req, res) {
                     newNotice.author = req.body.userId;
                     var date = new Date().toISOString();
                     newNotice.date = date.slice(0, 10);
+                    notice.modified = "";
                     NursingHome.findById(req.body.nursingHomeId, function (err, nursingHome) {
                         if (err) return res.json({'result': 'fail'});
                         if (nursingHome) {
@@ -295,6 +296,8 @@ router.post('/saveComment', function(req, res) {
                     comment.notice = notice;
                     comment.author = req.body.userId;
                     comment.content = req.body.content;
+                    var date = new Date().toISOString();
+                    comment.date = date.slice(0, 10);
                     comment.save();
                     notice.commentCount += 1;
                     notice.save();

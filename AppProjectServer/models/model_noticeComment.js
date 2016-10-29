@@ -16,7 +16,7 @@ var NoticeCommentSchema = new Schema({
         type: String,
         unique: false
     },
-    created: String
+    date: String
 });
 
 mongoose.model('NoticeComment', NoticeCommentSchema);
