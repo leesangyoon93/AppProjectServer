@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -52,20 +53,6 @@ public class EditArticle extends AppCompatActivity {
         content.setText(Article.getInstance().getContent());
         title.setText(Article.getInstance().getTitle());
 
-//        completeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(title.getText().toString().isEmpty()){
-//                    Toast.makeText(EditArticle.this,"제목을 입력해주세요",Toast.LENGTH_SHORT).show();
-//                }else{
-//                    try {
-//                        saveArticleToServer();
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -104,6 +91,7 @@ public class EditArticle extends AppCompatActivity {
 
         String URL = "http://52.41.19.232/saveArticle";
 
+        Log.e("asdf", "asdf");
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postParam), new Response.Listener<JSONObject>() {
 
             @Override

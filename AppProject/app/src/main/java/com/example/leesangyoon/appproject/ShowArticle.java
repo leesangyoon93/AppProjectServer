@@ -201,7 +201,7 @@ public class ShowArticle extends AppCompatActivity {
                     if (response.toString().contains("result") && response.toString().contains("fail")) {
                         Toast.makeText(ShowArticle.this,"게시글을 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
                     } else {
-                        Article.getInstance().setCommentCount(response.getString("commentCount"));
+                        Article.getInstance().setCommentCount(response.getInt("commentCount"));
                         Article.getInstance().setDate(response.getString("date"));
                         Article.getInstance().setTitle(response.getString("title"));
                         Article.getInstance().setContent(response.getString("content"));

@@ -6,29 +6,30 @@ import android.util.Log;
  * Created by daddyslab on 2016. 10. 29..
  */
 public class Article {
-    private String id = null;
-    private String author = null;
-    private String content = null;
-    private String title = null;
-    private String date = null;
-    private String commentCount = null;
+    private String id = "";
+    private String author = "";
+    private String content = "";
+    private String title = "";
+    private String date = "";
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    private int commentCount = 0;
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
     }
 
     private Article() {}
 
     public String getDate() {
         return date;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
     }
 
     public String getAuthor() {

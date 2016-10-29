@@ -97,7 +97,7 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
             Article.getInstance().setId(notices.get(position).getString("_id"));
             Article.getInstance().setContent(notices.get(position).getString("content"));
             Article.getInstance().setAuthor(notices.get(position).getString("author"));
-            Article.getInstance().setCommentCount(notices.get(position).getString("commentCount"));
+            Article.getInstance().setCommentCount(notices.get(position).getInt("commentCount"));
             Article.getInstance().setDate(notices.get(position).getString("date"));
         } catch (JSONException e) {
             e.printStackTrace();

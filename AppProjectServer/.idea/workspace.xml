@@ -2,44 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/model_notice.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/model_noticeComment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/model_qa.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/model_schedule.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_Gallery.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_GroupMain.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_Intro.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_Notice.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_QA.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_Schedule.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/fragment_gallery.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/fragment_groupmain.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/fragment_intro.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/fragment_notice.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/fragment_qa.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/fragment_schedule.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/../AppProject/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/.idea/misc.xml" afterPath="$PROJECT_DIR$/../AppProject/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/BackPressCloseHandler.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/BackPressCloseHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/CreateNursingHome.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/CreateNursingHome.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/CreateWorker.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/CreateWorker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/EditWorker.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/EditWorker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Login.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Login.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/MainActivity.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Profile.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Profile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/SettingNursingHome.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/SettingNursingHome.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ViewWorker.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ViewWorker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_createnursinghome.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_createnursinghome.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_createworker.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_createworker.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_editworker.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_editworker.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_profile.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_profile.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_settingnursinghome.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_settingnursinghome.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_admin.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_admin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <ignored path="AppProjectServer.iws" />
@@ -78,8 +40,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="312" column="18" selection-start-line="312" selection-start-column="18" selection-end-line="312" selection-end-column="18" />
+            <state relative-caret-position="154">
+              <caret line="255" column="22" selection-start-line="255" selection-start-column="22" selection-end-line="255" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -329,12 +291,12 @@
       <workItem from="1477029567962" duration="70000" />
       <workItem from="1477061235604" duration="480000" />
       <workItem from="1477561226565" duration="129000" />
-      <workItem from="1477738469912" duration="7104000" />
+      <workItem from="1477738469912" duration="7399000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21478000" />
+    <option name="totallyTimeSpent" value="21773000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="15" y="23" width="1400" height="784" extended-state="0" />
@@ -866,8 +828,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="312" column="18" selection-start-line="312" selection-start-column="18" selection-end-line="312" selection-end-column="18" />
+        <state relative-caret-position="154">
+          <caret line="255" column="22" selection-start-line="255" selection-start-column="22" selection-end-line="255" selection-end-column="22" />
           <folding />
         </state>
       </provider>

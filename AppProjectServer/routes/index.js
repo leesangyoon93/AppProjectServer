@@ -247,8 +247,11 @@ router.get('/showComments', function (req, res) {
 });
 
 router.post('/saveArticle', function (req, res) {
+    console.log("save");
     var path = req.body.path;
     var id = new ObjectId(req.body.articleId);
+    console.log(path);
+    console.log(id);
     switch (path) {
         case 'notice':
             Notice.findById(id, function (err, notice) {
