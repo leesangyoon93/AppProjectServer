@@ -268,7 +268,6 @@ router.post('/saveArticle', function (req, res) {
                     newNotice.author = req.body.userId;
                     var date = new Date().toISOString();
                     newNotice.date = date.slice(0, 10);
-                    notice.modified = "";
                     NursingHome.findById(req.body.nursingHomeId, function (err, nursingHome) {
                         if (err) return res.json({'result': 'fail'});
                         if (nursingHome) {
