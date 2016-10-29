@@ -3,6 +3,7 @@ package com.example.leesangyoon.appproject;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -43,11 +44,13 @@ public class EditArticle extends AppCompatActivity {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_editarticle);
 
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         from = intent.getStringExtra("from");
         path = intent.getStringExtra("path");
-
-        Log.e("asdf", path);
 
         title = (EditText) findViewById(R.id.input_title);
         content = (EditText) findViewById(R.id.input_content);
@@ -66,6 +69,29 @@ public class EditArticle extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent;
+                if (from.equals("list")) {
+                    switch (path) {
+                        case "notice":
+                            cls = Notice.class;
+                            break;
+                        case "schedule":
+                            cls = Schedule.class;
+                            break;
+                        case "qa":
+                            cls = QA.class;
+                            break;
+                    }
+                    intent = new Intent(EditArticle.this, cls);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(EditArticle.this, ShowArticle.class);
+                    intent.putExtra("path", path);
+                }
+                startActivity(intent);
+                super.onBackPressed();
+                break;
             case R.id.menu_createArticle:
                 if (title.getText().toString().isEmpty()) {
                     Toast.makeText(EditArticle.this, "제목을 입력해주세요", Toast.LENGTH_SHORT).show();

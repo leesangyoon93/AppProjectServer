@@ -32,7 +32,7 @@
         <activity android:name=".Gallery"/>
         <activity android:name=".Schedule"/>
         <activity android:name=".QA"/>
-        <activity android:name=".ShowArticle"/>
+        <activity android:name=".ShowArticle" android:windowSoftInputMode="adjustPan"/>
         <activity android:name="EditArticle"/>
         <!--android:parentActivityName=".MainActivity"-->
     </application>

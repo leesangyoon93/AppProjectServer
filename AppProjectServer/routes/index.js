@@ -257,7 +257,7 @@ router.post('/saveArticle', function (req, res) {
                     notice.title = req.body.title;
                     notice.content = req.body.content;
                     var date = new Date().toISOString();
-                    notice.modified = date.slice(0, 10);
+                    notice.modified = date;
                     notice.save();
                     return res.json({'result': 'success', 'articleId': notice._id});
                 }

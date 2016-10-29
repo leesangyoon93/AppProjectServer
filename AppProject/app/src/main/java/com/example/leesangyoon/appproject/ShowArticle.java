@@ -3,6 +3,7 @@ package com.example.leesangyoon.appproject;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -56,6 +57,10 @@ public class ShowArticle extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_showarticle);
+
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
         path = intent.getStringExtra("path");
@@ -113,6 +118,22 @@ public class ShowArticle extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
+            case android.R.id.home:
+                switch(path) {
+                    case "notice":
+                        cls = Notice.class;
+                        break;
+                    case "schedule":
+                        cls = Schedule.class;
+                        break;
+                    case "qa":
+                        cls = QA.class;
+                        break;
+                }
+                intent = new Intent(ShowArticle.this, cls);
+                startActivity(intent);
+                super.onBackPressed();
+                break;
             case R.id.menu_editArticle:
                 intent = new Intent(ShowArticle.this, EditArticle.class);
                 intent.putExtra("from", "article");
@@ -178,19 +199,6 @@ public class ShowArticle extends AppCompatActivity {
     }
 
     private void showArticleToServer() throws Exception {
-
-//        String url = "";
-//        switch(path) {
-//            case "notice":
-//                url = "showNotice";
-//                break;
-//            case "schedule":
-//                url = "showSchedule";
-//                break;
-//            case "qa":
-//                url = "showQA";
-//                break;
-//        }
         String URL = String.format("http://52.41.19.232/showArticle?articleId=%s&path=%s",
                 URLEncoder.encode(Article.getInstance().getId(), "utf-8"), URLEncoder.encode(path), "utf-8");
 
@@ -212,7 +220,7 @@ public class ShowArticle extends AppCompatActivity {
                         content.setText(Article.getInstance().getContent());
                         title.setText(Article.getInstance().getTitle());
                         author.setText(Article.getInstance().getAuthor());
-                        commentCount.setText("(" + Article.getInstance().getCommentCount() + ")");
+//                        commentCount.setText("(" + Article.getInstance().getCommentCount() + ")");
                         date.setText(Article.getInstance().getDate());
 
 //                        if (User.getInstance().getUserId().equals(response.getString("author"))) {

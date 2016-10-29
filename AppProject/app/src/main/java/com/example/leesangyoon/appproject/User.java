@@ -12,7 +12,7 @@ public class User {
     private String userId = null;
     private String userName = null;
     private String phoneNumber = null;
-    private String nursingHomeId = null;
+    private String nursingHomeId = "";
     private String nursingHomeName = null;
     private String nursingHomeAddress = null;
     private String nursingHomePhoneNumber = null;

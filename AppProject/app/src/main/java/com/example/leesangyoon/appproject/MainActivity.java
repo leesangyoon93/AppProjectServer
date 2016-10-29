@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,10 @@ import java.util.List;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
+
+    // 게시판에 키보드좀 어떻게 하자;
+    // 권한별로 게시판 기능 제한걸기. 빡셀듯; 생각좀 해야함.
+    // 공지 게시판 완벽구현 되면 나머지 게시판 두개 마저 하기. UI에 따라 수정사항 생길 수 있으니 게시판 기능 끝나면 다른거 하자.
 
     // 수급자 관리 또는 정보열람 버튼 넣기
     // 보호자 프로필일 경우에는 연결된 수급자 정보까지 프로필에 띄워주기, 요양사는 그냥 자기정보만.??

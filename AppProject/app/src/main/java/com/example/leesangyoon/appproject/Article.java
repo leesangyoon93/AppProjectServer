@@ -72,4 +72,13 @@ public class Article {
     public void setId(String id) {
         this.id = id;
     }
+
+    public void initArticle(){
+        this.id="00a00a0aaa00aa000000a0a0";
+        this.content="";
+        this.title="";
+        this.author="";
+        this.commentCount=0;
+        this.date="";
+    }
 }

@@ -52,7 +52,7 @@ public class AdapterArticleList extends BaseAdapter {
         try {
             title.setText(article.getString("title"));
             author.setText(article.getString("author"));
-            date.setText(article.getString("created"));
+            date.setText(article.getString("date"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

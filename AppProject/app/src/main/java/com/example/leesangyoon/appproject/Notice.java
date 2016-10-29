@@ -42,6 +42,8 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        Article.getInstance().initArticle();
+
         noticeList = (ListView) findViewById(R.id.listView_article);
         noticeList.setOnItemClickListener(this);
 

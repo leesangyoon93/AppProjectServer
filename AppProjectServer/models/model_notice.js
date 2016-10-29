@@ -20,7 +20,7 @@ var NoticeSchema = new Schema({
     modified: {
         type: String,
         null: true,
-        default: new Date().toISOString().slice(0, 10)
+        default: new Date().toISOString()
     },
     content: {
         type: String

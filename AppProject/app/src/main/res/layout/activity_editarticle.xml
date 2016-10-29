@@ -8,7 +8,9 @@
         android:layout_height="match_parent"
         android:id="@+id/input_title"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="9" />
+        android:layout_weight="9"
+        android:singleLine="true"
+        android:hint="제목을 입력하세요." />
 
     <EditText
         android:layout_width="match_parent"
@@ -16,5 +18,8 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/input_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:hint="내용을 입력하세요."
+        android:textSize="20dp"
+        android:gravity="top|left" />
 </LinearLayout>
