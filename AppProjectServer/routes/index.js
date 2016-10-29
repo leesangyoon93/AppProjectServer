@@ -5,11 +5,15 @@ var bcrypt = require("bcrypt-nodejs");
 var User = mongoose.model('User');
 var NursingHome = mongoose.model('NursingHome');
 var Patient = mongoose.model('Patient');
+var Notice = mongoose.model('Notice');
+var Schedule = mongoose.model('Schedule');
+var QA = mongoose.model('QA');
+var NoticeComment = mongoose.model('NoticeComment');
 var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+    res.render('index', {title: 'AppProjectServer'});
 });
 
 router.post('/login', function (req, res) {
@@ -135,10 +139,10 @@ router.post('/deleteUser', function (req, res) {
                     return res.json({'result': 'success'});
                 })
             }
-            else if(user.auth == 2) {
-                Patient.findOne({'protector': id}, function(err, patient) {
-                    if(err) return res.json({'result': 'fail'});
-                    if(patient)
+            else if (user.auth == 2) {
+                Patient.findOne({'protector': id}, function (err, patient) {
+                    if (err) return res.json({'result': 'fail'});
+                    if (patient)
                         patient.remove();
                     user.remove();
                     return res.json({'result': 'success'});
@@ -191,5 +195,143 @@ router.post('/createPatient', function (req, res) {
         else return res.json({'result': 'fail'});
     })
 });
+
+// 게시판 API
+// showArticle, editArticle, deleteArticle 통합 request에 path 파라미터로 구분
+
+router.get('/getArticles', function (req, res) {
+    var path = req.query.path;
+    var id = req.query.nursingHomeId;
+    switch (path) {
+        case 'notice':
+            Notice.find({'nursingHome': new Object(id)}, function (err, notices) {
+                if (err) return res.json({'result': 'fail'});
+                if (notices) {
+                    return res.json(notices);
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
+    }
+});
+
+router.get('/showArticle', function (req, res) {
+    var path = req.query.path;
+    var id = new ObjectId(req.query.articleId);
+    switch (path) {
+        case 'notice':
+            Notice.findById(id, function (err, article) {
+                if (err) return res.json({'result': 'fail'});
+                if (article) return res.json(article);
+                else return res.json({'result': 'fail'});
+            });
+            break;
+    }
+});
+
+
+router.get('/showComments', function (req, res) {
+    var path = req.query.path;
+    var id = req.query.articleId;
+    switch (path) {
+        case 'notice':
+            NoticeComment.find({'notice': new ObjectId(id)}, function (err, comments) {
+                if (err) return res.json({'result': 'fail'});
+                if (comments)
+                    return res.json(comments);
+                else return res.json({'result': 'fail'});
+            });
+            break;
+    }
+
+});
+
+router.post('/saveArticle', function (req, res) {
+    var path = req.body.path;
+    var id = new ObjectId(req.body.articleId);
+    switch (path) {
+        case 'notice':
+            Notice.findById(id, function (err, notice) {
+                if (err) return res.json({'result': 'fail'});
+                if (notice) {
+                    notice.title = req.body.title;
+                    notice.content = req.body.content;
+                    var date = new Date().toISOString();
+                    notice.articleDate = date.slice(0, 10);
+                    notice.save();
+                    return res.json({'result': 'success', 'articleId': notice._id});
+                }
+                else {
+                    var newNotice = new Notice();
+                    newNotice.title = req.body.title;
+                    newNotice.content = req.body.content;
+                    newNotice.author = req.body.userId;
+                    var date = new Date().toISOString();
+                    newNotice.articleDate = date.slice(0, 10);
+                    NursingHome.findById(req.body.nursingHomeId, function (err, nursingHome) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (nursingHome) {
+                            newNotice.nursingHome = nursingHome;
+                            newNotice.save();
+                            return res.json({'result': 'success', 'articleId': newNotice._id});
+                        }
+                        else
+                            return res.json({'result': 'fail'});
+                    });
+                }
+            })
+    }
+
+});
+
+router.post('/saveComment', function(req, res) {
+    var path = req.body.path;
+    switch(path) {
+        case 'notice':
+            Notice.findById(req.body.articleId, function(err, notice) {
+                if(err) return res.json({'result': 'fail'});
+                if(notice) {
+                    var comment = new NoticeComment();
+                    comment.notice = notice;
+                    comment.author = req.body.userId;
+                    comment.content = req.body.content;
+                    comment.save();
+                    notice.commentCount += 1;
+                    notice.save();
+                    return res.json({'result': 'success'});
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
+    }
+
+});
+
+router.post('/deleteArticle', function(req, res) {
+    var path = req.body.path;
+    var id = new ObjectId(req.body.articleId);
+    switch(path) {
+        case 'notice':
+            Notice.findById(id, function(err, notice) {
+                if(err) return res.json({'result': 'fail'});
+                if(notice) {
+                    NoticeComment.find({'notice': id}, function(err, comments) {
+                        if(err) return res.json({'result': 'fail'});
+                        if(comments) {
+                            for(var i=0; i<comments.length; i++)
+                                comments[i].remove();
+                            notice.remove();
+                            return res.json({'result': 'success'});
+                        }
+                        else return res.json({'result': 'fail'});
+                    })
+                }
+                else return res.json({'result': 'fail'});
+            })
+    }
+
+});
+
+// 게시판 API 끝
 
 module.exports = router;

@@ -22,6 +22,10 @@ mongoose.connect('mongodb://localhost/appProject', function(err) {
 require('./models/model_user');
 require('./models/model_nursingHome');
 require('./models/model_patient');
+require('./models/model_notice');
+require('./models/model_schedule');
+require('./models/model_qa');
+require('./models/model_noticeComment');
 var User = mongoose.model('User');
 
 // view engine setup

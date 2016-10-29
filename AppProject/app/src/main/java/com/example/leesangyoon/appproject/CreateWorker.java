@@ -2,7 +2,10 @@ package com.example.leesangyoon.appproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,31 +28,44 @@ import java.util.Map;
 public class CreateWorker extends AppCompatActivity {
 
     EditText workerName, workerPhoneNumber, workerId, workerPassword;
-    Button createWorkerButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_createworker);
 
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         workerName = (EditText)findViewById(R.id.input_workerName);
         workerPhoneNumber = (EditText)findViewById(R.id.input_workerPhoneNumber);
         workerId = (EditText)findViewById(R.id.input_workerId);
         workerPassword = (EditText)findViewById(R.id.input_workerPassword);
+    }
 
-        createWorkerButton = (Button)findViewById(R.id.submit_createWorker);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_createworker, menu);
+        return true;
+    }
 
-        createWorkerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_createWorker:
                 try {
                     createWorkerToServer(workerName.getText().toString(), workerPhoneNumber.getText().toString(),
                             workerId.getText().toString(), workerPassword.getText().toString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-        });
+                break;
+            case android.R.id.home:
+                Intent intent = new Intent(CreateWorker.this, ViewWorker.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void createWorkerToServer(final String workerName, final String workerPhoneNumber, final String workerId, final String workerPassword) throws Exception {

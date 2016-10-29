@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +17,6 @@ import android.widget.Toast;
 public class SettingNursingHome extends AppCompatActivity {
 
     TextView nursingHomeName, nursingHomeAddress, nursingHomePhoneNumber, adminName, adminPhoneNumber, adminId;
-    Button adminLogoutButton;
 
     SharedPreferences userSession;
 
@@ -26,11 +25,11 @@ public class SettingNursingHome extends AppCompatActivity {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_settingnursinghome);
 
+        userSession = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
+
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        userSession = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
 
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
         nursingHomeAddress = (TextView)findViewById(R.id.text_nursingHomeAddress);
@@ -46,11 +45,18 @@ public class SettingNursingHome extends AppCompatActivity {
         adminPhoneNumber.setText(User.getInstance().getPhoneNumber());
         adminId.setText(User.getInstance().getUserId());
 
-        adminLogoutButton = (Button)findViewById(R.id.btn_adminLogout);
+    }
 
-        adminLogoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_setting, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_logout:
                 SharedPreferences.Editor editor = userSession.edit();
                 editor.clear();
                 editor.apply();
@@ -59,8 +65,13 @@ public class SettingNursingHome extends AppCompatActivity {
                 startActivity(intent);
 
                 Toast.makeText(SettingNursingHome.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                break;
+            case android.R.id.home:
+                intent = new Intent(SettingNursingHome.this, ViewWorker.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

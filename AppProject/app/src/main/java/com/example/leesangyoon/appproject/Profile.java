@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +35,6 @@ import java.util.Map;
  * Created by daddyslab on 2016. 10. 12..
  */
 public class Profile extends AppCompatActivity {
-
     SharedPreferences userSession;
 
     TextView userId, userName, userPhoneNumber;
@@ -89,6 +90,7 @@ public class Profile extends AppCompatActivity {
                 layout.addView(newPw1);
                 layout.addView(newPw2);
 
+                // 커스텀 타이틀.
 //                TextView title = new TextView(this);
 //                title.setText("Custom Centered Title");
 //                title.setBackgroundColor(Color.DKGRAY);
@@ -99,8 +101,10 @@ public class Profile extends AppCompatActivity {
 //
 //                builder.setCustomTitle(title);
 
+                // 비밀번호 변경 성공안했을때 유지시키기. 버튼 따로만들어서 리스너 붙여야함
                 builder.setTitle("비밀번호 변경")
                         .setView(layout)
+                        .setCancelable(true)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -115,20 +119,13 @@ public class Profile extends AppCompatActivity {
                                     }
                                 }
                                 else {
-                                    Toast.makeText(Profile.this, "새로운 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Profile.this, "변경 할 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                                 }
-                                // yes 버튼 누르면
-//                                try {
-//                                    deleteUserToServer(workerId.getText().toString());
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
                             }
                         })
                         .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                // no 버튼 누르면
                             }
                         })
                         .show();
@@ -157,7 +154,7 @@ public class Profile extends AppCompatActivity {
                             Toast.makeText(Profile.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
                         }
                         else if(response.getString("result").equals("failPw")) {
-                            Toast.makeText(Profile.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Profile.this, "현재 비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                         }
                         else if(response.getString("result").equals("success")) {
                             Toast.makeText(Profile.this, "비밀번호 변경 완료.", Toast.LENGTH_SHORT).show();
@@ -177,5 +174,38 @@ public class Profile extends AppCompatActivity {
                 });
 
         volley.getInstance().addToRequestQueue(req);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_setting, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_logout:
+                SharedPreferences.Editor editor = userSession.edit();
+                editor.clear();
+                editor.apply();
+
+                Intent intent = new Intent(Profile.this, Login.class);
+                startActivity(intent);
+
+                Toast.makeText(Profile.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                break;
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+//        Intent intent = new Intent(Profile.this, MainActivity.class);
+//        startActivity(intent);
+        super.onBackPressed();
     }
 }

@@ -19,14 +19,6 @@
             android:layout_weight="2"
             android:gravity="center" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="삭제"
-            android:id="@+id/btn_deleteWorker"
-            android:layout_weight="8"
-            android:layout_gravity="center_vertical"
-            android:gravity="center" />
     </LinearLayout>
 
     <TextView

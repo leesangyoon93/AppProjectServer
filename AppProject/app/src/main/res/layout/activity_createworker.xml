@@ -43,10 +43,4 @@
         android:layout_gravity="center_horizontal"
         android:hint="패스워드" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="등록"
-        android:id="@+id/submit_createWorker"
-        android:layout_gravity="center_horizontal" />
 </LinearLayout>

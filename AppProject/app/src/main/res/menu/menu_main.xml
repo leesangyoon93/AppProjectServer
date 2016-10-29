@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:appproject="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/menu_home"
-        android:title="홈" />
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_intro"
-        android:title="소개" />
+        android:title="@string/intro" />
 
     <item
         android:id="@+id/menu_notice"
-        android:title="공지사항" />
+        android:title="@string/notice" />
     <item
         android:id="@+id/menu_schedule"
-        android:title="일정" />
+        android:title="@string/schedule" />
     <item
         android:id="@+id/menu_gallery"
-        android:title="갤러리" />
+        android:title="@string/gallery" />
     <item
         android:id="@+id/menu_QA"
-        android:title="Q/A" />
-    <item
-        android:id="@+id/menu_userSetting"
-        android:title="Setting"
-        android:icon="@android:drawable/ic_dialog_info"
-        appproject:showAsAction="ifRoom"/>
+        android:title="@string/qa" />
 </menu>

@@ -27,6 +27,13 @@
         <activity android:name=".EditWorker"/>
         <activity android:name=".SettingNursingHome"/>
         <activity android:name=".Profile"/>
+        <activity android:name=".Intro"/>
+        <activity android:name=".Notice"/>
+        <activity android:name=".Gallery"/>
+        <activity android:name=".Schedule"/>
+        <activity android:name=".QA"/>
+        <activity android:name=".ShowArticle"/>
+        <activity android:name="EditArticle"/>
         <!--android:parentActivityName=".MainActivity"-->
     </application>
 

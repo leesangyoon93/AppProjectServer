@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.android.volley.Response;
@@ -30,6 +31,7 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
     ListView workerList;
     TextView nursingHomeName;
+    ImageButton homeButton, profileButton;
 
     AdapterWorkerList adapterWorkerList;
     ArrayList<JSONObject> workers = new ArrayList<JSONObject>();
@@ -45,7 +47,8 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(R.layout.layout_actionbar);
 
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
 
@@ -66,6 +69,25 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         adapterWorkerList.notifyDataSetChanged();
 
         workerList.setAdapter(adapterWorkerList);
+
+        profileButton = (ImageButton)findViewById(R.id.btn_profile);
+        homeButton = (ImageButton)findViewById(R.id.btn_home);
+
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewWorker.this, SettingNursingHome.class);
+                startActivity(intent);
+            }
+        });
+
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ViewWorker.this, ViewWorker.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -80,13 +102,6 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
             case R.id.menu_addWorker:
                 Intent intent = new Intent(ViewWorker.this, CreateWorker.class);
                 startActivity(intent);
-                break;
-            case R.id.menu_adminSetting:
-                intent = new Intent(ViewWorker.this, SettingNursingHome.class);
-                startActivity(intent);
-                break;
-            case android.R.id.home:
-                backPressCloseHandler.onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);

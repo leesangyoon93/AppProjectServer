@@ -109,11 +109,13 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(Login.this, "존재하지 않는 아이디입니다.", Toast.LENGTH_SHORT).show();
                         }
                         else if(response.getString("result").equals("failPw")) {
-                            Toast.makeText(Login.this, "비밀번호가 옳바르지 않습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                     else {
                         User.getInstance().setUserId(response.getString("userId"));
+                        User.getInstance().setUserName(response.getString("userName"));
+                        User.getInstance().setPhoneNumber(response.getString("phoneNumber"));
                         User.getInstance().setAuth(response.getInt("auth"));
                         User.getInstance().setNursingHomeId(response.getString("nursingHome"));
 

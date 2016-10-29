@@ -44,12 +44,6 @@
             android:id="@+id/text_adminId"
             android:layout_gravity="center_horizontal" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="로그아웃"
-            android:id="@+id/btn_adminLogout"
-            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
 </LinearLayout>

@@ -66,11 +66,4 @@
         android:layout_gravity="center_horizontal"
         android:hint="관리자 비밀번호" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="등록 신청"
-        android:id="@+id/submit_registerNursingHome"
-        android:layout_gravity="center_horizontal" />
-
 </LinearLayout>

@@ -3,9 +3,9 @@
     xmlns:appproject="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_addWorker"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="Add Worker"
+        android:id="@+id/menu_deleteWorker"
+        android:icon="@android:drawable/ic_delete"
+        android:title="DeleteWorker"
         appproject:showAsAction="ifRoom"
         />
 </menu>

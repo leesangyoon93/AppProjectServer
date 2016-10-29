@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,7 +30,6 @@ import java.util.Map;
 public class EditWorker extends AppCompatActivity {
 
     TextView workerId, workerName, workerPhoneNumber;
-    Button deleteWorkerButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,16 +43,23 @@ public class EditWorker extends AppCompatActivity {
         workerId = (TextView)findViewById(R.id.text_detailWorkerId);
         workerName = (TextView)findViewById(R.id.text_detailWorkerName);
         workerPhoneNumber = (TextView)findViewById(R.id.text_detailWorkerPhoneNumber);
-        deleteWorkerButton = (Button)findViewById(R.id.btn_deleteWorker);
 
         Intent intent = getIntent();
         workerId.setText(intent.getStringExtra("workerId"));
         workerName.setText(intent.getStringExtra("workerName"));
         workerPhoneNumber.setText(intent.getStringExtra("workerPhoneNumber"));
+    }
 
-        deleteWorkerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_editworker, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_deleteWorker:
                 new AlertDialog.Builder(EditWorker.this)
                         .setTitle("요양사 삭제 확인")
                         .setMessage(" 요양사를 삭제하시겠습니까?")
@@ -73,10 +81,13 @@ public class EditWorker extends AppCompatActivity {
                             }
                         })
                         .show();
-            }
-        });
-
-
+                break;
+            case android.R.id.home:
+                Intent intent = new Intent(EditWorker.this, ViewWorker.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void deleteUserToServer(final String userId) throws Exception {

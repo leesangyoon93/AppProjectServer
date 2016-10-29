@@ -10,22 +10,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.List;
 import java.util.Vector;
-
-// 비밀번호 변경 다이얼로그에 입력 1개밖에 안뜸.
-// 비밀번호 변경 서버 api 구현
 
 public class MainActivity extends AppCompatActivity {
 
     // 수급자 관리 또는 정보열람 버튼 넣기
     // 보호자 프로필일 경우에는 연결된 수급자 정보까지 프로필에 띄워주기, 요양사는 그냥 자기정보만.??
 
+    ImageButton homeButton, profileButton;
+
+    // 타이틀 제대로.
     BackPressCloseHandler backPressCloseHandler;
-    int mCurrentFragmentIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,50 +35,29 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(R.layout.layout_actionbar);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        Intent intent = getIntent();
-        mCurrentFragmentIndex = intent.getIntExtra("fragNum", 0);
-        fragmentReplace(mCurrentFragmentIndex);
-    }
+        profileButton = (ImageButton)findViewById(R.id.btn_profile);
+        homeButton = (ImageButton)findViewById(R.id.btn_home);
 
-    public void fragmentReplace(int index) {
-        Fragment frag;
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Profile.class);
+                startActivity(intent);
+            }
+        });
 
-        frag = getFragment(index);
-
-        final FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        transaction.replace(R.id.fragments, frag);
-        transaction.commit();
-    }
-
-    private Fragment getFragment(int index) {
-        Fragment frag = null;
-
-        switch(index) {
-            case 0:
-                frag = new frag_GroupMain();
-                break;
-            case 1:
-                frag = new frag_Intro();
-                break;
-            case 2:
-                frag = new frag_Notice();
-                break;
-            case 3:
-                frag = new frag_Schedule();
-                break;
-            case 4:
-                frag = new frag_Gallery();
-                break;
-            case 5:
-                frag = new frag_QA();
-                break;
-        }
-        return frag;
+        homeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -88,40 +68,34 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch(item.getItemId()) {
-            case R.id.menu_home:
-                mCurrentFragmentIndex = 0;
-                break;
             case R.id.menu_intro:
-                mCurrentFragmentIndex = 1;
-                break;
-            case R.id.menu_notice:
-                mCurrentFragmentIndex = 2;
-                break;
-            case R.id.menu_schedule:
-                mCurrentFragmentIndex = 3;
-                break;
-            case R.id.menu_gallery:
-                mCurrentFragmentIndex = 4;
-                break;
-            case R.id.menu_QA:
-                mCurrentFragmentIndex = 5;
-                break;
-            case R.id.menu_userSetting:
-                Intent intent = new Intent(MainActivity.this, Profile.class);
+                intent = new Intent(MainActivity.this, Intro.class);
                 startActivity(intent);
                 break;
-            case android.R.id.home:
-                backPressCloseHandler.onBackPressed();
+            case R.id.menu_notice:
+                intent = new Intent(MainActivity.this, Notice.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_schedule:
+                intent = new Intent(MainActivity.this, Schedule.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_gallery:
+                intent = new Intent(MainActivity.this, Gallery.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_QA:
+                intent = new Intent(MainActivity.this, QA.class);
+                startActivity(intent);
                 break;
         }
-        fragmentReplace(mCurrentFragmentIndex);
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
         backPressCloseHandler.onBackPressed();
     }
 }
