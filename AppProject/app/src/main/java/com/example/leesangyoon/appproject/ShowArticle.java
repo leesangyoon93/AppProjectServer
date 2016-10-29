@@ -116,6 +116,7 @@ public class ShowArticle extends AppCompatActivity {
             case R.id.menu_editArticle:
                 intent = new Intent(ShowArticle.this, EditArticle.class);
                 intent.putExtra("from", "article");
+                intent.putExtra("path", path);
                 startActivity(intent);
                 break;
             case R.id.menu_deleteArticle:

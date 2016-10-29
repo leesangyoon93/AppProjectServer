@@ -77,6 +77,7 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
                 // 공지사항 등록 액티비티로.
                 intent = new Intent(Notice.this, EditArticle.class);
                 intent.putExtra("from", "list");
+                intent.putExtra("path", "notice");
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

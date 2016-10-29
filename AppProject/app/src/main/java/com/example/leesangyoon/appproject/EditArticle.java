@@ -31,8 +31,8 @@ import java.util.Map;
  */
 public class EditArticle extends AppCompatActivity {
 
-    String from = null;
-    String path = null;
+    String from = "";
+    String path = "";
     EditText title;
     EditText content;
     TextView author;
@@ -46,6 +46,8 @@ public class EditArticle extends AppCompatActivity {
         Intent intent = getIntent();
         from = intent.getStringExtra("from");
         path = intent.getStringExtra("path");
+
+        Log.e("asdf", path);
 
         title = (EditText) findViewById(R.id.input_title);
         content = (EditText) findViewById(R.id.input_content);
@@ -70,7 +72,7 @@ public class EditArticle extends AppCompatActivity {
                 }
                 else {
                     try {
-                        saveArticleToServer();
+                        saveArticleToServer(path);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -79,7 +81,7 @@ public class EditArticle extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void saveArticleToServer() throws Exception {
+    private void saveArticleToServer(final String path) throws Exception {
 
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userId", User.getInstance().getUserId());
@@ -89,9 +91,11 @@ public class EditArticle extends AppCompatActivity {
         postParam.put("nursingHomeId", User.getInstance().getNursingHomeId());
         postParam.put("path", path);
 
+        Log.e("asdf", Article.getInstance().getId());
+        Log.e("asdf", path);
+
         String URL = "http://52.41.19.232/saveArticle";
 
-        Log.e("asdf", "asdf");
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postParam), new Response.Listener<JSONObject>() {
 
             @Override

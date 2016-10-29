@@ -6,7 +6,7 @@ import android.util.Log;
  * Created by daddyslab on 2016. 10. 29..
  */
 public class Article {
-    private String id = "";
+    private String id = "00a00a0aaa00aa000000a0a0";
     private String author = "";
     private String content = "";
     private String title = "";
