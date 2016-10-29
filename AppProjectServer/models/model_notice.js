@@ -17,7 +17,10 @@ var NoticeSchema = new Schema({
         unique: false
     },
     date: String,
-    modified: String,
+    modified: {
+        type: String,
+        null: true
+    },
     content: {
         type: String
     },
