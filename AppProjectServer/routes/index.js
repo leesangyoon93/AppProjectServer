@@ -362,7 +362,7 @@ router.post('/saveGallery', function(req, res) {
             NursingHome.findById(req.body.nursingHomeId, function(err, nursingHome) {
                 if(err) return res.json({'result': 'fail'});
                 if(nursingHome) {
-                    newGallery.nursingHome = nursinghome;
+                    newGallery.nursingHome = nursingHome;
                     newGallery.save();
                     return res.json({'result': 'success', 'galleryId': newGallery._id});
                 }

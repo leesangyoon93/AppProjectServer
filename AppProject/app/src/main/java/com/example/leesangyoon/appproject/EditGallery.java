@@ -107,19 +107,25 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.menu_saveGallery:
                 try {
-                    saveGalleryToServer();
+                    saveGalleryToServer(photo);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     public String getStringImage(Bitmap bmp){
+        Log.e("adsf", "5");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 300, baos);
+        Log.e("adsf", "6");
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        Log.e("adsf", "7");
         byte[] imageBytes = baos.toByteArray();
+        Log.e("adsf", "8");
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        Log.e("adsf", "9");
         return encodedImage;
     }
 
@@ -247,11 +253,13 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
         super.onBackPressed();
     }
 
-    private void saveGalleryToServer() throws Exception {
+    private void saveGalleryToServer(Bitmap photo) throws Exception {
 
         final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
-
+        Log.e("adsf", "0");
         String image = getStringImage(photo);
+
+        Log.e("adsf", "1");
 
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userId", User.getInstance().getUserId());
@@ -260,6 +268,7 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
         postParam.put("image", image);
         postParam.put("title", title.getText().toString());
         postParam.put("content", content.getText().toString());
+        Log.e("adsf", "2");
 
         String URL = "http://52.41.19.232/saveGallery";
 
@@ -267,6 +276,7 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onResponse(JSONObject response) {
+                Log.e("adsf", "3");
                 loading.dismiss();
                 try {
                     if (response.getString("result").equals("success")) {
