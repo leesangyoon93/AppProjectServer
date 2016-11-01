@@ -1,5 +1,6 @@
 package com.example.leesangyoon.appproject;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,16 +16,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 /**
@@ -117,9 +123,6 @@ public class EditArticle extends AppCompatActivity {
         postParam.put("nursingHomeId", User.getInstance().getNursingHomeId());
         postParam.put("path", path);
 
-        Log.e("asdf", Article.getInstance().getId());
-        Log.e("asdf", path);
-
         String URL = "http://52.41.19.232/saveArticle";
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postParam), new Response.Listener<JSONObject>() {
@@ -176,4 +179,6 @@ public class EditArticle extends AppCompatActivity {
         startActivity(intent);
         super.onBackPressed();
     }
+
+
 }

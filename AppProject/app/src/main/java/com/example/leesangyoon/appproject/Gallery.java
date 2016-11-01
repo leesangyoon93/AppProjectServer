@@ -1,18 +1,39 @@
 package com.example.leesangyoon.appproject;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
 
 /**
  * Created by daddyslab on 2016. 10. 13..
  */
-public class Gallery extends AppCompatActivity {
+public class Gallery extends AppCompatActivity implements AdapterView.OnItemClickListener{
+    AdapterGalleryGrid adapterGalleryGrid;
+    ArrayList<JSONObject> gallery = new ArrayList<JSONObject>();
+    GridView gridView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,6 +44,23 @@ public class Gallery extends AppCompatActivity {
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        GallerySingleton.getInstance().initGallery();
+
+        gridView = (GridView) findViewById(R.id.gridView_gallery);
+
+        gallery.clear();
+
+        try {
+            getGalleryToServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        adapterGalleryGrid = new AdapterGalleryGrid(Gallery.this, gallery);
+        adapterGalleryGrid.notifyDataSetChanged();
+        gridView.setAdapter(adapterGalleryGrid);
+
+        gridView.setOnItemClickListener(this);
     }
 
     @Override
@@ -40,6 +78,9 @@ public class Gallery extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.menu_createGallery:
+                intent = new Intent(Gallery.this, EditGallery.class);
+                intent.putExtra("from", "list");
+                startActivity(intent);
                 // 갤러리 등록 액티비티로.
         }
         return super.onOptionsItemSelected(item);
@@ -50,5 +91,40 @@ public class Gallery extends AppCompatActivity {
         Intent intent = new Intent(Gallery.this, MainActivity.class);
         startActivity(intent);
         super.onBackPressed();
+    }
+
+    private void getGalleryToServer() throws Exception {
+
+        String URL = String.format("http://52.41.19.232/getGallery?nursingHomeId=%s",
+                URLEncoder.encode(User.getInstance().getNursingHomeId(), "utf-8"));
+
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                if (response.toString().contains("result") && response.toString().contains("fail")) {
+                    Toast.makeText(Gallery.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    for (int i = 0; i < response.length(); i++) {
+                        gallery.add(response.optJSONObject(i));
+                        adapterGalleryGrid.notifyDataSetChanged();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("development", "Error: " + error.getMessage());
+            }
+        });
+
+        // Adding request to request queue
+        volley.getInstance().addToRequestQueue(req);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

@@ -94,9 +94,9 @@ public class ShowArticle extends AppCompatActivity {
         saveComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(input_comment.getText().toString().isEmpty()){
-                    Toast.makeText(ShowArticle.this,"댓글을 입력해주세요",Toast.LENGTH_SHORT).show();
-                }else{
+                if (input_comment.getText().toString().isEmpty()) {
+                    Toast.makeText(ShowArticle.this, "댓글을 입력해주세요", Toast.LENGTH_SHORT).show();
+                } else {
                     try {
                         saveCommentToServer();
                     } catch (Exception e) {
@@ -105,12 +105,13 @@ public class ShowArticle extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_showarticle, menu);
+        if (User.getInstance().getUserId().equals(author.getText().toString())) {
+            getMenuInflater().inflate(R.menu.menu_showarticle, menu);
+        }
         return true;
     }
 
@@ -119,7 +120,7 @@ public class ShowArticle extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-                switch(path) {
+                switch (path) {
                     case "notice":
                         cls = Notice.class;
                         break;
@@ -179,7 +180,7 @@ public class ShowArticle extends AppCompatActivity {
             public void onResponse(JSONArray response) {
 
                 if (response.toString().contains("result") && response.toString().contains("fail")) {
-                    Toast.makeText(ShowArticle.this,"댓글을 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShowArticle.this, "댓글을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     for (int i = 0; i < response.length(); i++) {
                         comments.add(response.optJSONObject(i));
@@ -208,7 +209,7 @@ public class ShowArticle extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     if (response.toString().contains("result") && response.toString().contains("fail")) {
-                        Toast.makeText(ShowArticle.this,"게시글을 불러오는데 실패하였습니다.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShowArticle.this, "게시글을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         Article.getInstance().setCommentCount(response.getInt("commentCount"));
                         Article.getInstance().setDate(response.getString("date"));
@@ -282,7 +283,7 @@ public class ShowArticle extends AppCompatActivity {
 
     private void saveCommentToServer() throws Exception {
 
-        Map<String, String> postParam= new HashMap<String, String>();
+        Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userId", User.getInstance().getUserId());
         postParam.put("articleId", Article.getInstance().getId());
         postParam.put("content", input_comment.getText().toString());
@@ -321,7 +322,7 @@ public class ShowArticle extends AppCompatActivity {
 
     private void deleteArticleToServer() throws Exception {
 
-        Map<String, String> postParam= new HashMap<String, String>();
+        Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("articleId", Article.getInstance().getId());
         postParam.put("path", path);
 
@@ -335,7 +336,7 @@ public class ShowArticle extends AppCompatActivity {
                     if (response.getString("result").equals("success")) {
                         Toast.makeText(ShowArticle.this, "글이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
 
-                        switch(path) {
+                        switch (path) {
                             case "notice":
                                 cls = Notice.class;
                                 break;
@@ -369,7 +370,7 @@ public class ShowArticle extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        switch(path) {
+        switch (path) {
             case "notice":
                 cls = Notice.class;
                 break;

@@ -63,7 +63,9 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_notice, menu);
+        if(User.getInstance().getAuth() == 1) {
+            getMenuInflater().inflate(R.menu.menu_notice, menu);
+        }
         return true;
     }
 

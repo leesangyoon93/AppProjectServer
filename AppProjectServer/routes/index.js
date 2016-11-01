@@ -8,6 +8,7 @@ var Patient = mongoose.model('Patient');
 var Notice = mongoose.model('Notice');
 var Schedule = mongoose.model('Schedule');
 var QA = mongoose.model('QA');
+var Gallery = mongoose.model('Gallery');
 var NoticeComment = mongoose.model('NoticeComment');
 var ObjectId = require('mongodb').ObjectId;
 
@@ -284,13 +285,13 @@ router.post('/saveArticle', function (req, res) {
 
 });
 
-router.post('/saveComment', function(req, res) {
+router.post('/saveComment', function (req, res) {
     var path = req.body.path;
-    switch(path) {
+    switch (path) {
         case 'notice':
-            Notice.findById(req.body.articleId, function(err, notice) {
-                if(err) return res.json({'result': 'fail'});
-                if(notice) {
+            Notice.findById(req.body.articleId, function (err, notice) {
+                if (err) return res.json({'result': 'fail'});
+                if (notice) {
                     var comment = new NoticeComment();
                     comment.notice = notice;
                     comment.author = req.body.userId;
@@ -309,18 +310,18 @@ router.post('/saveComment', function(req, res) {
 
 });
 
-router.post('/deleteArticle', function(req, res) {
+router.post('/deleteArticle', function (req, res) {
     var path = req.body.path;
     var id = new ObjectId(req.body.articleId);
-    switch(path) {
+    switch (path) {
         case 'notice':
-            Notice.findById(id, function(err, notice) {
-                if(err) return res.json({'result': 'fail'});
-                if(notice) {
-                    NoticeComment.find({'notice': id}, function(err, comments) {
-                        if(err) return res.json({'result': 'fail'});
-                        if(comments) {
-                            for(var i=0; i<comments.length; i++)
+            Notice.findById(id, function (err, notice) {
+                if (err) return res.json({'result': 'fail'});
+                if (notice) {
+                    NoticeComment.find({'notice': id}, function (err, comments) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (comments) {
+                            for (var i = 0; i < comments.length; i++)
                                 comments[i].remove();
                             notice.remove();
                             return res.json({'result': 'success'});
@@ -335,5 +336,51 @@ router.post('/deleteArticle', function(req, res) {
 });
 
 // 게시판 API 끝
+
+// 갤러리
+router.post('/saveGallery', function(req, res) {
+    var id = new ObjectId(req.body.galleryId);
+    Gallery.findById(id, function(err, gallery) {
+        if(err) return res.json({'result': 'fail'});
+        if(gallery) {
+            gallery.title = req.body.title;
+            gallery.content = req.body.content;
+            gallery.image = req.body.image;
+            var date = new Date().toISOString();
+            gallery.modified = date;
+            gallery.save();
+            return res.json({'result': 'success', 'galleryId': gallery._id});
+        }
+        else {
+            var newGallery = new Gallery();
+            newGallery.title = req.body.title;
+            newGallery.content = req.body.content;
+            newGallery.image = req.body.image;
+            newGallery.author = req.body.userId;
+            var date = new Date().toISOString();
+            newGallery.date = date.slice(0, 10);
+            NursingHome.findById(req.body.nursingHomeId, function(err, nursingHome) {
+                if(err) return res.json({'result': 'fail'});
+                if(nursingHome) {
+                    newGallery.nursingHome = nursinghome;
+                    newGallery.save();
+                    return res.json({'result': 'success', 'galleryId': newGallery._id});
+                }
+                else return res.json({'result': 'fail'});
+            })
+        }
+    })
+});
+
+router.get('/getGallery', function(req, res) {
+    var id = req.query.nursingHomeId;
+    Gallery.find({'nursingHome': new ObjectId(id)}, function(err, galleries) {
+        if(err) return res.json({'result': 'fail'});
+        if(galleries) {
+            return res.json(galleries);
+        }
+        else return res.json({'result': 'fail'});
+    })
+});
 
 module.exports = router;
