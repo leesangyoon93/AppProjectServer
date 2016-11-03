@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appproject="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_createPatient"
+        android:icon="@android:drawable/presence_online"
+        android:title="CreatePatient"
+        appproject:showAsAction="ifRoom"
+        />
+</menu>

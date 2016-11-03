@@ -46,6 +46,8 @@
         <activity android:name="EditArticle"/>
         <activity android:name=".EditGallery"/>
         <activity android:name=".ShowGallery"/>
+        <activity android:name=".AdminPatient"/>
+        <activity android:name=".CreatePatient"/>
         <!--android:parentActivityName=".MainActivity"-->
     </application>
 

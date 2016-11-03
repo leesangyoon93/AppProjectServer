@@ -40,6 +40,9 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -117,15 +120,10 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
     }
 
     public String getStringImage(Bitmap bmp){
-        Log.e("adsf", "5");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        Log.e("adsf", "6");
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        Log.e("adsf", "7");
+        bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
-        Log.e("adsf", "8");
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        Log.e("adsf", "9");
         return encodedImage;
     }
 
@@ -172,11 +170,11 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
                 final Bundle extras = data.getExtras();
 
                 if (extras != null) {
-                    photo = extras.getParcelable("data");
-                    image.setImageBitmap(photo);
-                }
+                        photo = extras.getParcelable("data");
+                        image.setImageBitmap(photo);
+                    }
 
-                // 임시 파일 삭제
+//                 임시 파일 삭제
                 File f = new File(mImageCaptureUri.getPath());
                 if (f.exists()) {
                     f.delete();
@@ -256,10 +254,8 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
     private void saveGalleryToServer(Bitmap photo) throws Exception {
 
         final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
-        Log.e("adsf", "0");
         String image = getStringImage(photo);
 
-        Log.e("adsf", "1");
 
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userId", User.getInstance().getUserId());
@@ -268,15 +264,14 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
         postParam.put("image", image);
         postParam.put("title", title.getText().toString());
         postParam.put("content", content.getText().toString());
-        Log.e("adsf", "2");
+        postParam.put("path", "gallery");
 
-        String URL = "http://52.41.19.232/saveGallery";
+        String URL = "http://52.41.19.232/saveArticle";
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postParam), new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
-                Log.e("adsf", "3");
                 loading.dismiss();
                 try {
                     if (response.getString("result").equals("success")) {

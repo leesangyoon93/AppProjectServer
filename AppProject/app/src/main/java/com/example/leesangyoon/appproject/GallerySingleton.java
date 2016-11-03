@@ -11,6 +11,15 @@ public class GallerySingleton {
     private String author = "";
     private String content = "";
     private String title = "";
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     private String image = "";
     private String date = "";
 

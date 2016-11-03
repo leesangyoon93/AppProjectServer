@@ -10,6 +10,7 @@ var Schedule = mongoose.model('Schedule');
 var QA = mongoose.model('QA');
 var Gallery = mongoose.model('Gallery');
 var NoticeComment = mongoose.model('NoticeComment');
+var GalleryComment = mongoose.model('GalleryComment');
 var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
@@ -203,6 +204,7 @@ router.post('/createPatient', function (req, res) {
 router.get('/getArticles', function (req, res) {
     var path = req.query.path;
     var id = req.query.nursingHomeId;
+    console.log(path);
     switch (path) {
         case 'notice':
             Notice.find({'nursingHome': new Object(id)}, function (err, notices) {
@@ -212,6 +214,15 @@ router.get('/getArticles', function (req, res) {
                 }
                 else return res.json({'result': 'fail'});
             });
+            break;
+        case 'gallery':
+            Gallery.find({'nursingHome': new ObjectId(id)}, function(err, galleries) {
+                if(err) return res.json({'result': 'fail'});
+                if(galleries) {
+                    return res.json(galleries);
+                }
+                else return res.json({'result': 'fail'});
+            })
             break;
     }
 });
@@ -227,6 +238,12 @@ router.get('/showArticle', function (req, res) {
                 else return res.json({'result': 'fail'});
             });
             break;
+        case 'gallery':
+            Gallery.findById(id, function(err, gallery) {
+                if (err) return res.json({'result': 'fail'});
+                if (gallery) return res.json(gallery);
+                else return res.json({'result': 'fail'});
+            })
     }
 });
 
@@ -243,6 +260,14 @@ router.get('/showComments', function (req, res) {
                 else return res.json({'result': 'fail'});
             });
             break;
+        case 'gallery':
+            GalleryComment.find({'gallery': new ObjectId(id)}, function (err, comments) {
+                if (err) return res.json({'result': 'fail'});
+                if (comments)
+                    return res.json(comments);
+                else return res.json({'result': 'fail'});
+            });
+            break;
     }
 
 });
@@ -250,6 +275,7 @@ router.get('/showComments', function (req, res) {
 router.post('/saveArticle', function (req, res) {
     var path = req.body.path;
     var id = new ObjectId(req.body.articleId);
+    console.log(path);
     switch (path) {
         case 'notice':
             Notice.findById(id, function (err, notice) {
@@ -280,7 +306,40 @@ router.post('/saveArticle', function (req, res) {
                             return res.json({'result': 'fail'});
                     });
                 }
-            })
+            });
+            break;
+        case 'gallery':
+            Gallery.findById(id, function(err, gallery) {
+                if(err) return res.json({'result': 'fail'});
+                if(gallery) {
+                    gallery.title = req.body.title;
+                    gallery.content = req.body.content;
+                    gallery.image = req.body.image;
+                    var date = new Date().toISOString();
+                    gallery.modified = date;
+                    gallery.save();
+                    return res.json({'result': 'success', 'galleryId': gallery._id});
+                }
+                else {
+                    var newGallery = new Gallery();
+                    newGallery.title = req.body.title;
+                    newGallery.content = req.body.content;
+                    newGallery.image = req.body.image;
+                    newGallery.author = req.body.userId;
+                    var date = new Date().toISOString();
+                    newGallery.date = date.slice(0, 10);
+                    NursingHome.findById(req.body.nursingHomeId, function(err, nursingHome) {
+                        if(err) return res.json({'result': 'fail'});
+                        if(nursingHome) {
+                            newGallery.nursingHome = nursingHome;
+                            newGallery.save();
+                            return res.json({'result': 'success', 'galleryId': newGallery._id});
+                        }
+                        else return res.json({'result': 'fail'});
+                    })
+                }
+            });
+            break;
     }
 
 });
@@ -301,6 +360,24 @@ router.post('/saveComment', function (req, res) {
                     comment.save();
                     notice.commentCount += 1;
                     notice.save();
+                    return res.json({'result': 'success'});
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
+        case 'gallery':
+            Gallery.findById(req.body.articleId, function (err, gallery) {
+                if (err) return res.json({'result': 'fail'});
+                if (gallery) {
+                    var comment = new GalleryComment();
+                    comment.gallery = gallery;
+                    comment.author = req.body.userId;
+                    comment.content = req.body.content;
+                    var date = new Date().toISOString();
+                    comment.date = date.slice(0, 10);
+                    comment.save();
+                    gallery.commentCount += 1;
+                    gallery.save();
                     return res.json({'result': 'success'});
                 }
                 else return res.json({'result': 'fail'});
@@ -330,7 +407,26 @@ router.post('/deleteArticle', function (req, res) {
                     })
                 }
                 else return res.json({'result': 'fail'});
-            })
+            });
+            break;
+        case 'gallery':
+            Gallery.findById(id, function (err, gallery) {
+                if (err) return res.json({'result': 'fail'});
+                if (gallery) {
+                    GalleryComment.find({'gallery': id}, function (err, comments) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (comments) {
+                            for (var i = 0; i < comments.length; i++)
+                                comments[i].remove();
+                            gallery.remove();
+                            return res.json({'result': 'success'});
+                        }
+                        else return res.json({'result': 'fail'});
+                    })
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
     }
 
 });
@@ -338,49 +434,5 @@ router.post('/deleteArticle', function (req, res) {
 // 게시판 API 끝
 
 // 갤러리
-router.post('/saveGallery', function(req, res) {
-    var id = new ObjectId(req.body.galleryId);
-    Gallery.findById(id, function(err, gallery) {
-        if(err) return res.json({'result': 'fail'});
-        if(gallery) {
-            gallery.title = req.body.title;
-            gallery.content = req.body.content;
-            gallery.image = req.body.image;
-            var date = new Date().toISOString();
-            gallery.modified = date;
-            gallery.save();
-            return res.json({'result': 'success', 'galleryId': gallery._id});
-        }
-        else {
-            var newGallery = new Gallery();
-            newGallery.title = req.body.title;
-            newGallery.content = req.body.content;
-            newGallery.image = req.body.image;
-            newGallery.author = req.body.userId;
-            var date = new Date().toISOString();
-            newGallery.date = date.slice(0, 10);
-            NursingHome.findById(req.body.nursingHomeId, function(err, nursingHome) {
-                if(err) return res.json({'result': 'fail'});
-                if(nursingHome) {
-                    newGallery.nursingHome = nursingHome;
-                    newGallery.save();
-                    return res.json({'result': 'success', 'galleryId': newGallery._id});
-                }
-                else return res.json({'result': 'fail'});
-            })
-        }
-    })
-});
-
-router.get('/getGallery', function(req, res) {
-    var id = req.query.nursingHomeId;
-    Gallery.find({'nursingHome': new ObjectId(id)}, function(err, galleries) {
-        if(err) return res.json({'result': 'fail'});
-        if(galleries) {
-            return res.json(galleries);
-        }
-        else return res.json({'result': 'fail'});
-    })
-});
 
 module.exports = router;

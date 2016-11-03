@@ -27,6 +27,7 @@ require('./models/model_gallery');
 require('./models/model_schedule');
 require('./models/model_qa');
 require('./models/model_noticeComment');
+require('./models/model_galleryComment');
 var User = mongoose.model('User');
 
 // view engine setup

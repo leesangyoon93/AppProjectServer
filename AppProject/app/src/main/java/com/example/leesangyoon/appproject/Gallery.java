@@ -22,6 +22,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
@@ -95,8 +96,8 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemClic
 
     private void getGalleryToServer() throws Exception {
 
-        String URL = String.format("http://52.41.19.232/getGallery?nursingHomeId=%s",
-                URLEncoder.encode(User.getInstance().getNursingHomeId(), "utf-8"));
+        String URL = String.format("http://52.41.19.232/getArticles?nursingHomeId=%s&path=%s",
+                URLEncoder.encode(User.getInstance().getNursingHomeId(), "utf-8"), URLEncoder.encode("gallery", "utf-8"));
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
 
@@ -125,6 +126,17 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Intent intent = new Intent(Gallery.this, ShowGallery.class);
+        try {
+            GallerySingleton.getInstance().setId(gallery.get(position).getString("_id"));
+            GallerySingleton.getInstance().setContent(gallery.get(position).getString("content"));
+            GallerySingleton.getInstance().setAuthor(gallery.get(position).getString("author"));
+            GallerySingleton.getInstance().setCommentCount(gallery.get(position).getInt("commentCount"));
+            GallerySingleton.getInstance().setDate(gallery.get(position).getString("date"));
+            GallerySingleton.getInstance().setImage(gallery.get(position).getString("image"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        startActivity(intent);
     }
 }

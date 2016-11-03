@@ -17,4 +17,11 @@
     <item
         android:id="@+id/menu_QA"
         android:title="@string/qa" />
+
+    <item
+        android:id="@+id/menu_adminPatient"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="AdminPatient"
+        appproject:showAsAction="ifRoom"
+        />
 </menu>

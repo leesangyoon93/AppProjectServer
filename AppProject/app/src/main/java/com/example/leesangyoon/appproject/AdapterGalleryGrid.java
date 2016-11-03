@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,11 +52,17 @@ public class AdapterGalleryGrid extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         JSONObject galleries = gallery.get(position);
 
+        try {
+            Log.e("asdf", galleries.getString("title"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         byte[] decodedString;
 
         convertView = mInflater.inflate(R.layout.grid_gallery, null);
-        TextView title = (TextView) convertView.findViewById(R.id.title);
-        ImageView image = (ImageView) convertView.findViewById(R.id.image);
+        TextView title = (TextView) convertView.findViewById(R.id.grid_title);
+        ImageView image = (ImageView) convertView.findViewById(R.id.grid_image);
 
 
         // 텍스트를 비트맵으로 변환하고 뿌려주면됨.
