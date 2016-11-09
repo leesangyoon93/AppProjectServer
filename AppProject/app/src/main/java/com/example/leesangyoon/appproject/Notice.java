@@ -40,7 +40,9 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         Article.getInstance().initArticle();
 
@@ -73,10 +75,10 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
-            case android.R.id.home:
-                intent = new Intent(Notice.this, MainActivity.class);
-                startActivity(intent);
-                break;
+//            case android.R.id.home:
+//                intent = new Intent(Notice.this, MainActivity.class);
+//                startActivity(intent);
+//                break;
             case R.id.menu_createNotice:
                 // 공지사항 등록 액티비티로.
                 intent = new Intent(Notice.this, EditArticle.class);

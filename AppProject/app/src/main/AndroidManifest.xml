@@ -39,15 +39,15 @@
         <activity android:name=".EditWorker" android:label="요양사정보"/>
         <activity android:name=".SettingNursingHome" android:label="요양원정보"/>
         <activity android:name=".Profile" android:label="프로필"/>
-        <activity android:name=".Intro"/>
-        <activity android:name=".Notice"/>
-        <activity android:name=".Gallery"/>
-        <activity android:name=".Schedule"/>
-        <activity android:name=".QA"/>
-        <activity android:name=".ShowArticle" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name="EditArticle"/>
-        <activity android:name=".EditGallery"/>
-        <activity android:name=".ShowGallery"/>
+        <activity android:name=".Intro" android:label="소개"/>
+        <activity android:name=".Notice" android:label="공지사항"/>
+        <activity android:name=".Gallery" android:label="갤러리"/>
+        <activity android:name=".Schedule" android:label="일정"/>
+        <activity android:name=".QA" android:label="질문/답변"/>
+        <activity android:name=".ShowArticle" android:label="게시글 정보" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name="EditArticle" android:label="글 작성/수정"/>
+        <activity android:name=".EditGallery" android:label="갤러리 작성/수정"/>
+        <activity android:name=".ShowGallery" android:label="갤러리 정보"/>
         <activity android:name=".AdminPatient"/>
         <activity android:name=".CreatePatient"/>
         <activity android:name=".ShowPatient"/>

@@ -42,7 +42,6 @@ public class EditArticle extends AppCompatActivity {
     String path = "";
     EditText title;
     EditText content;
-    TextView author;
     Class cls = null;
 
     @Override
