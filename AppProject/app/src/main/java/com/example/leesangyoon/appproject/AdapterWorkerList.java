@@ -46,13 +46,11 @@ public class AdapterWorkerList extends BaseAdapter {
         JSONObject worker = workers.get(position);
 
         convertView = mInflater.inflate(R.layout.list_worker, null);
-        TextView textRole = (TextView) convertView.findViewById(R.id.text_workerRole);
         TextView textName = (TextView) convertView.findViewById(R.id.text_workerName);
         TextView textId = (TextView) convertView.findViewById(R.id.text_workerId);
 
         try {
-            textRole.setText(worker.getString("role"));
-            textId.setText(worker.getString("userId"));
+            textId.setText("(" +worker.getString("userId") + ")");
             textName.setText(worker.getString("userName"));
         } catch (JSONException e) {
             e.printStackTrace();

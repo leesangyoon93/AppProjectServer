@@ -47,12 +47,15 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.layout_actionbar);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setTitle("요양사목록");
+        actionBar.setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
 
-        nursingHomeName.setText(User.getInstance().getNursingHomeName());
+        nursingHomeName.setText(User.getInstance().getNursingHomeName() + " 원장님\n환영합니다.");
 
         workers.clear();
 
@@ -70,24 +73,24 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
         workerList.setAdapter(adapterWorkerList);
 
-        profileButton = (ImageButton)findViewById(R.id.btn_profile);
-        homeButton = (ImageButton)findViewById(R.id.btn_home);
-
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewWorker.this, SettingNursingHome.class);
-                startActivity(intent);
-            }
-        });
-
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewWorker.this, ViewWorker.class);
-                startActivity(intent);
-            }
-        });
+//        profileButton = (ImageButton)findViewById(R.id.btn_profile);
+//        homeButton = (ImageButton)findViewById(R.id.btn_home);
+//
+//        profileButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ViewWorker.this, SettingNursingHome.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        homeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(ViewWorker.this, ViewWorker.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -102,6 +105,9 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
             case R.id.menu_addWorker:
                 Intent intent = new Intent(ViewWorker.this, CreateWorker.class);
                 startActivity(intent);
+                break;
+            case android.R.id.home:
+                backPressCloseHandler.onBackPressed();
                 break;
         }
         return super.onOptionsItemSelected(item);

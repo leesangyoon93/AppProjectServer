@@ -2,21 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/model_galleryComment.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/EditGallery.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/EditGallery.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/.idea/inspectionProfiles/Project_Default.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/.idea/inspectionProfiles/profiles_settings.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/.idea/misc.xml" afterPath="$PROJECT_DIR$/../AppProject/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/AdapterGalleryGrid.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/AdapterGalleryGrid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Gallery.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Gallery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/GallerySingleton.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/GallerySingleton.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/AdapterWorkerList.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/AdapterWorkerList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Login.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Login.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/MainActivity.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ShowGallery.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ShowGallery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ViewWorker.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ViewWorker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_createworker.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_createworker.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_gallery.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_gallery.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_showarticle.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_showarticle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_showgallery.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_showgallery.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/grid_gallery.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/grid_gallery.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_login.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_viewworker.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_viewworker.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/layout_actionbar.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/layout_actionbar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/list_worker.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/list_worker.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_createworker.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_createworker.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/values/styles.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/values/styles.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/model_patient.js" afterPath="$PROJECT_DIR$/models/model_patient.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/model_user.js" afterPath="$PROJECT_DIR$/models/model_user.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <ignored path="AppProjectServer.iws" />
@@ -55,8 +62,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="206" column="22" selection-start-line="206" selection-start-column="22" selection-end-line="206" selection-end-column="22" />
+            <state relative-caret-position="344">
+              <caret line="109" column="65" selection-start-line="109" selection-start-column="65" selection-end-line="109" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -89,8 +96,8 @@
       <file leaf-file-name="model_user.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/model_user.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+            <state relative-caret-position="214">
+              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
               <folding>
                 <element signature="e#0#49#0" expanded="false" />
               </folding>
@@ -101,8 +108,8 @@
       <file leaf-file-name="model_patient.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/model_patient.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+            <state relative-caret-position="255">
+              <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -154,9 +161,7 @@
       <list>
         <option value="$PROJECT_DIR$/bin/www" />
         <option value="$PROJECT_DIR$/views/index.jade" />
-        <option value="$PROJECT_DIR$/models/model_patient.js" />
         <option value="$PROJECT_DIR$/models/model_nursingHome.js" />
-        <option value="$PROJECT_DIR$/models/model_user.js" />
         <option value="$PROJECT_DIR$/models/model_schedule.js" />
         <option value="$PROJECT_DIR$/models/model_qa.js" />
         <option value="$PROJECT_DIR$/models/model_comment.js" />
@@ -165,6 +170,8 @@
         <option value="$PROJECT_DIR$/models/model_gallery.js" />
         <option value="$PROJECT_DIR$/models/model_galleryComment.js" />
         <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/models/model_user.js" />
+        <option value="$PROJECT_DIR$/models/model_patient.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
       </list>
     </option>
@@ -358,12 +365,14 @@
       <workItem from="1477738469912" duration="8695000" />
       <workItem from="1477916945275" duration="1453000" />
       <workItem from="1478000630894" duration="2257000" />
-      <workItem from="1478154688503" duration="352000" />
+      <workItem from="1478154688503" duration="664000" />
+      <workItem from="1478432279182" duration="131000" />
+      <workItem from="1478679858161" duration="499000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27131000" />
+    <option name="totallyTimeSpent" value="28073000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="15" y="23" width="1400" height="784" extended-state="0" />
@@ -780,12 +789,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_gallery.js">
+    <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        <state relative-caret-position="345">
+          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding>
-            <element signature="e#0#49#0" expanded="false" />
+            <marker date="1478006815000" expanded="true" signature="533:892" ph="..." />
           </folding>
         </state>
       </provider>
@@ -800,31 +809,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
+    <entry file="file://$PROJECT_DIR$/models/model_gallery.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
-          <folding>
-            <marker date="1478006815000" expanded="true" signature="533:892" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
+        <state relative-caret-position="195">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding>
             <element signature="e#0#49#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_patient.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -848,10 +839,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#49#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_patient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="206" column="22" selection-start-line="206" selection-start-column="22" selection-end-line="206" selection-end-column="22" />
+        <state relative-caret-position="344">
+          <caret line="109" column="65" selection-start-line="109" selection-start-column="65" selection-end-line="109" selection-end-column="65" />
           <folding />
         </state>
       </provider>

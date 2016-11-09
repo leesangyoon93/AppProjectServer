@@ -52,12 +52,6 @@ public class AdapterGalleryGrid extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         JSONObject galleries = gallery.get(position);
 
-        try {
-            Log.e("asdf", galleries.getString("title"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
         byte[] decodedString;
 
         convertView = mInflater.inflate(R.layout.grid_gallery, null);

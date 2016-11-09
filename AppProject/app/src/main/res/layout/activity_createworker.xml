@@ -3,44 +3,132 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="요양사 추가"
-        android:id="@+id/textView10"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20dp" />
-
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/input_workerName"
-        android:layout_gravity="center_horizontal"
-        android:hint="요양사 이름" />
+        android:layout_weight="1"
+        android:gravity="center">
 
-    <EditText
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:id="@+id/imageView4"
+            android:src="@drawable/abc_switch_thumb_material"
+            android:layout_marginLeft="10dp" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/input_workerName"
+                android:layout_gravity="center_horizontal"
+                android:theme="@style/MyEditTextTheme"
+                android:hint="이름"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="50dp"
+                android:padding="10dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="50dp"
+                android:padding="10dp">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="남"
+                        android:id="@+id/radio_male"
+                        android:checked="true"
+                        android:layout_marginRight="10dp" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="여"
+                        android:id="@+id/radio_female"
+                        android:checked="false"
+                        android:layout_marginLeft="10dp" />
+                </RadioGroup>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/input_workerPhoneNumber"
-        android:layout_gravity="center_horizontal"
-        android:hint="요양사 연락처" />
+        android:layout_weight="9">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/input_workerId"
-        android:layout_gravity="center_horizontal"
-        android:hint="발급 아이디" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/input_workerPhoneNumber"
+            android:layout_gravity="center_horizontal"
+            android:theme="@style/MyEditTextTheme"
+            android:hint="요양사 연락처"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/input_workerPassword"
-        android:layout_gravity="center_horizontal"
-        android:hint="패스워드" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/input_workerId"
+            android:layout_gravity="center_horizontal"
+            android:theme="@style/MyEditTextTheme"
+            android:hint="요양사 ID"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/input_workerPassword"
+            android:layout_gravity="center_horizontal"
+            android:theme="@style/MyEditTextTheme"
+            android:hint="비밀번호입력"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/input_workerPasswordCheck"
+            android:layout_gravity="center_horizontal"
+            android:theme="@style/MyEditTextTheme"
+            android:hint="비밀번호확인"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp" />
+    </LinearLayout>
 
 </LinearLayout>

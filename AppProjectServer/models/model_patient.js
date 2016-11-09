@@ -15,6 +15,7 @@ var PatientSchema = new Schema({
     },
     birthday: String,
     relation: String,
+    gender: String,
     roomNumber: String,
     created: {
         type: Date,

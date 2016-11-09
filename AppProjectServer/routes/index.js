@@ -14,7 +14,7 @@ var GalleryComment = mongoose.model('GalleryComment');
 var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     res.render('index', {title: 'AppProjectServer'});
 });
 
@@ -72,6 +72,7 @@ router.post('/createNursingHome', function (req, res) {
             admin.password = req.body.adminPassword;
             admin.userName = req.body.adminName;
             admin.phoneNumber = req.body.adminPhoneNumber;
+            admin.gender = req.body.gender;
             admin.role = "관리자";
             admin.auth = 0;
             var newNursingHome = new NursingHome();
@@ -113,6 +114,7 @@ router.post('/createWorker', function (req, res) {
                     newWorker.userId = req.body.workerId;
                     newWorker.userName = req.body.workerName;
                     newWorker.password = req.body.workerPassword;
+                    newWorker.gender = req.body.workerGender;
                     newWorker.phoneNumber = req.body.workerPhoneNumber;
                     newWorker.auth = 1;
                     newWorker.role = "요양사";
@@ -174,6 +176,7 @@ router.post('/createPatient', function (req, res) {
                             protector.userName = req.body.userName;
                             protector.password = req.body.password;
                             protector.phoneNumber = req.body.phoneNumber;
+                            protector.gender = req.body.gender;
                             protector.auth = 2;
                             protector.role = "보호자";
 
@@ -181,6 +184,7 @@ router.post('/createPatient', function (req, res) {
                             patient.protector = protector;
                             patient.worker = worker;
                             patient.patientName = req.body.patientName;
+                            patient.gender = req.body.gender;
                             patient.birthday = req.body.birthday;
                             patient.relation = req.body.relation;
                             patient.roomNumber = req.body.roomNumber;

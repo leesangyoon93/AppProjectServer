@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,7 +28,9 @@ import java.util.Map;
  */
 public class CreateWorker extends AppCompatActivity {
 
-    EditText workerName, workerPhoneNumber, workerId, workerPassword;
+    EditText workerName, workerPhoneNumber, workerId, workerPassword, workerPasswordCheck;
+    RadioButton male, female;
+    String gender = "male";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,10 @@ public class CreateWorker extends AppCompatActivity {
         workerPhoneNumber = (EditText)findViewById(R.id.input_workerPhoneNumber);
         workerId = (EditText)findViewById(R.id.input_workerId);
         workerPassword = (EditText)findViewById(R.id.input_workerPassword);
+        workerPasswordCheck = (EditText)findViewById(R.id.input_workerPasswordCheck);
+
+        male = (RadioButton)findViewById(R.id.radio_male);
+        female = (RadioButton)findViewById(R.id.radio_female);
     }
 
     @Override
@@ -55,8 +62,16 @@ public class CreateWorker extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.menu_createWorker:
                 try {
-                    createWorkerToServer(workerName.getText().toString(), workerPhoneNumber.getText().toString(),
-                            workerId.getText().toString(), workerPassword.getText().toString());
+                    if (workerPassword.getText().toString().equals(workerPasswordCheck.getText().toString())) {
+                        if(female.isChecked()) {
+                            gender = "female";
+                        }
+                        createWorkerToServer(workerName.getText().toString(), workerPhoneNumber.getText().toString(),
+                                workerId.getText().toString(), workerPassword.getText().toString());
+                    }
+                    else {
+                        Toast.makeText(CreateWorker.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -78,6 +93,7 @@ public class CreateWorker extends AppCompatActivity {
         postParam.put("workerPhoneNumber", workerPhoneNumber);
         postParam.put("workerId", workerId);
         postParam.put("workerPassword", workerPassword);
+        postParam.put("workerGender", gender);
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {

@@ -52,24 +52,24 @@ public class MainActivity extends AppCompatActivity {
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        profileButton = (ImageButton)findViewById(R.id.btn_profile);
-        homeButton = (ImageButton)findViewById(R.id.btn_home);
-
-        profileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Profile.class);
-                startActivity(intent);
-            }
-        });
-
-        homeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+//        profileButton = (ImageButton)findViewById(R.id.btn_profile);
+//        homeButton = (ImageButton)findViewById(R.id.btn_home);
+//
+//        profileButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, Profile.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        homeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -108,6 +108,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_adminPatient:
                 intent = new Intent(MainActivity.this, AdminPatient.class);
                 startActivity(intent);
+                break;
+            case R.id.menu_showPatient:
+                intent = new Intent(MainActivity.this, ShowPatient.class);
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -15,15 +15,17 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:windowSoftInputMode="stateAlwaysHidden"
         android:name="com.example.leesangyoon.appproject.volley">
 
-        <activity android:name=".Login">
+        <activity android:name=".Login" android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,8 +34,8 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name=".CreateNursingHome"/>
-        <activity android:name=".ViewWorker"/>
-        <activity android:name=".CreateWorker"/>
+        <activity android:name=".ViewWorker" android:label="요양사목록"/>
+        <activity android:name=".CreateWorker" android:label="요양사추가"/>
         <activity android:name=".EditWorker"/>
         <activity android:name=".SettingNursingHome"/>
         <activity android:name=".Profile"/>
@@ -48,6 +50,7 @@
         <activity android:name=".ShowGallery"/>
         <activity android:name=".AdminPatient"/>
         <activity android:name=".CreatePatient"/>
+        <activity android:name=".ShowPatient"/>
         <!--android:parentActivityName=".MainActivity"-->
     </application>
 

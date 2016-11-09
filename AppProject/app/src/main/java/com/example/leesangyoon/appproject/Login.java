@@ -1,5 +1,6 @@
 package com.example.leesangyoon.appproject;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -37,6 +38,10 @@ public class Login extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_login);
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.hide();
 
         loginButton = (Button) findViewById(R.id.btn_login);
         registerButton = (Button) findViewById(R.id.btn_registerNursinHome);

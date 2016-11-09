@@ -6,23 +6,27 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="8"
+        android:gravity="center"
+        android:background="#8FB7AE">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_nursingHomeName"
-            android:layout_gravity="center_vertical"
-            android:textSize="30dp"
+            android:textSize="25dp"
+            android:textColor="#FFFFFF"
             android:gravity="center" />
 
     </LinearLayout>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/list_worker"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="2" />
 
 </LinearLayout>
