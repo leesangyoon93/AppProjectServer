@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -33,6 +35,7 @@ public class Login extends AppCompatActivity {
     EditText userId, password;
 
     SharedPreferences userSession;
+    LinearLayout mainLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,16 @@ public class Login extends AppCompatActivity {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.hide();
+
+        mainLayout = (LinearLayout)findViewById(R.id.login_layout);
+        mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(userId.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
+            }
+        });
 
         loginButton = (Button) findViewById(R.id.btn_login);
         registerButton = (Button) findViewById(R.id.btn_registerNursinHome);
@@ -121,6 +134,7 @@ public class Login extends AppCompatActivity {
                         User.getInstance().setUserId(response.getString("userId"));
                         User.getInstance().setUserName(response.getString("userName"));
                         User.getInstance().setPhoneNumber(response.getString("phoneNumber"));
+                        User.getInstance().setGender(response.getString("gender"));
                         User.getInstance().setAuth(response.getInt("auth"));
                         User.getInstance().setNursingHomeId(response.getString("nursingHome"));
 
@@ -165,6 +179,7 @@ public class Login extends AppCompatActivity {
                         User.getInstance().setUserId(response.getString("userId"));
                         User.getInstance().setUserName(response.getString("userName"));
                         User.getInstance().setPhoneNumber(response.getString("phoneNumber"));
+                        User.getInstance().setGender(response.getString("gender"));
                         User.getInstance().setAuth(response.getInt("auth"));
                         User.getInstance().setNursingHomeId(response.getString("nursingHome"));
 

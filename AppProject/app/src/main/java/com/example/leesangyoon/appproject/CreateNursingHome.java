@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,7 +31,9 @@ import java.util.Map;
 public class CreateNursingHome extends AppCompatActivity {
     final String URL = "http://52.41.19.232/createNursingHome";
 
-    EditText homeName, address, nursingHomePhoneNumber, adminName, adminPhoneNumber, adminId, adminPassword;
+    EditText homeName, address, nursingHomePhoneNumber, adminName, adminPhoneNumber, adminId, adminPassword, adminPasswordCheck;
+    RadioButton male, female;
+    String gender = "male";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,9 @@ public class CreateNursingHome extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         homeName = (EditText) findViewById(R.id.input_homeName);
         address = (EditText) findViewById(R.id.input_address);
@@ -48,6 +53,9 @@ public class CreateNursingHome extends AppCompatActivity {
         adminPhoneNumber = (EditText) findViewById(R.id.input_adminPhoneNumber);
         adminId = (EditText) findViewById(R.id.input_adminId);
         adminPassword = (EditText) findViewById(R.id.input_adminPassword);
+        adminPasswordCheck = (EditText) findViewById(R.id.input_adminPasswordCheck);
+        male = (RadioButton)findViewById(R.id.admin_male);
+        female = (RadioButton)findViewById(R.id.admin_female);
     }
 
     @Override
@@ -61,22 +69,39 @@ public class CreateNursingHome extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.menu_createNursingHome:
                 try {
-                    registerNursingHomeToServer(
-                            homeName.getText().toString(),
-                            address.getText().toString(),
-                            nursingHomePhoneNumber.getText().toString(),
-                            adminName.getText().toString(),
-                            adminPhoneNumber.getText().toString(),
-                            adminId.getText().toString(),
-                            adminPassword.getText().toString()
-                    );
+                    if(homeName.getText().toString().equals("") || address.getText().toString().equals("") ||
+                            nursingHomePhoneNumber.getText().toString().equals("") || adminName.getText().toString().equals("") ||
+                            adminPhoneNumber.getText().toString().equals("") || adminId.getText().toString().equals("") ||
+                            adminPassword.getText().toString().equals("")) {
+                        Toast.makeText(CreateNursingHome.this, "입력창을 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        if(adminPassword.getText().toString().equals(adminPasswordCheck.getText().toString())) {
+                            if(female.isChecked()) {
+                                gender = "female";
+                            }
+                            registerNursingHomeToServer(
+                                    homeName.getText().toString(),
+                                    address.getText().toString(),
+                                    nursingHomePhoneNumber.getText().toString(),
+                                    adminName.getText().toString(),
+                                    adminPhoneNumber.getText().toString(),
+                                    adminId.getText().toString(),
+                                    adminPassword.getText().toString()
+                            );
+                        }
+                        else {
+                            Toast.makeText(CreateNursingHome.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
-            case android.R.id.home:
-                Intent intent = new Intent(CreateNursingHome.this, Login.class);
-                startActivity(intent);
+//            case android.R.id.home:
+//                Intent intent = new Intent(CreateNursingHome.this, Login.class);
+//                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -93,6 +118,7 @@ public class CreateNursingHome extends AppCompatActivity {
         postParam.put("adminPhoneNumber", adminPhoneNumber);
         postParam.put("adminId", adminId);
         postParam.put("adminPassword", adminPassword);
+        postParam.put("adminGender", gender);
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {
@@ -126,5 +152,12 @@ public class CreateNursingHome extends AppCompatActivity {
                 });
 
         volley.getInstance().addToRequestQueue(req);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CreateNursingHome.this, Login.class);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }

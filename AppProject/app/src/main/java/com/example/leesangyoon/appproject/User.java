@@ -12,6 +12,16 @@ public class User {
     private String userId = null;
     private String userName = null;
     private String phoneNumber = null;
+    private String gender = null;
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     private String nursingHomeId = "";
     private String nursingHomeName = null;
     private String nursingHomeAddress = null;

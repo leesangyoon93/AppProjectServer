@@ -19,9 +19,14 @@
         android:title="@string/qa" />
 
     <item
+        android:id="@+id/menu_userProfile"
+        android:title="프로필"
+        appproject:showAsAction="ifRoom"
+        />
+
+    <item
         android:id="@+id/menu_adminPatient"
-        android:icon="@android:drawable/ic_menu_manage"
-        android:title="AdminPatient"
+        android:title="수급자관리"
         appproject:showAsAction="ifRoom"
         />
 </menu>

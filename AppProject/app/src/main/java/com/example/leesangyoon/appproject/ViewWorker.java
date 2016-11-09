@@ -31,7 +31,6 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
 
     ListView workerList;
     TextView nursingHomeName;
-    ImageButton homeButton, profileButton;
 
     AdapterWorkerList adapterWorkerList;
     ArrayList<JSONObject> workers = new ArrayList<JSONObject>();
@@ -48,10 +47,9 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayUseLogoEnabled(true);
-        actionBar.setTitle("요양사목록");
         actionBar.setDisplayShowTitleEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
 
@@ -72,25 +70,6 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         adapterWorkerList.notifyDataSetChanged();
 
         workerList.setAdapter(adapterWorkerList);
-
-//        profileButton = (ImageButton)findViewById(R.id.btn_profile);
-//        homeButton = (ImageButton)findViewById(R.id.btn_home);
-//
-//        profileButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ViewWorker.this, SettingNursingHome.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        homeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(ViewWorker.this, ViewWorker.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     @Override
@@ -106,8 +85,12 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
                 Intent intent = new Intent(ViewWorker.this, CreateWorker.class);
                 startActivity(intent);
                 break;
-            case android.R.id.home:
-                backPressCloseHandler.onBackPressed();
+//            case android.R.id.home:
+//                backPressCloseHandler.onBackPressed();
+//                break;
+            case R.id.menu_adminProfile:
+                intent = new Intent(ViewWorker.this, SettingNursingHome.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);

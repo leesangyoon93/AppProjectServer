@@ -19,9 +19,15 @@
         android:title="@string/qa" />
 
     <item
-        android:id="@+id/menu_showPatient"
-        android:icon="@android:drawable/ic_menu_view"
-        android:title="ShowPatient"
+        android:id="@+id/menu_userProfile"
+        android:title="프로필"
         appproject:showAsAction="ifRoom"
         />
+
+    <item
+        android:id="@+id/menu_showPatient"
+        android:title="정보열람"
+        appproject:showAsAction="ifRoom"
+        />
+    <!--android:icon="@android:drawable/ic_menu_view"-->
 </menu>

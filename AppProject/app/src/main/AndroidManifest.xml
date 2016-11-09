@@ -25,7 +25,7 @@
         android:windowSoftInputMode="stateAlwaysHidden"
         android:name="com.example.leesangyoon.appproject.volley">
 
-        <activity android:name=".Login" android:windowSoftInputMode="adjustResize">
+        <activity android:name=".Login" android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,12 +33,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".CreateNursingHome"/>
+        <activity android:name=".CreateNursingHome" android:label="요양원등록"/>
         <activity android:name=".ViewWorker" android:label="요양사목록"/>
         <activity android:name=".CreateWorker" android:label="요양사추가"/>
-        <activity android:name=".EditWorker"/>
-        <activity android:name=".SettingNursingHome"/>
-        <activity android:name=".Profile"/>
+        <activity android:name=".EditWorker" android:label="요양사정보"/>
+        <activity android:name=".SettingNursingHome" android:label="요양원정보"/>
+        <activity android:name=".Profile" android:label="프로필"/>
         <activity android:name=".Intro"/>
         <activity android:name=".Notice"/>
         <activity android:name=".Gallery"/>

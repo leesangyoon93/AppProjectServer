@@ -39,7 +39,9 @@ public class CreateWorker extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
 
         workerName = (EditText)findViewById(R.id.input_workerName);
         workerPhoneNumber = (EditText)findViewById(R.id.input_workerPhoneNumber);
@@ -62,23 +64,27 @@ public class CreateWorker extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.menu_createWorker:
                 try {
-                    if (workerPassword.getText().toString().equals(workerPasswordCheck.getText().toString())) {
-                        if(female.isChecked()) {
-                            gender = "female";
-                        }
-                        createWorkerToServer(workerName.getText().toString(), workerPhoneNumber.getText().toString(),
-                                workerId.getText().toString(), workerPassword.getText().toString());
+                    if(workerName.getText().toString().equals("") || workerId.getText().toString().equals("") || workerPassword.getText().toString().equals("") || workerPhoneNumber.getText().toString().equals("")) {
+                        Toast.makeText(CreateWorker.this, "입력창을 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(CreateWorker.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        if (workerPassword.getText().toString().equals(workerPasswordCheck.getText().toString())) {
+                            if (female.isChecked()) {
+                                gender = "female";
+                            }
+                            createWorkerToServer(workerName.getText().toString(), workerPhoneNumber.getText().toString(),
+                                    workerId.getText().toString(), workerPassword.getText().toString());
+                        } else {
+                            Toast.makeText(CreateWorker.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
-            case android.R.id.home:
-                Intent intent = new Intent(CreateWorker.this, ViewWorker.class);
-                startActivity(intent);
+//            case android.R.id.home:
+//                Intent intent = new Intent(CreateWorker.this, ViewWorker.class);
+//                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

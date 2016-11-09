@@ -38,7 +38,9 @@ public class EditWorker extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         workerId = (TextView)findViewById(R.id.text_detailWorkerId);
         workerName = (TextView)findViewById(R.id.text_detailWorkerName);
@@ -61,8 +63,8 @@ public class EditWorker extends AppCompatActivity {
         switch(item.getItemId()) {
             case R.id.menu_deleteWorker:
                 new AlertDialog.Builder(EditWorker.this)
-                        .setTitle("요양사 삭제 확인")
-                        .setMessage(" 요양사를 삭제하시겠습니까?")
+                        .setTitle("요양사 삭제하기")
+                        .setMessage("정말 요양사를 삭제하시겠습니까?")
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -82,10 +84,10 @@ public class EditWorker extends AppCompatActivity {
                         })
                         .show();
                 break;
-            case android.R.id.home:
-                Intent intent = new Intent(EditWorker.this, ViewWorker.class);
-                startActivity(intent);
-                break;
+//            case android.R.id.home:
+//                Intent intent = new Intent(EditWorker.this, ViewWorker.class);
+//                startActivity(intent);
+//                break;
         }
         return super.onOptionsItemSelected(item);
     }

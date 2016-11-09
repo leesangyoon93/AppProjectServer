@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     // 수급자 관리 또는 정보열람 버튼 넣기
 
-    ImageButton homeButton, profileButton;
-
     // 타이틀 제대로.
     BackPressCloseHandler backPressCloseHandler;
 
@@ -47,29 +45,11 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(R.layout.layout_actionbar);
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
-
-//        profileButton = (ImageButton)findViewById(R.id.btn_profile);
-//        homeButton = (ImageButton)findViewById(R.id.btn_home);
-//
-//        profileButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, Profile.class);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        homeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     @Override
@@ -113,6 +93,14 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, ShowPatient.class);
                 startActivity(intent);
                 break;
+            case R.id.menu_userProfile:
+                intent = new Intent(MainActivity.this, Profile.class);
+                startActivity(intent);
+                break;
+//            case android.R.id.home:
+//                backPressCloseHandler.onBackPressed();
+//                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

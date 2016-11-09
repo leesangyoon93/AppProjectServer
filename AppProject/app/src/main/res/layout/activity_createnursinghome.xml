@@ -1,69 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="요양원 등록 신청"
-        android:id="@+id/textView9"
-        android:layout_gravity="center_horizontal"
-        android:textSize="30dp" />
-
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/input_homeName"
-        android:layout_gravity="center_horizontal"
-        android:hint="요양원 이름" />
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView5" >
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/input_address"
-        android:layout_gravity="center_horizontal"
-        android:hint="요양원 주소" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/input_nursingHomePhoneNumber"
-        android:layout_gravity="center_horizontal"
-        android:hint="요양원 전화번호" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/input_homeName"
+                android:layout_gravity="center_horizontal"
+                android:hint="요양원 이름"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:layout_marginTop="15dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/input_adminName"
-        android:layout_gravity="center_horizontal"
-        android:hint="대표자 이름" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/input_address"
+                android:layout_gravity="center_horizontal"
+                android:hint="요양원 주소"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/input_adminPhoneNumber"
-        android:layout_gravity="center_horizontal"
-        android:hint="대표자 연락처" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/input_nursingHomePhoneNumber"
+                android:layout_gravity="center_horizontal"
+                android:hint="요양원 전화번호"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/input_adminId"
-        android:layout_gravity="center_horizontal"
-        android:hint="관리자 아이디" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/input_adminName"
+                android:layout_gravity="center_horizontal"
+                android:hint="대표자 이름"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/input_adminPassword"
-        android:layout_gravity="center_horizontal"
-        android:hint="관리자 비밀번호" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="left|center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="대표자 성별"
+                    android:id="@+id/textView2"
+                    android:layout_marginRight="30dp"
+                    android:textSize="17sp"
+                    android:textIsSelectable="false"
+                    android:paddingLeft="0dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="10dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="남"
+                    android:id="@+id/admin_male"
+                    android:checked="true"
+                    android:layout_marginRight="20dp" />
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="여"
+                    android:id="@+id/admin_female"
+                    android:checked="false"
+                    android:layout_marginLeft="20dp" />
+
+            </RadioGroup>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:ems="10"
+                android:id="@+id/input_adminPhoneNumber"
+                android:layout_gravity="center_horizontal"
+                android:hint="대표자 연락처"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/input_adminId"
+                android:layout_gravity="center_horizontal"
+                android:hint="대표자 아이디"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/input_adminPassword"
+                android:layout_gravity="center_horizontal"
+                android:hint="비밀번호입력"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/input_adminPasswordCheck"
+                android:layout_gravity="center_horizontal"
+                android:hint="비밀번호확인"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

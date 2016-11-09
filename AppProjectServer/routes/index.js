@@ -72,7 +72,7 @@ router.post('/createNursingHome', function (req, res) {
             admin.password = req.body.adminPassword;
             admin.userName = req.body.adminName;
             admin.phoneNumber = req.body.adminPhoneNumber;
-            admin.gender = req.body.gender;
+            admin.gender = req.body.adminGender;
             admin.role = "관리자";
             admin.auth = 0;
             var newNursingHome = new NursingHome();
