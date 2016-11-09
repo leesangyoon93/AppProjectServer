@@ -130,8 +130,10 @@ public class CreateNursingHome extends AppCompatActivity {
                     if (response.toString().contains("result")) {
                         if (response.getString("result").equals("fail")) {
                             Toast.makeText(CreateNursingHome.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
-                        } else if (response.getString("result").equals("overlap")) {
+                        } else if (response.getString("result").equals("userOverlap")) {
                             Toast.makeText(CreateNursingHome.this, "관리자 아이디가 이미 사용중입니다.", Toast.LENGTH_SHORT).show();
+                        } else if (response.getString("result").equals("homeOverlap")) {
+                            Toast.makeText(CreateNursingHome.this, "요양원 이름이 이미 사용중입니다.", Toast.LENGTH_SHORT).show();
                         } else if (response.getString("result").equals("success")) {
                             Toast.makeText(CreateNursingHome.this, "요양원 등록 완료! 관리자 계정으로 로그인 해주세요.", Toast.LENGTH_SHORT).show();
 

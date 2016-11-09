@@ -65,28 +65,34 @@ router.post('/getNursingHome', function (req, res) {
 router.post('/createNursingHome', function (req, res) {
     NursingHome.findOne({'homeName': req.body.homeName}, function (err, nursingHome) {
         if (err) return res.json({'result': 'fail'});
-        if (nursingHome) return res.json({'result': 'overlap'});
+        if (nursingHome) return res.json({'result': 'homeOverlap'});
         else {
-            var admin = new User();
-            admin.userId = req.body.adminId;
-            admin.password = req.body.adminPassword;
-            admin.userName = req.body.adminName;
-            admin.phoneNumber = req.body.adminPhoneNumber;
-            admin.gender = req.body.adminGender;
-            admin.role = "관리자";
-            admin.auth = 0;
-            var newNursingHome = new NursingHome();
-            newNursingHome.homeName = req.body.homeName;
-            newNursingHome.address = req.body.address;
-            newNursingHome.phoneNumber = req.body.nursingHomePhoneNumber;
+            User.findOne({'userId': req.body.adminId}, function(err, user) {
+                if(err) return res.json({'result': 'fail'});
+                if(user) return res.json({'result': 'userOverlap'});
+                else {
+                    var admin = new User();
+                    admin.userId = req.body.adminId;
+                    admin.password = req.body.adminPassword;
+                    admin.userName = req.body.adminName;
+                    admin.phoneNumber = req.body.adminPhoneNumber;
+                    admin.gender = req.body.adminGender;
+                    admin.role = "관리자";
+                    admin.auth = 0;
+                    var newNursingHome = new NursingHome();
+                    newNursingHome.homeName = req.body.homeName;
+                    newNursingHome.address = req.body.address;
+                    newNursingHome.phoneNumber = req.body.nursingHomePhoneNumber;
 
-            admin.nursingHome = newNursingHome;
-            newNursingHome.host = admin;
+                    admin.nursingHome = newNursingHome;
+                    newNursingHome.host = admin;
 
-            admin.save();
-            newNursingHome.save();
+                    admin.save();
+                    newNursingHome.save();
 
-            return res.json({'result': 'success'});
+                    return res.json({'result': 'success'});
+                }
+            })
         }
     })
 });
