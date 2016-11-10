@@ -438,9 +438,11 @@ router.post('/deleteArticle', function (req, res) {
             });
             break;
     }
-
 });
 
+router.post('/aaaa', function(req, res) {
+    console.log(req.body);
+});
 // 게시판 API 끝
 
 // 갤러리
