@@ -1,50 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="top|center"
+    android:padding="10dp">
 
-    <ScrollView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollView"
-        android:layout_weight="1">
+        android:id="@+id/input_galleryTitle"
+        android:layout_gravity="center_horizontal"
+        android:singleLine="true"
+        android:hint="제목을 입력하세요."
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:padding="10dp"
+        android:layout_weight="5" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/input_galleryContent"
+        android:hint="내용을 입력하세요."
+        android:textSize="18sp"
+        android:gravity="top|left"
+        android:background="@drawable/edittext_border"
+        android:padding="10dp"
+        android:layout_weight="3" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/input_galleryTitle"
-                android:layout_gravity="center_horizontal" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="사진업로드"
-                android:id="@+id/btn_uploadImage" />
-
-            <ImageView
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:scaleType="fitXY"
-                android:id="@+id/input_galleryImage" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textMultiLine"
-                android:ems="10"
-                android:id="@+id/input_galleryContent"
-                android:layout_weight="7"
-                android:gravity="top|left"
-                android:hint="간단한 내용을 입력해주세요" />
-
-        </LinearLayout>
-    </ScrollView>
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:id="@+id/input_galleryImage"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="false"
+        android:layout_weight="3" />
 
 </LinearLayout>

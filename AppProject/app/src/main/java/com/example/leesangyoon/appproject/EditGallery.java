@@ -51,7 +51,7 @@ import java.util.Map;
 /**
  * Created by daddyslab on 2016. 10. 31..
  */
-public class EditGallery extends AppCompatActivity implements View.OnClickListener {
+public class EditGallery extends AppCompatActivity {
 
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -61,7 +61,6 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
     String from = "";
     Class cls = null;
     EditText title, content;
-    Button uploadButton;
     ImageView image;
     Bitmap photo;
 
@@ -73,23 +72,21 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         Intent intent = getIntent();
         from = intent.getStringExtra("from");
 
         title = (EditText) findViewById(R.id.input_galleryTitle);
         content = (EditText) findViewById(R.id.input_galleryContent);
-        uploadButton = (Button) findViewById(R.id.btn_uploadImage);
         image = (ImageView) findViewById(R.id.input_galleryImage);
 
-        uploadButton.setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (User.getInstance().getAuth() == 1) {
-            getMenuInflater().inflate(R.menu.menu_editgallery, menu);
-        }
+        getMenuInflater().inflate(R.menu.menu_editgallery, menu);
         return true;
     }
 
@@ -115,6 +112,28 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
                     e.printStackTrace();
                 }
                 break;
+            case R.id.menu_uploadImage:
+                DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        doTakeAlbumAction();
+                    }
+                };
+
+                DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                };
+
+                new AlertDialog.Builder(this)
+                        .setTitle("업로드할 이미지 선택")
+                        .setNeutralButton("앨범선택", albumListener)
+                        .setNegativeButton("취소", cancelListener)
+                        .show();
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -205,35 +224,6 @@ public class EditGallery extends AppCompatActivity implements View.OnClickListen
                 break;
             }
         }
-    }
-
-    @Override
-    public void onClick(View v) {
-//        DialogInterface.OnClickListener cameraListener = new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                doTakePhotoAction();
-//            }
-//        };
-        DialogInterface.OnClickListener albumListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                doTakeAlbumAction();
-            }
-        };
-
-        DialogInterface.OnClickListener cancelListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        };
-
-        new AlertDialog.Builder(this)
-                .setTitle("업로드할 이미지 선택")
-                .setNeutralButton("앨범선택", albumListener)
-                .setNegativeButton("취소", cancelListener)
-                .show();
     }
 
     @Override

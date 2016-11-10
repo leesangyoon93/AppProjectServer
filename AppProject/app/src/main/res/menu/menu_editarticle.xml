@@ -3,7 +3,7 @@
     xmlns:appproject="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_createArticle"
-        android:title="완료"
+        android:title="저장"
         appproject:showAsAction="ifRoom"
         />
     <!--android:icon="@android:drawable/presence_online"-->

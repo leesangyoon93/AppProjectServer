@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:appproject="http://schemas.android.com/apk/res-auto">
+
     <item
-        android:id="@+id/menu_saveGallery"
-        android:icon="@android:drawable/presence_online"
-        android:title="SaveGallery"
+        android:id="@+id/menu_uploadImage"
+        android:title="사진업로드"
         appproject:showAsAction="ifRoom"
         />
+    <item
+        android:id="@+id/menu_saveGallery"
+        android:title="저장"
+        appproject:showAsAction="ifRoom"
+        />
+
 </menu>

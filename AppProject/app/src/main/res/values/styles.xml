@@ -12,7 +12,7 @@
         <!-- action bar background - without android prefix -->
         <item name="background">@color/colorPrimary</item>
         <item name="logo">@mipmap/ic_launcher</item>
-        <item name="displayOptions">useLogo|showHome</item>
+        <!--<item name="displayOptions">useLogo|showHome</item>-->
         <!-- action bar elevation - without android prefix -->
         <item name="elevation">4dp</item>
     </style>

@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:appproject="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_createGallery"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="CreateGallery"
+        android:id="@+id/menu_searchGallery"
+        android:icon="@android:drawable/ic_menu_search"
         appproject:showAsAction="ifRoom"
+        android:title="검색"
         />
 </menu>

@@ -28,10 +28,12 @@ import org.json.JSONObject;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
+
 /**
  * Created by daddyslab on 2016. 10. 13..
  */
-public class Gallery extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class Gallery extends AppCompatActivity implements AdapterView.OnItemClickListener {
     AdapterGalleryGrid adapterGalleryGrid;
     ArrayList<JSONObject> gallery = new ArrayList<JSONObject>();
     GridView gridView;
@@ -44,10 +46,27 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemClic
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         GallerySingleton.getInstance().initGallery();
 
         gridView = (GridView) findViewById(R.id.gridView_gallery);
+
+        if (User.getInstance().getAuth() == 1) {
+            FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
+            mFloatingButton.attachToListView(gridView);
+
+            mFloatingButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Gallery.this, EditGallery.class);
+                    intent.putExtra("from", "list");
+                    startActivity(intent);
+                }
+            });
+        }
+
 
         gallery.clear();
 
@@ -73,16 +92,13 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemClic
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 intent = new Intent(Gallery.this, MainActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.menu_createGallery:
-                intent = new Intent(Gallery.this, EditGallery.class);
-                intent.putExtra("from", "list");
-                startActivity(intent);
-                // 갤러리 등록 액티비티로.
+            case R.id.menu_searchGallery:
+                // 검색
         }
         return super.onOptionsItemSelected(item);
     }

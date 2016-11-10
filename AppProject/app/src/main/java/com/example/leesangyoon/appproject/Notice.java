@@ -42,8 +42,8 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
         Article.getInstance().initArticle();
@@ -51,18 +51,20 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
         noticeList = (ListView) findViewById(R.id.listView_article);
         noticeList.setOnItemClickListener(this);
 
-        FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
-        mFloatingButton.attachToListView(noticeList);
+        if (User.getInstance().getAuth() == 1) {
+            FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
+            mFloatingButton.attachToListView(noticeList);
 
-        mFloatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Notice.this, EditArticle.class);
-                intent.putExtra("from", "list");
-                intent.putExtra("path", "notice");
-                startActivity(intent);
-            }
-        });
+            mFloatingButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Notice.this, EditArticle.class);
+                    intent.putExtra("from", "list");
+                    intent.putExtra("path", "notice");
+                    startActivity(intent);
+                }
+            });
+        }
 
         notices.clear();
 
@@ -78,22 +80,26 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
         noticeList.setAdapter(adapterArticleList);
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        if(User.getInstance().getAuth() == 1) {
-//            getMenuInflater().inflate(R.menu.menu_notice, menu);
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu_searchNotice:
-//                // 검색 버튼
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_notice, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_searchNotice:
+                // 검색 버튼
+                break;
+            case android.R.id.home:
+                Intent intent = new Intent(Notice.this, MainActivity.class);
+                startActivity(intent);
+                super.onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onBackPressed() {
