@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
+import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
+
 /**
  * Created by daddyslab on 2016. 10. 13..
  */
@@ -49,6 +51,19 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
         noticeList = (ListView) findViewById(R.id.listView_article);
         noticeList.setOnItemClickListener(this);
 
+        FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
+        mFloatingButton.attachToListView(noticeList);
+
+        mFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Notice.this, EditArticle.class);
+                intent.putExtra("from", "list");
+                intent.putExtra("path", "notice");
+                startActivity(intent);
+            }
+        });
+
         notices.clear();
 
         try {
@@ -73,18 +88,9 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
         switch (item.getItemId()) {
-//            case android.R.id.home:
-//                intent = new Intent(Notice.this, MainActivity.class);
-//                startActivity(intent);
-//                break;
-            case R.id.menu_createNotice:
-                // 공지사항 등록 액티비티로.
-                intent = new Intent(Notice.this, EditArticle.class);
-                intent.putExtra("from", "list");
-                intent.putExtra("path", "notice");
-                startActivity(intent);
+            case R.id.menu_searchNotice:
+                // 검색 버튼
         }
         return super.onOptionsItemSelected(item);
     }
