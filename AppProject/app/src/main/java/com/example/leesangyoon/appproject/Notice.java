@@ -78,22 +78,22 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
         noticeList.setAdapter(adapterArticleList);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if(User.getInstance().getAuth() == 1) {
-            getMenuInflater().inflate(R.menu.menu_notice, menu);
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_searchNotice:
-                // 검색 버튼
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        if(User.getInstance().getAuth() == 1) {
+//            getMenuInflater().inflate(R.menu.menu_notice, menu);
+//        }
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menu_searchNotice:
+//                // 검색 버튼
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onBackPressed() {

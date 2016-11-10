@@ -44,7 +44,7 @@
         <activity android:name=".Gallery" android:label="갤러리"/>
         <activity android:name=".Schedule" android:label="일정"/>
         <activity android:name=".QA" android:label="질문/답변"/>
-        <activity android:name=".ShowArticle" android:label="게시글 정보" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ShowArticle" android:label="게시글 정보" android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity android:name="EditArticle" android:label="글 작성/수정"/>
         <activity android:name=".EditGallery" android:label="갤러리 작성/수정"/>
         <activity android:name=".ShowGallery" android:label="갤러리 정보"/>
