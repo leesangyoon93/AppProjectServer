@@ -29,8 +29,8 @@ public class SettingNursingHome extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
 
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
@@ -68,10 +68,10 @@ public class SettingNursingHome extends AppCompatActivity {
 
                 Toast.makeText(SettingNursingHome.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 break;
-//            case android.R.id.home:
-//                intent = new Intent(SettingNursingHome.this, ViewWorker.class);
-//                startActivity(intent);
-//                break;
+            case android.R.id.home:
+                intent = new Intent(SettingNursingHome.this, ViewWorker.class);
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

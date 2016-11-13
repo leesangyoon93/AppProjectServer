@@ -49,8 +49,8 @@ public class Profile extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
 
         userSession = getSharedPreferences("UserSession", Context.MODE_PRIVATE);
@@ -197,9 +197,9 @@ public class Profile extends AppCompatActivity {
 
                 Toast.makeText(Profile.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
                 break;
-//            case android.R.id.home:
-//                super.onBackPressed();
-//                break;
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

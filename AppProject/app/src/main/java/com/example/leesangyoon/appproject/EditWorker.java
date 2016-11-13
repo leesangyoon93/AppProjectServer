@@ -38,8 +38,8 @@ public class EditWorker extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
 
         workerId = (TextView)findViewById(R.id.text_detailWorkerId);
@@ -84,10 +84,10 @@ public class EditWorker extends AppCompatActivity {
                         })
                         .show();
                 break;
-//            case android.R.id.home:
-//                Intent intent = new Intent(EditWorker.this, ViewWorker.class);
-//                startActivity(intent);
-//                break;
+            case android.R.id.home:
+                Intent intent = new Intent(EditWorker.this, ViewWorker.class);
+                startActivity(intent);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -46,7 +46,7 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemClic
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
-        //actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
 
         GallerySingleton.getInstance().initGallery();

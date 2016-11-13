@@ -57,6 +57,8 @@ public class ShowGallery extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
 
         commentList = (ListView) findViewById(R.id.listView_galleryComment);
         saveComment = (Button) findViewById(R.id.btn_galleryCommentSave);

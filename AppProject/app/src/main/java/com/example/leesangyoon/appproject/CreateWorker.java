@@ -39,9 +39,9 @@ public class CreateWorker extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
-        //actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         workerName = (EditText)findViewById(R.id.input_workerName);
         workerPhoneNumber = (EditText)findViewById(R.id.input_workerPhoneNumber);
@@ -82,9 +82,9 @@ public class CreateWorker extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 break;
-//            case android.R.id.home:
-//                Intent intent = new Intent(CreateWorker.this, ViewWorker.class);
-//                startActivity(intent);
+            case android.R.id.home:
+                Intent intent = new Intent(CreateWorker.this, ViewWorker.class);
+                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

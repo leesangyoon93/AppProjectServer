@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/menu_deleteWorker"
-        android:title="DeleteWorker"
+        android:title="삭제"
         appproject:showAsAction="ifRoom"
         />
     <!--android:icon="@android:drawable/ic_delete"-->

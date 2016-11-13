@@ -1,20 +1,20 @@
 package com.example.leesangyoon.appproject;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
+
 
 import java.util.List;
 import java.util.Vector;
@@ -37,19 +37,35 @@ public class MainActivity extends AppCompatActivity {
 
     // 타이틀 제대로.
     BackPressCloseHandler backPressCloseHandler;
+    RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
+        actionBar.setTitle(User.getInstance().getNursingHomeName());
         //actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
+        List<Fragment> fragments = new Vector<>();
+        fragments.add(Fragment.instantiate(this, frag_Notice.class.getName()));
+        fragments.add(Fragment.instantiate(this, frag_Schedule.class.getName()));
+        fragments.add(Fragment.instantiate(this, frag_Gallery.class.getName()));
+        fragments.add(Fragment.instantiate(this, frag_QA.class.getName()));
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), fragments);
+        final ViewPager pager = (ViewPager)findViewById(R.id.mainPager);
+
+        pager.setAdapter(adapter);
+
         backPressCloseHandler = new BackPressCloseHandler(this);
+
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView = (RecyclerView) findViewById(R.id.listView_patient);
+        mRecyclerView.setLayoutManager(layoutManager);
     }
 
     @Override

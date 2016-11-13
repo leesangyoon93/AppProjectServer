@@ -61,48 +61,6 @@
                 android:layout_marginBottom="10dp"
                 android:padding="10dp" />
 
-            <RadioGroup
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="left|center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:padding="10dp"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="대표자 성별"
-                    android:id="@+id/textView2"
-                    android:layout_marginRight="30dp"
-                    android:textSize="17sp"
-                    android:textIsSelectable="false"
-                    android:paddingLeft="0dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="남"
-                    android:id="@+id/admin_male"
-                    android:checked="true"
-                    android:layout_marginRight="20dp" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="여"
-                    android:id="@+id/admin_female"
-                    android:checked="false"
-                    android:layout_marginLeft="20dp" />
-
-            </RadioGroup>
-
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

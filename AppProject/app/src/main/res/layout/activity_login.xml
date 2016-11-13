@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#88C443"
+    android:background="#A2C67A"
     android:orientation="vertical"
     >
 
@@ -20,11 +20,11 @@
             android:id="@+id/login_layout">
 
             <ImageView
-                android:layout_width="95dp"
+                android:layout_width="80dp"
                 android:layout_height="95dp"
                 android:id="@+id/imageView"
                 android:layout_gravity="center"
-                android:src="@drawable/abc_btn_radio_to_on_mtrl_015"
+                android:src="@drawable/main_logo"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="30dp" />
 

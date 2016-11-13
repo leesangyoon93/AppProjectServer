@@ -32,7 +32,7 @@ public class CreateNursingHome extends AppCompatActivity {
     final String URL = "http://52.41.19.232/createNursingHome";
 
     EditText homeName, address, nursingHomePhoneNumber, adminName, adminPhoneNumber, adminId, adminPassword, adminPasswordCheck;
-    RadioButton male, female;
+    //RadioButton male, female;
     String gender = "male";
 
     @Override
@@ -42,8 +42,8 @@ public class CreateNursingHome extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        //actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        //actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
         homeName = (EditText) findViewById(R.id.input_homeName);
@@ -54,8 +54,8 @@ public class CreateNursingHome extends AppCompatActivity {
         adminId = (EditText) findViewById(R.id.input_adminId);
         adminPassword = (EditText) findViewById(R.id.input_adminPassword);
         adminPasswordCheck = (EditText) findViewById(R.id.input_adminPasswordCheck);
-        male = (RadioButton)findViewById(R.id.admin_male);
-        female = (RadioButton)findViewById(R.id.admin_female);
+//        male = (RadioButton)findViewById(R.id.admin_male);
+//        female = (RadioButton)findViewById(R.id.admin_female);
     }
 
     @Override
@@ -77,9 +77,9 @@ public class CreateNursingHome extends AppCompatActivity {
                     }
                     else {
                         if(adminPassword.getText().toString().equals(adminPasswordCheck.getText().toString())) {
-                            if(female.isChecked()) {
-                                gender = "female";
-                            }
+//                            if(female.isChecked()) {
+//                                gender = "female";
+//                            }
                             registerNursingHomeToServer(
                                     homeName.getText().toString(),
                                     address.getText().toString(),
@@ -99,9 +99,9 @@ public class CreateNursingHome extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 break;
-//            case android.R.id.home:
-//                Intent intent = new Intent(CreateNursingHome.this, Login.class);
-//                startActivity(intent);
+            case android.R.id.home:
+                Intent intent = new Intent(CreateNursingHome.this, Login.class);
+                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -118,7 +118,7 @@ public class CreateNursingHome extends AppCompatActivity {
         postParam.put("adminPhoneNumber", adminPhoneNumber);
         postParam.put("adminId", adminId);
         postParam.put("adminPassword", adminPassword);
-        postParam.put("adminGender", gender);
+        postParam.put("adminGender", "male");
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {
