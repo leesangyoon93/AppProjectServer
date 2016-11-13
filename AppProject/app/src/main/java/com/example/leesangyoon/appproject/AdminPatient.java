@@ -64,8 +64,6 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-
-
         patients.clear();
 
         try {

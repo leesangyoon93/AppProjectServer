@@ -170,7 +170,6 @@ router.post('/deleteUser', function (req, res) {
 router.get('/getArticles', function (req, res) {
     var path = req.query.path;
     var id = req.query.nursingHomeId;
-    console.log(path);
     switch (path) {
         case 'notice':
             Notice.find({'nursingHome': new Object(id)}, function (err, notices) {
@@ -403,12 +402,13 @@ router.post('/aaaa', function(req, res) {
 
 router.get('/getPatients', function (req, res) {
     var id = req.query.nursingHomeId;
-    User.findOne({'nursingHome': new Object(id)}, function(err, worker) {
+    User.findOne({'nursingHome': new Object(id), 'userId': req.query.userId}, function(err, worker) {
         if(err) return res.json({'result': 'fail'});
         if(worker) {
             Patient.find({'nursingHome': new Object(id), 'worker': worker}, function (err, patients) {
                 if (err) return res.json({'result': 'fail'});
                 if (patients) {
+                    console.log(patients);
                     return res.json(patients);
                 }
                 else return res.json({'result': 'fail'});
