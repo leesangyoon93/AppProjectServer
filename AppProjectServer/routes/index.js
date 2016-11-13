@@ -406,7 +406,7 @@ router.get('/getPatients', function (req, res) {
     User.findOne({'nursingHome': new Object(id)}, function(err, worker) {
         if(err) return res.json({'result': 'fail'});
         if(worker) {
-            Patient.find({'nursingHome': new Object(id), 'worker': worker.id}, function (err, patients) {
+            Patient.find({'nursingHome': new Object(id), 'worker': worker}, function (err, patients) {
                 if (err) return res.json({'result': 'fail'});
                 if (patients) {
                     return res.json(patients);
