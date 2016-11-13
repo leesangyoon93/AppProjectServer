@@ -6,6 +6,22 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by daddyslab on 2016. 11. 1..
@@ -13,6 +29,14 @@ import android.view.MenuItem;
 
 // 여기는 누구든지 보호자환자 생성할 수 있게. 프로텍터를 지정하면 해당 프로텍터한테만 보임.
 public class CreatePatient extends AppCompatActivity {
+
+    CircleImageView patient_image;
+    EditText patient_name, patient_birthday, patient_relation;
+    EditText worker_id, user_name, user_phone_number, user_id, user_password, user_password_check;
+    RadioButton patient_female;
+    String patientName, birthday, relation, workerId, userName, userPhoneNumber, userId, userPassword, userPasswordCheck;
+    String gender = "male";
+    String image = "";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +46,29 @@ public class CreatePatient extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
+
+        patient_image = (CircleImageView)findViewById(R.id.image_patient);
+        patient_name = (EditText)findViewById(R.id.input_patientName);
+        patientName = patient_name.getText().toString();
+        patient_birthday = (EditText)findViewById(R.id.input_birthday);
+        birthday = patient_birthday.getText().toString();
+        patient_relation = (EditText)findViewById(R.id.input_relation);
+        relation = patient_relation.getText().toString();
+        worker_id = (EditText)findViewById(R.id.input_workerId);
+        workerId = worker_id.getText().toString();
+        user_name = (EditText)findViewById(R.id.input_protectorName);
+        userName = user_name.getText().toString();
+        user_id = (EditText)findViewById(R.id.input_protectorId);
+        userId = user_id.getText().toString();
+        user_phone_number = (EditText)findViewById(R.id.input_protectorPhoneNumber);
+        userPhoneNumber = user_phone_number.getText().toString();
+        user_password = (EditText)findViewById(R.id.input_protectorPassword);
+        userPassword = user_password.getText().toString();
+        user_password_check = (EditText)findViewById(R.id.input_protectorPasswordCheck);
+        userPasswordCheck = user_password_check.getText().toString();
+        patient_female = (RadioButton)findViewById(R.id.radio_patient_female);
     }
 
     @Override
@@ -41,7 +88,79 @@ public class CreatePatient extends AppCompatActivity {
                 break;
             case R.id.menu_createPatient:
                 // 환자/보호자 생성 요청 후 인덴트
+                try {
+                    if(patientName.equals("") || birthday.equals("") || relation.equals("") || workerId.equals("") || userName.equals("") ||
+                            userId.equals("") || userPassword.equals("") || userPhoneNumber.equals("") || userPasswordCheck.equals("")) {
+                        Toast.makeText(CreatePatient.this, "입력창을 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        if (userPassword.equals(userPasswordCheck)) {
+                            if (patient_female.isChecked()) {
+                                gender = "female";
+                            }
+                            createPatientToServer();
+                        } else {
+                            Toast.makeText(CreatePatient.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void createPatientToServer() throws Exception {
+
+        final String URL = "http://52.41.19.232/createPatient";
+
+        Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("nursingHomeId", User.getInstance().getNursingHomeId());
+        postParam.put("patientName", patientName);
+        postParam.put("birthday", birthday);
+        postParam.put("relation", relation);
+        postParam.put("workerId", workerId);
+        postParam.put("userName", userName);
+        postParam.put("userId", userId);
+        postParam.put("password", userPassword);
+        postParam.put("phoneNumber", userPhoneNumber);
+        postParam.put("image", image);
+        postParam.put("gender", gender);
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
+                new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.toString().contains("result")) {
+                        if (response.getString("result").equals("fail")) {
+                            Toast.makeText(CreatePatient.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(response.getString("result").equals("userOverlap")) {
+                            Toast.makeText(CreatePatient.this, "보호자 아이디가 이미 사용중입니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(response.getString("result").equals("patientOverlap")) {
+                            Toast.makeText(CreatePatient.this, "이미 등록된 수급자입니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(response.getString("result").equals("success")) {
+                            Toast.makeText(CreatePatient.this, "수급자 등록 완료", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(CreatePatient.this, AdminPatient.class);
+                            startActivity(intent);
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("development", "Error: " + error.getMessage());
+                    }
+                });
+
+        volley.getInstance().addToRequestQueue(req);
     }
 }

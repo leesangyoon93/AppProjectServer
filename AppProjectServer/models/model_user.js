@@ -17,7 +17,10 @@ var UserSchema = new Schema({
         type: String,
         unique: false
     },
-    gender: String,
+    gender: {
+        type: String,
+        default: "male"
+    },
     password: {
         type: String
     },

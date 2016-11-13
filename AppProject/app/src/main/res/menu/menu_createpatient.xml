@@ -3,8 +3,7 @@
     xmlns:appproject="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_createPatient"
-        android:icon="@android:drawable/presence_online"
-        android:title="CreatePatient"
+        android:title="완료"
         appproject:showAsAction="ifRoom"
         />
 </menu>

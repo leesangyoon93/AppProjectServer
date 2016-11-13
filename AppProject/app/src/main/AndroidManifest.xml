@@ -48,9 +48,9 @@
         <activity android:name="EditArticle" android:label="글 작성/수정"/>
         <activity android:name=".EditGallery" android:label="갤러리 작성/수정"/>
         <activity android:name=".ShowGallery" android:label="갤러리 정보"/>
-        <activity android:name=".AdminPatient"/>
-        <activity android:name=".CreatePatient"/>
-        <activity android:name=".ShowPatient"/>
+        <activity android:name=".AdminPatient" android:label="수급자관리"/>
+        <activity android:name=".CreatePatient" android:label="수급자등록"/>
+        <activity android:name=".ShowPatient" android:label="수급자정보"/>
         <!--android:parentActivityName=".MainActivity"-->
     </application>
 

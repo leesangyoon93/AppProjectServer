@@ -163,50 +163,6 @@ router.post('/deleteUser', function (req, res) {
     })
 });
 
-router.post('/createPatient', function (req, res) {
-    var id = new ObjectId(req.body.nursingHomeId);
-    NursingHome.findById(id, function (err, nursingHome) {
-        if (err) return res.json({'result': 'fail'});
-        if (nursingHome) {
-            User.findOne({'userId': protectorId}, function (err, user) {
-                if (err) return res.json({'result': 'fail'});
-                if (user)
-                    return res.json({'result': 'overlap'});
-                else {
-                    User.findOne({'userId': workerId}, function (err, worker) {
-                        if (err) return res.json({'result': 'fail'});
-                        if (worker) {
-                            var protector = new User();
-                            protector.nursingHome = nursingHome;
-                            protector.userId = req.body.protectorId;
-                            protector.userName = req.body.userName;
-                            protector.password = req.body.password;
-                            protector.phoneNumber = req.body.phoneNumber;
-                            protector.gender = req.body.gender;
-                            protector.auth = 2;
-                            protector.role = "보호자";
-
-                            var patient = new Patient();
-                            patient.protector = protector;
-                            patient.worker = worker;
-                            patient.patientName = req.body.patientName;
-                            patient.gender = req.body.gender;
-                            patient.birthday = req.body.birthday;
-                            patient.relation = req.body.relation;
-                            patient.roomNumber = req.body.roomNumber;
-
-                            protector.save();
-                            patient.save();
-                            return res.json({'result': 'success'});
-                        }
-                        else return res.json({'result': 'fail'})
-                    })
-                }
-            })
-        }
-        else return res.json({'result': 'fail'});
-    })
-});
 
 // 게시판 API
 // showArticle, editArticle, deleteArticle 통합 request에 path 파라미터로 구분
@@ -232,7 +188,7 @@ router.get('/getArticles', function (req, res) {
                     return res.json(galleries);
                 }
                 else return res.json({'result': 'fail'});
-            })
+            });
             break;
     }
 });
@@ -445,6 +401,77 @@ router.post('/aaaa', function(req, res) {
 });
 // 게시판 API 끝
 
-// 갤러리
+router.get('/getPatients', function (req, res) {
+    var id = req.query.nursingHomeId;
+    User.findOne({'nursingHome': new Object(id)}, function(err, worker) {
+        if(err) return res.json({'result': 'fail'});
+        if(worker) {
+            Patient.find({'nursingHome': new Object(id), 'worker': worker.id}, function (err, patients) {
+                if (err) return res.json({'result': 'fail'});
+                if (patients) {
+                    return res.json(patients);
+                }
+                else return res.json({'result': 'fail'});
+            });
+        }
+        else return res.json({'result': 'fail'});
+    })
+
+});
+
+router.post('/createPatient', function (req, res) {
+    var id = new ObjectId(req.body.nursingHomeId);
+    NursingHome.findById(id, function (err, nursingHome) {
+        if (err) return res.json({'result': 'fail'});
+        if (nursingHome) {
+            User.findOne({'userId': req.body.userId}, function (err, user) {
+                if (err) return res.json({'result': 'fail'});
+                if (user)
+                    return res.json({'result': 'userOverlap'});
+                else {
+                    User.findOne({'userId': workerId, 'nursingHome': id}, function (err, worker) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (worker) {
+                            Patient.findOne({'patientName': req.body.patientName, 'birthday': req.body.birthday}, function(err, patient) {
+                                if(err) return res.json({'result': 'fail'});
+                                if(patient)
+                                    return res.json({'result': 'patientOverlap'});
+                                else {
+                                    var protector = new User();
+                                    protector.nursingHome = nursingHome;
+                                    protector.userId = req.body.userId;
+                                    protector.userName = req.body.userName;
+                                    protector.password = req.body.password;
+                                    protector.phoneNumber = req.body.phoneNumber;
+                                    protector.gender = "male";
+                                    protector.auth = 2;
+                                    protector.role = "보호자";
+
+                                    var patient = new Patient();
+                                    patient.protector = protector;
+                                    patient.worker = worker;
+                                    patient.patientName = req.body.patientName;
+                                    patient.gender = req.body.gender;
+                                    patient.birthday = req.body.birthday;
+                                    patient.relation = req.body.relation;
+                                    patient.roomNumber = req.body.roomNumber;
+
+                                    protector.save();
+                                    patient.save();
+                                    return res.json({'result': 'success'});
+                                }
+                            })
+                        }
+                        else return res.json({'result': 'notWorker'})
+                    })
+                }
+            })
+        }
+        else return res.json({'result': 'fail'});
+    })
+});
+
+
+
 
 module.exports = router;

@@ -17,6 +17,10 @@ var PatientSchema = new Schema({
     relation: String,
     gender: String,
     roomNumber: String,
+    image: {
+        type: String,
+        default: "-"
+    },
     created: {
         type: Date,
         default: Date.now()

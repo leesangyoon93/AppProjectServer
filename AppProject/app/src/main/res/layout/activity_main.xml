@@ -8,35 +8,56 @@
     tools:context="com.example.leesangyoon.appproject.MainActivity">
 
 
-    <ImageView
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:id="@+id/imageView8"
-        android:background="@drawable/main_image" />
+        android:layout_height="match_parent">
 
-    <android.support.v4.view.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:id="@+id/mainPager"
-        android:layout_below="@id/imageView8">
-        <android.support.v4.view.PagerTabStrip
-            android:id="@+id/pager_header"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="#fff"
-            android:paddingBottom="15dp"
-            android:paddingTop="15dp"
-            android:textColor="#000"
-            />
-    </android.support.v4.view.ViewPager>
+            android:layout_height="match_parent"
+            android:id="@+id/imageView8"
+            android:background="@drawable/main_image"
+            android:layout_weight="10" />
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/listView_patient"
-        tools:context=".MainActivity"
-        tools:listitem="@layout/list_patient"
-        android:layout_below="@id/mainPager"/>
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mainPager"
+            android:layout_below="@id/imageView8"
+            android:layout_weight="6">
+            <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pager_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="#fff"
+                android:paddingBottom="15dp"
+                android:paddingTop="15dp"
+                android:textColor="#000"
+                />
+        </android.support.v4.view.ViewPager>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="수급자 관리"
+            android:id="@+id/textView2"
+            android:layout_weight="12"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recycleView_patient"
+            tools:context=".MainActivity"
+            tools:listitem="@layout/item_patient"
+            android:layout_weight="11"
+        />
+    </LinearLayout>
+
+
 
 </RelativeLayout>

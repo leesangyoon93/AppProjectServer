@@ -14,8 +14,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -38,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     // 타이틀 제대로.
     BackPressCloseHandler backPressCloseHandler;
     RecyclerView mRecyclerView;
+    ArrayList<JSONObject> patients = new ArrayList<JSONObject>();
+    AdapterPatientRecycle adapterPatientRecycle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +77,19 @@ public class MainActivity extends AppCompatActivity {
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView = (RecyclerView) findViewById(R.id.listView_patient);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycleView_patient);
         mRecyclerView.setLayoutManager(layoutManager);
+
+//        patients.clear();
+//
+//        try {
+//            getPatientsToServer();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        adapterPatientRecycle = new AdapterPatientRecycle(patients);
+        mRecyclerView.setAdapter(adapterPatientRecycle);
     }
 
     @Override
@@ -113,9 +137,6 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this, Profile.class);
                 startActivity(intent);
                 break;
-//            case android.R.id.home:
-//                backPressCloseHandler.onBackPressed();
-//                break;
 
         }
         return super.onOptionsItemSelected(item);
@@ -124,5 +145,36 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         backPressCloseHandler.onBackPressed();
+    }
+
+    private void getPatientsToServer() throws Exception {
+
+        String URL = String.format("http://52.41.19.232/getPatients?nursingHomeId=%s&userId=%s",
+                URLEncoder.encode(User.getInstance().getNursingHomeId(), "utf-8"),
+                URLEncoder.encode(User.getInstance().getUserId(), "utf-8"));
+
+        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+
+                if (response.toString().contains("result") && response.toString().contains("fail")) {
+                    Toast.makeText(MainActivity.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    for (int i = 0; i < response.length(); i++) {
+                        patients.add(response.optJSONObject(i));
+                        adapterPatientRecycle.notifyDataSetChanged();
+                    }
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("development", "Error: " + error.getMessage());
+            }
+        });
+
+        // Adding request to request queue
+        volley.getInstance().addToRequestQueue(req);
     }
 }
