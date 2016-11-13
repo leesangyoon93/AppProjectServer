@@ -1,207 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="center">
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:id="@+id/image_patient"
-            android:layout_marginLeft="10dp"/>
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView" >
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/input_patientName"
-                android:layout_gravity="center_horizontal"
-                android:theme="@style/MyEditTextTheme"
-                android:hint="이름"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="50dp"
-                android:padding="10dp" />
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="50dp"
-                android:padding="10dp">
+                android:layout_marginTop="10dp">
 
-                <RadioGroup
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:id="@+id/image_patient"
+                    android:layout_marginLeft="10dp"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:gravity="center">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="남"
-                        android:id="@+id/radio_patient_male"
-                        android:checked="true"
-                        android:layout_marginRight="10dp" />
+                        android:id="@+id/input_patientName"
+                        android:layout_gravity="center_horizontal"
+                        android:theme="@style/MyEditTextTheme"
+                        android:hint="이름"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="50dp"
+                        android:padding="10dp" />
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="여"
-                        android:id="@+id/radio_patient_female"
-                        android:checked="false"
-                        android:layout_marginLeft="10dp" />
-                </RadioGroup>
+                        android:gravity="center"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="50dp"
+                        android:padding="10dp">
+
+                        <RadioGroup
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="남"
+                                android:id="@+id/radio_patient_male"
+                                android:checked="true"
+                                android:layout_marginRight="10dp" />
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="여"
+                                android:id="@+id/radio_patient_female"
+                                android:checked="false"
+                                android:layout_marginLeft="10dp" />
+                        </RadioGroup>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="9">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/input_birthday"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="수급자 생년월일"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="date" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/input_roomNumber"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="수급자 호실"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/input_relation"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="보호자와의 관계"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="text" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/input_workerId"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="담당 요양사 아이디"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/input_protectorName"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="보호자 이름"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/input_protectorPhoneNumber"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="보호자 연락처"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="phone" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:ems="10"
+                    android:id="@+id/input_protectorId"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="보호자 아이디"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:id="@+id/input_protectorPassword"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="비밀번호입력"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:inputType="textPassword" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:ems="10"
+                    android:id="@+id/input_protectorPasswordCheck"
+                    android:layout_gravity="center_horizontal"
+                    android:theme="@style/MyEditTextTheme"
+                    android:hint="비밀번호확인"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:layout_marginBottom="5dp" />
 
             </LinearLayout>
         </LinearLayout>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="9">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/input_birthday"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="요양사 연락처"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp"
-            android:inputType="date" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/input_roomNumber"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="요양사 ID"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/input_relation"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="비밀번호입력"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp"
-            android:inputType="text" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/input_workerId"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="비밀번호확인"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/input_protectorName"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="비밀번호확인"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/input_protectorPhoneNumber"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="비밀번호확인"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp"
-            android:inputType="phone" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:ems="10"
-            android:id="@+id/input_protectorId"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="비밀번호확인"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:id="@+id/input_protectorPassword"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="비밀번호확인"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp"
-            android:inputType="textPassword" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/input_protectorPasswordCheck"
-            android:layout_gravity="center_horizontal"
-            android:theme="@style/MyEditTextTheme"
-            android:hint="비밀번호확인"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp" />
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

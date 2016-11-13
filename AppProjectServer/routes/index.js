@@ -429,7 +429,7 @@ router.post('/createPatient', function (req, res) {
                 if (user)
                     return res.json({'result': 'userOverlap'});
                 else {
-                    User.findOne({'userId': workerId, 'nursingHome': id}, function (err, worker) {
+                    User.findOne({'userId': req.body.workerId, 'nursingHome': id}, function (err, worker) {
                         if (err) return res.json({'result': 'fail'});
                         if (worker) {
                             Patient.findOne({'patientName': req.body.patientName, 'birthday': req.body.birthday}, function(err, patient) {

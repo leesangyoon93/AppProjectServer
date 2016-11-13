@@ -51,23 +51,14 @@ public class CreatePatient extends AppCompatActivity {
 
         patient_image = (CircleImageView)findViewById(R.id.image_patient);
         patient_name = (EditText)findViewById(R.id.input_patientName);
-        patientName = patient_name.getText().toString();
         patient_birthday = (EditText)findViewById(R.id.input_birthday);
-        birthday = patient_birthday.getText().toString();
         patient_relation = (EditText)findViewById(R.id.input_relation);
-        relation = patient_relation.getText().toString();
         worker_id = (EditText)findViewById(R.id.input_workerId);
-        workerId = worker_id.getText().toString();
         user_name = (EditText)findViewById(R.id.input_protectorName);
-        userName = user_name.getText().toString();
         user_id = (EditText)findViewById(R.id.input_protectorId);
-        userId = user_id.getText().toString();
         user_phone_number = (EditText)findViewById(R.id.input_protectorPhoneNumber);
-        userPhoneNumber = user_phone_number.getText().toString();
         user_password = (EditText)findViewById(R.id.input_protectorPassword);
-        userPassword = user_password.getText().toString();
         user_password_check = (EditText)findViewById(R.id.input_protectorPasswordCheck);
-        userPasswordCheck = user_password_check.getText().toString();
         patient_female = (RadioButton)findViewById(R.id.radio_patient_female);
     }
 
@@ -87,6 +78,15 @@ public class CreatePatient extends AppCompatActivity {
                 super.onBackPressed();
                 break;
             case R.id.menu_createPatient:
+                patientName = patient_name.getText().toString();
+                birthday = patient_birthday.getText().toString();
+                relation = patient_relation.getText().toString();
+                workerId = worker_id.getText().toString();
+                userName = user_name.getText().toString();
+                userId = user_id.getText().toString();
+                userPhoneNumber = user_phone_number.getText().toString();
+                userPassword = user_password.getText().toString();
+                userPasswordCheck = user_password_check.getText().toString();
                 // 환자/보호자 생성 요청 후 인덴트
                 try {
                     if(patientName.equals("") || birthday.equals("") || relation.equals("") || workerId.equals("") || userName.equals("") ||
@@ -113,6 +113,16 @@ public class CreatePatient extends AppCompatActivity {
     private void createPatientToServer() throws Exception {
 
         final String URL = "http://52.41.19.232/createPatient";
+
+        patientName = patient_name.getText().toString();
+        birthday = patient_birthday.getText().toString();
+        relation = patient_relation.getText().toString();
+        workerId = worker_id.getText().toString();
+        userName = user_name.getText().toString();
+        userId = user_id.getText().toString();
+        userPhoneNumber = user_phone_number.getText().toString();
+        userPassword = user_password.getText().toString();
+        userPasswordCheck = user_password_check.getText().toString();
 
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("nursingHomeId", User.getInstance().getNursingHomeId());

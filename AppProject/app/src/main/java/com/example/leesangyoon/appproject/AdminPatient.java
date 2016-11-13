@@ -50,6 +50,9 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
         actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
 
+        patientList = (ListView) findViewById(R.id.listView_patient);
+        patientList.setOnItemClickListener(this);
+
         FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
         mFloatingButton.attachToListView(patientList);
 
@@ -61,8 +64,7 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        patientList = (ListView) findViewById(R.id.listView_patient);
-        patientList.setOnItemClickListener(this);
+
 
         patients.clear();
 
