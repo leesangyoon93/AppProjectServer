@@ -240,7 +240,6 @@ router.get('/showComments', function (req, res) {
 router.post('/saveArticle', function (req, res) {
     var path = req.body.path;
     var id = new ObjectId(req.body.articleId);
-    console.log(path);
     switch (path) {
         case 'notice':
             Notice.findById(id, function (err, notice) {
@@ -405,11 +404,9 @@ router.get('/getPatients', function (req, res) {
     User.findOne({'nursingHome': new Object(id), 'userId': req.query.userId}, function(err, worker) {
         if(err) return res.json({'result': 'fail'});
         if(worker) {
-            console.log(worker);
             Patient.find({'worker': worker}, function (err, patients) {
                 if (err) return res.json({'result': 'fail'});
                 if (patients) {
-                    console.log(patients);
                     return res.json(patients);
                 }
                 else return res.json({'result': 'fail'});
@@ -455,6 +452,7 @@ router.post('/createPatient', function (req, res) {
                                     patient.gender = req.body.gender;
                                     patient.birthday = req.body.birthday;
                                     patient.relation = req.body.relation;
+                                    patient.image = req.body.image;
                                     patient.roomNumber = req.body.roomNumber;
 
                                     protector.save();

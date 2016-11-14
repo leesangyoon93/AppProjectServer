@@ -43,7 +43,7 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
 
         Article.getInstance().initArticle();

@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by daddyslab on 2016. 11. 13..
@@ -47,9 +50,17 @@ public class AdapterPatientList extends BaseAdapter {
 
         convertView = mInflater.inflate(R.layout.list_patient, null);
         TextView patientName = (TextView) convertView.findViewById(R.id.text_patientName);
+        CircleImageView patientGender = (CircleImageView)convertView.findViewById(R.id.image_patientGender);
 
         try {
             patientName.setText(patient.getString("patientName"));
+            // 메인 써클러랑 여기 만약 수급자 사긴이 등록되어있으면 그 사진을 디코딩해서 보여주고, 아니면 밑에껄로.
+            if(patient.getString("gender").equals("male")) {
+                patientGender.setImageResource(R.drawable.user_male);
+            }
+            else {
+                patientGender.setImageResource(R.drawable.user_female);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

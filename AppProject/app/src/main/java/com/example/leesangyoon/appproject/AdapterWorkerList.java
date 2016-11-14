@@ -1,10 +1,12 @@
 package com.example.leesangyoon.appproject;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -48,10 +50,17 @@ public class AdapterWorkerList extends BaseAdapter {
         convertView = mInflater.inflate(R.layout.list_worker, null);
         TextView textName = (TextView) convertView.findViewById(R.id.text_workerName);
         TextView textId = (TextView) convertView.findViewById(R.id.text_workerId);
+        ImageView workerGender = (ImageView)convertView.findViewById(R.id.image_workerGender);
 
         try {
             textId.setText("(" +worker.getString("userId") + ")");
             textName.setText(worker.getString("userName"));
+            if(worker.getString("gender").equals("male")) {
+                workerGender.setImageResource(R.drawable.user_male);
+            }
+            else {
+                workerGender.setImageResource(R.drawable.user_female);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -27,7 +27,8 @@
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:id="@+id/image_patient"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/user_plain" />
 
                 <LinearLayout
                     android:orientation="vertical"

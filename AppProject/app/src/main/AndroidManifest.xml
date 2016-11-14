@@ -51,6 +51,7 @@
         <activity android:name=".AdminPatient" android:label="수급자관리"/>
         <activity android:name=".CreatePatient" android:label="수급자등록"/>
         <activity android:name=".ShowPatient" android:label="수급자정보"/>
+        <activity android:name=".EditPatient" android:label="수급자기록"/>
         <!--android:parentActivityName=".MainActivity"-->
     </application>
 

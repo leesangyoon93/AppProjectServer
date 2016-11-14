@@ -69,7 +69,18 @@ public class frag_Notice extends Fragment implements AdapterView.OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Intent intent = new Intent(getActivity(), ShowArticle.class);
+        intent.putExtra("path", "notice");
+        try {
+            Article.getInstance().setId(notices.get(position).getString("_id"));
+            Article.getInstance().setContent(notices.get(position).getString("content"));
+            Article.getInstance().setAuthor(notices.get(position).getString("author"));
+            Article.getInstance().setCommentCount(notices.get(position).getInt("commentCount"));
+            Article.getInstance().setDate(notices.get(position).getString("date"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        startActivity(intent);
     }
 
     private void getArticlesToServer() throws Exception {

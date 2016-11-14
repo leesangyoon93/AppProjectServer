@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ public class Profile extends AppCompatActivity {
 
     TextView userId, userName, userPhoneNumber;
     Button changePasswordButton;
+    ImageView prifleGender;
 
     private String currentPassword, newPassword1, newPassword2;
 
@@ -58,10 +61,17 @@ public class Profile extends AppCompatActivity {
         userId = (TextView)findViewById(R.id.text_profileUserId);
         userName = (TextView)findViewById(R.id.text_profileUserName);
         userPhoneNumber = (TextView)findViewById(R.id.text_profileUserPhoneNumber);
+        prifleGender = (ImageView)findViewById(R.id.image_profileGender);
 
         userId.setText(User.getInstance().getUserId());
         userName.setText(User.getInstance().getUserName());
         userPhoneNumber.setText(User.getInstance().getPhoneNumber());
+        if(User.getInstance().getGender().equals("male")) {
+            prifleGender.setImageResource(R.drawable.user_male);
+        }
+        else {
+            prifleGender.setImageResource(R.drawable.user_female);
+        }
 
         changePasswordButton = (Button)findViewById(R.id.btn_changePassword);
 
@@ -91,17 +101,6 @@ public class Profile extends AppCompatActivity {
                 layout.addView(currentPw);
                 layout.addView(newPw1);
                 layout.addView(newPw2);
-
-                // 커스텀 타이틀.
-//                TextView title = new TextView(this);
-//                title.setText("Custom Centered Title");
-//                title.setBackgroundColor(Color.DKGRAY);
-//                title.setPadding(10, 10, 10, 10);
-//                title.setGravity(Gravity.CENTER);
-//                title.setTextColor(Color.WHITE);
-//                title.setTextSize(20);
-//
-//                builder.setCustomTitle(title);
 
                 // 비밀번호 변경 성공안했을때 유지시키기. 버튼 따로만들어서 리스너 붙여야함
                 builder.setTitle("비밀번호 변경")

@@ -1,9 +1,11 @@
 package com.example.leesangyoon.appproject;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -71,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(Fragment.instantiate(this, frag_QA.class.getName()));
         PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), fragments);
         final ViewPager pager = (ViewPager)findViewById(R.id.mainPager);
+        final PagerTabStrip header = (PagerTabStrip)findViewById(R.id.pager_header);
+        header.setTabIndicatorColor(Color.WHITE);
 
         pager.setAdapter(adapter);
 
@@ -80,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycleView_patient);
         mRecyclerView.setLayoutManager(layoutManager);
 
-//        patients.clear();
-//
-//        try {
-//            getPatientsToServer();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        patients.clear();
+
+        try {
+            getPatientsToServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         adapterPatientRecycle = new AdapterPatientRecycle(patients);
         mRecyclerView.setAdapter(adapterPatientRecycle);

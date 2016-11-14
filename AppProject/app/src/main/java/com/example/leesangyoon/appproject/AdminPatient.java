@@ -102,7 +102,7 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(AdminPatient.this, ShowArticle.class);
+        Intent intent = new Intent(AdminPatient.this, EditPatient.class);
         try {
             Patient.getInstance().setGender(patients.get(position).getString("gender"));
             Patient.getInstance().setBirthday(patients.get(position).getString("birthday"));

@@ -31,11 +31,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:background="#fff"
+                android:background="#A2C67A"
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp"
-                android:textColor="#000"
-                />
+                android:textColor="#000" />
         </android.support.v4.view.ViewPager>
 
         <TextView
@@ -46,7 +45,8 @@
             android:layout_weight="12"
             android:gravity="center"
             android:textColor="#000"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:background="#A2C67A" />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -55,7 +55,10 @@
             tools:context=".MainActivity"
             tools:listitem="@layout/item_patient"
             android:layout_weight="11"
-        />
+            android:layout_gravity="left|center"
+            android:padding="10dp">
+        </android.support.v7.widget.RecyclerView>
+
     </LinearLayout>
 
 
