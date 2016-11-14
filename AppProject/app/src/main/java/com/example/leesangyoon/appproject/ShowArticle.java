@@ -1,5 +1,6 @@
 package com.example.leesangyoon.appproject;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,13 +36,9 @@ import java.util.Map;
  * Created by daddyslab on 2016. 10. 29..
  */
 public class ShowArticle extends AppCompatActivity {
-    // edit 으로 갈 때 from 넣어줘야함.
-    // 삭제도 만들어야함
-
     ListView commentList;
     TextView content;
     TextView title;
-    TextView commentCount;
     TextView date;
     TextView author;
     EditText input_comment;
@@ -72,14 +69,10 @@ public class ShowArticle extends AppCompatActivity {
         input_comment = (EditText) findViewById(R.id.input_comment);
         title = (TextView) findViewById(R.id.title);
         author = (TextView) findViewById(R.id.author);
-//        commentCount = (TextView) findViewById(R.id.commentCount);
         date = (TextView) findViewById(R.id.date);
         content = (TextView) findViewById(R.id.content);
 
         comments.clear();
-
-//        editArticle.setVisibility(View.GONE);
-//        deleteArticle.setVisibility(View.GONE);
 
         try {
             showArticleToServer();
@@ -111,7 +104,7 @@ public class ShowArticle extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (User.getInstance().getUserId().equals(author.getText().toString())) {
+        if (User.getInstance().getUserId().equals(Article.getInstance().getAuthor())) {
             getMenuInflater().inflate(R.menu.menu_showarticle, menu);
         }
         return true;
@@ -202,6 +195,7 @@ public class ShowArticle extends AppCompatActivity {
     }
 
     private void showArticleToServer() throws Exception {
+        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
         String URL = String.format("http://52.41.19.232/showArticle?articleId=%s&path=%s",
                 URLEncoder.encode(Article.getInstance().getId(), "utf-8"), URLEncoder.encode(path), "utf-8");
 
@@ -209,6 +203,7 @@ public class ShowArticle extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject response) {
+                loading.dismiss();
                 try {
                     if (response.toString().contains("result") && response.toString().contains("fail")) {
                         Toast.makeText(ShowArticle.this, "게시글을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();

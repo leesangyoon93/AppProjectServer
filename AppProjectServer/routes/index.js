@@ -285,8 +285,6 @@ router.post('/saveArticle', function (req, res) {
                     return res.json({'result': 'success', 'galleryId': gallery._id});
                 }
                 else {
-                    console.log("asdf");
-                    console.log(req.body.image);
                     var newGallery = new Gallery();
                     newGallery.title = req.body.title;
                     newGallery.content = req.body.content;

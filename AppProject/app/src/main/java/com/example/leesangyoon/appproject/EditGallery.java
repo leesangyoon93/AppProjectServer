@@ -38,10 +38,7 @@ import java.util.Map;
  */
 public class EditGallery extends AppCompatActivity {
 
-    private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
-    private static final int CROP_FROM_CAMERA = 2;
-    private Uri mImageCaptureUri;
 
     String from = "";
     Class cls = null;
@@ -67,6 +64,11 @@ public class EditGallery extends AppCompatActivity {
         title = (EditText) findViewById(R.id.input_galleryTitle);
         content = (EditText) findViewById(R.id.input_galleryContent);
         image = (ImageView) findViewById(R.id.input_galleryImage);
+
+        title.setText(GallerySingleton.getInstance().getTitle());
+        content.setText(GallerySingleton.getInstance().getContent());
+        photo = StringToBitmap(GallerySingleton.getInstance().getImage());
+        image.setImageBitmap(photo);
 
     }
 
@@ -127,7 +129,7 @@ public class EditGallery extends AppCompatActivity {
     public static String BitmapToString(Bitmap bitmap) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
             byte[] b = baos.toByteArray();
             String temp = Base64.encodeToString(b, Base64.DEFAULT);
             return temp;
@@ -188,7 +190,7 @@ public class EditGallery extends AppCompatActivity {
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userId", User.getInstance().getUserId());
         postParam.put("nursingHomeId", User.getInstance().getNursingHomeId());
-        postParam.put("galleryId", GallerySingleton.getInstance().getId());
+        postParam.put("articleId", GallerySingleton.getInstance().getId());
         postParam.put("image", strImage);
         postParam.put("title", title.getText().toString());
         postParam.put("content", content.getText().toString());
@@ -223,5 +225,18 @@ public class EditGallery extends AppCompatActivity {
 
         // Adding request to request queue
         volley.getInstance().addToRequestQueue(req);
+    }
+
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (NullPointerException e) {
+            e.getMessage();
+            return null;
+        } catch (OutOfMemoryError e) {
+            return null;
+        }
     }
 }

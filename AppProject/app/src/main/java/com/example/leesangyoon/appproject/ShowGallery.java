@@ -1,5 +1,6 @@
 package com.example.leesangyoon.appproject;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -102,7 +103,7 @@ public class ShowGallery extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (User.getInstance().getUserId().equals(author.getText().toString())) {
+        if (User.getInstance().getUserId().equals(GallerySingleton.getInstance().getAuthor())) {
             getMenuInflater().inflate(R.menu.menu_showgallery, menu);
         }
         return true;
@@ -180,6 +181,7 @@ public class ShowGallery extends AppCompatActivity {
     }
 
     private void showGalleryToServer() throws Exception {
+        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
         String URL = String.format("http://52.41.19.232/showArticle?articleId=%s&path=%s",
                 URLEncoder.encode(GallerySingleton.getInstance().getId(), "utf-8"), URLEncoder.encode("gallery", "utf-8"));
 
@@ -187,6 +189,7 @@ public class ShowGallery extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject response) {
+                loading.dismiss();
                 try {
                     if (response.toString().contains("result") && response.toString().contains("fail")) {
                         Toast.makeText(ShowGallery.this, "게시글을 불러오는데 실패하였습니다.", Toast.LENGTH_SHORT).show();

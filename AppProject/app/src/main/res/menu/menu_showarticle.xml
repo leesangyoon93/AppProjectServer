@@ -3,14 +3,12 @@
     xmlns:appproject="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_editArticle"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="EditArticle"
+        android:title="수정"
         appproject:showAsAction="ifRoom"
         />
     <item
         android:id="@+id/menu_deleteArticle"
-        android:icon="@android:drawable/ic_delete"
-        android:title="DeleteArticle"
+        android:title="삭제"
         appproject:showAsAction="ifRoom"
         />
 </menu>

@@ -115,6 +115,7 @@ public class EditArticle extends AppCompatActivity {
     }
 
     private void saveArticleToServer(final String path) throws Exception {
+        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userId", User.getInstance().getUserId());
@@ -130,6 +131,7 @@ public class EditArticle extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject response) {
+                loading.dismiss();
                 try {
                     if (response.getString("result").equals("success")) {
                         Toast.makeText(EditArticle.this, "성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show();

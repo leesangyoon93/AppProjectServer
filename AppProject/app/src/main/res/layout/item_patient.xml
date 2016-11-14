@@ -11,5 +11,6 @@
     <TextView
         android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:id="@+id/patient_name" />
+        android:id="@+id/patient_name"
+        android:gravity="center" />
 </LinearLayout>
