@@ -16,10 +16,18 @@ var ScheduleSchema = new Schema({
         type: String,
         unique: false
     },
-    created: String,
-    modified: String,
+    date: String,
+    modified: {
+        type: String,
+        null: true,
+        default: new Date().toISOString()
+    },
     content: {
         type: String
+    },
+    commentCount: {
+        type: Number,
+        default: 0
     }
 });
 

@@ -11,6 +11,7 @@ var QA = mongoose.model('QA');
 var Gallery = mongoose.model('Gallery');
 var NoticeComment = mongoose.model('NoticeComment');
 var GalleryComment = mongoose.model('GalleryComment');
+var ScheduleComment = mongoose.model('ScheduleComment');
 var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
@@ -189,6 +190,15 @@ router.get('/getArticles', function (req, res) {
                 else return res.json({'result': 'fail'});
             });
             break;
+        case 'schedule':
+            Schedule.find({'nursingHome': new ObjectId(id)}, function(err, schedules) {
+                if(err) return res.json({'result': 'fail'});
+                if(schedules) {
+                    return res.json(schedules);
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
     }
 });
 
@@ -208,7 +218,15 @@ router.get('/showArticle', function (req, res) {
                 if (err) return res.json({'result': 'fail'});
                 if (gallery) return res.json(gallery);
                 else return res.json({'result': 'fail'});
-            })
+            });
+            break;
+        case 'schedule':
+            Schedule.findById(id, function(err, schedule) {
+                if (err) return res.json({'result': 'fail'});
+                if (schedule) return res.json(schedule);
+                else return res.json({'result': 'fail'});
+            });
+            break;
     }
 });
 
@@ -227,6 +245,14 @@ router.get('/showComments', function (req, res) {
             break;
         case 'gallery':
             GalleryComment.find({'gallery': new ObjectId(id)}, function (err, comments) {
+                if (err) return res.json({'result': 'fail'});
+                if (comments)
+                    return res.json(comments);
+                else return res.json({'result': 'fail'});
+            });
+            break;
+        case 'schedule':
+            ScheduleComment.find({'schedule': new ObjectId(id)}, function (err, comments) {
                 if (err) return res.json({'result': 'fail'});
                 if (comments)
                     return res.json(comments);
@@ -304,6 +330,37 @@ router.post('/saveArticle', function (req, res) {
                 }
             });
             break;
+        case 'schedule':
+            Schedule.findById(id, function (err, schedule) {
+                if (err) return res.json({'result': 'fail'});
+                if (schedule) {
+                    schedule.title = req.body.title;
+                    schedule.content = req.body.content;
+                    var date = new Date().toISOString();
+                    schedule.modified = date;
+                    schedule.save();
+                    return res.json({'result': 'success', 'articleId': schedule._id});
+                }
+                else {
+                    var newSchedule = new Schedule();
+                    newSchedule.title = req.body.title;
+                    newSchedule.content = req.body.content;
+                    newSchedule.author = req.body.userId;
+                    var date = new Date().toISOString();
+                    newSchedule.date = date.slice(0, 10);
+                    NursingHome.findById(req.body.nursingHomeId, function (err, nursingHome) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (nursingHome) {
+                            newSchedule.nursingHome = nursingHome;
+                            newSchedule.save();
+                            return res.json({'result': 'success', 'articleId': newSchedule._id});
+                        }
+                        else
+                            return res.json({'result': 'fail'});
+                    });
+                }
+            });
+            break;
     }
 
 });
@@ -347,6 +404,24 @@ router.post('/saveComment', function (req, res) {
                 else return res.json({'result': 'fail'});
             });
             break;
+        case 'schedule':
+            Schedule.findById(req.body.articleId, function (err, schedule) {
+                if (err) return res.json({'result': 'fail'});
+                if (schedule) {
+                    var comment = new ScheduleComment();
+                    comment.schedule = schedule;
+                    comment.author = req.body.userId;
+                    comment.content = req.body.content;
+                    var date = new Date().toISOString();
+                    comment.date = date.slice(0, 10);
+                    comment.save();
+                    schedule.commentCount += 1;
+                    schedule.save();
+                    return res.json({'result': 'success'});
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
     }
 
 });
@@ -383,6 +458,24 @@ router.post('/deleteArticle', function (req, res) {
                             for (var i = 0; i < comments.length; i++)
                                 comments[i].remove();
                             gallery.remove();
+                            return res.json({'result': 'success'});
+                        }
+                        else return res.json({'result': 'fail'});
+                    })
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
+        case 'schedule':
+            Schedule.findById(id, function (err, schedule) {
+                if (err) return res.json({'result': 'fail'});
+                if (schedule) {
+                    ScheduleComment.find({'schedule': id}, function (err, comments) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (comments) {
+                            for (var i = 0; i < comments.length; i++)
+                                comments[i].remove();
+                            schedule.remove();
                             return res.json({'result': 'success'});
                         }
                         else return res.json({'result': 'fail'});

@@ -1,5 +1,6 @@
 package com.example.leesangyoon.appproject;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -125,7 +126,7 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
     }
 
     private void getArticlesToServer() throws Exception {
-
+        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
         String URL = String.format("http://52.41.19.232/getArticles?nursingHomeId=%s&path=%s",
                 URLEncoder.encode(User.getInstance().getNursingHomeId(), "utf-8"),
                 URLEncoder.encode("notice", "utf-8"));
@@ -134,7 +135,7 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
 
             @Override
             public void onResponse(JSONArray response) {
-
+                loading.dismiss();
                 if (response.toString().contains("result") && response.toString().contains("fail")) {
                     Toast.makeText(Notice.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
                 } else {
