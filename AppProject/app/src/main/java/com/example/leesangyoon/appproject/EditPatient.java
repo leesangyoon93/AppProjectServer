@@ -6,10 +6,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
-
-import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
 
 /**
  * Created by daddyslab on 2016. 11. 13..

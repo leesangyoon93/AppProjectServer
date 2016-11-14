@@ -1,10 +1,14 @@
 package com.example.leesangyoon.appproject;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +29,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,10 +40,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 // 여기는 누구든지 보호자환자 생성할 수 있게. 프로텍터를 지정하면 해당 프로텍터한테만 보임.
 public class CreatePatient extends AppCompatActivity {
-    private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
-    private static final int CROP_FROM_CAMERA = 2;
-    private Uri mImageCaptureUri;
     Bitmap photo;
 
     CircleImageView patient_image;
@@ -100,12 +100,18 @@ public class CreatePatient extends AppCompatActivity {
         });
     }
 
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
+    public static String BitmapToString(Bitmap bitmap) {
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+            byte[] b = baos.toByteArray();
+            String temp = Base64.encodeToString(b, Base64.DEFAULT);
+            return temp;
+        } catch (NullPointerException e) {
+            return null;
+        } catch (OutOfMemoryError e) {
+            return null;
+        }
     }
 
     private void doTakeAlbumAction() {
@@ -117,52 +123,21 @@ public class CreatePatient extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != RESULT_OK) {
-            return;
-        }
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK && null != data) {
+            Uri mImageCaptureUri = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
-        switch (requestCode) {
-            case CROP_FROM_CAMERA: {
-                // 크롭이 된 이후의 이미지를 넘겨 받습니다.
-                // 이미지뷰에 이미지를 보여준다거나 부가적인 작업 이후에
-                // 임시 파일을 삭제합니다.
-                final Bundle extras = data.getExtras();
+            Cursor cursor = getContentResolver().query(mImageCaptureUri,
+                    filePathColumn, null, null, null);
+            assert cursor != null;
+            cursor.moveToFirst();
 
-                if (extras != null) {
-                    photo = extras.getParcelable("data");
-                    patient_image.setImageBitmap(photo);
-                }
-
-//                 임시 파일 삭제
-                File f = new File(mImageCaptureUri.getPath());
-                if (f.exists()) {
-                    f.delete();
-                }
-
-                break;
-            }
-
-            case PICK_FROM_ALBUM: {
-                mImageCaptureUri = data.getData();
-            }
-
-            case PICK_FROM_CAMERA: {
-                // 이미지를 가져온 이후의 리사이즈할 이미지 크기를 결정합니다.
-                // 이후에 이미지 크롭 어플리케이션을 호출하게 됩니다.
-
-                Intent intent = new Intent("com.android.camera.action.CROP");
-                intent.setDataAndType(mImageCaptureUri, "image/*");
-
-                intent.putExtra("outputX", 1000);
-                intent.putExtra("outputY", 1000);
-                intent.putExtra("aspectX", 1);
-                intent.putExtra("aspectY", 1);
-                intent.putExtra("scale", true);
-                intent.putExtra("return-data", true);
-                startActivityForResult(intent, CROP_FROM_CAMERA);
-
-                break;
-            }
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            photo = BitmapFactory.decodeFile(picturePath);
+            patient_image.setImageBitmap(photo);
         }
     }
 
@@ -215,10 +190,11 @@ public class CreatePatient extends AppCompatActivity {
     }
 
     private void createPatientToServer() throws Exception {
+        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
         final String URL = "http://52.41.19.232/createPatient";
 
-        image = getStringImage(photo);
+        image = BitmapToString(photo);
         patientName = patient_name.getText().toString();
         birthday = patient_birthday.getText().toString();
         relation = patient_relation.getText().toString();
@@ -247,6 +223,7 @@ public class CreatePatient extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject response) {
+                loading.dismiss();
                 try {
                     if (response.toString().contains("result")) {
                         if (response.getString("result").equals("fail")) {

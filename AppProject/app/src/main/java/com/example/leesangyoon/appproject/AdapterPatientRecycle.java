@@ -1,11 +1,12 @@
 package com.example.leesangyoon.appproject;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -42,11 +43,16 @@ public class AdapterPatientRecycle extends RecyclerView.Adapter<AdapterPatientRe
 
         try {
             holder.patientName.setText(patient.getString("patientName"));
-            if(patient.getString("gender").equals("male")) {
-                holder.patientGender.setImageResource(R.drawable.user_male);
+            if(patient.getString("image").equals("-")) {
+                if(patient.getString("gender").equals("male")) {
+                    holder.patientGender.setImageResource(R.drawable.user_male);
+                }
+                else {
+                    holder.patientGender.setImageResource(R.drawable.user_female);
+                }
             }
             else {
-                holder.patientGender.setImageResource(R.drawable.user_female);
+                holder.patientGender.setImageBitmap(StringToBitmap(patient.getString("image")));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -67,6 +73,19 @@ public class AdapterPatientRecycle extends RecyclerView.Adapter<AdapterPatientRe
             super(itemView);
             patientName = (TextView) itemView.findViewById(R.id.patient_name);
             patientGender = (CircleImageView) itemView.findViewById(R.id.patient_gender);
+        }
+    }
+
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (NullPointerException e) {
+            e.getMessage();
+            return null;
+        } catch (OutOfMemoryError e) {
+            return null;
         }
     }
 }

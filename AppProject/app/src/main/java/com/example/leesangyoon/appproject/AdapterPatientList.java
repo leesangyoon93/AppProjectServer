@@ -1,11 +1,13 @@
 package com.example.leesangyoon.appproject;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -55,15 +57,33 @@ public class AdapterPatientList extends BaseAdapter {
         try {
             patientName.setText(patient.getString("patientName"));
             // 메인 써클러랑 여기 만약 수급자 사긴이 등록되어있으면 그 사진을 디코딩해서 보여주고, 아니면 밑에껄로.
-            if(patient.getString("gender").equals("male")) {
-                patientGender.setImageResource(R.drawable.user_male);
+            if(patient.getString("image").equals("-")) {
+                if(patient.getString("gender").equals("male")) {
+                    patientGender.setImageResource(R.drawable.user_male);
+                }
+                else {
+                    patientGender.setImageResource(R.drawable.user_female);
+                }
             }
             else {
-                patientGender.setImageResource(R.drawable.user_female);
+                patientGender.setImageBitmap(StringToBitmap(patient.getString("image")));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return convertView;
+    }
+
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (NullPointerException e) {
+            e.getMessage();
+            return null;
+        } catch (OutOfMemoryError e) {
+            return null;
+        }
     }
 }

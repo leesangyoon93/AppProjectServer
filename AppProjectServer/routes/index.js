@@ -396,6 +396,7 @@ router.post('/deleteArticle', function (req, res) {
 
 router.post('/aaaa', function(req, res) {
     console.log(req.body);
+    return res.json({'result': 'success'});
 });
 // 게시판 API 끝
 
