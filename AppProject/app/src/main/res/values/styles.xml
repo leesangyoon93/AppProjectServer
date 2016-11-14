@@ -21,11 +21,11 @@
         <!-- title text color -->
         <item name="android:textColorPrimary">@color/black</item>
         <!-- subtitle text color -->
-        <!--<item name="android:textColorSecondary">?android:textColorPrimary</item>-->
+        <item name="android:textColorSecondary">@color/black</item>
         <!--&lt;!&ndash; action menu item text color &ndash;&gt;-->
-        <!--<item name="actionMenuTextColor">?android:textColorPrimary</item>-->
+        <item name="actionMenuTextColor">@color/black</item>
         <!--&lt;!&ndash; action menu item icon color &ndash;&gt;-->
-        <!--<item name="colorControlNormal">?android:textColorPrimary</item>-->
+        <item name="colorControlNormal">@color/black</item>
     </style>
 
     <style name="ThemeOverlay.AppTheme.PopupMenu" parent="ThemeOverlay.AppCompat.Dark">

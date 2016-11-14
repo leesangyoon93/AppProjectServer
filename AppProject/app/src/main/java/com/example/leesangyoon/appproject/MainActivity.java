@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     // 이부분이 가장 핵심기능, 개 빡셀듯
 
     // 갤러리 표시 제대로 해주고 밑에꺼 ㄲㄲㄲㄲ
-    // 1. adminPatient 에 리스트뷰 달고, 어떻게 나타낼건지.
-    // 2. createPatient 로 보호자/환자 정보 추가하는거 구현.
+    // 1. adminPatient 에 리스트뷰 달고, 어떻게 나타낼건지. // 완료
+    // 2. createPatient 로 보호자/환자 정보 추가하는거 구현. // 완료
     // 3. showPatient 로 보호자/환자 정보 나타내기 ( 이부분이 막연함 )
     // 4. editPatient 구현. 정보를 나타낼 수 있으면 당연히 수정할 수 있겟지?
     // 5. 정보 추가가 되면 유저프로필에 같이 나오게 해주자.
@@ -50,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     ArrayList<JSONObject> patients = new ArrayList<JSONObject>();
     AdapterPatientRecycle adapterPatientRecycle;
-    TabLayout tab;
-    ViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,49 +59,25 @@ public class MainActivity extends AppCompatActivity {
         final ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(User.getInstance().getNursingHomeName());
-        //actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        tab = (TabLayout) findViewById(R.id.tab_layout);
-        tab.addTab(tab.newTab().setText("공지사항"));
-        tab.addTab(tab.newTab().setText("일정"));
-        tab.addTab(tab.newTab().setText("갤러리"));
-        tab.addTab(tab.newTab().setText("Q&A"));
-        tab.setTabGravity(TabLayout.GRAVITY_FILL);
+        List<Fragment> fragments = new Vector<>();
+        fragments.add(Fragment.instantiate(this, frag_Notice.class.getName()));
+        fragments.add(Fragment.instantiate(this, frag_Schedule.class.getName()));
+        fragments.add(Fragment.instantiate(this, frag_Gallery.class.getName()));
+        fragments.add(Fragment.instantiate(this, frag_QA.class.getName()));
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), fragments);
 
-//        List<Fragment> fragments = new Vector<>();
-//        fragments.add(Fragment.instantiate(this, frag_Notice.class.getName()));
-//        fragments.add(Fragment.instantiate(this, frag_Schedule.class.getName()));
-//        fragments.add(Fragment.instantiate(this, frag_Gallery.class.getName()));
-//        fragments.add(Fragment.instantiate(this, frag_QA.class.getName()));
-        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tab.getTabCount());
-        pager = (ViewPager) findViewById(R.id.mainPager);
-        pager.setAdapter(pagerAdapter);
-        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tab));
-        tab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                pager.setCurrentItem(tab.getPosition());
-            }
+        final ViewPager pager = (ViewPager)findViewById(R.id.mainPager);
+        pager.setAdapter(adapter);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-//        final PagerTabStrip header = (PagerTabStrip)findViewById(R.id.pager_header);
-//        header.setTabIndicatorColor(Color.WHITE);
-        });
-
+        final PagerTabStrip header = (PagerTabStrip)findViewById(R.id.pager_header);
+        header.setTabIndicatorColor(Color.WHITE);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycleView_patient);
         mRecyclerView.setLayoutManager(layoutManager);
 
@@ -121,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (User.getInstance().getAuth() != 2)
+        if(User.getInstance().getAuth() != 2)
             getMenuInflater().inflate(R.menu.menu_adminmain, menu);
         else
             getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -131,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
-        switch (item.getItemId()) {
+        switch(item.getItemId()) {
             case R.id.menu_intro:
                 intent = new Intent(MainActivity.this, Intro.class);
                 startActivity(intent);
@@ -175,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getPatientsToServer() throws Exception {
-        final ProgressDialog loading = ProgressDialog.show(this, "Loading...", "Please wait...", false, false);
+        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
         String URL = String.format("http://52.41.19.232/getPatients?nursingHomeId=%s&userId=%s",
                 URLEncoder.encode(User.getInstance().getNursingHomeId(), "utf-8"),

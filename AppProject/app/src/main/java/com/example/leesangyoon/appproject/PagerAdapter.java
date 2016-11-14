@@ -12,37 +12,36 @@ import java.util.List;
  */
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    private int tabCount;
+    private List<Fragment> fragments;
 
-    public PagerAdapter(FragmentManager fm, int tabCount) {
+    public PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
-        this.tabCount = tabCount;
+        this.fragments = fragments;
     }
 
     @Override
-    public Fragment getItem(int position) {
-
-        // Returning the current tabs
-        switch (position) {
-            case 0:
-                frag_Notice tabFragment1 = new frag_Notice();
-                return tabFragment1;
-            case 1:
-                frag_Schedule tabFragment2 = new frag_Schedule();
-                return tabFragment2;
-            case 2:
-                frag_Gallery tabFragment3 = new frag_Gallery();
-                return tabFragment3;
-            case 3:
-                frag_QA tabFragment4 = new frag_QA();
-                return tabFragment4;
-            default:
-                return null;
-        }
+    public android.support.v4.app.Fragment getItem(int position) {
+        return fragments.get(position);
     }
 
     @Override
     public int getCount() {
-        return tabCount;
+        return fragments.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position) {
+            case 0:
+                return "공지사항";
+            case 1:
+                return "일정";
+            case 2:
+                return "갤러리";
+            case 3:
+                return "Q&A";
+        }
+
+        return null;
     }
 }

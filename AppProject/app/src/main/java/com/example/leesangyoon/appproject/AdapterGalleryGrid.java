@@ -49,22 +49,30 @@ public class AdapterGalleryGrid extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         JSONObject galleries = gallery.get(position);
 
-        byte[] decodedString;
-
         convertView = mInflater.inflate(R.layout.grid_gallery, null);
         TextView title = (TextView) convertView.findViewById(R.id.grid_title);
         ImageView image = (ImageView) convertView.findViewById(R.id.grid_image);
 
-
         // 텍스트를 비트맵으로 변환하고 뿌려주면됨.
         try {
-            decodedString = Base64.decode(galleries.getString("image"), Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             title.setText(galleries.getString("title"));
-            image.setImageBitmap(decodedByte);
+            image.setImageBitmap(StringToBitmap(galleries.getString("image")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return convertView;
+    }
+
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (NullPointerException e) {
+            e.getMessage();
+            return null;
+        } catch (OutOfMemoryError e) {
+            return null;
+        }
     }
 }
