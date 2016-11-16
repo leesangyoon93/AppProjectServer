@@ -52,19 +52,20 @@ public class Notice extends AppCompatActivity implements AdapterView.OnItemClick
         noticeList = (ListView) findViewById(R.id.listView_article);
         noticeList.setOnItemClickListener(this);
 
-        if (User.getInstance().getAuth() == 1) {
-            FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
-            mFloatingButton.attachToListView(noticeList);
+        FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
+        mFloatingButton.attachToListView(noticeList);
 
-            mFloatingButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Notice.this, EditArticle.class);
-                    intent.putExtra("from", "list");
-                    intent.putExtra("path", "notice");
-                    startActivity(intent);
-                }
-            });
+        mFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Notice.this, EditArticle.class);
+                intent.putExtra("from", "list");
+                intent.putExtra("path", "notice");
+                startActivity(intent);
+            }
+        });
+        if (User.getInstance().getAuth() == 1) {
+            mFloatingButton.setVisibility(View.VISIBLE);
         }
 
         notices.clear();

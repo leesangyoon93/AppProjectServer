@@ -24,9 +24,9 @@
         appproject:showAsAction="ifRoom"
         />
 
-    <item
-        android:id="@+id/menu_adminPatient"
-        android:title="수급자관리"
-        appproject:showAsAction="ifRoom"
-        />
+    <!--<item-->
+        <!--android:id="@+id/menu_adminPatient"-->
+        <!--android:title="수급자관리"-->
+        <!--appproject:showAsAction="ifRoom"-->
+        <!--/>-->
 </menu>

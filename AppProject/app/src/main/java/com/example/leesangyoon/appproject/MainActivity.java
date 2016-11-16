@@ -2,8 +2,6 @@ package com.example.leesangyoon.appproject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -14,6 +12,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -22,6 +22,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     // 메뉴 달때 유저한테 수급자 정보 열람 버튼을 제공해주자. 그거 누르면 showPatient 로 가서 날짜별로 정보 열람할수있고, 수정 안됨.
     // 이부분이 가장 핵심기능, 개 빡셀듯
 
-    // 갤러리 표시 제대로 해주고 밑에꺼 ㄲㄲㄲㄲ
+    // 갤러리 표시 제대로 해주고 밑에꺼 ㄲㄲㄲㄲ // 완료
     // 1. adminPatient 에 리스트뷰 달고, 어떻게 나타낼건지. // 완료
     // 2. createPatient 로 보호자/환자 정보 추가하는거 구현. // 완료
     // 3. showPatient 로 보호자/환자 정보 나타내기 ( 이부분이 막연함 )
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     ArrayList<JSONObject> patients = new ArrayList<JSONObject>();
     AdapterPatientRecycle adapterPatientRecycle;
+    TextView adminPatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,13 +75,29 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(adapter);
 
         final PagerTabStrip header = (PagerTabStrip)findViewById(R.id.pager_header);
-        header.setTabIndicatorColor(Color.WHITE);
+        header.setTabIndicatorColor(10667642);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycleView_patient);
         mRecyclerView.setLayoutManager(layoutManager);
+
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(MainActivity.this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+                        try {
+                            Toast.makeText(MainActivity.this, patients.get(position).getString("patientName"), Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override public void onLongItemClick(View view, int position) {
+                        // do whatever
+                    }
+                })
+        );
 
         patients.clear();
 
@@ -91,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
 
         adapterPatientRecycle = new AdapterPatientRecycle(patients);
         mRecyclerView.setAdapter(adapterPatientRecycle);
+
+        adminPatient = (TextView)findViewById(R.id.btn_adminPatient);
+        adminPatient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AdminPatient.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -124,10 +151,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_QA:
                 intent = new Intent(MainActivity.this, QA.class);
-                startActivity(intent);
-                break;
-            case R.id.menu_adminPatient:
-                intent = new Intent(MainActivity.this, AdminPatient.class);
                 startActivity(intent);
                 break;
             case R.id.menu_showPatient:
@@ -179,4 +202,5 @@ public class MainActivity extends AppCompatActivity {
         // Adding request to request queue
         volley.getInstance().addToRequestQueue(req);
     }
+
 }

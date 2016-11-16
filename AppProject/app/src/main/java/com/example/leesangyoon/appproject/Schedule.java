@@ -52,19 +52,20 @@ public class Schedule extends AppCompatActivity implements AdapterView.OnItemCli
         scheduleList = (ListView) findViewById(R.id.listView_article);
         scheduleList.setOnItemClickListener(this);
 
-        if (User.getInstance().getAuth() == 1) {
-            FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
-            mFloatingButton.attachToListView(scheduleList);
+        FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
+        mFloatingButton.attachToListView(scheduleList);
 
-            mFloatingButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Schedule.this, EditArticle.class);
-                    intent.putExtra("from", "list");
-                    intent.putExtra("path", "schedule");
-                    startActivity(intent);
-                }
-            });
+        mFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Schedule.this, EditArticle.class);
+                intent.putExtra("from", "list");
+                intent.putExtra("path", "schedule");
+                startActivity(intent);
+            }
+        });
+        if (User.getInstance().getAuth() == 1) {
+            mFloatingButton.setVisibility(View.VISIBLE);
         }
 
         schedules.clear();

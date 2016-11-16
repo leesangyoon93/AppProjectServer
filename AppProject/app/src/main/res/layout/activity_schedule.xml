@@ -18,6 +18,7 @@
         android:layout_margin="16dp"
         android:src="@android:drawable/ic_menu_add"
         fab:fab_colorNormal="#009688"
-        fab:fab_colorPressed="#26a69a" />
+        fab:fab_colorPressed="#26a69a"
+        android:visibility="gone"/>
 
 </FrameLayout>

@@ -12,6 +12,7 @@ var Gallery = mongoose.model('Gallery');
 var NoticeComment = mongoose.model('NoticeComment');
 var GalleryComment = mongoose.model('GalleryComment');
 var ScheduleComment = mongoose.model('ScheduleComment');
+var QAComment = mongoose.model('QAComment');
 var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
@@ -199,6 +200,15 @@ router.get('/getArticles', function (req, res) {
                 else return res.json({'result': 'fail'});
             });
             break;
+        case 'qa':
+            QA.find({'nursingHome': new ObjectId(id)}, function(err, qas) {
+                if(err) return res.json({'result': 'fail'});
+                if(qas) {
+                    return res.json(qas);
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
     }
 });
 
@@ -224,6 +234,13 @@ router.get('/showArticle', function (req, res) {
             Schedule.findById(id, function(err, schedule) {
                 if (err) return res.json({'result': 'fail'});
                 if (schedule) return res.json(schedule);
+                else return res.json({'result': 'fail'});
+            });
+            break;
+        case 'qa':
+            QA.findById(id, function(err, qa) {
+                if (err) return res.json({'result': 'fail'});
+                if (qa) return res.json(qa);
                 else return res.json({'result': 'fail'});
             });
             break;
@@ -253,6 +270,14 @@ router.get('/showComments', function (req, res) {
             break;
         case 'schedule':
             ScheduleComment.find({'schedule': new ObjectId(id)}, function (err, comments) {
+                if (err) return res.json({'result': 'fail'});
+                if (comments)
+                    return res.json(comments);
+                else return res.json({'result': 'fail'});
+            });
+            break;
+        case 'qa':
+            QAComment.find({'QA': new ObjectId(id)}, function (err, comments) {
                 if (err) return res.json({'result': 'fail'});
                 if (comments)
                     return res.json(comments);
@@ -361,6 +386,37 @@ router.post('/saveArticle', function (req, res) {
                 }
             });
             break;
+        case 'qa':
+            QA.findById(id, function (err, qa) {
+                if (err) return res.json({'result': 'fail'});
+                if (qa) {
+                    qa.title = req.body.title;
+                    qa.content = req.body.content;
+                    var date = new Date().toISOString();
+                    qa.modified = date;
+                    qa.save();
+                    return res.json({'result': 'success', 'articleId': qa._id});
+                }
+                else {
+                    var newQA = new QA();
+                    newQA.title = req.body.title;
+                    newQA.content = req.body.content;
+                    newQA.author = req.body.userId;
+                    var date = new Date().toISOString();
+                    newQA.date = date.slice(0, 10);
+                    NursingHome.findById(req.body.nursingHomeId, function (err, nursingHome) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (nursingHome) {
+                            newQA.nursingHome = nursingHome;
+                            newQA.save();
+                            return res.json({'result': 'success', 'articleId': newQA._id});
+                        }
+                        else
+                            return res.json({'result': 'fail'});
+                    });
+                }
+            });
+            break;
     }
 
 });
@@ -422,6 +478,24 @@ router.post('/saveComment', function (req, res) {
                 else return res.json({'result': 'fail'});
             });
             break;
+        case 'qa':
+            QA.findById(req.body.articleId, function (err, qa) {
+                if (err) return res.json({'result': 'fail'});
+                if (qa) {
+                    var comment = new QAComment();
+                    comment.QA = qa;
+                    comment.author = req.body.userId;
+                    comment.content = req.body.content;
+                    var date = new Date().toISOString();
+                    comment.date = date.slice(0, 10);
+                    comment.save();
+                    qa.commentCount += 1;
+                    qa.save();
+                    return res.json({'result': 'success'});
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
     }
 
 });
@@ -476,6 +550,24 @@ router.post('/deleteArticle', function (req, res) {
                             for (var i = 0; i < comments.length; i++)
                                 comments[i].remove();
                             schedule.remove();
+                            return res.json({'result': 'success'});
+                        }
+                        else return res.json({'result': 'fail'});
+                    })
+                }
+                else return res.json({'result': 'fail'});
+            });
+            break;
+        case 'qa':
+            QA.findById(id, function (err, qa) {
+                if (err) return res.json({'result': 'fail'});
+                if (qa) {
+                    QAComment.find({'QA': id}, function (err, comments) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (comments) {
+                            for (var i = 0; i < comments.length; i++)
+                                comments[i].remove();
+                            qa.remove();
                             return res.json({'result': 'success'});
                         }
                         else return res.json({'result': 'fail'});

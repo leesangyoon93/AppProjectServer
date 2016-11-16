@@ -49,18 +49,19 @@ public class Gallery extends AppCompatActivity implements AdapterView.OnItemClic
 
         gridView = (GridView) findViewById(R.id.gridView_gallery);
 
-        if (User.getInstance().getAuth() == 1) {
-            FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
-            mFloatingButton.attachToListView(gridView);
+        FloatingActionButton mFloatingButton = (FloatingActionButton) findViewById(R.id.mFloatingActionButton);
+        mFloatingButton.attachToListView(gridView);
 
-            mFloatingButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Gallery.this, EditGallery.class);
-                    intent.putExtra("from", "list");
-                    startActivity(intent);
-                }
-            });
+        mFloatingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Gallery.this, EditGallery.class);
+                intent.putExtra("from", "list");
+                startActivity(intent);
+            }
+        });
+        if (User.getInstance().getAuth() == 1) {
+            mFloatingButton.setVisibility(View.VISIBLE);
         }
 
 
