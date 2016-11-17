@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/model_category.js" afterPath="$PROJECT_DIR$/models/model_category.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ShowPatient.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ShowPatient.java" />
     </list>
     <ignored path="AppProjectServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -349,12 +348,12 @@
       <workItem from="1478766903374" duration="803000" />
       <workItem from="1479035132955" duration="3234000" />
       <workItem from="1479111375275" duration="2821000" />
-      <workItem from="1479368104839" duration="6896000" />
+      <workItem from="1479368104839" duration="7024000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43319000" />
+    <option name="totallyTimeSpent" value="43447000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="15" y="23" width="1400" height="808" extended-state="0" />
