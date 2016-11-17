@@ -661,8 +661,7 @@ router.post('/createPatient', function (req, res) {
 });
 
 router.post('/getPatient', function(req, res) {
-    var id = new ObjectId(req.body.userId);
-    User.findById(id, function(err, user) {
+    User.findOne({'userId': req.body.userId}, function(err, user) {
         if(err) return res.json({'result': 'fail'});
         if(user) {
             Patient.findOne({protector: user._id}, function(err, patient) {
