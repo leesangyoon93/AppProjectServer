@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.ParseError;
@@ -39,32 +41,34 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     AdapterCategoryGrid adapterCategoryGrid ;
     ArrayList<JSONObject> categories = new ArrayList<JSONObject>();
     GridView gridView;
+    TextView roomNumber, birthday;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_showpatient);
 
-        ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayUseLogoEnabled(false);
-        actionBar.setDisplayShowTitleEnabled(true);
-
         try {
             getPatientToServer();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setTitle(Patient.getInstance().getPatientName());
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayUseLogoEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
+
         gridView = (GridView) findViewById(R.id.gridView_category);
+        roomNumber = (TextView)findViewById(R.id.patient_roomNumber);
+        birthday = (TextView)findViewById(R.id.patient_birthday);
+
+        roomNumber.setText(Patient.getInstance().getRoomNumber());
+        birthday.setText(Patient.getInstance().getBirthday());
 
         categories.clear();
-
-        try {
-            getCategoriesToServer();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         adapterCategoryGrid = new AdapterCategoryGrid(ShowPatient.this, categories);
         adapterCategoryGrid.notifyDataSetChanged();
@@ -131,6 +135,8 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                         Patient.getInstance().setRoomNumber(response.getString("roomNumber"));
                         Patient.getInstance().setImage(response.getString("image"));
                         Patient.getInstance().setGender(response.getString("gender"));
+
+                        getCategoriesToServer();
                     }
 
                 } catch (Exception e) {
