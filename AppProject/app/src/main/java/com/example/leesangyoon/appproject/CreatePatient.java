@@ -44,10 +44,10 @@ public class CreatePatient extends AppCompatActivity {
     Bitmap photo;
 
     CircleImageView patient_image;
-    EditText patient_name, patient_birthday, patient_relation;
+    EditText patient_name, patient_birthday, patient_roomNumber, patient_relation;
     EditText worker_id, user_name, user_phone_number, user_id, user_password, user_password_check;
     RadioButton patient_female;
-    String patientName, birthday, relation, workerId, userName, userPhoneNumber, userId, userPassword, userPasswordCheck;
+    String patientName, birthday, roomNumber, relation, workerId, userName, userPhoneNumber, userId, userPassword, userPasswordCheck;
     String gender = "male";
     String image = "";
 
@@ -65,6 +65,7 @@ public class CreatePatient extends AppCompatActivity {
         patient_image = (CircleImageView)findViewById(R.id.image_patient);
         patient_name = (EditText)findViewById(R.id.input_patientName);
         patient_birthday = (EditText)findViewById(R.id.input_birthday);
+        patient_roomNumber = (EditText)findViewById(R.id.input_roomNumber);
         patient_relation = (EditText)findViewById(R.id.input_relation);
         worker_id = (EditText)findViewById(R.id.input_workerId);
         user_name = (EditText)findViewById(R.id.input_protectorName);
@@ -159,6 +160,7 @@ public class CreatePatient extends AppCompatActivity {
             case R.id.menu_createPatient:
                 patientName = patient_name.getText().toString();
                 birthday = patient_birthday.getText().toString();
+                roomNumber = patient_roomNumber.getText().toString();
                 relation = patient_relation.getText().toString();
                 workerId = worker_id.getText().toString();
                 userName = user_name.getText().toString();
@@ -169,7 +171,7 @@ public class CreatePatient extends AppCompatActivity {
                 // 환자/보호자 생성 요청 후 인덴트
                 try {
                     if(patientName.equals("") || birthday.equals("") || relation.equals("") || workerId.equals("") || userName.equals("") ||
-                            userId.equals("") || userPassword.equals("") || userPhoneNumber.equals("") || userPasswordCheck.equals("")) {
+                            userId.equals("") || userPassword.equals("") || userPhoneNumber.equals("") || userPasswordCheck.equals("") || roomNumber.equals("")) {
                         Toast.makeText(CreatePatient.this, "입력창을 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
                     }
                     else {
@@ -197,6 +199,7 @@ public class CreatePatient extends AppCompatActivity {
         image = BitmapToString(photo);
         patientName = patient_name.getText().toString();
         birthday = patient_birthday.getText().toString();
+        roomNumber = patient_roomNumber.getText().toString();
         relation = patient_relation.getText().toString();
         workerId = worker_id.getText().toString();
         userName = user_name.getText().toString();
@@ -217,6 +220,7 @@ public class CreatePatient extends AppCompatActivity {
         postParam.put("phoneNumber", userPhoneNumber);
         postParam.put("image", image);
         postParam.put("gender", gender);
+        postParam.put("roomNumber", roomNumber);
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {

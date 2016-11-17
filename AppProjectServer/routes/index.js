@@ -641,6 +641,7 @@ router.post('/createPatient', function (req, res) {
                                     patient.patientName = req.body.patientName;
                                     patient.gender = req.body.gender;
                                     patient.birthday = req.body.birthday;
+                                    patient.roomNumber = req.body.roomNumber;
                                     patient.relation = req.body.relation;
                                     patient.image = req.body.image;
                                     patient.roomNumber = req.body.roomNumber;
