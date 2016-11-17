@@ -663,7 +663,7 @@ router.post('/createPatient', function (req, res) {
 Patient.find(function(err, patients) {
         var date = new Date().toISOString();
         Category.find({date: date.slice(0, 10)}, function(err, categories) {
-            if(!categories) {
+            if(categories.length == 0) {
                 for(var i in patients) {
                     var category = new Category();
                     category.patient = patients[i];
