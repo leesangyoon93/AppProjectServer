@@ -661,21 +661,18 @@ router.post('/createPatient', function (req, res) {
 });
 
 Patient.find(function(err, patients) {
-    for(var i in patients) {
-        console.log(patients[i]);
         var date = new Date().toISOString();
-        Category.findOne({patient: patients[i]._id, date: date.slice(0, 10)}, function(err, category) {
-            console.log(i);
-            if(!category) {
-                console.log("카테고리 생성");
-                var category = new Category();
-                category.patient = patients[i];
+        Category.find({date: date.slice(0, 10)}, function(err, categories) {
+            if(!categories) {
+                for(var i in patients) {
+                    var category = new Category();
+                    category.patient = patients[i];
 
-                category.date = date.slice(0, 10);
-                category.save();
+                    category.date = date.slice(0, 10);
+                    category.save();
+                }
             }
         })
-    }
 });
 
 setInterval(function () {
