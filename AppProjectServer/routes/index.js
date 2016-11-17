@@ -661,11 +661,14 @@ router.post('/createPatient', function (req, res) {
 });
 
 setInterval(function () {
+    console.log("timer start");
     Patient.find(function(err, patients) {
         for(var i in patients) {
+            console.log(patients[i]);
             var date = new Date().toISOString();
             Category.findOne({patient: patients[i], date: date.slice(0, 10)}, function(err, category) {
                 if(!category) {
+                    console.log("카테고리 생성");
                     var category = new Category();
                     category.patient = patients[i];
 
