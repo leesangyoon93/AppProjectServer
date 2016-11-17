@@ -52,6 +52,7 @@
         <activity android:name=".CreatePatient" android:label="수급자등록"/>
         <activity android:name=".ShowPatient" android:label="수급자정보"/>
         <activity android:name=".EditPatient" android:label="수급자기록"/>
+        <activity android:name=".EditCategory" android:label="카테고리 수정"/>
         <!--android:parentActivityName=".MainActivity"-->
     </application>
 

@@ -30,6 +30,7 @@ require('./models/model_noticeComment');
 require('./models/model_galleryComment');
 require('./models/model_scheduleComment');
 require('./models/model_QAComment');
+require('./models/model_category');
 var User = mongoose.model('User');
 
 // view engine setup

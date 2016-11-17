@@ -13,6 +13,7 @@ var NoticeComment = mongoose.model('NoticeComment');
 var GalleryComment = mongoose.model('GalleryComment');
 var ScheduleComment = mongoose.model('ScheduleComment');
 var QAComment = mongoose.model('QAComment');
+var Category = mongoose.model('Category');
 var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
@@ -69,9 +70,9 @@ router.post('/createNursingHome', function (req, res) {
         if (err) return res.json({'result': 'fail'});
         if (nursingHome) return res.json({'result': 'homeOverlap'});
         else {
-            User.findOne({'userId': req.body.adminId}, function(err, user) {
-                if(err) return res.json({'result': 'fail'});
-                if(user) return res.json({'result': 'userOverlap'});
+            User.findOne({'userId': req.body.adminId}, function (err, user) {
+                if (err) return res.json({'result': 'fail'});
+                if (user) return res.json({'result': 'userOverlap'});
                 else {
                     var admin = new User();
                     admin.userId = req.body.adminId;
@@ -183,27 +184,27 @@ router.get('/getArticles', function (req, res) {
             });
             break;
         case 'gallery':
-            Gallery.find({'nursingHome': new ObjectId(id)}, function(err, galleries) {
-                if(err) return res.json({'result': 'fail'});
-                if(galleries) {
+            Gallery.find({'nursingHome': new ObjectId(id)}, function (err, galleries) {
+                if (err) return res.json({'result': 'fail'});
+                if (galleries) {
                     return res.json(galleries);
                 }
                 else return res.json({'result': 'fail'});
             });
             break;
         case 'schedule':
-            Schedule.find({'nursingHome': new ObjectId(id)}, function(err, schedules) {
-                if(err) return res.json({'result': 'fail'});
-                if(schedules) {
+            Schedule.find({'nursingHome': new ObjectId(id)}, function (err, schedules) {
+                if (err) return res.json({'result': 'fail'});
+                if (schedules) {
                     return res.json(schedules);
                 }
                 else return res.json({'result': 'fail'});
             });
             break;
         case 'qa':
-            QA.find({'nursingHome': new ObjectId(id)}, function(err, qas) {
-                if(err) return res.json({'result': 'fail'});
-                if(qas) {
+            QA.find({'nursingHome': new ObjectId(id)}, function (err, qas) {
+                if (err) return res.json({'result': 'fail'});
+                if (qas) {
                     return res.json(qas);
                 }
                 else return res.json({'result': 'fail'});
@@ -224,21 +225,21 @@ router.get('/showArticle', function (req, res) {
             });
             break;
         case 'gallery':
-            Gallery.findById(id, function(err, gallery) {
+            Gallery.findById(id, function (err, gallery) {
                 if (err) return res.json({'result': 'fail'});
                 if (gallery) return res.json(gallery);
                 else return res.json({'result': 'fail'});
             });
             break;
         case 'schedule':
-            Schedule.findById(id, function(err, schedule) {
+            Schedule.findById(id, function (err, schedule) {
                 if (err) return res.json({'result': 'fail'});
                 if (schedule) return res.json(schedule);
                 else return res.json({'result': 'fail'});
             });
             break;
         case 'qa':
-            QA.findById(id, function(err, qa) {
+            QA.findById(id, function (err, qa) {
                 if (err) return res.json({'result': 'fail'});
                 if (qa) return res.json(qa);
                 else return res.json({'result': 'fail'});
@@ -324,9 +325,9 @@ router.post('/saveArticle', function (req, res) {
             });
             break;
         case 'gallery':
-            Gallery.findById(id, function(err, gallery) {
-                if(err) return res.json({'result': 'fail'});
-                if(gallery) {
+            Gallery.findById(id, function (err, gallery) {
+                if (err) return res.json({'result': 'fail'});
+                if (gallery) {
                     gallery.title = req.body.title;
                     gallery.content = req.body.content;
                     gallery.image = req.body.image;
@@ -343,9 +344,9 @@ router.post('/saveArticle', function (req, res) {
                     newGallery.author = req.body.userId;
                     var date = new Date().toISOString();
                     newGallery.date = date.slice(0, 10);
-                    NursingHome.findById(req.body.nursingHomeId, function(err, nursingHome) {
-                        if(err) return res.json({'result': 'fail'});
-                        if(nursingHome) {
+                    NursingHome.findById(req.body.nursingHomeId, function (err, nursingHome) {
+                        if (err) return res.json({'result': 'fail'});
+                        if (nursingHome) {
                             newGallery.nursingHome = nursingHome;
                             newGallery.save();
                             return res.json({'result': 'success', 'galleryId': newGallery._id});
@@ -579,7 +580,7 @@ router.post('/deleteArticle', function (req, res) {
     }
 });
 
-router.post('/aaaa', function(req, res) {
+router.post('/aaaa', function (req, res) {
     console.log(req.body);
     return res.json({'result': 'success'});
 });
@@ -587,9 +588,9 @@ router.post('/aaaa', function(req, res) {
 
 router.get('/getPatients', function (req, res) {
     var id = req.query.nursingHomeId;
-    User.findOne({'nursingHome': new Object(id), 'userId': req.query.userId}, function(err, worker) {
-        if(err) return res.json({'result': 'fail'});
-        if(worker) {
+    User.findOne({'nursingHome': new Object(id), 'userId': req.query.userId}, function (err, worker) {
+        if (err) return res.json({'result': 'fail'});
+        if (worker) {
             Patient.find({'worker': worker}, function (err, patients) {
                 if (err) return res.json({'result': 'fail'});
                 if (patients) {
@@ -616,9 +617,12 @@ router.post('/createPatient', function (req, res) {
                     User.findOne({'userId': req.body.workerId, 'nursingHome': id}, function (err, worker) {
                         if (err) return res.json({'result': 'fail'});
                         if (worker) {
-                            Patient.findOne({'patientName': req.body.patientName, 'birthday': req.body.birthday}, function(err, patient) {
-                                if(err) return res.json({'result': 'fail'});
-                                if(patient)
+                            Patient.findOne({
+                                'patientName': req.body.patientName,
+                                'birthday': req.body.birthday
+                            }, function (err, patient) {
+                                if (err) return res.json({'result': 'fail'});
+                                if (patient)
                                     return res.json({'result': 'patientOverlap'});
                                 else {
                                     var protector = new User();
@@ -656,6 +660,21 @@ router.post('/createPatient', function (req, res) {
     })
 });
 
-console.log("asdf");
+setInterval(function () {
+    Patient.find(function(err, patients) {
+        for(var i in patients) {
+            var date = new Date().toISOString();
+            Category.findOne({patient: patients[i], date: date.slice(0, 10)}, function(err, category) {
+                if(!category) {
+                    var category = new Category();
+                    category.patient = patients[i];
+
+                    category.date = date.slice(0, 10);
+                    category.save();
+                }
+            })
+        }
+    })
+}, 1000*60*60);
 
 module.exports = router;
