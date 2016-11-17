@@ -64,9 +64,7 @@ public class QA extends AppCompatActivity implements AdapterView.OnItemClickList
                 startActivity(intent);
             }
         });
-        if (User.getInstance().getAuth() == 1) {
-            mFloatingButton.setVisibility(View.VISIBLE);
-        }
+        mFloatingButton.setVisibility(View.VISIBLE);
 
         qas.clear();
 

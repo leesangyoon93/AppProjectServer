@@ -2,23 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/models/model_QAComment.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/CreatePatient.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/CreatePatient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Gallery.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Gallery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/MainActivity.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Notice.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Notice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Schedule.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/Schedule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_Gallery.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_Gallery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_Schedule.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_Schedule.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_gallery.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_gallery.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_main.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_notice.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_notice.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_schedule.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_schedule.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/item_patient.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/item_patient.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_adminmain.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_adminmain.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/values/colors.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/.idea/misc.xml" afterPath="$PROJECT_DIR$/../AppProject/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/QA.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/QA.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_QA.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/frag_QA.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <ignored path="AppProjectServer.iws" />
@@ -45,7 +32,7 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="345">
               <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
               <folding />
             </state>
@@ -67,8 +54,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="610">
-              <caret line="577" column="18" selection-start-line="577" selection-start-column="18" selection-end-line="577" selection-end-column="18" />
+            <state relative-caret-position="470">
+              <caret line="658" column="20" selection-start-line="658" selection-start-column="20" selection-end-line="658" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -182,7 +169,7 @@
     <option name="x" value="15" />
     <option name="y" value="23" />
     <option name="width" value="1400" />
-    <option name="height" value="784" />
+    <option name="height" value="808" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -209,8 +196,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -361,15 +348,16 @@
       <workItem from="1478679858161" duration="1991000" />
       <workItem from="1478766903374" duration="803000" />
       <workItem from="1479035132955" duration="3234000" />
-      <workItem from="1479111375275" duration="2666000" />
+      <workItem from="1479111375275" duration="2821000" />
+      <workItem from="1479368104839" duration="847000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36268000" />
+    <option name="totallyTimeSpent" value="37270000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="15" y="23" width="1400" height="784" extended-state="0" />
+    <frame x="15" y="23" width="1400" height="808" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16243654" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -377,23 +365,23 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16473988" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15782122" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -732,38 +720,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
           <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#48#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/npm-debug.log" />
-    <entry file="file://$PROJECT_DIR$/models/model_user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#49#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_patient.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/model_gallery.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#49#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -771,9 +735,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="30" column="5" selection-start-line="9" selection-start-column="4" selection-end-line="30" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#49#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -781,41 +742,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="21" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#49#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_schedule.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="5" selection-start-line="9" selection-start-column="4" selection-end-line="30" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_scheduleComment.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" column="57" selection-start-line="3" selection-start-column="0" selection-end-line="21" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#49#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/models/model_qa.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
+        <state relative-caret-position="345">
           <caret line="23" column="34" selection-start-line="23" selection-start-column="34" selection-end-line="23" selection-end-column="34" />
           <folding />
         </state>
@@ -833,8 +765,52 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="577" column="18" selection-start-line="577" selection-start-column="18" selection-end-line="577" selection-end-column="18" />
+        <state relative-caret-position="470">
+          <caret line="658" column="20" selection-start-line="658" selection-start-column="20" selection-end-line="658" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_scheduleComment.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="21" column="57" selection-start-line="3" selection-start-column="0" selection-end-line="21" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#49#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_schedule.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="5" selection-start-line="9" selection-start-column="4" selection-end-line="30" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_qa.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#49#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/model_patient.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
           <folding />
         </state>
       </provider>

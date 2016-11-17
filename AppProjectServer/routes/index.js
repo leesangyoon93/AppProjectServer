@@ -656,7 +656,6 @@ router.post('/createPatient', function (req, res) {
     })
 });
 
-
-
+console.log("asdf");
 
 module.exports = router;
