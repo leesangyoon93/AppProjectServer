@@ -7,21 +7,31 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by daddyslab on 2016. 11. 3..
  */
 public class ShowPatient extends AppCompatActivity {
+    AdapterGalleryGrid adapterGalleryGrid;
+    ArrayList<JSONObject> gallery = new ArrayList<JSONObject>();
+    GridView gridView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate((savedInstanceState));
@@ -32,6 +42,12 @@ public class ShowPatient extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
+
+        try {
+            getPatientToServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -66,29 +82,47 @@ public class ShowPatient extends AppCompatActivity {
 
     private void getPatientToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
+        String URL = "http://52.41.19.232/getPatient";
 
-        String URL = String.format("http://52.41.19.232/getPatient?userId=%s",
-                URLEncoder.encode(User.getInstance().getUserId(), "utf-8"));
+        Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("userId", User.getInstance().getUserId());
 
-        JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
+                new JSONObject(postParam), new Response.Listener<JSONObject>() {
 
             @Override
-            public void onResponse(JSONArray response) {
+            public void onResponse(JSONObject response) {
                 loading.dismiss();
-                if (response.toString().contains("result") && response.toString().contains("fail")) {
-                    Toast.makeText(ShowPatient.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
-                } else {
+                try {
+                    if (response.toString().contains("result")) {
+                        if (response.getString("result").equals("fail")) {
+                            Toast.makeText(ShowPatient.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Patient.getInstance().setId(response.getString("_id"));
+                        Patient.getInstance().setWorkerId(response.getString("worker"));
+                        Patient.getInstance().setProtectorId(response.getString("protector"));
+                        Patient.getInstance().setPatientName(response.getString("patientName"));
+                        Patient.getInstance().setBirthday(response.getString("birthday"));
+                        Patient.getInstance().setRelation(response.getString("relation"));
+                        Patient.getInstance().setRoomNumber(response.getString("roomNumber"));
+                        Patient.getInstance().setImage(response.getString("image"));
+                        Patient.getInstance().setGender(response.getString("gender"));
+                    }
 
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                VolleyLog.d("development", "Error: " + error.getMessage());
-            }
-        });
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("development", "Error: " + error.getMessage());
+                    }
+                });
 
-        // Adding request to request queue
         volley.getInstance().addToRequestQueue(req);
     }
 }

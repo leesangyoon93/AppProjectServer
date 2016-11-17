@@ -6,6 +6,16 @@ import android.util.Log;
  * Created by daddyslab on 2016. 11. 13..
  */
 public class Patient {
+    private String id = null;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     private String workerId = null;
     private String protectorId = null;
     private String patientName = null;
@@ -13,6 +23,15 @@ public class Patient {
     private String relation = null;
     private String gender = null;
     private String roomNumber = null;
+    private String image = null;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getWorkerId() {
         return workerId;

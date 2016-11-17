@@ -660,6 +660,55 @@ router.post('/createPatient', function (req, res) {
     })
 });
 
+router.post('/getPatient', function(req, res) {
+    var id = new ObjectId(req.body.userId);
+    User.findById(id, function(err, user) {
+        if(err) return res.json({'result': 'fail'});
+        if(user) {
+            Patient.findOne({protector: user._id}, function(err, patient) {
+                if(err) return res.json({'result': 'fail'});
+                if(patient) return res.json(patient);
+                else return res.json({'result': 'fail'});
+            })
+        }
+        else return res.json({'result': 'fail'})
+    })
+});
+
+router.get('/getCategories', function(req, res) {
+    var result = [];
+    var id = new ObjectId(req.query.patientId);
+    Patient.findById(id, function(err, patient) {
+        Category.findOne({patient: patient.id}, function(err, category) {
+            if(err) return res.json({'result': 'fail'});
+            if(category) {
+                if(category.mealEnabled)
+                    result.push({'title': '오늘의 식사', 'content': category.meal});
+                if(category.cleanEnabled)
+                    result.push({'title': '신체위생관리', 'content': category.clean});
+                if(category.activityEnabled)
+                    result.push({'title': '산책/외출', 'content': category.activity});
+                if(category.moveTrainEnabled)
+                    result.push({'title': '동작기능훈련', 'content': category.moveTrain});
+                if(category.commentEnabled)
+                    result.push({'title': '특이사항', 'content': category.comment});
+                if(category.restRoomEnabled)
+                    result.push({'title': '배변횟수', 'content': category.restRoom});
+                if(category.medicineEnabled)
+                    result.push({'title': '투약관리', 'content': category.medicine});
+                if(category.mentalTrainEnabled)
+                    result.push({'title': '정신기능훈련', 'content': category.mentalTrain});
+                if(category.physicalCareEnabled)
+                    result.push({'title': '물리치료', 'content': category.physicalCare});
+                console.log(result);
+                return res.json(result);
+            }
+            else return res.json({'result': 'fail'});
+        })
+    })
+})
+
+
 Patient.find(function(err, patients) {
         var date = new Date().toISOString();
         Category.find({date: date.slice(0, 10)}, function(err, categories) {
