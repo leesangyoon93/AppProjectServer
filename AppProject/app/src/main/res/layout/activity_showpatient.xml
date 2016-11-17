@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#004589"
-        android:layout_weight="7"
+        android:layout_weight="8"
         android:gravity="center">
 
         <LinearLayout
@@ -22,17 +22,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/patient_roomNumber"
-                android:textSize="20sp"
-                android:padding="5dp" />
+                android:textSize="25sp"
+                android:padding="10dp"
+                android:textColor="#fff" />
         </LinearLayout>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/image_patient"
-            android:layout_marginLeft="10dp"
             android:src="@drawable/user_plain"
-            android:layout_weight="5" />
+            android:layout_weight="5"
+            android:layout_margin="5dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -45,8 +46,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/patient_birthday"
-                android:textSize="20sp"
-                android:padding="5dp" />
+                android:textSize="25sp"
+                android:padding="10dp"
+                android:textColor="#fff" />
         </LinearLayout>
 
     </LinearLayout>
@@ -55,13 +57,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="8"></LinearLayout>
+        android:layout_weight="9"></LinearLayout>
 
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/gridView_category"
         android:numColumns="2"
-        android:layout_weight="2" />
+        android:layout_weight="2"
+        android:gravity="top|center"
+        android:layout_gravity="center" />
 
 </LinearLayout>

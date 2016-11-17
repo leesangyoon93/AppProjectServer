@@ -2,9 +2,12 @@ package com.example.leesangyoon.appproject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
 
 
@@ -42,6 +46,8 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     ArrayList<JSONObject> categories = new ArrayList<JSONObject>();
     GridView gridView;
     TextView roomNumber, birthday;
+    ActionBar actionBar;
+    CircleImageView patientImage;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,9 +60,9 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
             e.printStackTrace();
         }
 
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setTitle(Patient.getInstance().getPatientName());
+
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
@@ -64,9 +70,7 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
         gridView = (GridView) findViewById(R.id.gridView_category);
         roomNumber = (TextView)findViewById(R.id.patient_roomNumber);
         birthday = (TextView)findViewById(R.id.patient_birthday);
-
-        roomNumber.setText(Patient.getInstance().getRoomNumber());
-        birthday.setText(Patient.getInstance().getBirthday());
+        patientImage = (CircleImageView)findViewById(R.id.image_patient);
 
         categories.clear();
 
@@ -136,6 +140,12 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                         Patient.getInstance().setImage(response.getString("image"));
                         Patient.getInstance().setGender(response.getString("gender"));
 
+                        actionBar.setTitle(Patient.getInstance().getPatientName());
+                        assert actionBar != null;
+                        roomNumber.setText(Patient.getInstance().getRoomNumber());
+                        birthday.setText(Patient.getInstance().getBirthday());
+                        patientImage.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
+
                         getCategoriesToServer();
                     }
 
@@ -188,5 +198,18 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+    }
+
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (NullPointerException e) {
+            e.getMessage();
+            return null;
+        } catch (OutOfMemoryError e) {
+            return null;
+        }
     }
 }
