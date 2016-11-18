@@ -17,10 +17,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +30,9 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
@@ -66,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
 
-
         adminPatient = (TextView)findViewById(R.id.btn_adminPatient);
         showPatient = (Button)findViewById(R.id.btn_showPatient);
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -79,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             showPatient.setVisibility(View.VISIBLE);
+            try {
+                getPatientToServer();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         List<Fragment> fragments = new Vector<>();
@@ -219,4 +227,49 @@ public class MainActivity extends AppCompatActivity {
         volley.getInstance().addToRequestQueue(req);
     }
 
+    private void getPatientToServer() throws Exception {
+        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
+        String URL = "http://52.41.19.232/getPatient";
+
+        Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("userId", User.getInstance().getUserId());
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
+                new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                loading.dismiss();
+                try {
+                    if (response.toString().contains("result")) {
+                        if (response.getString("result").equals("fail")) {
+                            Toast.makeText(MainActivity.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Patient.getInstance().setId(response.getString("_id"));
+                        Patient.getInstance().setWorkerId(response.getString("worker"));
+                        Patient.getInstance().setProtectorId(response.getString("protector"));
+                        Patient.getInstance().setPatientName(response.getString("patientName"));
+                        Patient.getInstance().setBirthday(response.getString("birthday"));
+                        Patient.getInstance().setRelation(response.getString("relation"));
+                        Patient.getInstance().setRoomNumber(response.getString("roomNumber"));
+                        Patient.getInstance().setImage(response.getString("image"));
+                        Patient.getInstance().setGender(response.getString("gender"));
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("development", "Error: " + error.getMessage());
+                    }
+                });
+
+        volley.getInstance().addToRequestQueue(req);
+    }
 }

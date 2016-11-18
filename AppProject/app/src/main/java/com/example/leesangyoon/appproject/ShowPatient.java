@@ -32,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,8 +43,6 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
-
-
 
 /**
  * Created by daddyslab on 2016. 11. 3..
@@ -65,12 +64,6 @@ public class ShowPatient extends AppCompatActivity {
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_showpatient);
 
-        try {
-            getPatientToServer();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         actionBar = getSupportActionBar();
         assert actionBar != null;
 
@@ -83,6 +76,12 @@ public class ShowPatient extends AppCompatActivity {
         birthday = (TextView)findViewById(R.id.patient_birthday);
         patientImage = (CircleImageView)findViewById(R.id.image_patient);
         date = (TextView)findViewById(R.id.text_date);
+
+        try {
+            setup();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         categories.clear();
 
@@ -127,67 +126,27 @@ public class ShowPatient extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    private void getPatientToServer() throws Exception {
-        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
-        String URL = "http://52.41.19.232/getPatient";
+    private void setup() throws ParseException {
+        actionBar.setTitle(Patient.getInstance().getPatientName());
+        assert actionBar != null;
+        roomNumber.setText(Patient.getInstance().getRoomNumber() + "호");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        Date d = format.parse(Patient.getInstance().getBirthday());
+        int age = getAgeFromBirthday(d) + 1;
+        birthday.setText(String.valueOf(age) + "세");
+        patientImage.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
 
-        Map<String, String> postParam = new HashMap<String, String>();
-        postParam.put("userId", User.getInstance().getUserId());
+        GregorianCalendar calendar = new GregorianCalendar();
+        lyear = calendar.get(Calendar.YEAR);
+        lmonth = calendar.get(Calendar.MONTH);
+        lday= calendar.get(Calendar.DAY_OF_MONTH);
 
-        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
-                new JSONObject(postParam), new Response.Listener<JSONObject>() {
-
-            @Override
-            public void onResponse(JSONObject response) {
-                loading.dismiss();
-                try {
-                    if (response.toString().contains("result")) {
-                        if (response.getString("result").equals("fail")) {
-                            Toast.makeText(ShowPatient.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    else {
-                        Patient.getInstance().setId(response.getString("_id"));
-                        Patient.getInstance().setWorkerId(response.getString("worker"));
-                        Patient.getInstance().setProtectorId(response.getString("protector"));
-                        Patient.getInstance().setPatientName(response.getString("patientName"));
-                        Patient.getInstance().setBirthday(response.getString("birthday"));
-                        Patient.getInstance().setRelation(response.getString("relation"));
-                        Patient.getInstance().setRoomNumber(response.getString("roomNumber"));
-                        Patient.getInstance().setImage(response.getString("image"));
-                        Patient.getInstance().setGender(response.getString("gender"));
-
-                        actionBar.setTitle(Patient.getInstance().getPatientName());
-                        assert actionBar != null;
-                        roomNumber.setText(Patient.getInstance().getRoomNumber() + "호");
-                        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-                        Date d = format.parse(Patient.getInstance().getBirthday());
-                        int age = getAgeFromBirthday(d) + 1;
-                        birthday.setText(String.valueOf(age) + "세");
-                        patientImage.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
-
-                        GregorianCalendar calendar = new GregorianCalendar();
-                        lyear = calendar.get(Calendar.YEAR);
-                        lmonth = calendar.get(Calendar.MONTH);
-                        lday= calendar.get(Calendar.DAY_OF_MONTH);
-
-                        date.setText(String.format("%d-%d-%d", lyear,lmonth+1, lday));
-                        getCategoriesToServer();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        VolleyLog.d("development", "Error: " + error.getMessage());
-                    }
-                });
-
-        volley.getInstance().addToRequestQueue(req);
+        date.setText(String.format("%d-%d-%d", lyear,lmonth+1, lday));
+        try {
+            getCategoriesToServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void getCategoriesToServer() throws Exception {

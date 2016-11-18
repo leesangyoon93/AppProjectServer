@@ -791,9 +791,18 @@ Patient.find(function (err, patients) {
         if (categories.length == 0) {
             for (var i in patients) {
                 var category = new Category();
+                category = categories[i];
                 category.patient = patients[i];
-
                 category.date = getTimeStamp();
+                category.meal = "";
+                category.clean = "";
+                category.activity = "";
+                category.moveTrain = "";
+                category.comment = "";
+                category.restRoom = "";
+                category.medicine = "";
+                category.mentalTrain = "";
+                category.physicalCare = "";
                 category.save();
             }
         }
@@ -805,9 +814,18 @@ setInterval(function () {
         if (categories.length == 0) {
             for (var i in patients) {
                 var category = new Category();
+                category = categories[i];
                 category.patient = patients[i];
-
                 category.date = getTimeStamp();
+                category.meal = "";
+                category.clean = "";
+                category.activity = "";
+                category.moveTrain = "";
+                category.comment = "";
+                category.restRoom = "";
+                category.medicine = "";
+                category.mentalTrain = "";
+                category.physicalCare = "";
                 category.save();
             }
         }
