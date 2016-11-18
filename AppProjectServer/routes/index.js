@@ -802,8 +802,7 @@ Patient.find(function (err, patients) {
 });
 
 setInterval(function () {
-    var date = new Date().toISOString();
-    Category.find({date: date.slice(0, 10)}, function (err, categories) {
+    Category.find({date: getTimeStamp()}, function (err, categories) {
         if (categories.length == 0) {
             for (var i in patients) {
                 var category = new Category();
@@ -815,5 +814,26 @@ setInterval(function () {
         }
     })
 }, 1000 * 60 * 60 * 24);
+
+function getTimeStamp() {
+    var d = new Date();
+
+    var s =
+        leadingZeros(d.getFullYear(), 4) + '-' +
+        leadingZeros(d.getMonth() + 1, 2) + '-' +
+        leadingZeros(d.getDate(), 2)
+    return s;
+}
+
+function leadingZeros(n, digits) {
+    var zero = '';
+    n = n.toString();
+
+    if (n.length < digits) {
+        for (i = 0; i < digits - n.length; i++)
+            zero += '0';
+    }
+    return zero + n;
+}
 
 module.exports = router;
