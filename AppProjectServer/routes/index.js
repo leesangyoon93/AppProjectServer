@@ -786,9 +786,11 @@ router.post("/saveCategoryState", function(req, res) {
 
 
 Patient.find(function (err, patients) {
+    console.log(getYesterdayTimeStamp());
+    console.log(getTimeStamp());
     Category.find({date: getTimeStamp()}, function (err, tmps) {
         if (tmps.length == 0) {
-            Category.find({date:getYesterdayTimeStamp()}, function(err, categories) {
+            Category.find({date: getYesterdayTimeStamp()}, function(err, categories) {
                 for (var i in patients) {
                     var category = new Category();
                     category = categories[i];
