@@ -189,7 +189,6 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     private void getCategoriesToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
-        Log.e("asdf", String.valueOf(date.getText().toString()));
         String URL = String.format("http://52.41.19.232/getCategories?patientId=%s&date=%s",
                 URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), date.getText().toString());
 
@@ -197,7 +196,6 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
 
             @Override
             public void onResponse(JSONArray response) {
-                Log.e("asdf", String.valueOf(response));
                 loading.dismiss();
                 if (response.toString().contains("result") && response.toString().contains("fail")) {
                     Toast.makeText(ShowPatient.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
@@ -206,6 +204,7 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                     Toast.makeText(ShowPatient.this, "데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    Log.e("asdf", "ohoh");
                     categories.clear();
                     for (int i = 0; i < response.length(); i++) {
                         categories.add(response.optJSONObject(i));
@@ -248,12 +247,14 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
             // TODO Auto-generated method stub
-            String msg = String.format("%d-%d-%d", year,monthOfYear+1, dayOfMonth);
-            date.setText(msg);
-            try {
-                getCategoriesToServer();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (view.isShown()) {
+                String msg = String.format("%d-%d-%d", year, monthOfYear + 1, dayOfMonth);
+                date.setText(msg);
+                try {
+                    getCategoriesToServer();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     };
