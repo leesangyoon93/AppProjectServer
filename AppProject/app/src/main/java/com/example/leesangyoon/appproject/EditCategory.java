@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Switch;
@@ -122,6 +123,7 @@ public class EditCategory extends AppCompatActivity {
                 } else {
                     for (int i = 0; i < response.length(); i++) {
                         try {
+                            Log.e("adsf", response.optJSONObject(i).getString("state"));
                             if(response.optJSONObject(i).getString("state").equals("true")) {
                                 switchs.get(i).setChecked(true);
                             }

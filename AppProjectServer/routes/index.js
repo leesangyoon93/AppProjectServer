@@ -744,7 +744,6 @@ router.get('/getCategoryState', function(req, res) {
                     if (category.physicalCareEnabled)
                         result.push({'state': 'true'});
                     else result.push({'state': 'false'});
-                    console.log(result);
                     return res.json(result);
                 }
                 else return res.json({'result': 'fail'})
@@ -763,6 +762,7 @@ router.post("/saveCategoryState", function(req, res) {
             Category.findOne({patient: patient, date: date.slice(0, 10)}, function(err, category) {
                 if(err) return res.json({'result': 'fail'});
                 if(category) {
+                    console.log(req.body);
                     category.mealEnabled = req.body.mealCheck == 'true';
                     category.cleanEnabled = req.body.cleanCheck == 'true';
                     category.activityEnabled = req.body.activityCheck == 'true';
