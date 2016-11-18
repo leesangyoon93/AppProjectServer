@@ -792,7 +792,8 @@ Patient.find(function (err, patients) {
         if (tmps.length == 0) {
             Category.find({date: getYesterdayTimeStamp()}, function(err, categories) {
                 for (var i in patients) {
-                    var category = JSON.parse( JSON.stringify(categories[i]));
+                    var category = new Category();
+                    category = JSON.parse( JSON.stringify(categories[i]));
                     category.patient = patients[i];
                     category.date = getTimeStamp();
                     category.meal = "";
