@@ -787,6 +787,7 @@ router.post("/saveCategoryState", function(req, res) {
 
 Patient.find(function (err, patients) {
     var date = new Date().toISOString();
+    console.log(date);
     Category.find({date: date.slice(0, 10)}, function (err, categories) {
         if (categories.length == 0) {
             for (var i in patients) {

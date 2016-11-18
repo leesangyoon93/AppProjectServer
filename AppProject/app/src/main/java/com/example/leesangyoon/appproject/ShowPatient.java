@@ -32,6 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,7 +48,7 @@ import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
 /**
  * Created by daddyslab on 2016. 11. 3..
  */
-public class ShowPatient extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ShowPatient extends AppCompatActivity {
     AdapterCategoryGrid adapterCategoryGrid ;
     ArrayList<JSONObject> categories = new ArrayList<JSONObject>();
     GridView gridView;
@@ -56,6 +57,8 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     CircleImageView patientImage;
     TextView date;
     int year, month, day;
+    String msg;
+    int lyear, lmonth, lday;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,8 +89,6 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
         adapterCategoryGrid = new AdapterCategoryGrid(ShowPatient.this, categories);
         adapterCategoryGrid.notifyDataSetChanged();
         gridView.setAdapter(adapterCategoryGrid);
-
-        gridView.setOnItemClickListener(this);
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,16 +159,19 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
 
                         actionBar.setTitle(Patient.getInstance().getPatientName());
                         assert actionBar != null;
-                        roomNumber.setText(Patient.getInstance().getRoomNumber());
-                        birthday.setText(Patient.getInstance().getBirthday());
+                        roomNumber.setText(Patient.getInstance().getRoomNumber() + "호");
+                        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+                        Date d = format.parse(Patient.getInstance().getBirthday());
+                        int age = getAgeFromBirthday(d) + 1;
+                        birthday.setText(String.valueOf(age) + "세");
                         patientImage.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
 
                         GregorianCalendar calendar = new GregorianCalendar();
-                        year = calendar.get(Calendar.YEAR);
-                        month = calendar.get(Calendar.MONTH);
-                        day= calendar.get(Calendar.DAY_OF_MONTH);
+                        lyear = calendar.get(Calendar.YEAR);
+                        lmonth = calendar.get(Calendar.MONTH);
+                        lday= calendar.get(Calendar.DAY_OF_MONTH);
 
-                        date.setText(String.format("%d-%d-%d", year,month+1, day));
+                        date.setText(String.format("%d-%d-%d", lyear,lmonth+1, lday));
                         getCategoriesToServer();
                     }
 
@@ -190,7 +194,7 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
         String URL = String.format("http://52.41.19.232/getCategories?patientId=%s&date=%s",
-                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), date.getText().toString());
+                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), String.format("%d-%d-%d", lyear, lmonth+1, lday));
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
 
@@ -202,9 +206,15 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                 }
                 else if(response.toString().contains("result") && response.toString().contains("nothing")) {
                     Toast.makeText(ShowPatient.this, "데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    msg = String.format("%d-%d-%d", year, month+1, day);
+                    date.setText(msg);
                 }
                 else {
-                    Log.e("asdf", "ohoh");
+                    year = lyear;
+                    month = lmonth;
+                    day = lday;
+                    msg = String.format("%d-%d-%d", lyear, lmonth+1, lday);
+                    date.setText(msg);
                     categories.clear();
                     for (int i = 0; i < response.length(); i++) {
                         categories.add(response.optJSONObject(i));
@@ -221,11 +231,6 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
 
         // Adding request to request queue
         volley.getInstance().addToRequestQueue(req);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
     }
 
     public static Bitmap StringToBitmap(String encodedString) {
@@ -248,8 +253,9 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                               int dayOfMonth) {
             // TODO Auto-generated method stub
             if (view.isShown()) {
-                String msg = String.format("%d-%d-%d", year, monthOfYear + 1, dayOfMonth);
-                date.setText(msg);
+                lyear = year;
+                lmonth = monthOfYear;
+                lday = dayOfMonth;
                 try {
                     getCategoriesToServer();
                 } catch (Exception e) {
@@ -258,4 +264,18 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
             }
         }
     };
+
+    public static int getAgeFromBirthday(Date birthday) {
+        Calendar birth = new GregorianCalendar();
+        Calendar today = new GregorianCalendar();
+
+        birth.setTime(birthday);
+        today.setTime(new Date());
+
+        int factor = 0;
+        if (today.get(Calendar.DAY_OF_YEAR) < birth.get(Calendar.DAY_OF_YEAR)) {
+            factor = -1;
+        }
+        return today.get(Calendar.YEAR) - birth.get(Calendar.YEAR) + factor;
+    }
 }

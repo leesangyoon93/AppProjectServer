@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<JSONObject> patients = new ArrayList<JSONObject>();
     AdapterPatientRecycle adapterPatientRecycle;
     TextView adminPatient;
+    Button showPatient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,21 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle(User.getInstance().getNursingHomeName());
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
+
+
+        adminPatient = (TextView)findViewById(R.id.btn_adminPatient);
+        showPatient = (Button)findViewById(R.id.btn_showPatient);
+        LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycleView_patient);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        if(User.getInstance().getAuth() == 1) {
+            adminPatient.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
+        else {
+            showPatient.setVisibility(View.VISIBLE);
+        }
 
         List<Fragment> fragments = new Vector<>();
         fragments.add(Fragment.instantiate(this, frag_Notice.class.getName()));
@@ -78,10 +95,6 @@ public class MainActivity extends AppCompatActivity {
         header.setTabIndicatorColor(10667642);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
-
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycleView_patient);
-        mRecyclerView.setLayoutManager(layoutManager);
 
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(MainActivity.this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
@@ -110,11 +123,18 @@ public class MainActivity extends AppCompatActivity {
         adapterPatientRecycle = new AdapterPatientRecycle(patients);
         mRecyclerView.setAdapter(adapterPatientRecycle);
 
-        adminPatient = (TextView)findViewById(R.id.btn_adminPatient);
         adminPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AdminPatient.class);
+                startActivity(intent);
+            }
+        });
+
+        showPatient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ShowPatient.class);
                 startActivity(intent);
             }
         });
@@ -151,10 +171,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.menu_QA:
                 intent = new Intent(MainActivity.this, QA.class);
-                startActivity(intent);
-                break;
-            case R.id.menu_showPatient:
-                intent = new Intent(MainActivity.this, ShowPatient.class);
                 startActivity(intent);
                 break;
             case R.id.menu_userProfile:
