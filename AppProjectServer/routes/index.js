@@ -790,7 +790,9 @@ Patient.find(function (err, patients) {
     console.log(getTimeStamp());
     Category.find({date: getTimeStamp()}, function (err, tmps) {
         if (tmps.length == 0) {
+            console.log("오늘꺼 없음");
             Category.find({date: getYesterdayTimeStamp()}, function(err, categories) {
+                console.log(categories);
                 for (var i in patients) {
                     var category = new Category();
                     category = categories[i];
@@ -841,7 +843,7 @@ function getTimeStamp() {
     var s =
         leadingZeros(d.getFullYear(), 4) + '-' +
         leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate(), 2)
+        leadingZeros(d.getDate()+1, 2)
     return s;
 }
 
@@ -851,7 +853,7 @@ function getYesterdayTimeStamp() {
     var s =
         leadingZeros(d.getFullYear(), 4) + '-' +
         leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate()-1, 2)
+        leadingZeros(d.getDate(), 2)
     return s;
 }
 
