@@ -678,8 +678,9 @@ router.post('/getPatient', function (req, res) {
 router.get('/getCategories', function (req, res) {
     var result = [];
     var id = new ObjectId(req.query.patientId);
+    var date = new Date().toISOString();
     Patient.findById(id, function (err, patient) {
-        Category.findOne({patient: patient.id}, function (err, category) {
+        Category.findOne({patient: patient.id, date: date.slice(0, 10)}, function (err, category) {
             if (err) return res.json({'result': 'fail'});
             if (category) {
                 if (category.mealEnabled)
