@@ -31,7 +31,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:text="아이디" />
+                android:text="아이디"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -40,7 +41,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:text="보호자성명" />
+                android:text="보호자성명"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -49,7 +51,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:text="수급자성명" />
+                android:text="수급자성명"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -58,7 +61,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:text="호실" />
+                android:text="호실"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,7 +71,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:text="담당요양사" />
+                android:text="담당요양사"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -76,7 +81,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:text="요양사연락처" />
+                android:text="요양사연락처"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -85,7 +91,8 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:text="요양원연락처" />
+                android:text="요양원연락처"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
