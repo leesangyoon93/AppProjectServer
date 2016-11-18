@@ -790,11 +790,9 @@ Patient.find(function (err, patients) {
     console.log(getTimeStamp());
     Category.find({date: getTimeStamp()}, function (err, tmps) {
         if (tmps.length == 0) {
-            console.log("오늘꺼 없음");
             Category.find({date: getYesterdayTimeStamp()}, function(err, categories) {
-                console.log(categories);
                 for (var i in patients) {
-                    var category = new Category();
+                    var category = JSON.parse( JSON.stringify(categories[i]));
                     category = categories[i];
                     category.patient = patients[i];
                     category.date = getTimeStamp();
