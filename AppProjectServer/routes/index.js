@@ -702,7 +702,7 @@ router.get('/getCategories', function (req, res) {
                     result.push({'title': '물리치료', 'content': category.physicalCare});
                 return res.json(result);
             }
-            else return res.json({'result': 'fail'});
+            else return res.json({'result': 'nothing'});
         })
     })
 });

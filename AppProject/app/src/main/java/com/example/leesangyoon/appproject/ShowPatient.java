@@ -55,8 +55,6 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     ActionBar actionBar;
     CircleImageView patientImage;
     TextView date;
-    Button alterButton;
-
     int year, month, day;
 
     @Override
@@ -169,8 +167,8 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                         month = calendar.get(Calendar.MONTH);
                         day= calendar.get(Calendar.DAY_OF_MONTH);
 
-                        date.setText(String.format("%d - %d - %d", year,month+1, day));
-
+                        date.setText(String.format("%d-%d-%d", year,month+1, day));
+                        categories.clear();
                         getCategoriesToServer();
                     }
 
@@ -202,7 +200,12 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                 loading.dismiss();
                 if (response.toString().contains("result") && response.toString().contains("fail")) {
                     Toast.makeText(ShowPatient.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if(response.toString().contains("result") && response.toString().contains("nothing")) {
+                    Toast.makeText(ShowPatient.this, "데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    categories.clear();
                     for (int i = 0; i < response.length(); i++) {
                         categories.add(response.optJSONObject(i));
                         adapterCategoryGrid.notifyDataSetChanged();
@@ -244,8 +247,9 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
             // TODO Auto-generated method stub
-            String msg = String.format("%d - %d - %d", year,monthOfYear+1, dayOfMonth);
+            String msg = String.format("%d-%d-%d", year,monthOfYear+1, dayOfMonth);
             date.setText(msg);
+            categories.clear();
             try {
                 getCategoriesToServer();
             } catch (Exception e) {
