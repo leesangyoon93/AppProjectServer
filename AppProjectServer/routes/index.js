@@ -784,6 +784,21 @@ router.post("/saveCategoryState", function(req, res) {
     })
 });
 
+router.post('/getWorker', function(req, res) {
+    var id = new ObjectId(req.body.patientId);
+    Patient.findById(id, function(err, patient) {
+        if(err) return res.json({'result': 'fail'});
+        if(patient) {
+            User.findById(patient.worker._id, function(err, user) {
+                if(err) return res.json({'result': 'fail'});
+                if(user) return res.json(user);
+                else return res.json({'result': 'fail'})
+            })
+        }
+        else return res.json({'result': 'fail'});
+    })
+})
+
 
 Patient.find(function (err, patients) {
     Category.find({date: getTimeStamp()}, function (err, tmps) {

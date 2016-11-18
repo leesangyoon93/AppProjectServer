@@ -39,7 +39,7 @@ import java.util.Map;
 public class Profile extends AppCompatActivity {
     SharedPreferences userSession;
 
-    TextView userId, userName, userPhoneNumber;
+    TextView userId, userName, patientName, roomNumber, workerName, workerPhoneNumber, nursingHomePhoneNumber;
     Button changePasswordButton;
     ImageView prifleGender;
 
@@ -60,12 +60,24 @@ public class Profile extends AppCompatActivity {
 
         userId = (TextView)findViewById(R.id.text_profileUserId);
         userName = (TextView)findViewById(R.id.text_profileUserName);
-        userPhoneNumber = (TextView)findViewById(R.id.text_profileUserPhoneNumber);
+        patientName = (TextView)findViewById(R.id.text_patientName);
+        roomNumber = (TextView)findViewById(R.id.text_roomNumber);
+        workerName = (TextView)findViewById(R.id.text_workerName);
+        workerPhoneNumber = (TextView)findViewById(R.id.text_workerPhoneNumber);
+        nursingHomePhoneNumber = (TextView)findViewById(R.id.text_nursingHomePhoneNumber);
         prifleGender = (ImageView)findViewById(R.id.image_profileGender);
 
+        try {
+            getWorkerToServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         userId.setText(User.getInstance().getUserId());
         userName.setText(User.getInstance().getUserName());
-        userPhoneNumber.setText(User.getInstance().getPhoneNumber());
+        patientName.setText(Patient.getInstance().getPatientName());
+        roomNumber.setText(Patient.getInstance().getRoomNumber());
+        nursingHomePhoneNumber.setText(User.getInstance().getNursingHomePhoneNumber());
+
         if(User.getInstance().getGender().equals("male")) {
             prifleGender.setImageResource(R.drawable.user_male);
         }
@@ -132,6 +144,44 @@ public class Profile extends AppCompatActivity {
                         .show();
             }
         });
+    }
+
+    private void getWorkerToServer() throws Exception {
+
+        final String URL = "http://52.41.19.232/getWorker";
+
+        Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("patientId", Patient.getInstance().getId());
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
+                new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.toString().contains("result")) {
+                        if (response.getString("result").equals("fail")) {
+                            Toast.makeText(Profile.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        workerName.setText(response.getString("userName"));
+                        workerPhoneNumber.setText(response.getString("userPhoneNumber"));
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("development", "Error: " + error.getMessage());
+                    }
+                });
+
+        volley.getInstance().addToRequestQueue(req);
     }
 
     private void changePasswordToServer(final String currentPassword, final String newPassword1, final String newPassword2) throws Exception {
