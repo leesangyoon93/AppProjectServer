@@ -786,8 +786,7 @@ router.post("/saveCategoryState", function(req, res) {
 
 
 Patient.find(function (err, patients) {
-    console.log(getTimeStamp());
-    Category.find({date: getTimeStamp()}, function (err, categories) {
+    Category.find({date: getTimeStamp()-1}, function (err, categories) {
         if (categories.length == 0) {
             for (var i in patients) {
                 var category = new Category();
@@ -810,7 +809,7 @@ Patient.find(function (err, patients) {
 });
 
 setInterval(function () {
-    Category.find({date: getTimeStamp()}, function (err, categories) {
+    Category.find({date: getTimeStamp()-1}, function (err, categories) {
         if (categories.length == 0) {
             for (var i in patients) {
                 var category = new Category();
