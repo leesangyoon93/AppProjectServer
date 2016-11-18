@@ -54,18 +54,42 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="9"></LinearLayout>
+        android:layout_weight="8"
+        android:padding="5dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_date"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜를 클릭하면 변경이 가능합니다."
+            android:id="@+id/textView9"
+            android:padding="5dp"
+            android:textSize="10sp"
+            android:gravity="center" />
+
+    </LinearLayout>
 
     <GridView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/gridView_category"
         android:numColumns="2"
-        android:layout_weight="2"
+        android:layout_weight="3"
         android:gravity="top|center"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:padding="10dp"
+        android:scrollbars="none"/>
 
 </LinearLayout>

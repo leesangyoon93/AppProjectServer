@@ -1,5 +1,6 @@
 package com.example.leesangyoon.appproject;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +33,9 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +54,10 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     TextView roomNumber, birthday;
     ActionBar actionBar;
     CircleImageView patientImage;
+    TextView date;
+    Button alterButton;
+
+    int year, month, day;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +81,7 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
         roomNumber = (TextView)findViewById(R.id.patient_roomNumber);
         birthday = (TextView)findViewById(R.id.patient_birthday);
         patientImage = (CircleImageView)findViewById(R.id.image_patient);
+        date = (TextView)findViewById(R.id.text_date);
 
         categories.clear();
 
@@ -79,6 +90,13 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
         gridView.setAdapter(adapterCategoryGrid);
 
         gridView.setOnItemClickListener(this);
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(ShowPatient.this, dateSetListener, year, month, day).show();
+            }
+        });
     }
 
     @Override
@@ -146,6 +164,13 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                         birthday.setText(Patient.getInstance().getBirthday());
                         patientImage.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
 
+                        GregorianCalendar calendar = new GregorianCalendar();
+                        year = calendar.get(Calendar.YEAR);
+                        month = calendar.get(Calendar.MONTH);
+                        day= calendar.get(Calendar.DAY_OF_MONTH);
+
+                        date.setText(String.format("%d - %d - %d", year,month+1, day));
+
                         getCategoriesToServer();
                     }
 
@@ -167,8 +192,8 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     private void getCategoriesToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
-        String URL = String.format("http://52.41.19.232/getCategories?patientId=%s",
-                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"));
+        String URL = String.format("http://52.41.19.232/getCategories?patientId=%s&date=%s",
+                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), URLEncoder.encode(date.getText().toString()));
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
 
@@ -212,4 +237,20 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
             return null;
         }
     }
+
+    private DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            String msg = String.format("%d - %d - %d", year,monthOfYear+1, dayOfMonth);
+            date.setText(msg);
+            try {
+                getCategoriesToServer();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    };
 }

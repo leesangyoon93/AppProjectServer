@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_editcategory.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/menu/menu_editcategory.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ShowPatient.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/ShowPatient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/drawable/item_category.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/drawable/item_category.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_showpatient.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/activity_showpatient.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/grid_category.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/grid_category.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <ignored path="AppProjectServer.iws" />
@@ -51,8 +54,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="683" column="57" selection-start-line="683" selection-start-column="57" selection-end-line="683" selection-end-column="57" />
+            <state relative-caret-position="-30">
+              <caret line="703" column="13" selection-start-line="703" selection-start-column="13" selection-end-line="703" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -61,8 +64,8 @@
       <file leaf-file-name="model_category.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/model_category.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+            <state relative-caret-position="435">
+              <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
               <folding>
                 <element signature="e#0#49#0" expanded="false" />
               </folding>
@@ -313,12 +316,12 @@
       <workItem from="1479111375275" duration="2821000" />
       <workItem from="1479368104839" duration="7599000" />
       <workItem from="1479403113043" duration="4000" />
-      <workItem from="1479449161372" duration="1866000" />
+      <workItem from="1479449161372" duration="2531000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45892000" />
+    <option name="totallyTimeSpent" value="46557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="15" y="23" width="1400" height="808" extended-state="0" />
@@ -762,8 +765,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/model_category.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        <state relative-caret-position="435">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
           <folding>
             <element signature="e#0#49#0" expanded="false" />
           </folding>
@@ -772,8 +775,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="683" column="57" selection-start-line="683" selection-start-column="57" selection-end-line="683" selection-end-column="57" />
+        <state relative-caret-position="-30">
+          <caret line="703" column="13" selection-start-line="703" selection-start-column="13" selection-end-line="703" selection-end-column="13" />
           <folding />
         </state>
       </provider>
