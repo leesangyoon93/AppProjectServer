@@ -793,7 +793,7 @@ Patient.find(function (err, patients) {
                 var category = new Category();
                 category.patient = patients[i];
 
-                category.date = date.slice(0, 10);
+                category.date = getTimeStamp();
                 category.save();
             }
         }
@@ -807,7 +807,7 @@ setInterval(function () {
                 var category = new Category();
                 category.patient = patients[i];
 
-                category.date = date.slice(0, 10);
+                category.date = getTimeStamp();
                 category.save();
             }
         }
