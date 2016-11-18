@@ -661,13 +661,13 @@ router.post('/createPatient', function (req, res) {
     })
 });
 
-router.post('/getPatient', function(req, res) {
-    User.findOne({'userId': req.body.userId}, function(err, user) {
-        if(err) return res.json({'result': 'fail'});
-        if(user) {
-            Patient.findOne({protector: user._id}, function(err, patient) {
-                if(err) return res.json({'result': 'fail'});
-                if(patient) return res.json(patient);
+router.post('/getPatient', function (req, res) {
+    User.findOne({'userId': req.body.userId}, function (err, user) {
+        if (err) return res.json({'result': 'fail'});
+        if (user) {
+            Patient.findOne({protector: user._id}, function (err, patient) {
+                if (err) return res.json({'result': 'fail'});
+                if (patient) return res.json(patient);
                 else return res.json({'result': 'fail'});
             })
         }
@@ -675,73 +675,158 @@ router.post('/getPatient', function(req, res) {
     })
 });
 
-router.get('/getCategories', function(req, res) {
+router.get('/getCategories', function (req, res) {
     var result = [];
     var id = new ObjectId(req.query.patientId);
-    Patient.findById(id, function(err, patient) {
-        Category.findOne({patient: patient.id}, function(err, category) {
-            if(err) return res.json({'result': 'fail'});
-            if(category) {
-                if(category.mealEnabled)
+    Patient.findById(id, function (err, patient) {
+        Category.findOne({patient: patient.id}, function (err, category) {
+            if (err) return res.json({'result': 'fail'});
+            if (category) {
+                if (category.mealEnabled)
                     result.push({'title': '오늘의 식사', 'content': category.meal});
-                if(category.cleanEnabled)
+                if (category.cleanEnabled)
                     result.push({'title': '신체위생관리', 'content': category.clean});
-                if(category.activityEnabled)
+                if (category.activityEnabled)
                     result.push({'title': '산책/외출', 'content': category.activity});
-                if(category.moveTrainEnabled)
+                if (category.moveTrainEnabled)
                     result.push({'title': '동작기능훈련', 'content': category.moveTrain});
-                if(category.commentEnabled)
+                if (category.commentEnabled)
                     result.push({'title': '특이사항', 'content': category.comment});
-                if(category.restRoomEnabled)
+                if (category.restRoomEnabled)
                     result.push({'title': '배변횟수', 'content': category.restRoom});
-                if(category.medicineEnabled)
+                if (category.medicineEnabled)
                     result.push({'title': '투약관리', 'content': category.medicine});
-                if(category.mentalTrainEnabled)
+                if (category.mentalTrainEnabled)
                     result.push({'title': '정신기능훈련', 'content': category.mentalTrain});
-                if(category.physicalCareEnabled)
+                if (category.physicalCareEnabled)
                     result.push({'title': '물리치료', 'content': category.physicalCare});
-                console.log(result);
                 return res.json(result);
             }
             else return res.json({'result': 'fail'});
         })
     })
-})
+});
 
-
-Patient.find(function(err, patients) {
-        var date = new Date().toISOString();
-        Category.find({date: date.slice(0, 10)}, function(err, categories) {
-            if(categories.length == 0) {
-                for(var i in patients) {
-                    var category = new Category();
-                    category.patient = patients[i];
-
-                    category.date = date.slice(0, 10);
-                    category.save();
+router.get('/getCategoryState', function(req, res) {
+    var result = [];
+    var id = new ObjectId(req.query.patientId);
+    var date = new Date().toISOString();
+    Patient.findById(id, function(err, patient) {
+        if(err) return res.json({'result': 'fail'});
+        if(patient) {
+            Category.findOne({'patient': patient, 'date': date.slice(0, 10)}, function(err, category) {
+                if(err) return res.json({'result': 'fail'});
+                if(category) {
+                    if (category.mealEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    if (category.cleanEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    if (category.activityEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    if (category.moveTrainEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    if (category.commentEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    if (category.restRoomEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    if (category.medicineEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    if (category.mentalTrainEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    if (category.physicalCareEnabled)
+                        result.push({'state': 'true'});
+                    else result.push({'state': 'false'});
+                    return res.json(result);
                 }
+                else return res.json({'result': 'fail'})
+            })
+        }
+        else return res.json({'result': 'fail'})
+    })
+});
+
+router.post("/saveCategoryState", function(req, res) {
+    var id = new ObjectId(req.body.patientId);
+    var date = new Date().toISOString();
+    Patient.findById(id, function(err, patient) {
+        if(err) return res.json({'result': 'fail'})
+        if(patient) {
+            Category.findOne({patient: patient, date: date.slice(0, 10)}, function(err, category) {
+                if(err) return res.json({'result': 'fail'})
+                if(category) {
+                    if(req.body.mealCheck == 'true')
+                        category.mealEnabled = true;
+                    else category.mealEnabled = false;
+                    if(req.body.cleanCheck == 'true')
+                        category.cleanEnabled = true;
+                    else category.cleanEnabled = false;
+                    if(req.body.activityCheck == 'true')
+                        category.activityEnabled = true;
+                    else category.activityEnabled = false;
+                    if(req.body.moveTrainCheck == 'true')
+                        category.moveTrainEnabled = true;
+                    else category.moveTrainEnabled = false;
+                    if(req.body.commentCheck == 'true')
+                        category.commentEnabled = true;
+                    else category.commentEnabled = false;
+                    if(req.body.restRoomCheck == 'true')
+                        category.restRoomEnabled = true;
+                    else category.restRoomEnabled = false;
+                    if(req.body.medicineCheck == 'true')
+                        category.medicineEnabled = true;
+                    else category.medicineEnabled = false;
+                    if(req.body.mentalTrainCheck == 'true')
+                        category.mentalTrainEnabled = true;
+                    else category.mentalTrainEnabled = false;
+                    if(req.body.physicalCareCheck == 'true')
+                        category.physicalCareEnabled = true;
+                    else category.physicalCareEnabled = false;
+                    return res.json({'result': 'success'})
+                }
+                else return res.json({'result': 'fail'})
+            })
+        }
+        else return res.json({'result': 'fail'})
+    })
+});
+
+
+Patient.find(function (err, patients) {
+    var date = new Date().toISOString();
+    Category.find({date: date.slice(0, 10)}, function (err, categories) {
+        if (categories.length == 0) {
+            for (var i in patients) {
+                var category = new Category();
+                category.patient = patients[i];
+
+                category.date = date.slice(0, 10);
+                category.save();
             }
-        })
+        }
+    })
 });
 
 setInterval(function () {
-    console.log("timer start");
-    Patient.find(function(err, patients) {
-        for(var i in patients) {
-            console.log(patients[i]);
-            var date = new Date().toISOString();
-            Category.findOne({patient: patients[i], date: date.slice(0, 10)}, function(err, category) {
-                if(!category) {
-                    console.log("카테고리 생성");
-                    var category = new Category();
-                    category.patient = patients[i];
+    var date = new Date().toISOString();
+    Category.find({date: date.slice(0, 10)}, function (err, categories) {
+        if (categories.length == 0) {
+            for (var i in patients) {
+                var category = new Category();
+                category.patient = patients[i];
 
-                    category.date = date.slice(0, 10);
-                    category.save();
-                }
-            })
+                category.date = date.slice(0, 10);
+                category.save();
+            }
         }
     })
-}, 1000*60*60);
+}, 1000 * 60 * 60 * 24);
 
 module.exports = router;
