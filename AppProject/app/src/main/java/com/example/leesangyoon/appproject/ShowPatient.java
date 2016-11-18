@@ -189,9 +189,9 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     private void getCategoriesToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
-        Log.e("asdf", String.valueOf(date));
+        Log.e("asdf", String.valueOf(date.getText().toString()));
         String URL = String.format("http://52.41.19.232/getCategories?patientId=%s&date=%s",
-                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), String.valueOf(date));
+                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), date.getText().toString());
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
 
