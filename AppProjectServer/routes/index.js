@@ -786,24 +786,26 @@ router.post("/saveCategoryState", function(req, res) {
 
 
 Patient.find(function (err, patients) {
-    Category.find({date: getYesterdayTimeStamp()}, function (err, categories) {
-        if (categories.length == 0) {
-            for (var i in patients) {
-                var category = new Category();
-                category = categories[i];
-                category.patient = patients[i];
-                category.date = getTimeStamp();
-                category.meal = "";
-                category.clean = "";
-                category.activity = "";
-                category.moveTrain = "";
-                category.comment = "";
-                category.restRoom = "";
-                category.medicine = "";
-                category.mentalTrain = "";
-                category.physicalCare = "";
-                category.save();
-            }
+    Category.find({date: getTimeStamp()}, function (err, tmps) {
+        if (tmps.length == 0) {
+            Category.find({date:getYesterdayTimeStamp()}, function(err, categories) {
+                for (var i in patients) {
+                    var category = new Category();
+                    category = categories[i];
+                    category.patient = patients[i];
+                    category.date = getTimeStamp();
+                    category.meal = "";
+                    category.clean = "";
+                    category.activity = "";
+                    category.moveTrain = "";
+                    category.comment = "";
+                    category.restRoom = "";
+                    category.medicine = "";
+                    category.mentalTrain = "";
+                    category.physicalCare = "";
+                    category.save();
+                }
+            })
         }
     })
 });
