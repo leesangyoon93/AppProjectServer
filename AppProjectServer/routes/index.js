@@ -678,6 +678,7 @@ router.post('/getPatient', function (req, res) {
 router.get('/getCategories', function (req, res) {
     var result = [];
     var id = new ObjectId(req.query.patientId);
+    console.log(req.query.date);
     Patient.findById(id, function (err, patient) {
         Category.findOne({patient: patient.id, date: req.query.date}, function (err, category) {
             if (err) return res.json({'result': 'fail'});

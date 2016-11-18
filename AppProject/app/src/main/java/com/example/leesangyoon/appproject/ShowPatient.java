@@ -168,7 +168,6 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
                         day= calendar.get(Calendar.DAY_OF_MONTH);
 
                         date.setText(String.format("%d-%d-%d", year,month+1, day));
-                        categories.clear();
                         getCategoriesToServer();
                     }
 
@@ -190,13 +189,15 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
     private void getCategoriesToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
+        Log.e("asdf", String.valueOf(date));
         String URL = String.format("http://52.41.19.232/getCategories?patientId=%s&date=%s",
-                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), URLEncoder.encode(date.getText().toString()));
+                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), String.valueOf(date));
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray response) {
+                Log.e("asdf", String.valueOf(response));
                 loading.dismiss();
                 if (response.toString().contains("result") && response.toString().contains("fail")) {
                     Toast.makeText(ShowPatient.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
@@ -249,7 +250,6 @@ public class ShowPatient extends AppCompatActivity implements AdapterView.OnItem
             // TODO Auto-generated method stub
             String msg = String.format("%d-%d-%d", year,monthOfYear+1, dayOfMonth);
             date.setText(msg);
-            categories.clear();
             try {
                 getCategoriesToServer();
             } catch (Exception e) {
