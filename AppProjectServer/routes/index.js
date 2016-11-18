@@ -841,7 +841,7 @@ function getTimeStamp() {
     var s =
         leadingZeros(d.getFullYear(), 4) + '-' +
         leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate()+1, 2)
+        leadingZeros(d.getDate(), 2)
     return s;
 }
 
@@ -851,7 +851,7 @@ function getYesterdayTimeStamp() {
     var s =
         leadingZeros(d.getFullYear(), 4) + '-' +
         leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate(), 2)
+        leadingZeros(d.getDate()-1, 2)
     return s;
 }
 
