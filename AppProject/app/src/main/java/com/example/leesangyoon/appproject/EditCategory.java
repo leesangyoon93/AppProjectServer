@@ -91,6 +91,9 @@ public class EditCategory extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 break;
+            case R.id.menu_addCategory:
+                //
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

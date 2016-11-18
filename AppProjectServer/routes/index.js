@@ -744,6 +744,7 @@ router.get('/getCategoryState', function(req, res) {
                     if (category.physicalCareEnabled)
                         result.push({'state': 'true'});
                     else result.push({'state': 'false'});
+                    console.log(result);
                     return res.json(result);
                 }
                 else return res.json({'result': 'fail'})
@@ -762,33 +763,15 @@ router.post("/saveCategoryState", function(req, res) {
             Category.findOne({patient: patient, date: date.slice(0, 10)}, function(err, category) {
                 if(err) return res.json({'result': 'fail'});
                 if(category) {
-                    if(req.body.mealCheck == 'true')
-                        category.mealEnabled = true;
-                    else category.mealEnabled = false;
-                    if(req.body.cleanCheck == 'true')
-                        category.cleanEnabled = true;
-                    else category.cleanEnabled = false;
-                    if(req.body.activityCheck == 'true')
-                        category.activityEnabled = true;
-                    else category.activityEnabled = false;
-                    if(req.body.moveTrainCheck == 'true')
-                        category.moveTrainEnabled = true;
-                    else category.moveTrainEnabled = false;
-                    if(req.body.commentCheck == 'true')
-                        category.commentEnabled = true;
-                    else category.commentEnabled = false;
-                    if(req.body.restRoomCheck == 'true')
-                        category.restRoomEnabled = true;
-                    else category.restRoomEnabled = false;
-                    if(req.body.medicineCheck == 'true')
-                        category.medicineEnabled = true;
-                    else category.medicineEnabled = false;
-                    if(req.body.mentalTrainCheck == 'true')
-                        category.mentalTrainEnabled = true;
-                    else category.mentalTrainEnabled = false;
-                    if(req.body.physicalCareCheck == 'true')
-                        category.physicalCareEnabled = true;
-                    else category.physicalCareEnabled = false;
+                    category.mealEnabled = req.body.mealCheck == 'true';
+                    category.cleanEnabled = req.body.cleanCheck == 'true';
+                    category.activityEnabled = req.body.activityCheck == 'true';
+                    category.moveTrainEnabled = req.body.moveTrainCheck == 'true';
+                    category.commentEnabled = req.body.commentCheck == 'true';
+                    category.restRoomEnabled = req.body.restRoomCheck == 'true';
+                    category.medicineEnabled = req.body.medicineCheck == 'true';
+                    category.mentalTrainEnabled = req.body.mentalTrainCheck == 'true';
+                    category.physicalCareEnabled = req.body.physicalCareCheck == 'true';
                     return res.json({'result': 'success'})
                 }
                 else return res.json({'result': 'fail'})

@@ -7,4 +7,9 @@
         android:title="저장"
         appproject:showAsAction="ifRoom"
         />
+    <item
+        android:id="@+id/menu_addCategory"
+        android:title="카테고리 추가"
+        appproject:showAsAction="ifRoom"
+        />
 </menu>
