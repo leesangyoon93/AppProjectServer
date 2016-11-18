@@ -786,26 +786,23 @@ router.post("/saveCategoryState", function(req, res) {
 
 
 Patient.find(function (err, patients) {
-    console.log(getYesterdayTimeStamp());
-    console.log(getTimeStamp());
     Category.find({date: getTimeStamp()}, function (err, tmps) {
         if (tmps.length == 0) {
             Category.find({date: getYesterdayTimeStamp()}, function(err, categories) {
                 for (var i in patients) {
                     var category = new Category();
                     var tmp = JSON.parse( JSON.stringify(categories[i]));
-                    console.log(tmp);
                     category.patient = patients[i];
                     category.date = getTimeStamp();
-                    category.meal = "";
-                    category.clean = "";
-                    category.activity = "";
-                    category.moveTrain = "";
-                    category.comment = "";
-                    category.restRoom = "";
-                    category.medicine = "";
-                    category.mentalTrain = "";
-                    category.physicalCare = "";
+                    category.mealEnabled = tmp.mealEnabled;
+                    category.cleanEnabled = tmp.cleanEnabled;
+                    category.activityEnabled = tmp.activityEnabled;
+                    category.moveTrainEnabled = tmp.moveTrainEnabled;
+                    category.commentEnabled = tmp.commentEnabled;
+                    category.restRoomEnabled = tmp.restRoomEnabled;
+                    category.medicineEnabled = tmp.medicineEnabled;
+                    category.mentalTrainEnabled = tmp.mentalTrainEnabled;
+                    category.physicalCareEnabled = tmp.physicalCareEnabled;
                     category.save();
                 }
             })
