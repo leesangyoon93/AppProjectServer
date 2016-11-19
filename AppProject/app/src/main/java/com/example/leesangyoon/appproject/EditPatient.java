@@ -50,7 +50,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by daddyslab on 2016. 11. 13..
  */
 public class EditPatient extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    AdapterCategoryGrid adapterCategoryGrid ;
+    AdapterCategoryGrid adapterCategoryGrid;
     ArrayList<JSONObject> categories = new ArrayList<JSONObject>();
     GridView gridView;
     TextView roomNumber, birthday;
@@ -64,43 +64,21 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
         super.onCreate((savedInstanceState));
         setContentView(R.layout.activity_editpatient);
 
-        ActionBar actionBar = getSupportActionBar();
+        actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setTitle(Patient.getInstance().getPatientName());
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        gridView = (GridView) findViewById(R.id.gridView_category);
-        roomNumber = (TextView)findViewById(R.id.patient_roomNumber);
-        birthday = (TextView)findViewById(R.id.patient_birthday);
-        patientImage = (CircleImageView)findViewById(R.id.image_patient);
-        date = (TextView)findViewById(R.id.text_date);
+        gridView = (GridView) findViewById(R.id.gridView__category);
+        roomNumber = (TextView) findViewById(R.id.patient__roomNumber);
+        birthday = (TextView) findViewById(R.id.patient__birthday);
+        patientImage = (CircleImageView) findViewById(R.id.image__patient);
+        date = (TextView) findViewById(R.id.text__date);
 
-        roomNumber.setText(Patient.getInstance().getRoomNumber() + "호");
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        Date d = null;
         try {
-            d = format.parse(Patient.getInstance().getBirthday());
+            setup();
         } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        int age = getAgeFromBirthday(d) + 1;
-        birthday.setText(String.valueOf(age) + "세");
-        patientImage.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
-
-        GregorianCalendar calendar = new GregorianCalendar();
-        lyear = calendar.get(Calendar.YEAR);
-        lmonth = calendar.get(Calendar.MONTH);
-        lday= calendar.get(Calendar.DAY_OF_MONTH);
-
-        date.setText(String.format("%d-%d-%d", lyear,lmonth+1, lday));
-
-        categories.clear();
-
-        try {
-            getCategoriesToServer();
-        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -132,11 +110,34 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
         return super.onOptionsItemSelected(item);
     }
 
+    private void setup() throws ParseException {
+        actionBar.setTitle(Patient.getInstance().getPatientName());
+        assert actionBar != null;
+        roomNumber.setText(Patient.getInstance().getRoomNumber() + "호");
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        Date d = format.parse(Patient.getInstance().getBirthday());
+        int age = getAgeFromBirthday(d) + 1;
+        birthday.setText(String.valueOf(age) + "세");
+        patientImage.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
+
+        GregorianCalendar calendar = new GregorianCalendar();
+        lyear = calendar.get(Calendar.YEAR);
+        lmonth = calendar.get(Calendar.MONTH);
+        lday = calendar.get(Calendar.DAY_OF_MONTH);
+
+        date.setText(String.format("%d-%d-%d", lyear, lmonth + 1, lday));
+        try {
+            getCategoriesToServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void getCategoriesToServer() throws Exception {
-        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
+        final ProgressDialog loading = ProgressDialog.show(this, "Loading...", "Please wait...", false, false);
 
         String URL = String.format("http://52.41.19.232/getCategories?patientId=%s&date=%s",
-                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), String.format("%d-%d-%d", lyear, lmonth+1, lday));
+                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), String.format("%d-%d-%d", lyear, lmonth + 1, lday));
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
 
@@ -145,11 +146,9 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
                 loading.dismiss();
                 if (response.toString().contains("result") && response.toString().contains("fail")) {
                     Toast.makeText(EditPatient.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
-                }
-                else if(response.toString().contains("result") && response.toString().contains("nothing")) {
+                } else if (response.toString().contains("result") && response.toString().contains("nothing")) {
                     Toast.makeText(EditPatient.this, "데이터가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     categories.clear();
                     for (int i = 0; i < response.length(); i++) {
                         categories.add(response.optJSONObject(i));
@@ -234,7 +233,7 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
     }
 
     private void saveCategoryToServer(final int position, final String content) throws Exception {
-        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
+        final ProgressDialog loading = ProgressDialog.show(this, "Loading...", "Please wait...", false, false);
 
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("patientId", Patient.getInstance().getId());

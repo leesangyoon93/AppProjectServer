@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/patient_roomNumber"
+                android:id="@+id/patient__roomNumber"
                 android:textSize="25sp"
                 android:padding="10dp"
                 android:textColor="#fff" />
@@ -30,7 +30,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/image_patient"
+            android:id="@+id/image__patient"
             android:src="@drawable/user_plain"
             android:layout_weight="5"
             android:layout_margin="5dp" />
@@ -45,7 +45,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/patient_birthday"
+                android:id="@+id/patient__birthday"
                 android:textSize="25sp"
                 android:padding="10dp"
                 android:textColor="#fff" />
@@ -64,7 +64,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/text_date"
+            android:id="@+id/text__date"
             android:gravity="center"
             android:padding="10dp"
             android:textSize="25sp"
@@ -75,7 +75,7 @@
     <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/gridView_category"
+        android:id="@+id/gridView__category"
         android:numColumns="2"
         android:layout_weight="3"
         android:gravity="top|center"

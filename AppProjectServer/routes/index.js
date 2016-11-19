@@ -802,7 +802,7 @@ router.post('/getWorker', function(req, res) {
 
 router.post('/saveCategory', function(req, res) {
     var id = new ObjectId(req.body.patientId);
-    patient.findById(id, function(err, patient) {
+    Patient.findById(id, function(err, patient) {
         if(err) return res.json({'result': 'fail'});
         if(patient) {
             Category.findOne({patient: patient.id, date: req.body.date}, function (err, category) {

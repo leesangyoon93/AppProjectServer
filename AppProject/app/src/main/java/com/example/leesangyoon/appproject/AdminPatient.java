@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -104,13 +105,16 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(AdminPatient.this, EditPatient.class);
         try {
-            Patient.getInstance().setGender(patients.get(position).getString("gender"));
-            Patient.getInstance().setBirthday(patients.get(position).getString("birthday"));
-            Patient.getInstance().setPatientName(patients.get(position).getString("patientName"));
+            Patient.getInstance().setId(patients.get(position).getString("_id"));
+            Patient.getInstance().setWorkerId(patients.get(position).getString("worker"));
             Patient.getInstance().setProtectorId(patients.get(position).getString("protector"));
+            Patient.getInstance().setPatientName(patients.get(position).getString("patientName"));
+            Patient.getInstance().setBirthday(patients.get(position).getString("birthday"));
             Patient.getInstance().setRelation(patients.get(position).getString("relation"));
             Patient.getInstance().setRoomNumber(patients.get(position).getString("roomNumber"));
-            Patient.getInstance().setWorkerId(patients.get(position).getString("worker"));
+            Patient.getInstance().setImage(patients.get(position).getString("image"));
+            Patient.getInstance().setGender(patients.get(position).getString("gender"));
+            Log.e("asdf", Patient.getInstance().getPatientName());
         } catch (JSONException e) {
             e.printStackTrace();
         }
