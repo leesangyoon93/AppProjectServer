@@ -81,7 +81,7 @@ var CategorySchema = new Schema({
         type: Boolean,
         default: false
     },
-    // custom: {type: Schema.Types.ObjectId, ref: 'CustomCategory', null: true}
+    custom: [{type: Schema.Types.ObjectId, ref: 'CustomCategory', null: true}]
 });
 
 mongoose.model('Category', CategorySchema);

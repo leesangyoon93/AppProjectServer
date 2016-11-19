@@ -52,27 +52,16 @@ public class AdapterCategoryGrid extends BaseAdapter {
         convertView = mInflater.inflate(R.layout.grid_category, null);
         TextView title = (TextView) convertView.findViewById(R.id.categoryTitle);
         TextView content = (TextView) convertView.findViewById(R.id.categoryContent);
-
-        // 텍스트를 비트맵으로 변환하고 뿌려주면됨.
+        ImageView image = (ImageView)convertView.findViewById(R.id.btn_editCategoryContent);
         try {
             title.setText(category.getString("title"));
             content.setText(category.getString("content"));
+            if (User.getInstance().getAuth() == 1 && category.getString("content").equals("")) {
+                image.setVisibility(View.VISIBLE);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return convertView;
     }
-
-//    public static Bitmap StringToBitmap(String encodedString) {
-//        try {
-//            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-//            return bitmap;
-//        } catch (NullPointerException e) {
-//            e.getMessage();
-//            return null;
-//        } catch (OutOfMemoryError e) {
-//            return null;
-//        }
-//    }
 }

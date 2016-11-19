@@ -14,6 +14,7 @@ var GalleryComment = mongoose.model('GalleryComment');
 var ScheduleComment = mongoose.model('ScheduleComment');
 var QAComment = mongoose.model('QAComment');
 var Category = mongoose.model('Category');
+var CustomCategory = mongoose.model('CustomCategory');
 var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
@@ -797,7 +798,54 @@ router.post('/getWorker', function(req, res) {
         }
         else return res.json({'result': 'fail'});
     })
-})
+});
+
+router.post('/saveCategory', function(req, res) {
+    var id = new ObjectId(req.body.patientId);
+    patient.findById(id, function(err, patient) {
+        if(err) return res.json({'result': 'fail'});
+        if(patient) {
+            Category.findOne({patient: patient.id, date: req.body.date}, function (err, category) {
+                if(err) return res.json({'result': 'fail'});
+                if(category) {
+                    switch(req.body.position) {
+                        case 0:
+                            category.meal = req.body.content;
+                            break;
+                        case 1:
+                            category.clean = req.body.content;
+                            break;
+                        case 2:
+                            category.activity = req.body.content;
+                            break;
+                        case 3:
+                            category.moveTrain = req.body.content;
+                            break;
+                        case 4:
+                            category.comment = req.body.content;
+                            break;
+                        case 5:
+                            category.restRoom = req.body.content;
+                            break;
+                        case 6:
+                            category.medicine = req.body.content;
+                            break;
+                        case 7:
+                            category.mentalTrain = req.body.content;
+                            break;
+                        case 8:
+                            category.physicalCare = req.body.content;
+                            break;
+                    }
+                    category.save();
+                    return res.json({'result': 'success'});
+                }
+                else return res.json({'result': 'fail'})
+            })
+        }
+        else return res.json({'result': 'fail'});
+    })
+});
 
 
 Patient.find(function (err, patients) {
@@ -854,7 +902,7 @@ function getTimeStamp() {
     var s =
         leadingZeros(d.getFullYear(), 4) + '-' +
         leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate()+1, 2)
+        leadingZeros(d.getDate()+1, 2);
     return s;
 }
 
@@ -864,7 +912,7 @@ function getYesterdayTimeStamp() {
     var s =
         leadingZeros(d.getFullYear(), 4) + '-' +
         leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate(), 2)
+        leadingZeros(d.getDate(), 2);
     return s;
 }
 

@@ -41,7 +41,7 @@ public class Profile extends AppCompatActivity {
 
     TextView userId, userName, patientName, roomNumber, workerName, workerPhoneNumber, nursingHomePhoneNumber;
     Button changePasswordButton;
-    ImageView prifleGender;
+    ImageView profileGender;
 
     private String currentPassword, newPassword1, newPassword2;
 
@@ -65,7 +65,7 @@ public class Profile extends AppCompatActivity {
         workerName = (TextView)findViewById(R.id.text_workerName);
         workerPhoneNumber = (TextView)findViewById(R.id.text_workerPhoneNumber);
         nursingHomePhoneNumber = (TextView)findViewById(R.id.text_nursingHomePhoneNumber);
-        prifleGender = (ImageView)findViewById(R.id.image_profileGender);
+        profileGender = (ImageView)findViewById(R.id.image_profileGender);
 
         try {
             getWorkerToServer();
@@ -79,10 +79,10 @@ public class Profile extends AppCompatActivity {
         nursingHomePhoneNumber.setText(User.getInstance().getNursingHomePhoneNumber());
 
         if(User.getInstance().getGender().equals("male")) {
-            prifleGender.setImageResource(R.drawable.user_male);
+            profileGender.setImageResource(R.drawable.user_male);
         }
         else {
-            prifleGender.setImageResource(R.drawable.user_female);
+            profileGender.setImageResource(R.drawable.user_female);
         }
 
         changePasswordButton = (Button)findViewById(R.id.btn_changePassword);
@@ -166,7 +166,7 @@ public class Profile extends AppCompatActivity {
                     }
                     else {
                         workerName.setText(response.getString("userName"));
-                        workerPhoneNumber.setText(response.getString("userPhoneNumber"));
+                        workerPhoneNumber.setText(response.getString("phoneNumber"));
                     }
 
                 } catch (Exception e) {

@@ -77,14 +77,13 @@ public class ShowPatient extends AppCompatActivity {
         patientImage = (CircleImageView)findViewById(R.id.image_patient);
         date = (TextView)findViewById(R.id.text_date);
 
+        categories.clear();
         try {
             setup();
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        categories.clear();
-
+//        categories.clear();
         adapterCategoryGrid = new AdapterCategoryGrid(ShowPatient.this, categories);
         adapterCategoryGrid.notifyDataSetChanged();
         gridView.setAdapter(adapterCategoryGrid);
