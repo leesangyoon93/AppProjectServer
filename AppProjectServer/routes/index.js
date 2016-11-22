@@ -722,6 +722,7 @@ router.get('/getCategoryState', function (req, res) {
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
+            console.log(date.slice(0, 10));
             Category.findOne({'patient': patient, 'date': date.slice(0, 10)}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
@@ -759,6 +760,7 @@ router.get('/getCategoryState', function (req, res) {
                             else result.push({'state': 'false'})
                         }
                     }
+                    console.log(result);
                     return res.json(result);
                 }
                 else return res.json({'result': 'fail'})
