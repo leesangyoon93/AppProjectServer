@@ -771,11 +771,10 @@ router.get('/getCategoryState', function (req, res) {
 
 router.post("/saveCategoryState", function (req, res) {
     var id = new ObjectId(req.body.patientId);
-    var date = new Date().toISOString();
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            Category.findOne({patient: patient, date: date.slice(0, 10)}, function (err, category) {
+            Category.findOne({patient: patient, date: req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
                     category.mealEnabled = req.body.mealCheck == 'true';

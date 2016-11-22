@@ -40,7 +40,7 @@ import java.util.Map;
 public class EditCategory extends AppCompatActivity {
     Switch meal, clean, activity, moveTrain, comment, restRoom, medicine, mentalTrain, physicalCare;
     ArrayList<Switch> switchs = new ArrayList<>();
-    String categoryTitle;
+    String categoryTitle, date;
     int lyear, lmonth, lday;
 
     @Override
@@ -53,6 +53,12 @@ public class EditCategory extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
+
+        GregorianCalendar calendar = new GregorianCalendar();
+        lyear = calendar.get(Calendar.YEAR);
+        lmonth = calendar.get(Calendar.MONTH);
+        lday = calendar.get(Calendar.DAY_OF_MONTH);
+        date = String.valueOf(lyear) + "-" + String.valueOf(lmonth+1) + "-" + String.valueOf(lday);
 
         meal = (Switch)findViewById(R.id.switch_meal);
         clean = (Switch)findViewById(R.id.switch_bodyClean);
@@ -153,12 +159,6 @@ public class EditCategory extends AppCompatActivity {
     private void getCategoryStateToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
-        GregorianCalendar calendar = new GregorianCalendar();
-        lyear = calendar.get(Calendar.YEAR);
-        lmonth = calendar.get(Calendar.MONTH);
-        lday = calendar.get(Calendar.DAY_OF_MONTH);
-        String date = String.valueOf(lyear) + "-" + String.valueOf(lmonth+1) + "-" + String.valueOf(lday);
-
         String URL = String.format("http://52.41.19.232/getCategoryState?patientId=%s&date=%s",
                 URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), date);
 
@@ -211,6 +211,7 @@ public class EditCategory extends AppCompatActivity {
         postParam.put("medicineCheck", String.valueOf(medicine.isChecked()));
         postParam.put("mentalTrainCheck", String.valueOf(mentalTrain.isChecked()));
         postParam.put("physicalCareCheck", String.valueOf(physicalCare.isChecked()));
+        postParam.put("date", date);
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {
