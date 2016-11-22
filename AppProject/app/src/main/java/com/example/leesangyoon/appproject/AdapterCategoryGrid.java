@@ -56,108 +56,117 @@ public class AdapterCategoryGrid extends BaseAdapter {
         TextView content = (TextView) convertView.findViewById(R.id.categoryContent);
         ImageView image = (ImageView)convertView.findViewById(R.id.btn_editCategoryContent);
         LinearLayout wrap_category = (LinearLayout)convertView.findViewById(R.id.wrap_category);
-        try {
-            Log.e("aaaa", String.valueOf(category.getBoolean("state")));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            switch(String.valueOf(position)) {
-                case "0":
-                    if(category.getString("state").equals("true")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("mealTitle"));
-                        content.setText(category.getString("meal"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("meal").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-                case "1":
-                    if(category.getBoolean("state")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("cleanTitle"));
-                        content.setText(category.getString("clean"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("clean").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-                case "2":
-                    if(category.getBoolean("state")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("activityTitle"));
-                        content.setText(category.getString("activity"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("activity").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-                case "3":
-                    if(category.getBoolean("state")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("moveTrainTitle"));
-                        content.setText(category.getString("moveTrain"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("moveTrain").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-                case "4":
-                    if(category.getBoolean("state")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("commentTitle"));
-                        content.setText(category.getString("comment"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("comment").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-                case "5":
-                    if(category.getBoolean("state")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("restRoomTitle"));
-                        content.setText(category.getString("restRoom"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("restRoom").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-                case "6":
-                    if(category.getBoolean("state")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("medicineTitle"));
-                        content.setText(category.getString("medicine"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("medicine").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-                case "7":
-                    if(category.getBoolean("state")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("mentalTrainTitle"));
-                        content.setText(category.getString("mentalTrain"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("mentalTrain").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-                case "8":
-                    if(category.getBoolean("state")) {
-                        wrap_category.setVisibility(View.VISIBLE);
-                        title.setText(category.getString("physicalCareTitle"));
-                        content.setText(category.getString("physicalCare"));
-                        if (User.getInstance().getAuth() == 1 && category.getString("physicalCare").equals("")) {
-                            image.setVisibility(View.VISIBLE);
-                        }
-                    }
-                    break;
-            }
 
+        try {
+            title.setText(category.getString("title"));
+            content.setText(category.getString("content"));
+            if (User.getInstance().getAuth() == 1 && category.getString("content").equals("")) {
+                image.setVisibility(View.VISIBLE);
+            }
+//            if(category.getString("state").equals("false")) {
+//                wrap_category.setVisibility(View.GONE);
+//
+//            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
+//        try {
+//            switch(String.valueOf(position)) {
+//                case "0":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("title"));
+//                        content.setText(category.getString("content"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("content").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//                case "1":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("cleanTitle"));
+//                        content.setText(category.getString("clean"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("clean").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//                case "2":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("activityTitle"));
+//                        content.setText(category.getString("activity"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("activity").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//                case "3":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("moveTrainTitle"));
+//                        content.setText(category.getString("moveTrain"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("moveTrain").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//                case "4":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("commentTitle"));
+//                        content.setText(category.getString("comment"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("comment").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//                case "5":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("restRoomTitle"));
+//                        content.setText(category.getString("restRoom"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("restRoom").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//                case "6":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("medicineTitle"));
+//                        content.setText(category.getString("medicine"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("medicine").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//                case "7":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("mentalTrainTitle"));
+//                        content.setText(category.getString("mentalTrain"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("mentalTrain").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//                case "8":
+//                    if(category.getString("state").equals("true")) {
+//                        wrap_category.setVisibility(View.VISIBLE);
+//                        title.setText(category.getString("physicalCareTitle"));
+//                        content.setText(category.getString("physicalCare"));
+//                        if (User.getInstance().getAuth() == 1 && category.getString("physicalCare").equals("")) {
+//                            image.setVisibility(View.VISIBLE);
+//                        }
+//                    }
+//                    break;
+//            }
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
         return convertView;
     }
 }
