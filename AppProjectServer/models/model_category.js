@@ -117,7 +117,7 @@ var CategorySchema = new Schema({
         type: Boolean,
         default: false
     },
-    custom: [{type: Schema.Types.ObjectId, ref: 'CustomCategory', null: true}]
+    custom: []
 });
 
 mongoose.model('Category', CategorySchema);
