@@ -684,23 +684,24 @@ router.get('/getCategories', function (req, res) {
             if (err) return res.json({'result': 'fail'});
             if (category) {
                 // if (category.mealEnabled)
-                result.push({'title': '오늘의 식사', 'content': category.meal});
+                result.push({'title': '오늘의 식사', 'content': category.meal, 'state': category.mealEnabled});
                 // if (category.cleanEnabled)
-                result.push({'title': '신체위생관리', 'content': category.clean});
+                result.push({'title': '신체위생관리', 'content': category.clean, 'state': category.cleanEnabled});
                 // if (category.activityEnabled)
-                result.push({'title': '산책/외출', 'content': category.activity});
+                result.push({'title': '산책/외출', 'content': category.activity, 'state': category.activityEnabled});
                 // if (category.moveTrainEnabled)
-                result.push({'title': '생활기능훈련', 'content': category.moveTrain});
+                result.push({'title': '생활기능훈련', 'content': category.moveTrain, 'state': category.moveTrainEnabled});
                 // if (category.commentEnabled)
-                result.push({'title': '특이사항', 'content': category.comment});
+                result.push({'title': '특이사항', 'content': category.comment, 'state': category.commentEnabled});
                 // if (category.restRoomEnabled)
-                result.push({'title': '배변횟수', 'content': category.restRoom});
+                result.push({'title': '배변횟수', 'content': category.restRoom, 'state': category.restRoomEnabled});
                 // if (category.medicineEnabled)
-                result.push({'title': '투약관리', 'content': category.medicine});
+                result.push({'title': '투약관리', 'content': category.medicine, 'state': category.medicineEnabled});
                 // if (category.mentalTrainEnabled)
-                result.push({'title': '정신기능훈련', 'content': category.mentalTrain});
+                result.push({'title': '정신기능훈련', 'content': category.mentalTrain, 'state': category.mentalTrainEnabled});
                 // if (category.physicalCareEnabled)
-                result.push({'title': '물리치료', 'content': category.physicalCare});
+                result.push({'title': '물리치료', 'content': category.physicalCare, 'state': category.physicalCareEnabled});
+                console.log(result);
                 return res.json(result);
             }
             else {

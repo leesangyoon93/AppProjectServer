@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,14 @@ public class AdapterCategoryGrid extends BaseAdapter {
         ImageView image = (ImageView)convertView.findViewById(R.id.btn_editCategoryContent);
         LinearLayout wrap_category = (LinearLayout)convertView.findViewById(R.id.wrap_category);
         try {
-            switch(position) {
-                case 0:
-                    if(category.getBoolean("mealEnabled")) {
+            Log.e("aaaa", String.valueOf(category.getBoolean("state")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            switch(String.valueOf(position)) {
+                case "0":
+                    if(category.getString("state").equals("true")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("mealTitle"));
                         content.setText(category.getString("meal"));
@@ -67,8 +73,8 @@ public class AdapterCategoryGrid extends BaseAdapter {
                         }
                     }
                     break;
-                case 1:
-                    if(category.getBoolean("cleanEnabled")) {
+                case "1":
+                    if(category.getBoolean("state")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("cleanTitle"));
                         content.setText(category.getString("clean"));
@@ -77,8 +83,8 @@ public class AdapterCategoryGrid extends BaseAdapter {
                         }
                     }
                     break;
-                case 2:
-                    if(category.getBoolean("activityEnabled")) {
+                case "2":
+                    if(category.getBoolean("state")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("activityTitle"));
                         content.setText(category.getString("activity"));
@@ -87,8 +93,8 @@ public class AdapterCategoryGrid extends BaseAdapter {
                         }
                     }
                     break;
-                case 3:
-                    if(category.getBoolean("moveTrainEnabled")) {
+                case "3":
+                    if(category.getBoolean("state")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("moveTrainTitle"));
                         content.setText(category.getString("moveTrain"));
@@ -97,8 +103,8 @@ public class AdapterCategoryGrid extends BaseAdapter {
                         }
                     }
                     break;
-                case 4:
-                    if(category.getBoolean("commentEnabled")) {
+                case "4":
+                    if(category.getBoolean("state")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("commentTitle"));
                         content.setText(category.getString("comment"));
@@ -107,8 +113,8 @@ public class AdapterCategoryGrid extends BaseAdapter {
                         }
                     }
                     break;
-                case 5:
-                    if(category.getBoolean("restRoomEnabled")) {
+                case "5":
+                    if(category.getBoolean("state")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("restRoomTitle"));
                         content.setText(category.getString("restRoom"));
@@ -117,8 +123,8 @@ public class AdapterCategoryGrid extends BaseAdapter {
                         }
                     }
                     break;
-                case 6:
-                    if(category.getBoolean("medicineEnabled")) {
+                case "6":
+                    if(category.getBoolean("state")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("medicineTitle"));
                         content.setText(category.getString("medicine"));
@@ -127,8 +133,8 @@ public class AdapterCategoryGrid extends BaseAdapter {
                         }
                     }
                     break;
-                case 7:
-                    if(category.getBoolean("mentalTrainEnabled")) {
+                case "7":
+                    if(category.getBoolean("state")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("mentalTrainTitle"));
                         content.setText(category.getString("mentalTrain"));
@@ -137,8 +143,8 @@ public class AdapterCategoryGrid extends BaseAdapter {
                         }
                     }
                     break;
-                case 8:
-                    if(category.getBoolean("physicalCareEnabled")) {
+                case "8":
+                    if(category.getBoolean("state")) {
                         wrap_category.setVisibility(View.VISIBLE);
                         title.setText(category.getString("physicalCareTitle"));
                         content.setText(category.getString("physicalCare"));
