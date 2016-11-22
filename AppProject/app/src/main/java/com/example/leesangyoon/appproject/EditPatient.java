@@ -216,7 +216,7 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
                         text.setText(editText.getText());
                         image.setVisibility(View.INVISIBLE);
                         try {
-                            saveCategoryToServer(position, editText.getText().toString());
+                            saveCategoryToServer(categories.get(position).getInt("num"), editText.getText().toString());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

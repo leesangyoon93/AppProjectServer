@@ -701,6 +701,10 @@ router.get('/getCategories', function (req, res) {
                     result.push({'title': '정신기능훈련', 'content': category.mentalTrain, 'state': category.mentalTrainEnabled, 'num':7});
                 if (category.physicalCareEnabled)
                     result.push({'title': '물리치료', 'content': category.physicalCare, 'state': category.physicalCareEnabled, 'num':8});
+                if(category.custom.length != 0) {
+                    for(var i in category.custom)
+                        result.push({'title':category.custom[i].title, 'content': category.custom[i].content, 'state': category.custom[i].state, 'num':category.custom[i].num});
+                }
                 return res.json(result);
             }
             else {
@@ -748,6 +752,13 @@ router.get('/getCategoryState', function (req, res) {
                     if (category.physicalCareEnabled)
                         result.push({'state': 'true'});
                     else result.push({'state': 'false'});
+                    if(category.custom.length != 0) {
+                        for(var i in category.custom) {
+                            if(category.custom[i].state)
+                                result.push({'state': 'true'});
+                            else result.push({'state': 'false'})
+                        }
+                    }
                     return res.json(result);
                 }
                 else return res.json({'result': 'fail'})
@@ -836,11 +847,33 @@ router.post('/saveCategory', function (req, res) {
                         case '8':
                             category.physicalCare = req.body.content;
                             break;
+                        default:
+                            category.custom[req.body.position-9].content = req.body.content;
                     }
                     category.save();
                     return res.json({'result': 'success'});
                 }
                 else return res.json({'result': 'fail'})
+            })
+        }
+        else return res.json({'result': 'fail'});
+    })
+});
+
+router.post('/addCategory', function(req, res) {
+    var id = new ObjectId(req.body.patientId);
+    var date = new Date().toISOString();
+    Patient.findById(id, function (err, patient) {
+        if (err) return res.json({'result': 'fail'});
+        if (patient) {
+            Category.findOne({patient: patient, date: date.slice(0, 10)}, function (err, category) {
+                if (err) return res.json({'result': 'fail'});
+                if (category) {
+                    category.custom.push({'title': req.body.customTitle, 'content': "", 'state': true, 'num': category.custom.length+9});
+                    category.save();
+                    return res.json({'result': 'success'});
+                }
+                else return res.json({'result': 'fail'});
             })
         }
         else return res.json({'result': 'fail'});

@@ -1,13 +1,18 @@
 package com.example.leesangyoon.appproject;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -33,6 +38,7 @@ import java.util.Map;
 public class EditCategory extends AppCompatActivity {
     Switch meal, clean, activity, moveTrain, comment, restRoom, medicine, mentalTrain, physicalCare;
     ArrayList<Switch> switchs = new ArrayList<>();
+    String categoryTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,7 +99,41 @@ public class EditCategory extends AppCompatActivity {
                 }
                 break;
             case R.id.menu_addCategory:
-                //
+                AlertDialog.Builder builder = new AlertDialog.Builder(EditCategory.this);
+
+                LinearLayout layout = new LinearLayout(EditCategory.this);
+                layout.setOrientation(LinearLayout.VERTICAL);
+
+                final EditText customCategory = new EditText(EditCategory.this);
+                customCategory.setHint("카테고리 제목을 입력하세요.");
+
+                layout.addView(customCategory);
+
+                builder.setTitle("카테고리 추가")
+                        .setView(layout)
+                        .setCancelable(true)
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                categoryTitle = customCategory.getText().toString();
+                                if(categoryTitle.equals("")) {
+                                    Toast.makeText(EditCategory.this, "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    try {
+                                        addCategoryToServer();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        })
+                        .show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -123,7 +163,6 @@ public class EditCategory extends AppCompatActivity {
                 } else {
                     for (int i = 0; i < response.length(); i++) {
                         try {
-                            Log.e("adsf", response.optJSONObject(i).getString("state"));
                             if(response.optJSONObject(i).getString("state").equals("true")) {
                                 switchs.get(i).setChecked(true);
                             }
@@ -178,6 +217,48 @@ public class EditCategory extends AppCompatActivity {
                         else {
                             Toast.makeText(EditCategory.this, "카테고리 저장이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(EditCategory.this, ShowPatient.class);
+                            startActivity(intent);
+                        }
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("development", "Error: " + error.getMessage());
+                    }
+                });
+
+        volley.getInstance().addToRequestQueue(req);
+    }
+
+    private void addCategoryToServer() throws Exception {
+        final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
+        String URL = "http://52.41.19.232/addCategory";
+
+        Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("patientId", Patient.getInstance().getId());
+        postParam.put("customTitle", categoryTitle);
+
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
+                new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                loading.dismiss();
+                try {
+                    if (response.toString().contains("result")) {
+                        if (response.getString("result").equals("fail")) {
+                            Toast.makeText(EditCategory.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(EditCategory.this, "카테고리 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(EditCategory.this, EditCategory.class);
                             startActivity(intent);
                         }
                     }
