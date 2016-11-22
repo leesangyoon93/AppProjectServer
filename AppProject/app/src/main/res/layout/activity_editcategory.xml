@@ -23,7 +23,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/meal_icon"
                     android:layout_weight="5" />
 
                 <TextView
@@ -54,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category2"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/shower_icon"
                     android:layout_weight="5" />
 
                 <TextView
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category3"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/walking_icon"
                     android:layout_weight="5" />
 
                 <TextView
@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category4"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/body_icon"
                     android:layout_weight="5" />
 
                 <TextView
@@ -147,7 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category5"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/comment_icon"
                     android:layout_weight="5" />
 
                 <TextView
@@ -178,7 +178,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category6"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/toilet_icon"
                     android:layout_weight="5" />
 
                 <TextView
@@ -209,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category7"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/medicine_icon"
                     android:layout_weight="5" />
 
                 <TextView
@@ -240,7 +240,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category9"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/mental_icon"
                     android:layout_weight="5" />
 
                 <TextView
@@ -271,7 +271,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:id="@+id/image_category11"
-                    android:src="@drawable/user_plain"
+                    android:src="@mipmap/physical_icon"
                     android:layout_weight="5" />
 
                 <TextView

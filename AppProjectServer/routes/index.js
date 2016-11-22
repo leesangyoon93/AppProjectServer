@@ -808,6 +808,7 @@ router.post('/saveCategory', function(req, res) {
             Category.findOne({patient: patient.id, date: req.body.date}, function (err, category) {
                 if(err) return res.json({'result': 'fail'});
                 if(category) {
+                    console.log(req.body);
                     switch(req.body.position) {
                         case 0:
                             category.meal = req.body.content;

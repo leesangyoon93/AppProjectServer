@@ -20,11 +20,11 @@
             android:id="@+id/login_layout">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="95dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:id="@+id/imageView"
                 android:layout_gravity="center"
-                android:src="@drawable/main_logo"
+                android:src="@drawable/login_logo"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="30dp" />
 
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="로그인"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textColor="#88C443"
                 android:id="@+id/btn_login"
                 android:layout_gravity="center_horizontal"
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#88C443"
                 android:text="요양원 등록 신청"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:id="@+id/btn_registerNursinHome"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="70dp"

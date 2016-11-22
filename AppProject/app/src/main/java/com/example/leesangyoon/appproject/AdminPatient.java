@@ -114,7 +114,6 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
             Patient.getInstance().setRoomNumber(patients.get(position).getString("roomNumber"));
             Patient.getInstance().setImage(patients.get(position).getString("image"));
             Patient.getInstance().setGender(patients.get(position).getString("gender"));
-            Log.e("asdf", Patient.getInstance().getPatientName());
         } catch (JSONException e) {
             e.printStackTrace();
         }

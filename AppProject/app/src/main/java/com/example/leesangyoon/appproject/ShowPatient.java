@@ -151,8 +151,9 @@ public class ShowPatient extends AppCompatActivity {
     private void getCategoriesToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
+        String currentDate = lyear + "-" + lmonth+1 + "-" + lday;
         String URL = String.format("http://52.41.19.232/getCategories?patientId=%s&date=%s",
-                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), String.format("%d-%d-%d", lyear, lmonth+1, lday));
+                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), URLEncoder.encode(currentDate), "utf-8");
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
 
