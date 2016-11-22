@@ -746,7 +746,6 @@ router.get('/getCategoryState', function (req, res) {
                     //if(category.custom.length != 0) {
                         for(var i in category.custom)
                             result.push({'title':category.custom[i].title, 'content': category.custom[i].content, 'state': category.custom[i].state, 'num':category.custom[i].num});
-                    }
                     return res.json(result);
                     // if (category.mealEnabled)
                     //     result.push({'state': 'true'});
