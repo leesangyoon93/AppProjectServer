@@ -721,8 +721,8 @@ router.get('/getCategoryState', function (req, res) {
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            console.log(req.body.date);
-            Category.findOne({'patient': patient, 'date': req.body.date}, function (err, category) {
+            console.log(req.query.date);
+            Category.findOne({'patient': patient, 'date': req.query.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
                     if (category.mealEnabled)
