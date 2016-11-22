@@ -64,15 +64,15 @@ public class EditCategory extends AppCompatActivity {
         lday = calendar.get(Calendar.DAY_OF_MONTH);
         date = String.valueOf(lyear) + "-" + String.valueOf(lmonth+1) + "-" + String.valueOf(lday);
 
-        meal = (Switch)findViewById(R.id.switch_meal);
-        clean = (Switch)findViewById(R.id.switch_bodyClean);
-        activity = (Switch)findViewById(R.id.switch_activity);
-        moveTrain = (Switch)findViewById(R.id.switch_moveTrain);
-        comment = (Switch)findViewById(R.id.switch_comment);
-        restRoom = (Switch)findViewById(R.id.switch_restRoom);
-        medicine = (Switch)findViewById(R.id.switch_medicine);
-        mentalTrain = (Switch)findViewById(R.id.switch_mentalTrain);
-        physicalCare = (Switch)findViewById(R.id.switch_physicalCare);
+//        meal = (Switch)findViewById(R.id.switch_meal);
+//        clean = (Switch)findViewById(R.id.switch_bodyClean);
+//        activity = (Switch)findViewById(R.id.switch_activity);
+//        moveTrain = (Switch)findViewById(R.id.switch_moveTrain);
+//        comment = (Switch)findViewById(R.id.switch_comment);
+//        restRoom = (Switch)findViewById(R.id.switch_restRoom);
+//        medicine = (Switch)findViewById(R.id.switch_medicine);
+//        mentalTrain = (Switch)findViewById(R.id.switch_mentalTrain);
+//        physicalCare = (Switch)findViewById(R.id.switch_physicalCare);
         categoryList = (ListView)findViewById(R.id.listView_category);
 
         adapterCategoryList = new AdapterCategoryList(EditCategory.this, categories);
@@ -88,6 +88,7 @@ public class EditCategory extends AppCompatActivity {
 //        switchs.add(mentalTrain);
 //        switchs.add(physicalCare);
 
+        categories.clear();
         try {
             getCategoryStateToServer();
         } catch (Exception e) {
@@ -179,6 +180,7 @@ public class EditCategory extends AppCompatActivity {
                 if (response.toString().contains("result") && response.toString().contains("fail")) {
                     Toast.makeText(EditCategory.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
                 } else {
+                    categories.clear();
                     for (int i = 0; i < response.length(); i++) {
                         try {
                             categories.add(response.getJSONObject(i));

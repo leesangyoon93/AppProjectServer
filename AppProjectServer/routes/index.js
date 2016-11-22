@@ -684,26 +684,71 @@ router.get('/getCategories', function (req, res) {
             if (err) return res.json({'result': 'fail'});
             if (category) {
                 if (category.mealEnabled)
-                    result.push({'title': '오늘의 식사', 'content': category.meal, 'state': category.mealEnabled, 'num':0});
+                    result.push({'title': '오늘의 식사', 'content': category.meal, 'state': category.mealEnabled, 'num': 0});
                 if (category.cleanEnabled)
-                    result.push({'title': '신체위생관리', 'content': category.clean, 'state': category.cleanEnabled, 'num':1});
+                    result.push({
+                        'title': '신체위생관리',
+                        'content': category.clean,
+                        'state': category.cleanEnabled,
+                        'num': 1
+                    });
                 if (category.activityEnabled)
-                    result.push({'title': '산책/외출', 'content': category.activity, 'state': category.activityEnabled, 'num':2});
+                    result.push({
+                        'title': '산책/외출',
+                        'content': category.activity,
+                        'state': category.activityEnabled,
+                        'num': 2
+                    });
                 if (category.moveTrainEnabled)
-                    result.push({'title': '생활기능훈련', 'content': category.moveTrain, 'state': category.moveTrainEnabled, 'num':3});
+                    result.push({
+                        'title': '생활기능훈련',
+                        'content': category.moveTrain,
+                        'state': category.moveTrainEnabled,
+                        'num': 3
+                    });
                 if (category.commentEnabled)
-                    result.push({'title': '특이사항', 'content': category.comment, 'state': category.commentEnabled, 'num':4});
+                    result.push({
+                        'title': '특이사항',
+                        'content': category.comment,
+                        'state': category.commentEnabled,
+                        'num': 4
+                    });
                 if (category.restRoomEnabled)
-                    result.push({'title': '배변횟수', 'content': category.restRoom, 'state': category.restRoomEnabled, 'num':5});
+                    result.push({
+                        'title': '배변횟수',
+                        'content': category.restRoom,
+                        'state': category.restRoomEnabled,
+                        'num': 5
+                    });
                 if (category.medicineEnabled)
-                    result.push({'title': '투약관리', 'content': category.medicine, 'state': category.medicineEnabled, 'num':6});
+                    result.push({
+                        'title': '투약관리',
+                        'content': category.medicine,
+                        'state': category.medicineEnabled,
+                        'num': 6
+                    });
                 if (category.mentalTrainEnabled)
-                    result.push({'title': '정신기능훈련', 'content': category.mentalTrain, 'state': category.mentalTrainEnabled, 'num':7});
+                    result.push({
+                        'title': '정신기능훈련',
+                        'content': category.mentalTrain,
+                        'state': category.mentalTrainEnabled,
+                        'num': 7
+                    });
                 if (category.physicalCareEnabled)
-                    result.push({'title': '물리치료', 'content': category.physicalCare, 'state': category.physicalCareEnabled, 'num':8});
-                if(category.custom.length != 0) {
-                    for(var i in category.custom)
-                        result.push({'title':category.custom[i].title, 'content': category.custom[i].content, 'state': category.custom[i].state, 'num':category.custom[i].num});
+                    result.push({
+                        'title': '물리치료',
+                        'content': category.physicalCare,
+                        'state': category.physicalCareEnabled,
+                        'num': 8
+                    });
+                if (category.custom.length != 0) {
+                    for (var i=0; i<category.custom.length; i++)
+                        result.push({
+                            'title': category.custom[i].title,
+                            'content': category.custom[i].content,
+                            'state': category.custom[i].state,
+                            'num': category.custom[i].num
+                        });
                 }
                 return res.json(result);
             }
@@ -726,63 +771,75 @@ router.get('/getCategoryState', function (req, res) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
                     //if (category.mealEnabled)
-                        result.push({'title': '오늘의 식사', 'content': category.meal, 'state': category.mealEnabled, 'num':0});
+                    result.push({'title': '오늘의 식사', 'content': category.meal, 'state': category.mealEnabled, 'num': 0});
                     //if (category.cleanEnabled)
-                        result.push({'title': '신체위생관리', 'content': category.clean, 'state': category.cleanEnabled, 'num':1});
+                    result.push({
+                        'title': '신체위생관리',
+                        'content': category.clean,
+                        'state': category.cleanEnabled,
+                        'num': 1
+                    });
                     //if (category.activityEnabled)
-                        result.push({'title': '산책/외출', 'content': category.activity, 'state': category.activityEnabled, 'num':2});
+                    result.push({
+                        'title': '산책/외출',
+                        'content': category.activity,
+                        'state': category.activityEnabled,
+                        'num': 2
+                    });
                     //if (category.moveTrainEnabled)
-                        result.push({'title': '생활기능훈련', 'content': category.moveTrain, 'state': category.moveTrainEnabled, 'num':3});
+                    result.push({
+                        'title': '생활기능훈련',
+                        'content': category.moveTrain,
+                        'state': category.moveTrainEnabled,
+                        'num': 3
+                    });
                     //if (category.commentEnabled)
-                        result.push({'title': '특이사항', 'content': category.comment, 'state': category.commentEnabled, 'num':4});
+                    result.push({
+                        'title': '특이사항',
+                        'content': category.comment,
+                        'state': category.commentEnabled,
+                        'num': 4
+                    });
                     //if (category.restRoomEnabled)
-                        result.push({'title': '배변횟수', 'content': category.restRoom, 'state': category.restRoomEnabled, 'num':5});
+                    result.push({
+                        'title': '배변횟수',
+                        'content': category.restRoom,
+                        'state': category.restRoomEnabled,
+                        'num': 5
+                    });
                     //if (category.medicineEnabled)
-                        result.push({'title': '투약관리', 'content': category.medicine, 'state': category.medicineEnabled, 'num':6});
+                    result.push({
+                        'title': '투약관리',
+                        'content': category.medicine,
+                        'state': category.medicineEnabled,
+                        'num': 6
+                    });
                     //if (category.mentalTrainEnabled)
-                        result.push({'title': '정신기능훈련', 'content': category.mentalTrain, 'state': category.mentalTrainEnabled, 'num':7});
+                    result.push({
+                        'title': '정신기능훈련',
+                        'content': category.mentalTrain,
+                        'state': category.mentalTrainEnabled,
+                        'num': 7
+                    });
                     //if (category.physicalCareEnabled)
-                        result.push({'title': '물리치료', 'content': category.physicalCare, 'state': category.physicalCareEnabled, 'num':8});
+                    result.push({
+                        'title': '물리치료',
+                        'content': category.physicalCare,
+                        'state': category.physicalCareEnabled,
+                        'num': 8
+                    });
                     //if(category.custom.length != 0) {
-                        for(var i in category.custom)
-                            result.push({'title':category.custom[i].title, 'content': category.custom[i].content, 'state': category.custom[i].state, 'num':category.custom[i].num});
+                    for (var i=0; i<category.custom.length; i++) {
+                        console.log(i);
+                        result.push({
+                            'title': category.custom[i].title,
+                            'content': category.custom[i].content,
+                            'state': category.custom[i].state,
+                            'num': category.custom[i].num
+                        });
+                    }
+                    console.log(result);
                     return res.json(result);
-                    // if (category.mealEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if (category.cleanEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if (category.activityEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if (category.moveTrainEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if (category.commentEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if (category.restRoomEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if (category.medicineEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if (category.mentalTrainEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if (category.physicalCareEnabled)
-                    //     result.push({'state': 'true'});
-                    // else result.push({'state': 'false'});
-                    // if(category.custom.length != 0) {
-                    //     for(var i in category.custom) {
-                    //         if(category.custom[i].state)
-                    //             result.push({'state': 'true'});
-                    //         else result.push({'state': 'false'})
-                    //     }
-                    // }
-                    // console.log(result);
-                    // return res.json(result);
                 }
                 else return res.json({'result': 'fail'})
             })
@@ -791,6 +848,7 @@ router.get('/getCategoryState', function (req, res) {
     })
 });
 
+// 해야함
 router.post("/saveCategoryState", function (req, res) {
     var id = new ObjectId(req.body.patientId);
     Patient.findById(id, function (err, patient) {
@@ -870,7 +928,7 @@ router.post('/saveCategory', function (req, res) {
                             category.physicalCare = req.body.content;
                             break;
                         default:
-                            category.custom[req.body.position-9].content = req.body.content;
+                            category.custom[req.body.position - 9].content = req.body.content;
                     }
                     category.save();
                     return res.json({'result': 'success'});
@@ -882,7 +940,7 @@ router.post('/saveCategory', function (req, res) {
     })
 });
 
-router.post('/addCategory', function(req, res) {
+router.post('/addCategory', function (req, res) {
     var id = new ObjectId(req.body.patientId);
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
@@ -890,7 +948,12 @@ router.post('/addCategory', function(req, res) {
             Category.findOne({patient: patient, date: req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
-                    category.custom.push({'title': req.body.customTitle, 'content': "", 'state': true, 'num': category.custom.length+9});
+                    category.custom.push({
+                        'title': req.body.customTitle,
+                        'content': "",
+                        'state': true,
+                        'num': category.custom.length + 9
+                    });
                     category.save();
                     return res.json({'result': 'success'});
                 }
