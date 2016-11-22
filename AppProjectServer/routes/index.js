@@ -718,12 +718,11 @@ router.get('/getCategories', function (req, res) {
 router.get('/getCategoryState', function (req, res) {
     var result = [];
     var id = new ObjectId(req.query.patientId);
-    var date = new Date().toISOString();
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            console.log(date.slice(0, 10));
-            Category.findOne({'patient': patient, 'date': date.slice(0, 10)}, function (err, category) {
+            console.log(req.body.date);
+            Category.findOne({'patient': patient, 'date': req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
                     if (category.mealEnabled)

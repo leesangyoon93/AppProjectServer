@@ -29,6 +29,8 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +41,7 @@ public class EditCategory extends AppCompatActivity {
     Switch meal, clean, activity, moveTrain, comment, restRoom, medicine, mentalTrain, physicalCare;
     ArrayList<Switch> switchs = new ArrayList<>();
     String categoryTitle;
+    int lyear, lmonth, lday;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -150,8 +153,14 @@ public class EditCategory extends AppCompatActivity {
     private void getCategoryStateToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
-        String URL = String.format("http://52.41.19.232/getCategoryState?patientId=%s",
-                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"));
+        GregorianCalendar calendar = new GregorianCalendar();
+        lyear = calendar.get(Calendar.YEAR);
+        lmonth = calendar.get(Calendar.MONTH);
+        lday = calendar.get(Calendar.DAY_OF_MONTH);
+        String date = String.valueOf(lyear) + "-" + String.valueOf(lmonth+1) + "-" + String.valueOf(lday);
+
+        String URL = String.format("http://52.41.19.232/getCategoryState?patientId=%s&date=%s",
+                URLEncoder.encode(Patient.getInstance().getId(), "utf-8"), date);
 
         JsonArrayRequest req = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
 
