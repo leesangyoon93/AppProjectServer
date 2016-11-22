@@ -808,36 +808,32 @@ router.post('/saveCategory', function(req, res) {
             Category.findOne({patient: patient.id, date: req.body.date}, function (err, category) {
                 if(err) return res.json({'result': 'fail'});
                 if(category) {
-                    console.log(req.body);
-                    console.log(req.body.position)
-                    console.log(req.body.content);
                     switch(req.body.position) {
-                        case 0:
+                        case '0':
                             category.meal = req.body.content;
-                            console.log("asdf");
                             break;
-                        case 1:
+                        case '1':
                             category.clean = req.body.content;
                             break;
-                        case 2:
+                        case '2':
                             category.activity = req.body.content;
                             break;
-                        case 3:
+                        case '3':
                             category.moveTrain = req.body.content;
                             break;
-                        case 4:
+                        case '4':
                             category.comment = req.body.content;
                             break;
-                        case 5:
+                        case '5':
                             category.restRoom = req.body.content;
                             break;
-                        case 6:
+                        case '6':
                             category.medicine = req.body.content;
                             break;
-                        case 7:
+                        case '7':
                             category.mentalTrain = req.body.content;
                             break;
-                        case 8:
+                        case '8':
                             category.physicalCare = req.body.content;
                             break;
                     }
