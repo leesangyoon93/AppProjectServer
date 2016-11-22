@@ -701,7 +701,7 @@ router.get('/getCategories', function (req, res) {
                     result.push({'title': '정신기능훈련', 'content': category.mentalTrain});
                 if (category.physicalCareEnabled)
                     result.push({'title': '물리치료', 'content': category.physicalCare});
-                return res.json(result);
+                return res.json(category);
             }
             else {
                 result.push({'result': 'nothing'});

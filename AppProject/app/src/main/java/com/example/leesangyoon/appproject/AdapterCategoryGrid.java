@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -53,12 +54,101 @@ public class AdapterCategoryGrid extends BaseAdapter {
         TextView title = (TextView) convertView.findViewById(R.id.categoryTitle);
         TextView content = (TextView) convertView.findViewById(R.id.categoryContent);
         ImageView image = (ImageView)convertView.findViewById(R.id.btn_editCategoryContent);
+        LinearLayout wrap_category = (LinearLayout)convertView.findViewById(R.id.wrap_category);
         try {
-            title.setText(category.getString("title"));
-            content.setText(category.getString("content"));
-            if (User.getInstance().getAuth() == 1 && category.getString("content").equals("")) {
-                image.setVisibility(View.VISIBLE);
+            switch(position) {
+                case 0:
+                    if(category.getBoolean("mealEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("mealTitle"));
+                        content.setText(category.getString("meal"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("meal").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case 1:
+                    if(category.getBoolean("cleanEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("cleanTitle"));
+                        content.setText(category.getString("clean"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("clean").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case 2:
+                    if(category.getBoolean("activityEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("activityTitle"));
+                        content.setText(category.getString("activity"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("activity").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case 3:
+                    if(category.getBoolean("moveTrainEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("moveTrainTitle"));
+                        content.setText(category.getString("moveTrain"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("moveTrain").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case 4:
+                    if(category.getBoolean("commentEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("commentTitle"));
+                        content.setText(category.getString("comment"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("comment").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case 5:
+                    if(category.getBoolean("restRoomEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("restRoomTitle"));
+                        content.setText(category.getString("restRoom"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("restRoom").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case 6:
+                    if(category.getBoolean("medicineEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("medicineTitle"));
+                        content.setText(category.getString("medicine"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("medicine").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case 7:
+                    if(category.getBoolean("mentalTrainEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("mentalTrainTitle"));
+                        content.setText(category.getString("mentalTrain"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("mentalTrain").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
+                case 8:
+                    if(category.getBoolean("physicalCareEnabled")) {
+                        wrap_category.setVisibility(View.VISIBLE);
+                        title.setText(category.getString("physicalCareTitle"));
+                        content.setText(category.getString("physicalCare"));
+                        if (User.getInstance().getAuth() == 1 && category.getString("physicalCare").equals("")) {
+                            image.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    break;
             }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
