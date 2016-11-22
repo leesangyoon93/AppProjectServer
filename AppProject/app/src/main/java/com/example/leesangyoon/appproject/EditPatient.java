@@ -105,7 +105,7 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
                 super.onBackPressed();
                 break;
 //            case R.id.menu_savePatient:
-//                savePatientToServer();
+//                saveCategoryToServer();
         }
         return super.onOptionsItemSelected(item);
     }

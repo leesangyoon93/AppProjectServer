@@ -809,9 +809,12 @@ router.post('/saveCategory', function(req, res) {
                 if(err) return res.json({'result': 'fail'});
                 if(category) {
                     console.log(req.body);
+                    console.log(req.body.position)
+                    console.log(req.body.content);
                     switch(req.body.position) {
                         case 0:
                             category.meal = req.body.content;
+                            console.log("asdf");
                             break;
                         case 1:
                             category.clean = req.body.content;
