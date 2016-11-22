@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -32,14 +33,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by daddyslab on 2016. 11. 17..
  */
 public class EditCategory extends AppCompatActivity {
+    AdapterCategoryList adapterCategoryList;
+    ListView categoryList;
     Switch meal, clean, activity, moveTrain, comment, restRoom, medicine, mentalTrain, physicalCare;
-    ArrayList<Switch> switchs = new ArrayList<>();
+    ArrayList<JSONObject> categories = new ArrayList<>();
     String categoryTitle, date;
     int lyear, lmonth, lday;
 
@@ -69,15 +73,20 @@ public class EditCategory extends AppCompatActivity {
         medicine = (Switch)findViewById(R.id.switch_medicine);
         mentalTrain = (Switch)findViewById(R.id.switch_mentalTrain);
         physicalCare = (Switch)findViewById(R.id.switch_physicalCare);
-        switchs.add(meal);
-        switchs.add(clean);
-        switchs.add(activity);
-        switchs.add(moveTrain);
-        switchs.add(comment);
-        switchs.add(restRoom);
-        switchs.add(medicine);
-        switchs.add(mentalTrain);
-        switchs.add(physicalCare);
+        categoryList = (ListView)findViewById(R.id.listView_category);
+
+        adapterCategoryList = new AdapterCategoryList(EditCategory.this, categories);
+        adapterCategoryList.notifyDataSetChanged();
+        categoryList.setAdapter(adapterCategoryList);
+//        switchs.add(meal);
+//        switchs.add(clean);
+//        switchs.add(activity);
+//        switchs.add(moveTrain);
+//        switchs.add(comment);
+//        switchs.add(restRoom);
+//        switchs.add(medicine);
+//        switchs.add(mentalTrain);
+//        switchs.add(physicalCare);
 
         try {
             getCategoryStateToServer();
@@ -172,12 +181,14 @@ public class EditCategory extends AppCompatActivity {
                 } else {
                     for (int i = 0; i < response.length(); i++) {
                         try {
-                            if(response.optJSONObject(i).getString("state").equals("true")) {
-                                switchs.get(i).setChecked(true);
-                            }
-                            else {
-                                switchs.get(i).setChecked(false);
-                            }
+                            categories.add(response.getJSONObject(i));
+                            adapterCategoryList.notifyDataSetChanged();
+//                            if(response.optJSONObject(i).getString("state").equals("true")) {
+//                                switchs.get(i).setChecked(true);
+//                            }
+//                            else {
+//                                switchs.get(i).setChecked(false);
+//                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
