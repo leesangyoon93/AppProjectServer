@@ -253,7 +253,7 @@ public class EditCategory extends AppCompatActivity {
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("patientId", Patient.getInstance().getId());
         postParam.put("customTitle", categoryTitle);
-
+        postParam.put("date", date);
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {
