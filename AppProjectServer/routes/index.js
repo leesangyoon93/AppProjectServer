@@ -684,23 +684,23 @@ router.get('/getCategories', function (req, res) {
             if (err) return res.json({'result': 'fail'});
             if (category) {
                 if (category.mealEnabled)
-                    result.push({'title': '오늘의 식사', 'content': category.meal, 'state': category.mealEnabled});
+                    result.push({'title': '오늘의 식사', 'content': category.meal, 'state': category.mealEnabled, 'num':0});
                 if (category.cleanEnabled)
-                    result.push({'title': '신체위생관리', 'content': category.clean, 'state': category.cleanEnabled});
+                    result.push({'title': '신체위생관리', 'content': category.clean, 'state': category.cleanEnabled, 'num':1});
                 if (category.activityEnabled)
-                    result.push({'title': '산책/외출', 'content': category.activity, 'state': category.activityEnabled});
+                    result.push({'title': '산책/외출', 'content': category.activity, 'state': category.activityEnabled, 'num':2});
                 if (category.moveTrainEnabled)
-                    result.push({'title': '생활기능훈련', 'content': category.moveTrain, 'state': category.moveTrainEnabled});
+                    result.push({'title': '생활기능훈련', 'content': category.moveTrain, 'state': category.moveTrainEnabled, 'num':3});
                 if (category.commentEnabled)
-                    result.push({'title': '특이사항', 'content': category.comment, 'state': category.commentEnabled});
+                    result.push({'title': '특이사항', 'content': category.comment, 'state': category.commentEnabled, 'num':4});
                 if (category.restRoomEnabled)
-                    result.push({'title': '배변횟수', 'content': category.restRoom, 'state': category.restRoomEnabled});
+                    result.push({'title': '배변횟수', 'content': category.restRoom, 'state': category.restRoomEnabled, 'num':5});
                 if (category.medicineEnabled)
-                    result.push({'title': '투약관리', 'content': category.medicine, 'state': category.medicineEnabled});
+                    result.push({'title': '투약관리', 'content': category.medicine, 'state': category.medicineEnabled, 'num':6});
                 if (category.mentalTrainEnabled)
-                    result.push({'title': '정신기능훈련', 'content': category.mentalTrain, 'state': category.mentalTrainEnabled});
+                    result.push({'title': '정신기능훈련', 'content': category.mentalTrain, 'state': category.mentalTrainEnabled, 'num':7});
                 if (category.physicalCareEnabled)
-                    result.push({'title': '물리치료', 'content': category.physicalCare, 'state': category.physicalCareEnabled});
+                    result.push({'title': '물리치료', 'content': category.physicalCare, 'state': category.physicalCareEnabled, 'num':8});
                 return res.json(result);
             }
             else {
