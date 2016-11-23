@@ -873,6 +873,7 @@ router.post("/saveCategoryState", function (req, res) {
                     if (length > 11) {
                         for (var i = 9; i < length - 2; i++) {
                             var tmp = "state" + i.toString();
+                            console.log(category.custom[i-9].content);
                             if(req.body[tmp] == "true") {
                                 category.custom[i-9]['state'] = true;
                                 category.save();
