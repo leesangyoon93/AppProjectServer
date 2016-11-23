@@ -877,7 +877,7 @@ router.post("/saveCategoryState", function (req, res) {
                     for (var i = 0; i < category.custom.length; i++) {
                         var tmp = 'state' + (i + 9);
                         token = req.body[tmp] == 'true';
-                        Category.update({'custom.num': i+9}, {'$set': {
+                        Category.update({'custom.num': i+9, 'patient': patient, 'date': req.body.date}, {'$set': {
                             'custom.$.state': token
                         }}, function(err) {
                             if(err) return res.json({'result': 'fail'})
@@ -913,7 +913,7 @@ router.post('/saveCategory', function (req, res) {
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            Category.findOne({patient: patient.id, date: req.body.date}, function (err, category) {
+            Category.findOne({patient: patient, date: req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
                     switch (req.body.position) {
@@ -945,11 +945,12 @@ router.post('/saveCategory', function (req, res) {
                             category.physicalCare = req.body.content;
                             break;
                         default:
-                            Category.update({'custom.num': req.body.position}, {'$set': {
+                            Category.update({'custom.num': req.body.position, 'patient': patient, 'date': req.body.date}, {'$set': {
                                 'custom.$.content': req.body.content
                             }}, function(err) {
                                 if(err) return res.json({'result': 'fail'})
-                            })
+                            });
+                            break;
                     }
                     category.save();
                     return res.json({'result': 'success'});
