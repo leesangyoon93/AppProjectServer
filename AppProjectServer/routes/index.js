@@ -871,19 +871,16 @@ router.post("/saveCategoryState", function (req, res) {
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
                     category.custom[1]['state'] = 'false';
+                    category.save();
                     if (length > 11) {
-                        for (var i = 9; i < length - 2; i++) {
+                        for (var i = 0; i < category.custom.length; i++) {
                             console.log(i);
-                            var tmp = "state" + i;
-                            var index = i-9;
-                            console.log(typeof(tmp));
-                            console.log(typeof(req.body[tmp]));
-                            console.log(typeof (index));
+                            var tmp = "state" + i + 9;
                             if(req.body[tmp] == "true") {
-                                category.custom[index].state = "true";
+                                category.custom[i].state = "true";
                             }
                             else {
-                                category.custom[index].state = "false";
+                                category.custom[i].state = "false";
                             }
                         }
                         console.log("custom save return")
