@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/EditCategory.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/EditCategory.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <ignored path="AppProjectServer.iws" />
@@ -50,8 +51,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="454">
-              <caret line="886" column="28" selection-start-line="886" selection-start-column="28" selection-end-line="886" selection-end-column="28" />
+            <state relative-caret-position="304">
+              <caret line="876" column="65" selection-start-line="876" selection-start-column="65" selection-end-line="876" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -352,12 +353,12 @@
       <workItem from="1479449161372" duration="6373000" />
       <workItem from="1479533197248" duration="2478000" />
       <workItem from="1479740770491" duration="13000" />
-      <workItem from="1479746958128" duration="12152000" />
+      <workItem from="1479746958128" duration="12365000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65042000" />
+    <option name="totallyTimeSpent" value="65255000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="42" width="1440" height="817" extended-state="0" />
@@ -814,8 +815,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="886" column="28" selection-start-line="886" selection-start-column="28" selection-end-line="886" selection-end-column="28" />
+        <state relative-caret-position="304">
+          <caret line="876" column="65" selection-start-line="876" selection-start-column="65" selection-end-line="876" selection-end-column="65" />
           <folding />
         </state>
       </provider>
