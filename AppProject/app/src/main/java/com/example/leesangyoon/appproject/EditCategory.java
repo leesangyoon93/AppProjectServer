@@ -168,26 +168,14 @@ public class EditCategory extends AppCompatActivity {
         final int position = listView.getPositionForView(linearLayout);
 
         try {
-            Log.e("asdf", String.valueOf(categories.get(position).getBoolean("state")));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            if(String.valueOf(categories.get(position).getBoolean("state")).equals("true")) {
-                Log.e("asdf", "true, false");
+            if(categories.get(position).getString("state").equals("true")) {
                 categories.get(position).put("state", "false");
                 adapterCategoryList.notifyDataSetChanged();
             }
             else {
-                Log.e("asdf", "false, true");
                 categories.get(position).put("state", "true");
                 adapterCategoryList.notifyDataSetChanged();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        try {
-            Log.e("asdf", String.valueOf(categories.get(position).getBoolean("state")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -271,7 +259,7 @@ public class EditCategory extends AppCompatActivity {
         postParam.put("date", date);
         postParam.put("patientId", Patient.getInstance().getId());
         for(int i=0; i<categories.size(); i++) {
-            String state = String.valueOf(categories.get(i).getBoolean("state"));
+            String state = categories.get(i).getString("state");
             postParam.put(("state" + String.valueOf(i)), state);
         }
 

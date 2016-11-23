@@ -871,7 +871,7 @@ router.post("/saveCategoryState", function (req, res) {
                     category.medicineEnabled = req.body.state6 == 'true';
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
-                    category.custom[0].state = true;
+                    category.custom[0].state = 'true';
                     console.log(category.custom[0].state);
                     console.log(category);
                     // if (length > 11) {
@@ -975,7 +975,7 @@ router.post('/addCategory', function (req, res) {
                     category.custom.push({
                         'title': req.body.customTitle,
                         'content': "",
-                        'state': true,
+                        'state': "true",
                         'num': category.custom.length + 9
                     });
                     category.save();
