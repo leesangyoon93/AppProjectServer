@@ -871,6 +871,7 @@ router.post("/saveCategoryState", function (req, res) {
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
                     category.custom[1]['state'] = 'false';
+                    console.log(category.custom[1].state);
                     category.save();
                     if (length > 11) {
                         for (var i = 0; i < category.custom.length; i++) {
