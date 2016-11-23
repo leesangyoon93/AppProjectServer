@@ -853,10 +853,11 @@ router.get('/getCategoryState', function (req, res) {
 // 해야함
 router.post("/saveCategoryState", function (req, res) {
     var id = new ObjectId(req.body.patientId);
+    var token = true;
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            Category.findOneAndUpdate({patient: patient, date: req.body.date}, function (err, category) {
+            Category.findOne({patient: patient, date: req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
                     console.log(req.body);
@@ -875,11 +876,14 @@ router.post("/saveCategoryState", function (req, res) {
                     for (var i = 0; i < category.custom.length; i++) {
                         var tmp = 'state' + (i + 9);
                         if (req.body[tmp] == 'true') {
-                            category.custom[i].set('state', true);
+                            //category.custom[i].set('state', true);
+                            token = true;
                         }
                         else {
-                            category.custom[i].set('state', false);
+                            //category.custom[i].set('state', false);
+                            token = false;
                         }
+                        Category.update({patient: patient, date: req.body.date}, {$set: {'custom.$.state': true}});
                     }
                     category.save();
                     return res.json({'result': 'success'})
