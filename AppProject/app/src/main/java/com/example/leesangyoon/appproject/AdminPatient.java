@@ -33,8 +33,6 @@ import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
  * Created by daddyslab on 2016. 11. 1..
  */
 
-// 여기는 환자 리스트 보여주자 자기가 가지고 있는 .. 리스트 클릭하면 showPatient 로 가지고 showPatient 에서 수정 가능하게 ( 요양사만 )
-//
 public class AdminPatient extends AppCompatActivity implements AdapterView.OnItemClickListener {
     ListView patientList;
     AdapterPatientList adapterPatientList;
@@ -81,7 +79,6 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_adminpatient, menu);
         return true;
     }
 
@@ -94,9 +91,6 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(intent);
                 super.onBackPressed();
                 break;
-//            case R.id.menu_addPatient:
-//                intent = new Intent(AdminPatient.this, CreatePatient.class);
-//                startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

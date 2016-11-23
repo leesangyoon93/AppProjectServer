@@ -4,19 +4,16 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -68,12 +65,11 @@ public class EditCategory extends AppCompatActivity {
 
         categoryList = (ListView)findViewById(R.id.listView_category);
 
-        floatingActionButton = (FloatingActionButton)findViewById(R.id.mFloatingActionButton);
+        floatingActionButton = (FloatingActionButton)findViewById(R.id.addCategory);
         adapterCategoryList = new AdapterCategoryList(EditCategory.this, categories);
         adapterCategoryList.notifyDataSetChanged();
         categoryList.setAdapter(adapterCategoryList);
 
-        categories.clear();
         try {
             getCategoryStateToServer();
         } catch (Exception e) {
@@ -197,11 +193,12 @@ public class EditCategory extends AppCompatActivity {
         String URL = "http://52.41.19.232/saveCategoryState";
 
         Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("date", date);
+        postParam.put("patientId", Patient.getInstance().getId());
         for(int i=0; i<categories.size(); i++) {
             String state = String.valueOf(categories.get(i).getBoolean("state"));
             postParam.put(("state" + String.valueOf(i)), state);
         }
-        postParam.put("patientId", Patient.getInstance().getId());
 //        postParam.put("mealCheck", String.valueOf(meal.isChecked()));
 //        postParam.put("cleanCheck", String.valueOf(clean.isChecked()));
 //        postParam.put("activityCheck", String.valueOf(activity.isChecked()));
@@ -211,7 +208,7 @@ public class EditCategory extends AppCompatActivity {
 //        postParam.put("medicineCheck", String.valueOf(medicine.isChecked()));
 //        postParam.put("mentalTrainCheck", String.valueOf(mentalTrain.isChecked()));
 //        postParam.put("physicalCareCheck", String.valueOf(physicalCare.isChecked()));
-        postParam.put("date", date);
+
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {

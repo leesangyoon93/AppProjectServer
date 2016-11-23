@@ -742,7 +742,7 @@ router.get('/getCategories', function (req, res) {
                         'num': 8
                     });
                 if (category.custom.length != 0) {
-                    for (var i=0; i<category.custom.length; i++)
+                    for (var i = 0; i < category.custom.length; i++)
                         result.push({
                             'title': category.custom[i].title,
                             'content': category.custom[i].content,
@@ -829,7 +829,7 @@ router.get('/getCategoryState', function (req, res) {
                         'num': 8
                     });
                     //if(category.custom.length != 0) {
-                    for (var i=0; i<category.custom.length; i++) {
+                    for (var i = 0; i < category.custom.length; i++) {
                         console.log(i);
                         result.push({
                             'title': category.custom[i].title,
@@ -868,8 +868,9 @@ router.post("/saveCategoryState", function (req, res) {
                     category.medicineEnabled = req.body.state6 == 'true';
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
-                    if(req.body.length >= 12) {
-                        for(var i=9; i<req.body.length-2; i++) {
+                    if (req.body.length >= 12) {
+                        for (var i = 9; i < req.body.length - 2; i++) {
+                            console.log(i);
                             var tmp = "state" + i.toString();
                             category.custom[i - 9].state = req.body[tmp] == "true";
                         }
@@ -982,7 +983,7 @@ Patient.find(function (err, patients) {
                     var tmp = JSON.parse(JSON.stringify(categories[i]));
                     category.patient = patients[i];
                     category.custom = tmp.custom;
-                    for(var j=0; j< category.custom.length; j++)
+                    for (var j = 0; j < category.custom.length; j++)
                         category.custom[j].content = "";
                     category.date = getTimeStamp();
                     category.mealEnabled = tmp.mealEnabled;
@@ -1002,27 +1003,34 @@ Patient.find(function (err, patients) {
 });
 
 setInterval(function () {
-    Category.find({date: getYesterdayTimeStamp()}, function (err, categories) {
-        if (categories.length == 0) {
-            for (var i in patients) {
-                var category = new Category();
-                category = categories[i];
-                category.patient = patients[i];
-                category.date = getTimeStamp();
-                category.meal = "";
-                category.clean = "";
-                category.activity = "";
-                category.moveTrain = "";
-                category.comment = "";
-                category.restRoom = "";
-                category.medicine = "";
-                category.mentalTrain = "";
-                category.physicalCare = "";
-                category.save();
+    Patient.find(function (err, patients) {
+        Category.find({date: getTimeStamp()}, function (err, tmps) {
+            if (tmps.length == 0) {
+                Category.find({date: getYesterdayTimeStamp()}, function (err, categories) {
+                    for (var i in patients) {
+                        var category = new Category();
+                        var tmp = JSON.parse(JSON.stringify(categories[i]));
+                        category.patient = patients[i];
+                        category.custom = tmp.custom;
+                        for (var j = 0; j < category.custom.length; j++)
+                            category.custom[j].content = "";
+                        category.date = getTimeStamp();
+                        category.mealEnabled = tmp.mealEnabled;
+                        category.cleanEnabled = tmp.cleanEnabled;
+                        category.activityEnabled = tmp.activityEnabled;
+                        category.moveTrainEnabled = tmp.moveTrainEnabled;
+                        category.commentEnabled = tmp.commentEnabled;
+                        category.restRoomEnabled = tmp.restRoomEnabled;
+                        category.medicineEnabled = tmp.medicineEnabled;
+                        category.mentalTrainEnabled = tmp.mentalTrainEnabled;
+                        category.physicalCareEnabled = tmp.physicalCareEnabled;
+                        category.save();
+                    }
+                })
             }
-        }
-    })
-}, 1000 * 60 * 60 * 24);
+        })
+    });
+}, 1000 * 60 * 60 * 12);
 
 function getTimeStamp() {
     var d = new Date();

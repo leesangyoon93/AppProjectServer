@@ -54,10 +54,9 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
     AdapterCategoryGrid adapterCategoryGrid;
     ArrayList<JSONObject> categories = new ArrayList<JSONObject>();
     GridView gridView;
-    TextView roomNumber, birthday;
+    TextView roomNumber, birthday, date;
     ActionBar actionBar;
     CircleImageView patientImage;
-    TextView date;
     int lyear, lmonth, lday;
 
     @Override
@@ -92,7 +91,7 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_editpatient, menu);
+        //getMenuInflater().inflate(R.menu.menu_editpatient, menu);
         return true;
     }
 
@@ -105,8 +104,6 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
                 startActivity(intent);
                 super.onBackPressed();
                 break;
-//            case R.id.menu_savePatient:
-//                saveCategoryToServer();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -45,14 +45,14 @@
         <activity android:name=".Schedule" android:label="일정"/>
         <activity android:name=".QA" android:label="질문/답변"/>
         <activity android:name=".ShowArticle" android:label="게시글 정보" android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
-        <activity android:name="EditArticle" android:label="글 작성/수정"/>
+        <activity android:name=".EditArticle" android:label="게시글 작성/수정"/>
         <activity android:name=".EditGallery" android:label="갤러리 작성/수정"/>
         <activity android:name=".ShowGallery" android:label="갤러리 정보" android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
         <activity android:name=".AdminPatient" android:label="수급자관리"/>
         <activity android:name=".CreatePatient" android:label="수급자등록"/>
         <activity android:name=".ShowPatient" android:label="수급자정보"/>
         <activity android:name=".EditPatient" android:label="수급자기록"/>
-        <activity android:name=".EditCategory" android:label="카테고리 수정"/>
+        <activity android:name=".EditCategory" android:label="카테고리"/>
         <!--android:parentActivityName=".MainActivity"-->
     </application>
 

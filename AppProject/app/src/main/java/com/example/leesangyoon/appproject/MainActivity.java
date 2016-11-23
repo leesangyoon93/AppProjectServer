@@ -36,22 +36,7 @@ import java.util.Map;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
-    // 메뉴 달때 유저한테 수급자 정보 열람 버튼을 제공해주자. 그거 누르면 showPatient 로 가서 날짜별로 정보 열람할수있고, 수정 안됨.
-    // 이부분이 가장 핵심기능, 개 빡셀듯
 
-    // 갤러리 표시 제대로 해주고 밑에꺼 ㄲㄲㄲㄲ // 완료
-    // 1. adminPatient 에 리스트뷰 달고, 어떻게 나타낼건지. // 완료
-    // 2. createPatient 로 보호자/환자 정보 추가하는거 구현. // 완료
-    // 3. showPatient 로 보호자/환자 정보 나타내기 ( 이부분이 막연함 )
-    // 4. editPatient 구현. 정보를 나타낼 수 있으면 당연히 수정할 수 있겟지?
-    // 5. 정보 추가가 되면 유저프로필에 같이 나오게 해주자.
-
-    // 다른 요양원인데 요양사 아이디가 같으면??.........
-    // 게시판에 검색버튼 추가 ( 추가사항 )
-
-    // 공지 게시판 완벽구현 되면 나머지 게시판 두개 마저 하기. UI에 따라 수정사항 생길 수 있으니 게시판 기능 끝나면 다른거 하자.
-
-    // 타이틀 제대로.
     BackPressCloseHandler backPressCloseHandler;
     RecyclerView mRecyclerView;
     ArrayList<JSONObject> patients = new ArrayList<JSONObject>();
@@ -107,15 +92,23 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.addOnItemTouchListener(
                 new RecyclerItemClickListener(MainActivity.this, mRecyclerView ,new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(MainActivity.this, EditPatient.class);
                         try {
-                            Toast.makeText(MainActivity.this, patients.get(position).getString("patientName"), Toast.LENGTH_SHORT).show();
+                            Patient.getInstance().setId(patients.get(position).getString("_id"));
+                            Patient.getInstance().setWorkerId(patients.get(position).getString("worker"));
+                            Patient.getInstance().setProtectorId(patients.get(position).getString("protector"));
+                            Patient.getInstance().setPatientName(patients.get(position).getString("patientName"));
+                            Patient.getInstance().setBirthday(patients.get(position).getString("birthday"));
+                            Patient.getInstance().setRelation(patients.get(position).getString("relation"));
+                            Patient.getInstance().setRoomNumber(patients.get(position).getString("roomNumber"));
+                            Patient.getInstance().setImage(patients.get(position).getString("image"));
+                            Patient.getInstance().setGender(patients.get(position).getString("gender"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                        startActivity(intent);
                     }
-
                     @Override public void onLongItemClick(View view, int position) {
-                        // do whatever
                     }
                 })
         );
@@ -257,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
                         Patient.getInstance().setImage(response.getString("image"));
                         Patient.getInstance().setGender(response.getString("gender"));
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
