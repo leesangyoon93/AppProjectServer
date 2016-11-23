@@ -743,7 +743,7 @@ router.get('/getCategories', function (req, res) {
                     });
                 if (category.custom.length != 0) {
                     for (var i = 0; i < category.custom.length; i++)
-                        if(category.custom[i].state) {
+                        if(category.custom[i].state == 'true') {
                             result.push({
                                 'title': category.custom[i].title,
                                 'content': category.custom[i].content,
