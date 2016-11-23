@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -47,7 +48,7 @@ public class AdapterCategoryList extends BaseAdapter {
 
         convertView = mInflater.inflate(R.layout.list_category, null);
 
-        JSONObject category = categories.get(position);
+        final JSONObject category = categories.get(position);
 
         CircleImageView image = (CircleImageView) convertView.findViewById(R.id.image_category);
         TextView title = (TextView)convertView.findViewById(R.id.title_category);

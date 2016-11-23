@@ -36,7 +36,8 @@
                 android:id="@+id/switch_category"
                 android:layout_gravity="right"
                 android:foregroundGravity="right"
-                android:gravity="center|right" />
+                android:gravity="center|right"
+                android:onClick="switchChange"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

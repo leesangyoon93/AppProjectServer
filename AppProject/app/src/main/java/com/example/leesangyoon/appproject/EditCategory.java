@@ -11,13 +11,18 @@ import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +79,26 @@ public class EditCategory extends AppCompatActivity {
         adapterCategoryList = new AdapterCategoryList(EditCategory.this, categories);
         adapterCategoryList.notifyDataSetChanged();
         categoryList.setAdapter(adapterCategoryList);
+
+//        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked) {
+//                    try {
+//                        category.put("state", true);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                else {
+//                    try {
+//                        category.put("state", false);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
 
         try {
             getCategoryStateToServer();
@@ -133,6 +158,39 @@ public class EditCategory extends AppCompatActivity {
                         .show();
             }
         });
+    }
+
+    public void switchChange(View v) {
+
+        View parentRow = (View) v.getParent();
+        LinearLayout linearLayout = (LinearLayout) parentRow.getParent().getParent();
+        ListView listView = (ListView)linearLayout.getParent();
+        final int position = listView.getPositionForView(linearLayout);
+
+        try {
+            Log.e("asdf", String.valueOf(categories.get(position).getBoolean("state")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            if(String.valueOf(categories.get(position).getBoolean("state")).equals("true")) {
+                Log.e("asdf", "true, false");
+                categories.get(position).put("state", "false");
+                adapterCategoryList.notifyDataSetChanged();
+            }
+            else {
+                Log.e("asdf", "false, true");
+                categories.get(position).put("state", "true");
+                adapterCategoryList.notifyDataSetChanged();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            Log.e("asdf", String.valueOf(categories.get(position).getBoolean("state")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -216,16 +274,6 @@ public class EditCategory extends AppCompatActivity {
             String state = String.valueOf(categories.get(i).getBoolean("state"));
             postParam.put(("state" + String.valueOf(i)), state);
         }
-//        postParam.put("mealCheck", String.valueOf(meal.isChecked()));
-//        postParam.put("cleanCheck", String.valueOf(clean.isChecked()));
-//        postParam.put("activityCheck", String.valueOf(activity.isChecked()));
-//        postParam.put("moveTrainCheck", String.valueOf(moveTrain.isChecked()));
-//        postParam.put("commentCheck", String.valueOf(comment.isChecked()));
-//        postParam.put("restRoomCheck", String.valueOf(restRoom.isChecked()));
-//        postParam.put("medicineCheck", String.valueOf(medicine.isChecked()));
-//        postParam.put("mentalTrainCheck", String.valueOf(mentalTrain.isChecked()));
-//        postParam.put("physicalCareCheck", String.valueOf(physicalCare.isChecked()));
-
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {
