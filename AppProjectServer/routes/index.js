@@ -884,9 +884,13 @@ router.post("/saveCategoryState", function (req, res) {
                                 category.save();
                             }
                         }
+                        category.save();
+                        return res.json({'result': 'success'})
                     }
-                    category.save();
-                    return res.json({'result': 'success'})
+                    else {
+                        category.save();
+                        return res.json({'result': 'success'})
+                    }
                 }
                 else return res.json({'result': 'fail'})
             })
