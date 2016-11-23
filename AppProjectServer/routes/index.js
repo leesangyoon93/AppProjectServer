@@ -881,7 +881,7 @@ router.post("/saveCategoryState", function (req, res) {
                         else {
                             token = false;
                         }
-                        Category.update({'custom.num': i+9}, {'$set': {
+                        Category.update({'custom.num': i+9, 'patient': patient, 'date': req.body.date}, {'$set': {
                             'custom.$.state': token
                         }}, function(err) {
                             if(err) return res.json({'result': 'fail'})
