@@ -752,6 +752,7 @@ router.get('/getCategories', function (req, res) {
                             });
                         }
                 }
+                console.log(result);
                 return res.json(result);
             }
             else {
@@ -944,7 +945,11 @@ router.post('/saveCategory', function (req, res) {
                             category.physicalCare = req.body.content;
                             break;
                         default:
-                            category.custom[req.body.position - 9].content = req.body.content;
+                            Category.update({'custom.num': req.body.position}, {'$set': {
+                                'custom.$.content': req.body.content
+                            }}, function(err) {
+                                if(err) return res.json({'result': 'fail'})
+                            })
                     }
                     category.save();
                     return res.json({'result': 'success'});

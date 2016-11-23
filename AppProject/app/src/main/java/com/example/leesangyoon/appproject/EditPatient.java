@@ -249,6 +249,11 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
                 try {
                     if (response.getString("result").equals("success")) {
                         Toast.makeText(EditPatient.this, "성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                        try {
+                            getCategoriesToServer();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     } else {
                         Toast.makeText(EditPatient.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
                     }
