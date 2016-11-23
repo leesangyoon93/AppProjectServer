@@ -743,7 +743,7 @@ router.get('/getCategories', function (req, res) {
                     });
                 if (category.custom.length != 0) {
                     for (var i = 0; i < category.custom.length; i++)
-                        if (category.custom[i].state == 'true') {
+                        if (category.custom[i].state) {
                             result.push({
                                 'title': category.custom[i].title,
                                 'content': category.custom[i].content,
@@ -870,14 +870,13 @@ router.post("/saveCategoryState", function (req, res) {
                     category.medicineEnabled = req.body.state6 == 'true';
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
-                    category.custom[1].state = "false";
                     for (var i = 0; i < category.custom.length; i++) {
                         var tmp = 'state' + (i + 9);
                         if (req.body[tmp] === 'true') {
-                            category.custom[i].state = "true";
+                            category.custom[i].state = true
                         }
                         else {
-                            category.custom[i].state = "false";
+                            category.custom[i].state = false;
                         }
                     }
                     category.save();
@@ -965,7 +964,7 @@ router.post('/addCategory', function (req, res) {
                     category.custom.push({
                         'title': req.body.customTitle,
                         'content': "",
-                        'state': "true",
+                        'state': true,
                         'num': category.custom.length + 9
                     });
                     category.save();
