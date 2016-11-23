@@ -952,15 +952,13 @@ router.post('/saveCategory', function (req, res) {
                                 'patient': patient,
                                 'date': req.body.date
                             }, {
-                                '$set': {
-                                    'custom.$.content': req.body.content
-                                }
+                                '$set': {'custom.$.content': req.body.content}
                             }, function (err) {
                                 if (err) return res.json({'result': 'fail'})
                             });
                             break;
+                            category.save();
                     }
-                    category.save();
                     return res.json({'result': 'success'});
                 }
                 else return res.json({'result': 'fail'})
