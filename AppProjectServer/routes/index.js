@@ -875,14 +875,7 @@ router.post("/saveCategoryState", function (req, res) {
                     //category.custom[1].state = req.body.state10 == 'true';
                     for (var i = 0; i < category.custom.length; i++) {
                         var tmp = 'state' + (i + 9);
-                        if (req.body[tmp] == 'true') {
-                            //category.custom[i].state.setData(true);
-                            token = true;
-                        }
-                        else {
-                            //category.custom[i].state.setData(false);
-                            token = false;
-                        }
+                        token = req.body[tmp] == 'true';
                         Category.update({'custom.num': i+9}, {'$set': {
                             'custom.$.state': token
                         }}, function(err) {
