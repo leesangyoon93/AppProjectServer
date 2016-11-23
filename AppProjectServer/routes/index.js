@@ -743,7 +743,7 @@ router.get('/getCategories', function (req, res) {
                     });
                 if (category.custom.length != 0) {
                     for (var i = 0; i < category.custom.length; i++)
-                        if(category.custom[i].state == 'true') {
+                        if (category.custom[i].state == 'true') {
                             result.push({
                                 'title': category.custom[i].title,
                                 'content': category.custom[i].content,
@@ -861,7 +861,6 @@ router.post("/saveCategoryState", function (req, res) {
                 if (category) {
                     console.log(req.body);
                     var length = Object.keys(req.body).length;
-                    category.custom[0].state = "true";
                     category.mealEnabled = req.body.state0 == 'true';
                     category.cleanEnabled = req.body.state1 == 'true';
                     category.activityEnabled = req.body.state2 == 'true';
@@ -871,26 +870,18 @@ router.post("/saveCategoryState", function (req, res) {
                     category.medicineEnabled = req.body.state6 == 'true';
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
-                    category.custom[1].state = 'false';
-                    if (length > 11) {
-                        for (var i = 0; i < category.custom.length; i++) {
-                            console.log(i);
-                            var tmp = 'state' + (i + 9);
-                            console.log(tmp);
-                            if(req.body[tmp] == 'true') {
-                                category.custom[i].state = 'true';
-                            }
-                            else {
-                                category.custom[i].state = 'false';
-                            }
+                    category.custom[1].state = "false";
+                    for (var i = 0; i < category.custom.length; i++) {
+                        var tmp = 'state' + (i + 9);
+                        if (req.body[tmp] === 'true') {
+                            category.custom[i].state = "true";
                         }
-                        category.save();
-                        return res.json({'result': 'success'})
+                        else {
+                            category.custom[i].state = "false";
+                        }
                     }
-                    else {
-                        category.save();
-                        return res.json({'result': 'success'})
-                    }
+                    category.save();
+                    return res.json({'result': 'success'})
                 }
                 else return res.json({'result': 'fail'})
             })
