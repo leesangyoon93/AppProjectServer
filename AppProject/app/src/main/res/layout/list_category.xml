@@ -1,35 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_margin="3dp">
+        android:layout_height="match_parent"
+        android:padding="5dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="match_parent"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/image_category"
-            android:layout_weight="5" />
+            android:layout_margin="3dp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/title_category"
             android:gravity="left|center"
             android:textSize="25sp"
-            android:padding="10dp"
-            android:layout_weight="2" />
+            android:padding="10dp" />
 
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:id="@+id/switch_category" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="right">
 
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="true"
+                android:id="@+id/switch_category"
+                android:layout_gravity="right"
+                android:foregroundGravity="right"
+                android:gravity="center|right" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

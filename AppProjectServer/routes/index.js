@@ -857,15 +857,23 @@ router.post("/saveCategoryState", function (req, res) {
             Category.findOne({patient: patient, date: req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
-                    category.mealEnabled = req.body.mealCheck == 'true';
-                    category.cleanEnabled = req.body.cleanCheck == 'true';
-                    category.activityEnabled = req.body.activityCheck == 'true';
-                    category.moveTrainEnabled = req.body.moveTrainCheck == 'true';
-                    category.commentEnabled = req.body.commentCheck == 'true';
-                    category.restRoomEnabled = req.body.restRoomCheck == 'true';
-                    category.medicineEnabled = req.body.medicineCheck == 'true';
-                    category.mentalTrainEnabled = req.body.mentalTrainCheck == 'true';
-                    category.physicalCareEnabled = req.body.physicalCareCheck == 'true';
+                    console.log(req.body);
+                    console.log(req.body.length);
+                    category.mealEnabled = req.body.state0 == 'true';
+                    category.cleanEnabled = req.body.state1 == 'true';
+                    category.activityEnabled = req.body.state2 == 'true';
+                    category.moveTrainEnabled = req.body.state3 == 'true';
+                    category.commentEnabled = req.body.state4 == 'true';
+                    category.restRoomEnabled = req.body.state5 == 'true';
+                    category.medicineEnabled = req.body.state6 == 'true';
+                    category.mentalTrainEnabled = req.body.state7 == 'true';
+                    category.physicalCareEnabled = req.body.state8 == 'true';
+                    if(req.body.length >= 12) {
+                        for(var i=9; i<req.body.length-2; i++) {
+                            var tmp = "state" + i.toString();
+                            category.custom[i - 9].state = req.body[tmp] == "true";
+                        }
+                    }
                     category.save();
                     return res.json({'result': 'success'})
                 }

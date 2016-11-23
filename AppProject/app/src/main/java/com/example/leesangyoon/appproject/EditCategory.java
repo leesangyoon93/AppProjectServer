@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -42,8 +44,8 @@ import java.util.Map;
 public class EditCategory extends AppCompatActivity {
     AdapterCategoryList adapterCategoryList;
     ListView categoryList;
-    Switch meal, clean, activity, moveTrain, comment, restRoom, medicine, mentalTrain, physicalCare;
     ArrayList<JSONObject> categories = new ArrayList<>();
+    FloatingActionButton floatingActionButton;
     String categoryTitle, date;
     int lyear, lmonth, lday;
 
@@ -64,29 +66,12 @@ public class EditCategory extends AppCompatActivity {
         lday = calendar.get(Calendar.DAY_OF_MONTH);
         date = String.valueOf(lyear) + "-" + String.valueOf(lmonth+1) + "-" + String.valueOf(lday);
 
-//        meal = (Switch)findViewById(R.id.switch_meal);
-//        clean = (Switch)findViewById(R.id.switch_bodyClean);
-//        activity = (Switch)findViewById(R.id.switch_activity);
-//        moveTrain = (Switch)findViewById(R.id.switch_moveTrain);
-//        comment = (Switch)findViewById(R.id.switch_comment);
-//        restRoom = (Switch)findViewById(R.id.switch_restRoom);
-//        medicine = (Switch)findViewById(R.id.switch_medicine);
-//        mentalTrain = (Switch)findViewById(R.id.switch_mentalTrain);
-//        physicalCare = (Switch)findViewById(R.id.switch_physicalCare);
         categoryList = (ListView)findViewById(R.id.listView_category);
 
+        floatingActionButton = (FloatingActionButton)findViewById(R.id.mFloatingActionButton);
         adapterCategoryList = new AdapterCategoryList(EditCategory.this, categories);
         adapterCategoryList.notifyDataSetChanged();
         categoryList.setAdapter(adapterCategoryList);
-//        switchs.add(meal);
-//        switchs.add(clean);
-//        switchs.add(activity);
-//        switchs.add(moveTrain);
-//        switchs.add(comment);
-//        switchs.add(restRoom);
-//        switchs.add(medicine);
-//        switchs.add(mentalTrain);
-//        switchs.add(physicalCare);
 
         categories.clear();
         try {
@@ -94,30 +79,10 @@ public class EditCategory extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_editcategory, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
-        switch(item.getItemId()) {
-            case android.R.id.home:
-                intent = new Intent(EditCategory.this, ShowPatient.class);
-                startActivity(intent);
-                break;
-            case R.id.menu_saveCategory:
-                try {
-                    saveCategoryStateToServer();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                break;
-            case R.id.menu_addCategory:
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditCategory.this);
 
                 LinearLayout layout = new LinearLayout(EditCategory.this);
@@ -153,6 +118,30 @@ public class EditCategory extends AppCompatActivity {
                             }
                         })
                         .show();
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_editcategory, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                intent = new Intent(EditCategory.this, ShowPatient.class);
+                startActivity(intent);
+                break;
+            case R.id.menu_saveCategory:
+                try {
+                    saveCategoryStateToServer();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -185,12 +174,6 @@ public class EditCategory extends AppCompatActivity {
                         try {
                             categories.add(response.getJSONObject(i));
                             adapterCategoryList.notifyDataSetChanged();
-//                            if(response.optJSONObject(i).getString("state").equals("true")) {
-//                                switchs.get(i).setChecked(true);
-//                            }
-//                            else {
-//                                switchs.get(i).setChecked(false);
-//                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -214,16 +197,20 @@ public class EditCategory extends AppCompatActivity {
         String URL = "http://52.41.19.232/saveCategoryState";
 
         Map<String, String> postParam = new HashMap<String, String>();
+        for(int i=0; i<categories.size(); i++) {
+            String state = String.valueOf(categories.get(i).getBoolean("state"));
+            postParam.put(("state" + String.valueOf(i)), state);
+        }
         postParam.put("patientId", Patient.getInstance().getId());
-        postParam.put("mealCheck", String.valueOf(meal.isChecked()));
-        postParam.put("cleanCheck", String.valueOf(clean.isChecked()));
-        postParam.put("activityCheck", String.valueOf(activity.isChecked()));
-        postParam.put("moveTrainCheck", String.valueOf(moveTrain.isChecked()));
-        postParam.put("commentCheck", String.valueOf(comment.isChecked()));
-        postParam.put("restRoomCheck", String.valueOf(restRoom.isChecked()));
-        postParam.put("medicineCheck", String.valueOf(medicine.isChecked()));
-        postParam.put("mentalTrainCheck", String.valueOf(mentalTrain.isChecked()));
-        postParam.put("physicalCareCheck", String.valueOf(physicalCare.isChecked()));
+//        postParam.put("mealCheck", String.valueOf(meal.isChecked()));
+//        postParam.put("cleanCheck", String.valueOf(clean.isChecked()));
+//        postParam.put("activityCheck", String.valueOf(activity.isChecked()));
+//        postParam.put("moveTrainCheck", String.valueOf(moveTrain.isChecked()));
+//        postParam.put("commentCheck", String.valueOf(comment.isChecked()));
+//        postParam.put("restRoomCheck", String.valueOf(restRoom.isChecked()));
+//        postParam.put("medicineCheck", String.valueOf(medicine.isChecked()));
+//        postParam.put("mentalTrainCheck", String.valueOf(mentalTrain.isChecked()));
+//        postParam.put("physicalCareCheck", String.valueOf(physicalCare.isChecked()));
         postParam.put("date", date);
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
