@@ -17,25 +17,35 @@
             android:layout_height="match_parent"
             android:id="@+id/mainImage"
             android:background="@drawable/main_image"
-            android:layout_weight="10"
+            android:layout_weight="11"
             android:scaleType="fitXY" />
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/mainTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:elevation="6dp"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            />
 
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/mainPager"
             android:background="@drawable/viewpager"
-            android:layout_weight="6"
+            android:layout_weight="7"
             android:layout_margin="1dp">
-            <android.support.v4.view.PagerTabStrip
-                android:id="@+id/pager_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:background="#ffffff"
-                android:paddingBottom="15dp"
-                android:paddingTop="15dp"
-                android:textColor="#000" />
+            <!--<android.support.v4.view.PagerTabStrip-->
+                <!--android:id="@+id/pager_header"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="top"-->
+                <!--android:background="#ffffff"-->
+                <!--android:paddingBottom="15dp"-->
+                <!--android:paddingTop="15dp"-->
+                <!--android:textColor="#000" />-->
         </android.support.v4.view.ViewPager>
 
         <LinearLayout
@@ -58,31 +68,71 @@
                 android:visibility="gone"
                 android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="나의 수급자"
+                android:id="@+id/btn_showPatient"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:layout_weight="8"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:textStyle="bold" />
+
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/recycleView_patient"
                 tools:context=".MainActivity"
                 tools:listitem="@layout/item_patient"
-                android:layout_gravity="left|center"
-                android:padding="10dp"
-                android:layout_weight="2"
-                android:visibility="gone">
+                android:visibility="gone"
+                android:foregroundGravity="left|center"
+                android:layout_weight="2">
             </android.support.v7.widget.RecyclerView>
 
-            <Button
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="정보열람"
-                android:id="@+id/btn_showPatient"
-                android:layout_margin="15dp"
-                android:background="@drawable/item_category"
-                android:gravity="center"
+                android:layout_gravity="center"
                 android:padding="10dp"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="@color/main"
-                android:visibility="gone"/>
+                android:layout_weight="2"
+                android:id="@+id/wrap_showPatient"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:background="#f4f4f4"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="3dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="3dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/patientImage"
+                        android:layout_marginRight="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/patientName"
+                        android:gravity="center"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        android:textColor="#000" />
+                </LinearLayout>
+            </LinearLayout>
+
+
         </LinearLayout>
 
     </LinearLayout>

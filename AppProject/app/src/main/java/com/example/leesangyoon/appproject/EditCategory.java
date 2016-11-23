@@ -116,7 +116,7 @@ public class EditCategory extends AppCompatActivity {
                 layout.setOrientation(LinearLayout.VERTICAL);
 
                 final EditText customCategory = new EditText(EditCategory.this);
-                customCategory.setHint("카테고리 제목을 입력하세요.");
+                customCategory.setHint("제공받고싶은 정보를 입력하세요.");
                 customCategory.setTextSize(20);
                 customCategory.setBackground(getResources().getDrawable(R.drawable.dialog));
 

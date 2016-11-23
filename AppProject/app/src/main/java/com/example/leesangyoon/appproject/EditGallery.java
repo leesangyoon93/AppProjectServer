@@ -188,7 +188,7 @@ public class EditGallery extends AppCompatActivity {
         strImage = BitmapToString(photo);
 
         Map<String, String> postParam = new HashMap<String, String>();
-        postParam.put("userId", User.getInstance().getUserId());
+        postParam.put("userId", User.getInstance().getUserName());
         postParam.put("nursingHomeId", User.getInstance().getNursingHomeId());
         postParam.put("articleId", GallerySingleton.getInstance().getId());
         postParam.put("image", strImage);

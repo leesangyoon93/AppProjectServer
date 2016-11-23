@@ -2,6 +2,11 @@ package com.example.leesangyoon.appproject;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -10,10 +15,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,14 +42,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
 
     BackPressCloseHandler backPressCloseHandler;
     RecyclerView mRecyclerView;
     ArrayList<JSONObject> patients = new ArrayList<JSONObject>();
     AdapterPatientRecycle adapterPatientRecycle;
-    TextView adminPatient;
-    Button showPatient;
+    TextView adminPatient, showPatient, patientName;
+    CircleImageView circleImageView;
+    LinearLayout wrap_showPatient;
+    TabLayout mainTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +67,10 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(true);
 
         adminPatient = (TextView)findViewById(R.id.btn_adminPatient);
-        showPatient = (Button)findViewById(R.id.btn_showPatient);
+        showPatient = (TextView) findViewById(R.id.btn_showPatient);
+        circleImageView = (CircleImageView)findViewById(R.id.patientImage);
+        patientName = (TextView)findViewById(R.id.patientName);
+        wrap_showPatient = (LinearLayout)findViewById(R.id.wrap_showPatient);
         LinearLayoutManager layoutManager= new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycleView_patient);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -64,9 +78,11 @@ public class MainActivity extends AppCompatActivity {
         if(User.getInstance().getAuth() == 1) {
             adminPatient.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.VISIBLE);
+            wrap_showPatient.setVisibility(View.GONE);
         }
         else {
             showPatient.setVisibility(View.VISIBLE);
+
             try {
                 getPatientToServer();
             } catch (Exception e) {
@@ -74,18 +90,48 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        List<Fragment> fragments = new Vector<>();
-        fragments.add(Fragment.instantiate(this, frag_Notice.class.getName()));
-        fragments.add(Fragment.instantiate(this, frag_Schedule.class.getName()));
-        fragments.add(Fragment.instantiate(this, frag_Gallery.class.getName()));
-        fragments.add(Fragment.instantiate(this, frag_QA.class.getName()));
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), fragments);
+        mainTab = (TabLayout) findViewById(R.id.mainTab);
+        mainTab.addTab(mainTab.newTab().setText("공지사항"));
+        mainTab.addTab(mainTab.newTab().setText("일정"));
+        mainTab.addTab(mainTab.newTab().setText("갤러리"));
+        mainTab.addTab(mainTab.newTab().setText("Q&A"));
+        mainTab.setTabGravity(TabLayout.GRAVITY_FILL);
+        mainTab.setTabTextColors(ColorStateList.valueOf(Color.BLACK));
 
-        final ViewPager pager = (ViewPager)findViewById(R.id.mainPager);
-        pager.setAdapter(adapter);
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.mainPager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager(), mainTab.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mainTab));
+        mainTab.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
 
-        final PagerTabStrip header = (PagerTabStrip)findViewById(R.id.pager_header);
-        header.setTabIndicatorColor(10667642);
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+//        List<Fragment> fragments = new Vector<>();
+//        fragments.add(Fragment.instantiate(this, frag_Notice.class.getName()));
+//        fragments.add(Fragment.instantiate(this, frag_Schedule.class.getName()));
+//        fragments.add(Fragment.instantiate(this, frag_Gallery.class.getName()));
+//        fragments.add(Fragment.instantiate(this, frag_QA.class.getName()));
+//        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), fragments);
+//
+//        final ViewPager pager = (ViewPager)findViewById(R.id.mainPager);
+//        pager.setAdapter(adapter);
+//
+//        final PagerTabStrip header = (PagerTabStrip)findViewById(R.id.pager_header);
+//        header.setTabIndicatorColor(10667642);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
@@ -132,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        showPatient.setOnClickListener(new View.OnClickListener() {
+        wrap_showPatient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ShowPatient.class);
@@ -249,6 +295,9 @@ public class MainActivity extends AppCompatActivity {
                         Patient.getInstance().setRoomNumber(response.getString("roomNumber"));
                         Patient.getInstance().setImage(response.getString("image"));
                         Patient.getInstance().setGender(response.getString("gender"));
+
+                        circleImageView.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
+                        patientName.setText(Patient.getInstance().getPatientName());
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -263,5 +312,18 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         volley.getInstance().addToRequestQueue(req);
+    }
+
+    public static Bitmap StringToBitmap(String encodedString) {
+        try {
+            byte[] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        } catch (NullPointerException e) {
+            e.getMessage();
+            return null;
+        } catch (OutOfMemoryError e) {
+            return null;
+        }
     }
 }

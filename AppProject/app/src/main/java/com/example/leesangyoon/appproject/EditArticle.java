@@ -118,7 +118,7 @@ public class EditArticle extends AppCompatActivity {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
         Map<String, String> postParam = new HashMap<String, String>();
-        postParam.put("userId", User.getInstance().getUserId());
+        postParam.put("userId", User.getInstance().getUserName());
         postParam.put("articleId", Article.getInstance().getId());
         postParam.put("title", title.getText().toString());
         postParam.put("content", content.getText().toString());

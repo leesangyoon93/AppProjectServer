@@ -4,9 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -22,6 +24,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AdapterPatientRecycle extends RecyclerView.Adapter<AdapterPatientRecycle.ListItemViewHolder> {
 
     ArrayList<JSONObject> patients;
+
 
     public AdapterPatientRecycle(ArrayList<JSONObject> patients) {
         this.patients = patients;
@@ -42,6 +45,7 @@ public class AdapterPatientRecycle extends RecyclerView.Adapter<AdapterPatientRe
         JSONObject patient = patients.get(position);
 
         try {
+            holder.myNormarLayout.setGravity(Gravity.CENTER | Gravity.LEFT);
             holder.patientName.setText(patient.getString("patientName"));
             if(patient.getString("image").equals("-")) {
                 if(patient.getString("gender").equals("male")) {
@@ -68,11 +72,14 @@ public class AdapterPatientRecycle extends RecyclerView.Adapter<AdapterPatientRe
     public final static class ListItemViewHolder extends RecyclerView.ViewHolder {
         TextView patientName;
         CircleImageView patientGender;
+        LinearLayout myNormarLayout;
 
         public ListItemViewHolder(View itemView) {
             super(itemView);
+
             patientName = (TextView) itemView.findViewById(R.id.patient_name);
             patientGender = (CircleImageView) itemView.findViewById(R.id.patient_gender);
+            myNormarLayout = (LinearLayout)itemView.findViewById(R.id.wrap_itemPatient);
         }
     }
 
