@@ -946,6 +946,7 @@ router.post('/saveCategory', function (req, res) {
                             category.physicalCare = req.body.content;
                             break;
                         default:
+                            console.log(req.body.position);
                             Category.update({
                                 'custom.num': req.body.position,
                                 'patient': patient,
