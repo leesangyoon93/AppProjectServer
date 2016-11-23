@@ -856,7 +856,7 @@ router.post("/saveCategoryState", function (req, res) {
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            Category.findOne({patient: patient, date: req.body.date}, function (err, category) {
+            Category.findOneAndUpdate({patient: patient, date: req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
                     console.log(req.body);
@@ -875,10 +875,10 @@ router.post("/saveCategoryState", function (req, res) {
                     for (var i = 0; i < category.custom.length; i++) {
                         var tmp = 'state' + (i + 9);
                         if (req.body[tmp] == 'true') {
-                            category.custom[i].setAttribute('state', true);
+                            category.custom[i].set('state', true);
                         }
                         else {
-                            category.custom[i].setAttribute('state', false);
+                            category.custom[i].set('state', false);
                         }
                     }
                     category.save();
