@@ -859,6 +859,7 @@ router.post("/saveCategoryState", function (req, res) {
                 if (category) {
                     console.log(req.body);
                     console.log(req.body.length);
+                    var length = Object.keys(req.body).length;
                     category.mealEnabled = req.body.state0 == 'true';
                     category.cleanEnabled = req.body.state1 == 'true';
                     category.activityEnabled = req.body.state2 == 'true';
@@ -868,8 +869,8 @@ router.post("/saveCategoryState", function (req, res) {
                     category.medicineEnabled = req.body.state6 == 'true';
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
-                    if (req.body.length >= 12) {
-                        for (var i = 9; i < req.body.length - 2; i++) {
+                    if (length >= 12) {
+                        for (var i = 9; i < length - 2; i++) {
                             console.log(i);
                             var tmp = "state" + i.toString();
                             category.custom[i - 9].state = req.body[tmp] == "true";
