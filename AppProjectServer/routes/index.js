@@ -875,14 +875,17 @@ router.post("/saveCategoryState", function (req, res) {
                             var tmp = "state" + i.toString();
                             console.log(category.custom[i-9].content);
                             if(req.body[tmp] == "true") {
+                                console.log(category.custom[0].state);
                                 category.custom[i-9].state = true;
                             }
                             else {
+                                console.log(category.custom[0].state);
                                 category.custom[i-9].state = false;
                             }
 
                         }
                     }
+                    console.log(category.custom[0].state);
                     category.save();
                     return res.json({'result': 'success'})
                 }
