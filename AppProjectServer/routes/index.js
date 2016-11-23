@@ -873,7 +873,7 @@ router.post("/saveCategoryState", function (req, res) {
                             var tmp = "state" + i.toString();
                             console.log(req.body[tmp]);
                             console.log(category.custom[i-9].state);
-                            category.custom[i - 9].state = req.body[tmp] == "true";
+                            category.custom[i-9].state = req.body[tmp] == "true";
                             category.save();
                             console.log(category.custom[i-9].state);
                         }
