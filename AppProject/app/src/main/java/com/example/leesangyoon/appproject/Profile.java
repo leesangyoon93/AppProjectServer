@@ -1,15 +1,19 @@
 package com.example.leesangyoon.appproject;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -88,6 +92,7 @@ public class Profile extends AppCompatActivity {
         changePasswordButton = (Button)findViewById(R.id.btn_changePassword);
 
         changePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(Profile.this);
@@ -95,20 +100,34 @@ public class Profile extends AppCompatActivity {
                 LinearLayout layout = new LinearLayout(Profile.this);
                 layout.setOrientation(LinearLayout.VERTICAL);
 
+                TextView title = new TextView(Profile.this);
+                title.setText("비밀번호 변경");
+                title.setBackgroundColor(Color.WHITE);
+                title.setPadding(10, 10, 10, 10);
+                title.setGravity(Gravity.CENTER);
+                title.setTextColor(Color.BLACK);
+                title.setTextSize(25);
+
                 final EditText currentPw = new EditText(Profile.this);
                 currentPw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 currentPw.setLines(1);
                 currentPw.setHint("현재 비밀번호");
+                currentPw.setTextSize(20);
+                currentPw.setBackground(getResources().getDrawable(R.drawable.dialog));
 
                 final EditText newPw1 = new EditText(Profile.this);
                 newPw1.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 newPw1.setLines(1);
                 newPw1.setHint("변경 할 비밀번호");
+                newPw1.setTextSize(20);
+                newPw1.setBackground(getResources().getDrawable(R.drawable.dialog));
 
                 final EditText newPw2 = new EditText(Profile.this);
                 newPw2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 newPw2.setLines(1);
                 newPw2.setHint("비밀번호 확인");
+                newPw2.setTextSize(20);
+                newPw2.setBackground(getResources().getDrawable(R.drawable.dialog));
 
                 layout.addView(currentPw);
                 layout.addView(newPw1);

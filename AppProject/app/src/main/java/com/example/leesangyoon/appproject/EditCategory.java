@@ -1,19 +1,24 @@
 package com.example.leesangyoon.appproject;
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -77,6 +82,7 @@ public class EditCategory extends AppCompatActivity {
         }
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditCategory.this);
@@ -86,10 +92,21 @@ public class EditCategory extends AppCompatActivity {
 
                 final EditText customCategory = new EditText(EditCategory.this);
                 customCategory.setHint("카테고리 제목을 입력하세요.");
+                customCategory.setTextSize(20);
+                customCategory.setBackground(getResources().getDrawable(R.drawable.dialog));
 
+                TextView title = new TextView(EditCategory.this);
+                title.setText("카테고리 추가");
+                title.setBackgroundColor(Color.WHITE);
+                title.setPadding(10, 10, 10, 10);
+                title.setGravity(Gravity.CENTER);
+                title.setTextColor(Color.BLACK);
+                title.setTextSize(25);
+
+                builder.setCustomTitle(title);
                 layout.addView(customCategory);
 
-                builder.setTitle("카테고리 추가")
+                builder.setCustomTitle(title)
                         .setView(layout)
                         .setCancelable(true)
                         .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
