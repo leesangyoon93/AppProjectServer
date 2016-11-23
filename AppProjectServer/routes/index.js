@@ -741,17 +741,17 @@ router.get('/getCategories', function (req, res) {
                         'state': category.physicalCareEnabled,
                         'num': 8
                     });
-                for (var i = 0; i < category.custom.length; i++) {
-                    if (category.custom[i].state) {
-                        result.push({
-                            'title': category.custom[i].title,
-                            'content': category.custom[i].content,
-                            'state': category.custom[i].state,
-                            'num': category.custom[i].num
-                        });
-                    }
+                if (category.custom.length != 0) {
+                    for (var i = 0; i < category.custom.length; i++)
+                        if (category.custom[i].state) {
+                            result.push({
+                                'title': category.custom[i].title,
+                                'content': category.custom[i].content,
+                                'state': category.custom[i].state,
+                                'num': category.custom[i].num
+                            });
+                        }
                 }
-                console.log(result);
                 return res.json(result);
             }
             else {
@@ -876,12 +876,10 @@ router.post("/saveCategoryState", function (req, res) {
                     for (var i = 0; i < category.custom.length; i++) {
                         var tmp = 'state' + (i + 9);
                         token = req.body[tmp] == 'true';
-                        Category.update({'custom.num': i + 9, 'patient': patient, 'date': req.body.date}, {
-                            '$set': {
-                                'custom.$.state': token
-                            }
-                        }, function (err) {
-                            if (err) return res.json({'result': 'fail'})
+                        Category.update({'custom.num': i+9}, {'$set': {
+                            'custom.$.state': token
+                        }}, function(err) {
+                            if(err) return res.json({'result': 'fail'})
                         })
                     }
                     category.save();
@@ -914,7 +912,7 @@ router.post('/saveCategory', function (req, res) {
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            Category.findOne({patient: patient, date: req.body.date}, function (err, category) {
+            Category.findOne({patient: patient.id, date: req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
                     switch (req.body.position) {
@@ -946,19 +944,9 @@ router.post('/saveCategory', function (req, res) {
                             category.physicalCare = req.body.content;
                             break;
                         default:
-                            console.log(req.body.position);
-                            Category.update({
-                                'custom.num': req.body.position,
-                                'patient': patient,
-                                'date': req.body.date
-                            }, {
-                                '$set': {'custom.$.content': req.body.content}
-                            }, function (err) {
-                                if (err) return res.json({'result': 'fail'})
-                            });
-                            break;
-                            category.save();
+                            category.custom[req.body.position - 9].content = req.body.content;
                     }
+                    category.save();
                     return res.json({'result': 'success'});
                 }
                 else return res.json({'result': 'fail'})
