@@ -949,7 +949,12 @@ router.post('/saveCategory', function (req, res) {
                             category.physicalCare = req.body.content;
                             break;
                         default:
-                            category.custom[req.body.position - 9].content = req.body.content;
+                            Category.update({'custom.num': req.body.position, 'patient': patient, 'date': req.body.date}, {'$set': {
+                                'custom.$.content': req.body.content
+                            }}, function(err) {
+                                if(err) return res.json({'result': 'fail'})
+                            })
+                            break;
                     }
                     category.save();
                     return res.json({'result': 'success'});
