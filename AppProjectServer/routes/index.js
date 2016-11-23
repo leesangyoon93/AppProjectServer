@@ -870,13 +870,12 @@ router.post("/saveCategoryState", function (req, res) {
                     category.medicineEnabled = req.body.state6 == 'true';
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
-                    category.custom[0].state = true;
                     if (length > 11) {
                         for (var i = 9; i < length - 2; i++) {
                             var tmp = "state" + i.toString();
                             if(req.body[tmp] == "true")
-                                category.custom[i-9].state = true;
-                            else category.custom[i-9].state = false;
+                                category.custom[i-9]['state'] = true;
+                            else category.custom[i-9]['state'] = false;
                             category.save();
                         }
                     }
