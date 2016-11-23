@@ -880,17 +880,17 @@ router.post("/saveCategoryState", function (req, res) {
                             console.log(typeof (index));
                             if(req.body[tmp] == "true") {
                                 category.custom[index].state = "true";
-                                category.save();
                             }
                             else {
                                 category.custom[index].state = "false";
-                                category.save();
                             }
                         }
+                        console.log("custom save return")
                         category.save();
                         return res.json({'result': 'success'})
                     }
                     else {
+                        console.log("normal save return")
                         category.save();
                         return res.json({'result': 'success'})
                     }
