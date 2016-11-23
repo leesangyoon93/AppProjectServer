@@ -981,6 +981,9 @@ Patient.find(function (err, patients) {
                     var category = new Category();
                     var tmp = JSON.parse(JSON.stringify(categories[i]));
                     category.patient = patients[i];
+                    category.custom = tmp.custom;
+                    for(var j=0; j< category.custom.length; j++)
+                        category.custom[j].content = "";
                     category.date = getTimeStamp();
                     category.mealEnabled = tmp.mealEnabled;
                     category.cleanEnabled = tmp.cleanEnabled;
