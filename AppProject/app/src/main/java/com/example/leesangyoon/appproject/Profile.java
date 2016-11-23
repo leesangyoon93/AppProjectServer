@@ -43,7 +43,9 @@ import java.util.Map;
 public class Profile extends AppCompatActivity {
     SharedPreferences userSession;
 
+    LinearLayout wrap_worker, wrap_user;
     TextView userId, userName, patientName, roomNumber, workerName, workerPhoneNumber, nursingHomePhoneNumber;
+    TextView name, workerId, phoneNumber;
     Button changePasswordButton;
     ImageView profileGender;
 
@@ -70,17 +72,31 @@ public class Profile extends AppCompatActivity {
         workerPhoneNumber = (TextView)findViewById(R.id.text_workerPhoneNumber);
         nursingHomePhoneNumber = (TextView)findViewById(R.id.text_nursingHomePhoneNumber);
         profileGender = (ImageView)findViewById(R.id.image_profileGender);
+        name = (TextView)findViewById(R.id.text_Name);
+        workerId = (TextView)findViewById(R.id.text_Id);
+        phoneNumber = (TextView)findViewById(R.id.text_phoneNumber);
+        wrap_user = (LinearLayout)findViewById(R.id.wrap_userProfile);
+        wrap_worker = (LinearLayout)findViewById(R.id.wrap_workerProfile);
 
-        try {
-            getWorkerToServer();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(User.getInstance().getAuth() == 2) {
+            wrap_worker.setVisibility(View.GONE);
+            try {
+                getWorkerToServer();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            userId.setText(User.getInstance().getUserId());
+            userName.setText(User.getInstance().getUserName());
+            patientName.setText(Patient.getInstance().getPatientName());
+            roomNumber.setText(Patient.getInstance().getRoomNumber());
+            nursingHomePhoneNumber.setText(User.getInstance().getNursingHomePhoneNumber());
         }
-        userId.setText(User.getInstance().getUserId());
-        userName.setText(User.getInstance().getUserName());
-        patientName.setText(Patient.getInstance().getPatientName());
-        roomNumber.setText(Patient.getInstance().getRoomNumber());
-        nursingHomePhoneNumber.setText(User.getInstance().getNursingHomePhoneNumber());
+        else {
+            wrap_user.setVisibility(View.GONE);
+            name.setText(User.getInstance().getUserName());
+            workerId.setText(User.getInstance().getUserId());
+            phoneNumber.setText(User.getInstance().getPhoneNumber());
+        }
 
         if(User.getInstance().getGender().equals("male")) {
             profileGender.setImageResource(R.drawable.user_male);

@@ -1,5 +1,6 @@
 package com.example.leesangyoon.appproject;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -115,6 +116,7 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void getPatientsToServer() throws Exception {
+        final ProgressDialog loading = ProgressDialog.show(this, "Loading...", "Please wait...", false, false);
 
         String URL = String.format("http://52.41.19.232/getPatients?nursingHomeId=%s&userId=%s",
                 URLEncoder.encode(User.getInstance().getNursingHomeId(), "utf-8"),
@@ -124,7 +126,7 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
             public void onResponse(JSONArray response) {
-
+                loading.dismiss();
                 if (response.toString().contains("result") && response.toString().contains("fail")) {
                     Toast.makeText(AdminPatient.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
                 } else {

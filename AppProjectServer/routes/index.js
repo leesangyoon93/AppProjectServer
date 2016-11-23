@@ -897,7 +897,7 @@ router.post('/getWorker', function (req, res) {
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            User.findById(patient.worker._id, function (err, user) {
+            User.findById(patient.worker, function (err, user) {
                 if (err) return res.json({'result': 'fail'});
                 if (user) return res.json(user);
                 else return res.json({'result': 'fail'})
