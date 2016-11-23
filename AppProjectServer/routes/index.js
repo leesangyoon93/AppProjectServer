@@ -872,24 +872,19 @@ router.post("/saveCategoryState", function (req, res) {
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
                     category.custom[0].state = 'true';
-                    console.log(category.custom[0].state);
-                    console.log(category);
-                    // if (length > 11) {
-                    //     for (var i = 9; i < length - 2; i++) {
-                    //         var tmp = "state" + i.toString();
-                    //         console.log(category.custom[i-9].content);
-                    //         if(req.body[tmp] == "true") {
-                    //             console.log(category.custom[0].state);
-                    //             category.custom[i-9].state = true;
-                    //         }
-                    //         else {
-                    //             console.log(category.custom[0].state);
-                    //             category.custom[i-9].state = false;
-                    //         }
-                    //
-                    //     }
-                    // }
-                    // console.log(category.custom[0].state);
+                    if (length > 11) {
+                        for (var i = 9; i < length - 2; i++) {
+                            var tmp = "state" + i.toString();
+                            if(req.body[tmp] == "true") {
+                                console.log(category.custom[0].state);
+                                category.custom[i-9].state = "true";
+                            }
+                            else {
+                                console.log(category.custom[0].state);
+                                category.custom[i-9].state = "false";
+                            }
+                        }
+                    }
                     category.save();
                     return res.json({'result': 'success'})
                 }
