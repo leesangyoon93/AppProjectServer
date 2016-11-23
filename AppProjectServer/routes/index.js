@@ -743,12 +743,14 @@ router.get('/getCategories', function (req, res) {
                     });
                 if (category.custom.length != 0) {
                     for (var i = 0; i < category.custom.length; i++)
-                        result.push({
-                            'title': category.custom[i].title,
-                            'content': category.custom[i].content,
-                            'state': category.custom[i].state,
-                            'num': category.custom[i].num
-                        });
+                        if(category.custom[i].state) {
+                            result.push({
+                                'title': category.custom[i].title,
+                                'content': category.custom[i].content,
+                                'state': category.custom[i].state,
+                                'num': category.custom[i].num
+                            });
+                        }
                 }
                 return res.json(result);
             }
