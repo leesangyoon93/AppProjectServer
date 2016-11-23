@@ -876,11 +876,16 @@ router.post("/saveCategoryState", function (req, res) {
                     for (var i = 0; i < category.custom.length; i++) {
                         var tmp = 'state' + (i + 9);
                         if (req.body[tmp] == 'true') {
-                            category.custom[i].state.setData(true);
+                            //category.custom[i].state.setData(true);
+                            token = true;
                         }
                         else {
-                            category.custom[i].state.setData(false);
+                            //category.custom[i].state.setData(false);
+                            token = false;
                         }
+                        Category.update({'custom.num': i+9}, {'$set': {
+                            'custom.$.state': token
+                        }})
                     }
                     category.save();
                     return res.json({'result': 'success'})
