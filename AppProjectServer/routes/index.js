@@ -873,6 +873,7 @@ router.post("/saveCategoryState", function (req, res) {
                     category.physicalCareEnabled = req.body.state8 == 'true';
                     category.custom[0].state = true;
                     console.log(category.custom[0].state);
+                    console.log(category);
                     // if (length > 11) {
                     //     for (var i = 9; i < length - 2; i++) {
                     //         var tmp = "state" + i.toString();
