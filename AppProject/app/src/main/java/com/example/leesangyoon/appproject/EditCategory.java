@@ -270,6 +270,7 @@ public class EditCategory extends AppCompatActivity {
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("date", date);
         postParam.put("patientId", Patient.getInstance().getId());
+        Log.e("size", String.valueOf(categories.size()));
         for(int i=0; i<categories.size(); i++) {
             String state = String.valueOf(categories.get(i).getBoolean("state"));
             postParam.put(("state" + String.valueOf(i)), state);
