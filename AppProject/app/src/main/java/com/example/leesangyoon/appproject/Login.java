@@ -33,6 +33,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
     Button loginButton, registerButton;
     EditText userId, password;
+    BackPressCloseHandler backPressCloseHandler;
 
     SharedPreferences userSession;
     LinearLayout mainLayout;
@@ -74,6 +75,8 @@ public class Login extends AppCompatActivity {
             }
         }
 
+        backPressCloseHandler = new BackPressCloseHandler(this);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +106,11 @@ public class Login extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
     }
 
     private void loginToServer(final String userId, final String password) throws Exception {

@@ -80,26 +80,6 @@ public class EditCategory extends AppCompatActivity {
         adapterCategoryList.notifyDataSetChanged();
         categoryList.setAdapter(adapterCategoryList);
 
-//        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                if(isChecked) {
-//                    try {
-//                        category.put("state", true);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                else {
-//                    try {
-//                        category.put("state", false);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-
         try {
             getCategoryStateToServer();
         } catch (Exception e) {

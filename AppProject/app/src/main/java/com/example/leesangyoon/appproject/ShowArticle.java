@@ -104,7 +104,7 @@ public class ShowArticle extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (User.getInstance().getUserId().equals(Article.getInstance().getAuthor())) {
+        if (User.getInstance().getUserName().equals(Article.getInstance().getAuthor())) {
             getMenuInflater().inflate(R.menu.menu_showarticle, menu);
         }
         return true;

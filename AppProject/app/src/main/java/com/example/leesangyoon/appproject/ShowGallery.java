@@ -103,7 +103,7 @@ public class ShowGallery extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (User.getInstance().getUserId().equals(GallerySingleton.getInstance().getAuthor())) {
+        if (User.getInstance().getUserName().equals(GallerySingleton.getInstance().getAuthor())) {
             getMenuInflater().inflate(R.menu.menu_showgallery, menu);
         }
         return true;
@@ -269,7 +269,7 @@ public class ShowGallery extends AppCompatActivity {
     private void deleteGalleryToServer() throws Exception {
 
         Map<String, String> postParam = new HashMap<String, String>();
-        postParam.put("articleId", Article.getInstance().getId());
+        postParam.put("articleId", GallerySingleton.getInstance().getId());
         postParam.put("path", "gallery");
 
         String URL = "http://52.41.19.232/deleteArticle";
