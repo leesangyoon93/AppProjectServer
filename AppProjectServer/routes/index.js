@@ -207,7 +207,9 @@ router.get('/getArticles', function (req, res) {
             Notice.find({'nursingHome': new Object(id)}, function (err, notices) {
                 if (err) return res.json({'result': 'fail'});
                 if (notices) {
-                    notices.sort();
+                    notices.sort(function(a, b) {
+                        return a.created - b.created;
+                    });
                     return res.json(notices);
                 }
                 else return res.json({'result': 'fail'});
