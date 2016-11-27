@@ -208,7 +208,7 @@ router.get('/getArticles', function (req, res) {
                 if (err) return res.json({'result': 'fail'});
                 if (notices) {
                     notices.sort(function(a, b) {
-                        return a.created - b.created;
+                        return a.modified - b.modified;
                     });
                     return res.json(notices);
                 }
