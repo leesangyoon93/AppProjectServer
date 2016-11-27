@@ -83,7 +83,6 @@ public class ShowPatient extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-//        categories.clear();
         adapterCategoryGrid = new AdapterCategoryGrid(ShowPatient.this, categories);
         adapterCategoryGrid.notifyDataSetChanged();
         gridView.setAdapter(adapterCategoryGrid);

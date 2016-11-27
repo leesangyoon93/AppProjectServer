@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/image_category"
+        android:layout_margin="3dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/title_category"
+        android:textSize="25sp"
+        android:padding="10dp"
+        android:gravity="center" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp">
+        android:gravity="right">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/image_category"
-            android:layout_margin="3dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/title_category"
-            android:gravity="left|center"
-            android:textSize="25sp"
-            android:padding="10dp" />
-
-        <LinearLayout
-            android:orientation="horizontal"
+        <Switch
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="right">
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:checked="true"
-                android:id="@+id/switch_category"
-                android:layout_gravity="right"
-                android:foregroundGravity="right"
-                android:gravity="center|right"
-                android:onClick="switchChange"/>
-        </LinearLayout>
+            android:checked="true"
+            android:id="@+id/switch_category"
+            android:foregroundGravity="right"
+            android:gravity="center|right"
+            android:onClick="switchChange"
+            android:layout_weight="7"
+            android:layout_marginRight="5dp" />
     </LinearLayout>
 </LinearLayout>

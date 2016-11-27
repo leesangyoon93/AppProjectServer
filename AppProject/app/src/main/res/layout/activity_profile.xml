@@ -33,7 +33,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="아이디"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -43,7 +45,9 @@
                 android:padding="5dp"
                 android:text="성명"
                 android:textStyle="bold"
-                android:id="@+id/textView3" />
+                android:id="@+id/textView3"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -53,7 +57,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="연락처"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
         </LinearLayout>
 
@@ -70,7 +76,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -79,7 +87,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -88,7 +98,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
         </LinearLayout>
     </LinearLayout>
@@ -115,7 +127,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="아이디"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -125,7 +139,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="보호자성명"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -135,7 +151,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="수급자성명"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -145,7 +163,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="호실"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -155,7 +175,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="담당요양사"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -165,7 +187,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="요양사연락처"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -175,7 +199,9 @@
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
                 android:text="요양원연락처"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -191,7 +217,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -200,7 +228,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -209,7 +239,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -218,7 +250,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -227,7 +261,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -236,7 +272,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -245,7 +283,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="10dp"
                 android:padding="5dp"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="10dp"
+                android:textSize="16sp"
+                android:textColor="#000" />
         </LinearLayout>
     </LinearLayout>
 

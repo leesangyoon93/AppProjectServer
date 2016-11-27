@@ -53,7 +53,6 @@ public class AdapterGalleryGrid extends BaseAdapter {
         TextView title = (TextView) convertView.findViewById(R.id.grid_title);
         ImageView image = (ImageView) convertView.findViewById(R.id.grid_image);
 
-        // 텍스트를 비트맵으로 변환하고 뿌려주면됨.
         try {
             title.setText(galleries.getString("title"));
             image.setImageBitmap(StringToBitmap(galleries.getString("image")));

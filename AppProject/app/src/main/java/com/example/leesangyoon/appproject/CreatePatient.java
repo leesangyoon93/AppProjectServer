@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +30,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileDescriptor;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +43,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by daddyslab on 2016. 11. 1..
  */
 
-// 여기는 누구든지 보호자환자 생성할 수 있게. 프로텍터를 지정하면 해당 프로텍터한테만 보임.
 public class CreatePatient extends AppCompatActivity {
     private static final int PICK_FROM_ALBUM = 1;
     Bitmap photo;
@@ -50,6 +54,8 @@ public class CreatePatient extends AppCompatActivity {
     String patientName, birthday, roomNumber, relation, workerId, userName, userPhoneNumber, userId, userPassword, userPasswordCheck;
     String gender = "male";
     String image = "";
+    int lyear, lmonth, lday;
+    String date;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +67,12 @@ public class CreatePatient extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayUseLogoEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
+
+        GregorianCalendar calendar = new GregorianCalendar();
+        lyear = calendar.get(Calendar.YEAR);
+        lmonth = calendar.get(Calendar.MONTH);
+        lday = calendar.get(Calendar.DAY_OF_MONTH);
+        date = String.valueOf(lyear) + "-" + String.valueOf(lmonth+1) + "-" + String.valueOf(lday);
 
         patient_image = (CircleImageView)findViewById(R.id.image_patient);
         patient_name = (EditText)findViewById(R.id.input_patientName);
@@ -104,7 +116,7 @@ public class CreatePatient extends AppCompatActivity {
     public static String BitmapToString(Bitmap bitmap) {
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 30, baos);
             byte[] b = baos.toByteArray();
             String temp = Base64.encodeToString(b, Base64.DEFAULT);
             return temp;
@@ -137,8 +149,10 @@ public class CreatePatient extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-            photo = BitmapFactory.decodeFile(picturePath);
-            patient_image.setImageBitmap(photo);
+            uriToBitmap(data.getData());
+            if (picturePath != null) {
+                patient_image.setImageURI(data.getData());
+            }
         }
     }
 
@@ -168,7 +182,6 @@ public class CreatePatient extends AppCompatActivity {
                 userPhoneNumber = user_phone_number.getText().toString();
                 userPassword = user_password.getText().toString();
                 userPasswordCheck = user_password_check.getText().toString();
-                // 환자/보호자 생성 요청 후 인덴트
                 try {
                     if(patientName.equals("") || birthday.equals("") || relation.equals("") || workerId.equals("") || userName.equals("") ||
                             userId.equals("") || userPassword.equals("") || userPhoneNumber.equals("") || userPasswordCheck.equals("") || roomNumber.equals("")) {
@@ -221,6 +234,7 @@ public class CreatePatient extends AppCompatActivity {
         postParam.put("image", image);
         postParam.put("gender", gender);
         postParam.put("roomNumber", roomNumber);
+        postParam.put("date", date);
 
         JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
                 new JSONObject(postParam), new Response.Listener<JSONObject>() {
@@ -258,5 +272,19 @@ public class CreatePatient extends AppCompatActivity {
                 });
 
         volley.getInstance().addToRequestQueue(req);
+    }
+
+    private void uriToBitmap(Uri selectedFileUri) {
+        try {
+            ParcelFileDescriptor parcelFileDescriptor =
+                    getContentResolver().openFileDescriptor(selectedFileUri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            photo = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+
+
+            parcelFileDescriptor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

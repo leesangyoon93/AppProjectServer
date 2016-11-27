@@ -8,11 +8,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -30,6 +32,11 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,7 +96,6 @@ public class EditGallery extends AppCompatActivity {
                 } else {
                     cls = ShowGallery.class;
                     intent = new Intent(EditGallery.this, cls);
-                    // 인텐트로 파라미터 넘겨야함.
                 }
                 startActivity(intent);
                 break;
@@ -141,7 +147,6 @@ public class EditGallery extends AppCompatActivity {
     }
 
     private void doTakeAlbumAction() {
-        // 앨범 호출
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
         startActivityForResult(intent, PICK_FROM_ALBUM);
@@ -162,8 +167,10 @@ public class EditGallery extends AppCompatActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-            photo = BitmapFactory.decodeFile(picturePath);
-            image.setImageBitmap(photo);
+            uriToBitmap(data.getData());
+            if (picturePath != null) {
+                image.setImageURI(data.getData());
+            }
         }
     }
 
@@ -176,7 +183,6 @@ public class EditGallery extends AppCompatActivity {
         } else {
             cls = ShowGallery.class;
             intent = new Intent(EditGallery.this, cls);
-            // 인텐트로 파라미터 넘겨야함.
         }
         startActivity(intent);
         super.onBackPressed();
@@ -239,4 +245,19 @@ public class EditGallery extends AppCompatActivity {
             return null;
         }
     }
+
+    private void uriToBitmap(Uri selectedFileUri) {
+        try {
+            ParcelFileDescriptor parcelFileDescriptor =
+                    getContentResolver().openFileDescriptor(selectedFileUri, "r");
+            FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+            photo = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+
+
+            parcelFileDescriptor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -143,7 +143,7 @@ public class EditCategory extends AppCompatActivity {
     public void switchChange(View v) {
 
         View parentRow = (View) v.getParent();
-        LinearLayout linearLayout = (LinearLayout) parentRow.getParent().getParent();
+        LinearLayout linearLayout = (LinearLayout) parentRow.getParent();
         ListView listView = (ListView)linearLayout.getParent();
         final int position = listView.getPositionForView(linearLayout);
 
@@ -193,7 +193,6 @@ public class EditCategory extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    // 여기 해야함. 디비에 저장되있는 카테고리 활성화 상태 제이슨으로 만들어서 보내주자.
     private void getCategoryStateToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
@@ -230,7 +229,6 @@ public class EditCategory extends AppCompatActivity {
         volley.getInstance().addToRequestQueue(req);
     }
 
-    // 현재 체크상태 보내서 디비에 업데이트 해주자.
     private void saveCategoryStateToServer() throws Exception {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
         String URL = "http://52.41.19.232/saveCategoryState";

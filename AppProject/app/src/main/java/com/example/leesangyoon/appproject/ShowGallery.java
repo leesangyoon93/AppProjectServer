@@ -66,7 +66,6 @@ public class ShowGallery extends AppCompatActivity {
         input_comment = (EditText) findViewById(R.id.input_galleryComment);
         title = (TextView) findViewById(R.id.galleryTitle);
         author = (TextView) findViewById(R.id.galleryAuthor);
-//        commentCount = (TextView) findViewById(R.id.commentCount);
         date = (TextView) findViewById(R.id.galleryDate);
         content = (TextView) findViewById(R.id.galleryContent);
         galleryImage = (ImageView) findViewById(R.id.galleryImage);
@@ -207,7 +206,6 @@ public class ShowGallery extends AppCompatActivity {
                         content.setText(GallerySingleton.getInstance().getContent());
                         title.setText(GallerySingleton.getInstance().getTitle());
                         author.setText(GallerySingleton.getInstance().getAuthor());
-//                        commentCount.setText("(" + Article.getInstance().getCommentCount() + ")");
                         date.setText(GallerySingleton.getInstance().getDate());
                         decodedString = Base64.decode(GallerySingleton.getInstance().getImage(), Base64.DEFAULT);
                         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);

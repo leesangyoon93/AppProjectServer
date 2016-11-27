@@ -647,6 +647,11 @@ router.post('/createPatient', function (req, res) {
                                     patient.image = req.body.image;
                                     patient.roomNumber = req.body.roomNumber;
 
+                                    var category = new Category();
+                                    category.patient = patient;
+                                    category.date = req.body.date;
+                                    category.save();
+
                                     protector.save();
                                     patient.save();
                                     return res.json({'result': 'success'});
@@ -850,7 +855,6 @@ router.get('/getCategoryState', function (req, res) {
     })
 });
 
-// 해야함
 router.post("/saveCategoryState", function (req, res) {
     var id = new ObjectId(req.body.patientId);
     var token = true;
@@ -871,8 +875,6 @@ router.post("/saveCategoryState", function (req, res) {
                     category.medicineEnabled = req.body.state6 == 'true';
                     category.mentalTrainEnabled = req.body.state7 == 'true';
                     category.physicalCareEnabled = req.body.state8 == 'true';
-                    //category.custom[0].state = req.body.state9 == 'true';
-                    //category.custom[1].state = req.body.state10 == 'true';
                     for (var i = 0; i < category.custom.length; i++) {
                         var tmp = 'state' + (i + 9);
                         if (req.body[tmp] == 'true') {

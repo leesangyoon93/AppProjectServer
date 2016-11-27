@@ -128,28 +128,27 @@ public class Profile extends AppCompatActivity {
                 currentPw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 currentPw.setLines(1);
                 currentPw.setHint("현재 비밀번호");
-                currentPw.setTextSize(20);
-                currentPw.setBackground(getResources().getDrawable(R.drawable.dialog));
+                currentPw.setTextSize(16);
+                currentPw.setWidth(200);
 
                 final EditText newPw1 = new EditText(Profile.this);
                 newPw1.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 newPw1.setLines(1);
                 newPw1.setHint("변경 할 비밀번호");
-                newPw1.setTextSize(20);
-                newPw1.setBackground(getResources().getDrawable(R.drawable.dialog));
+                newPw1.setTextSize(16);
+                newPw1.setWidth(200);
 
                 final EditText newPw2 = new EditText(Profile.this);
                 newPw2.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 newPw2.setLines(1);
                 newPw2.setHint("비밀번호 확인");
-                newPw2.setTextSize(20);
-                newPw2.setBackground(getResources().getDrawable(R.drawable.dialog));
+                newPw2.setTextSize(16);
+                newPw2.setWidth(200);
 
                 layout.addView(currentPw);
                 layout.addView(newPw1);
                 layout.addView(newPw2);
 
-                // 비밀번호 변경 성공안했을때 유지시키기. 버튼 따로만들어서 리스너 붙여야함
                 builder.setTitle("비밀번호 변경")
                         .setView(layout)
                         .setCancelable(true)
@@ -272,14 +271,35 @@ public class Profile extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.menu_logout:
-                SharedPreferences.Editor editor = userSession.edit();
-                editor.clear();
-                editor.apply();
+                new AlertDialog.Builder(Profile.this)
+                        .setTitle("로그아웃")
+                        .setMessage("로그아웃 하시겠습니까?")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // yes 버튼 누르면
+                                try {
+                                    SharedPreferences.Editor editor = userSession.edit();
+                                    editor.clear();
+                                    editor.apply();
 
-                Intent intent = new Intent(Profile.this, Login.class);
-                startActivity(intent);
+                                    Intent intent = new Intent(Profile.this, Login.class);
+                                    startActivity(intent);
 
-                Toast.makeText(Profile.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Profile.this, "로그아웃 되었습니다.", Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // no 버튼 누르면
+                            }
+                        })
+                        .show();
+
                 break;
             case android.R.id.home:
                 super.onBackPressed();
@@ -290,8 +310,6 @@ public class Profile extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        Intent intent = new Intent(Profile.this, MainActivity.class);
-//        startActivity(intent);
         super.onBackPressed();
     }
 }

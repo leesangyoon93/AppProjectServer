@@ -218,50 +218,8 @@ public class ShowArticle extends AppCompatActivity {
                         content.setText(Article.getInstance().getContent());
                         title.setText(Article.getInstance().getTitle());
                         author.setText(Article.getInstance().getAuthor());
-//                        commentCount.setText("(" + Article.getInstance().getCommentCount() + ")");
                         date.setText(Article.getInstance().getDate());
 
-//                        if (User.getInstance().getUserId().equals(response.getString("author"))) {
-//                            editArticle.setVisibility(View.VISIBLE);
-//                            deleteArticle.setVisibility(View.VISIBLE);
-
-//                            editArticle.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    Intent intent = new Intent(ShowArticle.this, EditArticle.class);
-//                                    intent.putExtra("path", "fromShow");
-//                                    startActivity(intent);
-//                                }
-//                            });
-//
-//                            deleteArticle.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//
-//                                    new AlertDialog.Builder(ShowArticle.this)
-//                                            .setTitle("게시글 삭제 확인")
-//                                            .setMessage("게시글을 정말 삭제하시겠습니까?")
-//                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                                                @Override
-//                                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                                    // yes 버튼 누르면
-//                                                    try {
-//                                                        deleteArticleToServer();
-//                                                    } catch (Exception e) {
-//                                                        e.printStackTrace();
-//                                                    }
-//                                                }
-//                                            })
-//                                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                                                @Override
-//                                                public void onClick(DialogInterface dialogInterface, int i) {
-//                                                    // no 버튼 누르면
-//                                                }
-//                                            })
-//                                            .show();
-//                                }
-//                            });
-//                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

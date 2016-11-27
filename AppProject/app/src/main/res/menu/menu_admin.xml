@@ -11,8 +11,7 @@
 
     <item
         android:id="@+id/menu_addWorker"
-        android:icon="@android:drawable/ic_input_add"
-        android:title="Add Worker"
+        android:title="요양사추가"
         appproject:showAsAction="ifRoom"
         />
 </menu>

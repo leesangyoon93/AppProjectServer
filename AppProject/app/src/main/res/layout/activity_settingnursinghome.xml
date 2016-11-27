@@ -14,7 +14,7 @@
             android:layout_height="85dp"
             android:id="@+id/imageView6"
             android:layout_marginTop="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="30dp"
             android:src="@drawable/user_plain" />
 
         <LinearLayout
@@ -38,7 +38,9 @@
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
                     android:text="요양원명"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -48,7 +50,9 @@
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
                     android:text="요양원주소"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -58,7 +62,9 @@
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
                     android:text="전화번호"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -68,7 +74,9 @@
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
                     android:text="관리자성명"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -78,7 +86,9 @@
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
                     android:text="관리자 연락처"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -88,7 +98,9 @@
                     android:layout_marginBottom="10dp"
                     android:padding="10dp"
                     android:text="관리자 아이디"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -106,7 +118,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -116,7 +129,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -126,7 +140,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -136,7 +151,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -146,7 +162,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -156,7 +173,8 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginBottom="10dp"
-                    android:padding="10dp" />
+                    android:padding="10dp"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
 

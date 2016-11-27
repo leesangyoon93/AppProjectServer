@@ -7,8 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +17,6 @@ import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,10 +35,7 @@ import org.json.JSONObject;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Vector;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -120,19 +114,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        List<Fragment> fragments = new Vector<>();
-//        fragments.add(Fragment.instantiate(this, frag_Notice.class.getName()));
-//        fragments.add(Fragment.instantiate(this, frag_Schedule.class.getName()));
-//        fragments.add(Fragment.instantiate(this, frag_Gallery.class.getName()));
-//        fragments.add(Fragment.instantiate(this, frag_QA.class.getName()));
-//        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), fragments);
-//
-//        final ViewPager pager = (ViewPager)findViewById(R.id.mainPager);
-//        pager.setAdapter(adapter);
-//
-//        final PagerTabStrip header = (PagerTabStrip)findViewById(R.id.pager_header);
-//        header.setTabIndicatorColor(10667642);
-
         backPressCloseHandler = new BackPressCloseHandler(this);
 
         mRecyclerView.addOnItemTouchListener(
@@ -200,10 +181,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         switch(item.getItemId()) {
-            case R.id.menu_intro:
-                intent = new Intent(MainActivity.this, Intro.class);
-                startActivity(intent);
-                break;
             case R.id.menu_notice:
                 intent = new Intent(MainActivity.this, Notice.class);
                 startActivity(intent);

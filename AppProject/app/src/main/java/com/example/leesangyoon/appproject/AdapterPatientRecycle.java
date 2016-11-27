@@ -25,11 +25,9 @@ public class AdapterPatientRecycle extends RecyclerView.Adapter<AdapterPatientRe
 
     ArrayList<JSONObject> patients;
 
-
     public AdapterPatientRecycle(ArrayList<JSONObject> patients) {
         this.patients = patients;
     }
-
 
     @Override
     public ListItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

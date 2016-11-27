@@ -48,8 +48,6 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         assert actionBar != null;
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nursingHomeName = (TextView)findViewById(R.id.text_nursingHomeName);
 
@@ -85,9 +83,6 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
                 Intent intent = new Intent(ViewWorker.this, CreateWorker.class);
                 startActivity(intent);
                 break;
-//            case android.R.id.home:
-//                backPressCloseHandler.onBackPressed();
-//                break;
             case R.id.menu_adminProfile:
                 intent = new Intent(ViewWorker.this, SettingNursingHome.class);
                 startActivity(intent);
@@ -103,10 +98,12 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         String workerId = null;
         String workerName = null;
         String workerPhoneNumber = null;
+        String workerGender = null;
         try {
             workerId = adapterWorkerList.getItem(position).getString("userId");
             workerName = adapterWorkerList.getItem(position).getString("userName");
             workerPhoneNumber = adapterWorkerList.getItem(position).getString("phoneNumber");
+            workerGender = adapterWorkerList.getItem(position).getString("gender");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -115,6 +112,7 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         intent.putExtra("workerId", workerId);
         intent.putExtra("workerName", workerName);
         intent.putExtra("workerPhoneNumber", workerPhoneNumber);
+        intent.putExtra("workerGender", workerGender);
         startActivity(intent);
     }
 

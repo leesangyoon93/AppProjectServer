@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import java.util.Map;
 public class EditWorker extends AppCompatActivity {
 
     TextView workerId, workerName, workerPhoneNumber;
+    ImageView workerGender;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,11 +47,18 @@ public class EditWorker extends AppCompatActivity {
         workerId = (TextView)findViewById(R.id.text_detailWorkerId);
         workerName = (TextView)findViewById(R.id.text_detailWorkerName);
         workerPhoneNumber = (TextView)findViewById(R.id.text_detailWorkerPhoneNumber);
+        workerGender = (ImageView)findViewById(R.id.workerGender);
 
         Intent intent = getIntent();
         workerId.setText(intent.getStringExtra("workerId"));
         workerName.setText(intent.getStringExtra("workerName"));
         workerPhoneNumber.setText(intent.getStringExtra("workerPhoneNumber"));
+        if (intent.getStringExtra("workerGender").equals("male")) {
+            workerGender.setImageResource(R.drawable.user_male);
+        }
+        else {
+            workerGender.setImageResource(R.drawable.user_female);
+        }
     }
 
     @Override
@@ -68,7 +77,6 @@ public class EditWorker extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                // yes 버튼 누르면
                                 try {
                                     deleteUserToServer(workerId.getText().toString());
                                 } catch (Exception e) {
@@ -79,7 +87,6 @@ public class EditWorker extends AppCompatActivity {
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                // no 버튼 누르면
                             }
                         })
                         .show();

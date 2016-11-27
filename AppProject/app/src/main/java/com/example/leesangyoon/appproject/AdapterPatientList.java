@@ -56,7 +56,6 @@ public class AdapterPatientList extends BaseAdapter {
 
         try {
             patientName.setText(patient.getString("patientName"));
-            // 메인 써클러랑 여기 만약 수급자 사긴이 등록되어있으면 그 사진을 디코딩해서 보여주고, 아니면 밑에껄로.
             if(patient.getString("image").equals("-")) {
                 if(patient.getString("gender").equals("male")) {
                     patientGender.setImageResource(R.drawable.user_male);

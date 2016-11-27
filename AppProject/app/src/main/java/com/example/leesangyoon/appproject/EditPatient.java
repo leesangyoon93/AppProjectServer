@@ -91,7 +91,6 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_editpatient, menu);
         return true;
     }
 
