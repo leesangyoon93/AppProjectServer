@@ -207,8 +207,13 @@ router.get('/getArticles', function (req, res) {
             Notice.find({'nursingHome': new Object(id)}, function (err, notices) {
                 if (err) return res.json({'result': 'fail'});
                 if (notices) {
+                    for(var i in notices) {
+                        console.log(notices[i].modified);
+                    }
                     notices.sort(function(a, b) {
-                        return a.modified - b.modified;
+                        if(a.modified < b.modified)
+                            return -1;
+                        else return 1;
                     });
                     return res.json(notices);
                 }
