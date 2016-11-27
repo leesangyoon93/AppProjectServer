@@ -212,8 +212,8 @@ router.get('/getArticles', function (req, res) {
                     }
                     notices.sort(function(a, b) {
                         if(a.modified < b.modified)
-                            return -1;
-                        else return 1;
+                            return 1;
+                        else return -1;
                     });
                     return res.json(notices);
                 }
