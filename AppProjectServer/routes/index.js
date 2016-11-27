@@ -207,9 +207,6 @@ router.get('/getArticles', function (req, res) {
             Notice.find({'nursingHome': new Object(id)}, function (err, notices) {
                 if (err) return res.json({'result': 'fail'});
                 if (notices) {
-                    for(var i in notices) {
-                        console.log(notices[i].modified);
-                    }
                     notices.sort(function(a, b) {
                         if(a.modified < b.modified)
                             return 1;
@@ -224,6 +221,11 @@ router.get('/getArticles', function (req, res) {
             Gallery.find({'nursingHome': new ObjectId(id)}, function (err, galleries) {
                 if (err) return res.json({'result': 'fail'});
                 if (galleries) {
+                    galleries.sort(function(a, b) {
+                        if(a.modified < b.modified)
+                            return 1;
+                        else return -1;
+                    });
                     return res.json(galleries);
                 }
                 else return res.json({'result': 'fail'});
@@ -233,6 +235,11 @@ router.get('/getArticles', function (req, res) {
             Schedule.find({'nursingHome': new ObjectId(id)}, function (err, schedules) {
                 if (err) return res.json({'result': 'fail'});
                 if (schedules) {
+                    schedules.sort(function(a, b) {
+                        if(a.modified < b.modified)
+                            return 1;
+                        else return -1;
+                    });
                     return res.json(schedules);
                 }
                 else return res.json({'result': 'fail'});
@@ -242,6 +249,11 @@ router.get('/getArticles', function (req, res) {
             QA.find({'nursingHome': new ObjectId(id)}, function (err, qas) {
                 if (err) return res.json({'result': 'fail'});
                 if (qas) {
+                    qas.sort(function(a, b) {
+                        if(a.modified < b.modified)
+                            return 1;
+                        else return -1;
+                    });
                     return res.json(qas);
                 }
                 else return res.json({'result': 'fail'});
