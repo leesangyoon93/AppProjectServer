@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "645005263676",
+    "project_id": "firebase-dailysilver"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645005263676:android:246db64ae82346cc",
+        "android_client_info": {
+          "package_name": "com.example.leesangyoon.appproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBUM-OgtRsjns4TV569rqz097bgjDhVwY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
