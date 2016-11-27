@@ -14,6 +14,16 @@ public class User {
     private String phoneNumber = null;
     private String gender = null;
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token = "";
+
     public String getGender() {
         return gender;
     }

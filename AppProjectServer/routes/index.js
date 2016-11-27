@@ -15,12 +15,40 @@ var ScheduleComment = mongoose.model('ScheduleComment');
 var QAComment = mongoose.model('QAComment');
 var Category = mongoose.model('Category');
 var CustomCategory = mongoose.model('CustomCategory');
+var gcm = require('node-gcm');
+var fs = require('fs');
 var ObjectId = require('mongodb').ObjectId;
 
 /* GET home page. */
 router.get('/', function (req, res) {
     res.render('index', {title: 'AppProjectServer'});
 });
+
+router.post('/sendMessage', function(req, res) {
+    var message = new gcm.Message();
+
+    var message = new gcm.Message({
+        collapseKey: 'demo',
+        delayWhileIdle: true,
+        timeToLive: 3,
+        data: {
+            title: '데일리실버 수급자 정보 업데이트',
+            message: '오늘의 열람정보를 확인하세요!'
+        }
+    });
+
+    var server_api_key = 'AIzaSyC80etKP8vJgmAJSIiUOfjUUU7opH7zR-M';
+    var sender = new gcm.Sender(server_api_key);
+    var registrationIds = [];
+
+    var token = req.body.token;
+    registrationIds.push(token);
+
+    sender.send(message, registrationIds, 4, function (err, result) {
+        console.log(result);
+        return res.json({'result': 'success'})
+    });
+})
 
 router.post('/login', function (req, res) {
     User.findOne({'userId': req.body.userId}, function (err, user) {

@@ -2,8 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:appproject="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_savePatient"
-        android:title="저장"
+        android:id="@+id/menu_sendMessage"
+        android:icon="@drawable/send_icon"
+        android:title="푸시알림전송"
         appproject:showAsAction="ifRoom"
         />
 </menu>

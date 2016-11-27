@@ -91,6 +91,7 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_editpatient, menu);
         return true;
     }
 
@@ -102,6 +103,13 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
                 intent = new Intent(EditPatient.this, AdminPatient.class);
                 startActivity(intent);
                 super.onBackPressed();
+                break;
+            case R.id.menu_sendMessage:
+                try {
+                    sendMessageToServer();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -248,6 +256,45 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
                 try {
                     if (response.getString("result").equals("success")) {
                         Toast.makeText(EditPatient.this, "성공적으로 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                        try {
+                            getCategoriesToServer();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(EditPatient.this, "알 수 없는 에러가 발생하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d("development", "Error: " + error.getMessage());
+            }
+        });
+
+        // Adding request to request queue
+        volley.getInstance().addToRequestQueue(req);
+    }
+
+    private void sendMessageToServer() throws Exception {
+        final ProgressDialog loading = ProgressDialog.show(this, "Loading...", "Please wait...", false, false);
+
+        Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("token", User.getInstance().getToken());
+
+        String URL = "http://52.41.19.232/sendMessage";
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL, new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                loading.dismiss();
+                try {
+                    if (response.getString("result").equals("success")) {
+                        Toast.makeText(EditPatient.this, "성공적으로 알림이 전송되었습니다..", Toast.LENGTH_SHORT).show();
                         try {
                             getCategoriesToServer();
                         } catch (Exception e) {

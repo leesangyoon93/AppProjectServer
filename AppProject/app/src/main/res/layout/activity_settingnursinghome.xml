@@ -15,7 +15,7 @@
             android:id="@+id/imageView6"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:src="@drawable/user_plain" />
+            android:src="@drawable/home_icon_96" />
 
         <LinearLayout
             android:orientation="horizontal"

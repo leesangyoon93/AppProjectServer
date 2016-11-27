@@ -1,22 +1,28 @@
 package com.example.leesangyoon.appproject;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +33,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,9 +44,15 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "MainActivity";
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     BackPressCloseHandler backPressCloseHandler;
     RecyclerView mRecyclerView;
@@ -48,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
     CircleImageView circleImageView;
     LinearLayout wrap_showPatient;
     TabLayout mainTab;
+
+    TextView mInformationTextView;
+    Button mRegistrationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +76,23 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setTitle(User.getInstance().getNursingHomeName());
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
+
+        registBroadcastReceiver();
+
+        // 토큰을 보여줄 TextView를 정의
+        mInformationTextView = (TextView) findViewById(R.id.informationTextView);
+        mInformationTextView.setVisibility(View.GONE);
+        // 토큰을 가져오는 동안 인디케이터를 보여줄 ProgressBar를 정의
+        // 토큰을 가져오는 Button을 정의
+        getInstanceIdToken();
+        mRegistrationButton = (Button) findViewById(R.id.registrationButton);
+        mRegistrationButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                getInstanceIdToken();
+            }
+        });
 
         adminPatient = (TextView)findViewById(R.id.btn_adminPatient);
         showPatient = (TextView) findViewById(R.id.btn_showPatient);
@@ -166,6 +200,77 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    public void getInstanceIdToken() {
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+    }
+
+    public void registBroadcastReceiver(){
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+
+                switch (action) {
+                    case QuickstartPreferences.REGISTRATION_READY:
+                        // 액션이 READY일 경우
+                        mInformationTextView.setVisibility(View.GONE);
+                        break;
+                    case QuickstartPreferences.REGISTRATION_GENERATING:
+                        // 액션이 GENERATING일 경우
+                        mInformationTextView.setVisibility(View.VISIBLE);
+                        mInformationTextView.setText(getString(R.string.registering_message_generating));
+                        break;
+                    case QuickstartPreferences.REGISTRATION_COMPLETE:
+                        // 액션이 COMPLETE일 경우
+                        mRegistrationButton.setText(getString(R.string.registering_message_complete));
+                        mRegistrationButton.setEnabled(false);
+                        String token = intent.getStringExtra("token");
+                        User.getInstance().setToken(token);
+                        mInformationTextView.setText(token);
+                        break;
+                }
+
+            }
+        };
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_READY));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_GENERATING));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
+
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, this,
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
     @Override
