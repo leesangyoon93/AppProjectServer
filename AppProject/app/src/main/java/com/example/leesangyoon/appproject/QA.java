@@ -111,7 +111,7 @@ public class QA extends AppCompatActivity implements AdapterView.OnItemClickList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(QA.this, ShowArticle.class);
-        intent.putExtra("path", "schedule");
+        intent.putExtra("path", "qa");
         try {
             Article.getInstance().setId(qas.get(position).getString("_id"));
             Article.getInstance().setContent(qas.get(position).getString("content"));

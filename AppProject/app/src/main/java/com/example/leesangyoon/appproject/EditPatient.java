@@ -3,6 +3,7 @@ package com.example.leesangyoon.appproject;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -105,11 +106,27 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
                 super.onBackPressed();
                 break;
             case R.id.menu_sendMessage:
-                try {
-                    sendMessageToServer();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                new AlertDialog.Builder(EditPatient.this)
+                        .setTitle("푸시알림전송")
+                        .setMessage("보호자에게 푸시알림을 보내시겠습니까?")
+                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // yes 버튼 누르면
+                                try {
+                                    sendMessageToServer();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                        .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                // no 버튼 누르면
+                            }
+                        })
+                        .show();
                 break;
         }
         return super.onOptionsItemSelected(item);

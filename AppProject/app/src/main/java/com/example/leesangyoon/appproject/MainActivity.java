@@ -22,7 +22,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     TabLayout mainTab;
 
     TextView mInformationTextView;
-    Button mRegistrationButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,20 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
         registBroadcastReceiver();
 
-        // 토큰을 보여줄 TextView를 정의
         mInformationTextView = (TextView) findViewById(R.id.informationTextView);
         mInformationTextView.setVisibility(View.GONE);
-        // 토큰을 가져오는 동안 인디케이터를 보여줄 ProgressBar를 정의
-        // 토큰을 가져오는 Button을 정의
         getInstanceIdToken();
-        mRegistrationButton = (Button) findViewById(R.id.registrationButton);
-        mRegistrationButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                getInstanceIdToken();
-            }
-        });
 
         adminPatient = (TextView)findViewById(R.id.btn_adminPatient);
         showPatient = (TextView) findViewById(R.id.btn_showPatient);
@@ -228,8 +215,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case QuickstartPreferences.REGISTRATION_COMPLETE:
                         // 액션이 COMPLETE일 경우
-                        mRegistrationButton.setText(getString(R.string.registering_message_complete));
-                        mRegistrationButton.setEnabled(false);
                         String token = intent.getStringExtra("token");
                         User.getInstance().setToken(token);
                         mInformationTextView.setText(token);
