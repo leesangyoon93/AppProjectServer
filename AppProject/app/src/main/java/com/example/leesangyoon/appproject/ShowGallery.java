@@ -42,7 +42,7 @@ import java.util.Map;
 public class ShowGallery extends AppCompatActivity {
 
     ListView commentList;
-    TextView title, date, author, content, commentCount;
+    TextView title, date, author, commentCount;
     EditText input_comment;
     ImageView galleryImage;
     Button saveComment;
@@ -67,7 +67,6 @@ public class ShowGallery extends AppCompatActivity {
         title = (TextView) findViewById(R.id.galleryTitle);
         author = (TextView) findViewById(R.id.galleryAuthor);
         date = (TextView) findViewById(R.id.galleryDate);
-        content = (TextView) findViewById(R.id.galleryContent);
         galleryImage = (ImageView) findViewById(R.id.galleryImage);
 
         comments.clear();
@@ -198,12 +197,10 @@ public class ShowGallery extends AppCompatActivity {
                         GallerySingleton.getInstance().setCommentCount(response.getInt("commentCount"));
                         GallerySingleton.getInstance().setDate(response.getString("date"));
                         GallerySingleton.getInstance().setTitle(response.getString("title"));
-                        GallerySingleton.getInstance().setContent(response.getString("content"));
                         GallerySingleton.getInstance().setId(response.getString("_id"));
                         GallerySingleton.getInstance().setAuthor(response.getString("author"));
                         GallerySingleton.getInstance().setImage(response.getString("image"));
 
-                        content.setText(GallerySingleton.getInstance().getContent());
                         title.setText(GallerySingleton.getInstance().getTitle());
                         author.setText(GallerySingleton.getInstance().getAuthor());
                         date.setText(GallerySingleton.getInstance().getDate());
@@ -231,7 +228,6 @@ public class ShowGallery extends AppCompatActivity {
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userId", User.getInstance().getUserId());
         postParam.put("articleId", GallerySingleton.getInstance().getId());
-        postParam.put("content", input_comment.getText().toString());
         postParam.put("path", "gallery");
 
         String URL = "http://52.41.19.232/saveComment";

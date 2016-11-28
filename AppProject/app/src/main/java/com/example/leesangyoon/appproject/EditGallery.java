@@ -49,7 +49,7 @@ public class EditGallery extends AppCompatActivity {
 
     String from = "";
     Class cls = null;
-    EditText title, content;
+    EditText title;
     ImageView image;
     Bitmap photo;
     String strImage;
@@ -69,11 +69,9 @@ public class EditGallery extends AppCompatActivity {
         from = intent.getStringExtra("from");
 
         title = (EditText) findViewById(R.id.input_galleryTitle);
-        content = (EditText) findViewById(R.id.input_galleryContent);
         image = (ImageView) findViewById(R.id.input_galleryImage);
 
         title.setText(GallerySingleton.getInstance().getTitle());
-        content.setText(GallerySingleton.getInstance().getContent());
         photo = StringToBitmap(GallerySingleton.getInstance().getImage());
         image.setImageBitmap(photo);
 
@@ -199,7 +197,6 @@ public class EditGallery extends AppCompatActivity {
         postParam.put("articleId", GallerySingleton.getInstance().getId());
         postParam.put("image", strImage);
         postParam.put("title", title.getText().toString());
-        postParam.put("content", content.getText().toString());
         postParam.put("path", "gallery");
 
         String URL = "http://52.41.19.232/saveArticle";

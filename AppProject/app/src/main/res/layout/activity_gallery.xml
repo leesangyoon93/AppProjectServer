@@ -6,9 +6,14 @@
 
     <GridView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:id="@+id/gridView_gallery"
-        android:numColumns="3" />
+        android:numColumns="3"
+        android:columnWidth="150dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:verticalSpacing="0dp"
+        android:horizontalSpacing="0dp"/>
 
     <whdghks913.tistory.floatingactionbutton.FloatingActionButton
         android:id="@+id/mFloatingActionButton"

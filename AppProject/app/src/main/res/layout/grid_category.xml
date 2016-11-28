@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:id="@+id/wrap_category"
         android:layout_width="match_parent"
@@ -16,19 +16,30 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp">
 
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/img_categoryIcon"
+            android:layout_centerInParent="true"
+            android:alpha="0.05"
+            android:src="@drawable/custom_icon" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/categoryTitle"
             android:textSize="25sp"
-            android:layout_weight="8"
             android:gravity="center"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:textColor="#000" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_marginTop="5dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@id/categoryTitle">
 
             <TextView
                 android:layout_width="match_parent"
@@ -38,7 +49,8 @@
                 android:layout_weight="2"
                 android:gravity="center"
                 android:layout_marginTop="5dp"
-                android:padding="3dp" />
+                android:padding="3dp"
+                android:textColor="#000" />
 
             <ImageView
                 android:layout_width="50dp"
@@ -47,6 +59,17 @@
                 android:layout_centerInParent="true"
                 android:src="@android:drawable/ic_input_add"
                 android:visibility="gone"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_editCategoryContent"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:text="터치 시 카테고리 정보 등록 가능"
+                android:textSize="12sp" />
+
         </RelativeLayout>
-    </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>

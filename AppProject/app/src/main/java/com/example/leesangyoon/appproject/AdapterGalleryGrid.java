@@ -50,11 +50,9 @@ public class AdapterGalleryGrid extends BaseAdapter {
         JSONObject galleries = gallery.get(position);
 
         convertView = mInflater.inflate(R.layout.grid_gallery, null);
-        TextView title = (TextView) convertView.findViewById(R.id.grid_title);
         ImageView image = (ImageView) convertView.findViewById(R.id.grid_image);
 
         try {
-            title.setText(galleries.getString("title"));
             image.setImageBitmap(StringToBitmap(galleries.getString("image")));
         } catch (JSONException e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/input_galleryTitle"
         android:layout_gravity="center_horizontal"
         android:singleLine="true"
@@ -15,29 +15,15 @@
         android:background="@drawable/edittext_border"
         android:layout_marginBottom="10dp"
         android:textSize="18sp"
-        android:padding="10dp"
-        android:layout_weight="5" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:id="@+id/input_galleryContent"
-        android:hint="내용을 입력하세요."
-        android:textSize="18sp"
-        android:gravity="top|left"
-        android:background="@drawable/edittext_border"
-        android:padding="10dp"
-        android:layout_weight="3" />
+        android:padding="10dp" />
 
     <ImageView
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:id="@+id/input_galleryImage"
         android:layout_centerInParent="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_alignParentBottom="false"
         android:layout_weight="3" />
 
