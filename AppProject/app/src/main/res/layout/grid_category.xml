@@ -3,13 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <FrameLayout
         android:orientation="vertical"
-        android:id="@+id/wrap_category"
+        android:id="@+id/wrap_categoryLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@drawable/item_category"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:gravity="center"
@@ -17,59 +15,75 @@
         android:layout_marginRight="5dp">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:id="@+id/img_categoryIcon"
-            android:layout_centerInParent="true"
-            android:alpha="0.05"
-            android:src="@drawable/custom_icon" />
-
-        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/categoryTitle"
-            android:textSize="25sp"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textColor="#000" />
+            android:layout_height="match_parent"
+            android:id="@+id/wrap_category"
+            android:alpha="0.1" />
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_below="@id/categoryTitle">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/img_categoryIcon"
+                android:src="@drawable/custom_icon"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:alpha="0.1" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/categoryContent"
-                android:textSize="20sp"
-                android:layout_weight="2"
+                android:id="@+id/categoryTitle"
+                android:textSize="25sp"
                 android:gravity="center"
-                android:layout_marginTop="5dp"
-                android:padding="3dp"
-                android:textColor="#000" />
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_margin="3dp"
+                android:padding="3dp" />
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/btn_editCategoryContent"
-                android:layout_centerInParent="true"
-                android:src="@android:drawable/ic_input_add"
-                android:visibility="gone"/>
-
-            <TextView
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_editCategoryContent"
-                android:visibility="gone"
-                android:layout_centerInParent="true"
-                android:text="터치 시 카테고리 정보 등록 가능"
-                android:textSize="12sp" />
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:padding="10dp"
+                android:layout_below="@id/categoryTitle">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/categoryContent"
+                    android:textSize="20sp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:padding="3dp"
+                    android:textColor="#000" />
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/btn_editCategoryContent"
+                    android:layout_centerInParent="true"
+                    android:src="@android:drawable/ic_input_add"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_editCategoryContent"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:text="터치 시 카테고리 정보 등록 가능"
+                    android:textSize="12sp" />
+
+            </RelativeLayout>
         </RelativeLayout>
 
-    </RelativeLayout>
+    </FrameLayout>
 </LinearLayout>

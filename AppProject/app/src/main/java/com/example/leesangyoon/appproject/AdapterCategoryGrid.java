@@ -57,43 +57,67 @@ public class AdapterCategoryGrid extends BaseAdapter {
         TextView content = (TextView) convertView.findViewById(R.id.categoryContent);
         ImageView categoryIcon = (ImageView)convertView.findViewById(R.id.img_categoryIcon);
         TextView editContent = (TextView)convertView.findViewById(R.id.text_editCategoryContent);
+        ImageView wrap_category = (ImageView)convertView.findViewById(R.id.wrap_category);
         try {
-            title.setText(category.getString("title"));
-            content.setText(category.getString("content"));
-            if (User.getInstance().getAuth() == 1 && category.getString("content").equals("")) {
-                editContent.setVisibility(View.VISIBLE);
-            }
             switch(String.valueOf(category.getInt("num"))) {
                 case "0":
                     categoryIcon.setImageResource(R.drawable.meal_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_meal);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 case "1":
                     categoryIcon.setImageResource(R.drawable.shower_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_clean);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 case "2":
                     categoryIcon.setImageResource(R.drawable.walking_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_activity);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 case "3":
                     categoryIcon.setImageResource(R.drawable.body_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_movetrain);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 case "4":
                     categoryIcon.setImageResource(R.drawable.comment_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_comment);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 case "5":
                     categoryIcon.setImageResource(R.drawable.toilet_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_restroom);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 case "6":
                     categoryIcon.setImageResource(R.drawable.medicine_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_medicine);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 case "7":
                     categoryIcon.setImageResource(R.drawable.mental_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_mentaltrain);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 case "8":
                     categoryIcon.setImageResource(R.drawable.physical_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_physicalcare);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
                 default:
                     categoryIcon.setImageResource(R.drawable.custom_icon);
+                    wrap_category.setBackgroundResource(R.drawable.item_category_custom);
+                    //wrap_category.setAlpha((float)0.05);
                     break;
+            }
+            title.setText(category.getString("title"));
+            title.setAlpha(1);
+            content.setText(category.getString("content"));
+            content.setAlpha(1);
+            if (User.getInstance().getAuth() == 1 && category.getString("content").equals("")) {
+                editContent.setVisibility(View.VISIBLE);
+                editContent.setAlpha(1);
             }
         } catch (JSONException e) {
             e.printStackTrace();

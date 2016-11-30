@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="" />
+    <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/drawable/item_category.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/AdapterCategoryGrid.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/AdapterCategoryGrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/MyGcmListenerService.java" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/java/com/example/leesangyoon/appproject/MyGcmListenerService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/grid_category.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/grid_category.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="AppProjectServer.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -48,8 +54,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="1113" column="0" selection-start-line="1113" selection-start-column="0" selection-end-line="1113" selection-end-column="0" />
+            <state relative-caret-position="292">
+              <caret line="1109" column="1" selection-start-line="1109" selection-start-column="1" selection-end-line="1109" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -206,6 +212,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -240,7 +247,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
@@ -356,12 +362,13 @@
       <workItem from="1480239359734" duration="3067000" />
       <workItem from="1480330997564" duration="404000" />
       <workItem from="1480333204388" duration="925000" />
-      <workItem from="1480506140691" duration="439000" />
+      <workItem from="1480506140691" duration="622000" />
+      <workItem from="1480518906603" duration="27000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80159000" />
+    <option name="totallyTimeSpent" value="80369000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="42" width="1440" height="817" extended-state="0" />
@@ -818,8 +825,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="1113" column="0" selection-start-line="1113" selection-start-column="0" selection-end-line="1113" selection-end-column="0" />
+        <state relative-caret-position="292">
+          <caret line="1109" column="1" selection-start-line="1109" selection-start-column="1" selection-end-line="1109" selection-end-column="1" />
           <folding />
         </state>
       </provider>
