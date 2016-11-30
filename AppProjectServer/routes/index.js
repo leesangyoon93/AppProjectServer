@@ -1042,9 +1042,15 @@ router.post('/addCategory', function (req, res) {
 
 
 Patient.find(function (err, patients) {
-    Category.find({date: getTimeStamp()}, function (err, tmps) {
+    var date = new Date();
+    var dateNow = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay();
+    var yesterday = new Date(date.valueOf() - (24*60*60*1000));
+    var dateYesterday = yesterday.getFullYear() + "-" + yesterday.getMonth() + "-" + yesterday.getDay();
+    console.log(dateNow);
+    console.log(dateYesterday);
+    Category.find({date: dateNow}, function (err, tmps) {
         if (tmps.length == 0) {
-            Category.find({date: getYesterdayTimeStamp()}, function (err, categories) {
+            Category.find({date: dateYesterday}, function (err, categories) {
                 for (var i in patients) {
                     var category = new Category();
                     var tmp = JSON.parse(JSON.stringify(categories[i]));
