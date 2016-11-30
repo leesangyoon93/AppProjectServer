@@ -1060,7 +1060,7 @@ Patient.find(function (err, patients) {
                     category.custom = tmp.custom;
                     for (var j = 0; j < category.custom.length; j++)
                         category.custom[j].content = "";
-                    category.date = getTimeStamp();
+                    category.date = dateNow;
                     category.mealEnabled = tmp.mealEnabled;
                     category.cleanEnabled = tmp.cleanEnabled;
                     category.activityEnabled = tmp.activityEnabled;
@@ -1078,64 +1078,39 @@ Patient.find(function (err, patients) {
 });
 
 setInterval(function () {
-    Patient.find(function (err, patients) {
-        Category.find({date: getTimeStamp()}, function (err, tmps) {
-            if (tmps.length == 0) {
-                Category.find({date: getYesterdayTimeStamp()}, function (err, categories) {
-                    for (var i in patients) {
-                        var category = new Category();
-                        var tmp = JSON.parse(JSON.stringify(categories[i]));
-                        category.patient = patients[i];
-                        category.custom = tmp.custom;
-                        for (var j = 0; j < category.custom.length; j++)
-                            category.custom[j].content = "";
-                        category.date = getTimeStamp();
-                        category.mealEnabled = tmp.mealEnabled;
-                        category.cleanEnabled = tmp.cleanEnabled;
-                        category.activityEnabled = tmp.activityEnabled;
-                        category.moveTrainEnabled = tmp.moveTrainEnabled;
-                        category.commentEnabled = tmp.commentEnabled;
-                        category.restRoomEnabled = tmp.restRoomEnabled;
-                        category.medicineEnabled = tmp.medicineEnabled;
-                        category.mentalTrainEnabled = tmp.mentalTrainEnabled;
-                        category.physicalCareEnabled = tmp.physicalCareEnabled;
-                        category.save();
-                    }
-                })
-            }
-        })
-    });
+    var today = new Date();
+    var month1 = today.getMonth()+1;
+    var dateNow = today.getFullYear().toString() + "-" + month1 + "-" + today.getDate();
+    var yesterday = new Date(today.valueOf() - (24*60*60*1000));
+    var month2 = yesterday.getMonth()+1;
+    var dateYesterday = yesterday.getFullYear() + "-" + month2 + "-" + yesterday.getDate();
+    console.log(dateNow);
+    console.log(dateYesterday);
+    Category.find({date: dateNow}, function (err, tmps) {
+        if (tmps.length == 0) {
+            Category.find({date: dateYesterday}, function (err, categories) {
+                for (var i in patients) {
+                    var category = new Category();
+                    var tmp = JSON.parse(JSON.stringify(categories[i]));
+                    category.patient = patients[i];
+                    category.custom = tmp.custom;
+                    for (var j = 0; j < category.custom.length; j++)
+                        category.custom[j].content = "";
+                    category.date = dateNow;
+                    category.mealEnabled = tmp.mealEnabled;
+                    category.cleanEnabled = tmp.cleanEnabled;
+                    category.activityEnabled = tmp.activityEnabled;
+                    category.moveTrainEnabled = tmp.moveTrainEnabled;
+                    category.commentEnabled = tmp.commentEnabled;
+                    category.restRoomEnabled = tmp.restRoomEnabled;
+                    category.medicineEnabled = tmp.medicineEnabled;
+                    category.mentalTrainEnabled = tmp.mentalTrainEnabled;
+                    category.physicalCareEnabled = tmp.physicalCareEnabled;
+                    category.save();
+                }
+            })
+        }
+    })
 }, 1000 * 60 * 60 * 12);
-
-function getTimeStamp() {
-    var d = new Date();
-
-    var s =
-        leadingZeros(d.getFullYear(), 4) + '-' +
-        leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate()+1, 2);
-    return s;
-}
-
-function getYesterdayTimeStamp() {
-    var d = new Date();
-
-    var s =
-        leadingZeros(d.getFullYear(), 4) + '-' +
-        leadingZeros(d.getMonth() + 1, 2) + '-' +
-        leadingZeros(d.getDate(), 2);
-    return s;
-}
-
-function leadingZeros(n, digits) {
-    var zero = '';
-    n = n.toString();
-
-    if (n.length < digits) {
-        for (i = 0; i < digits - n.length; i++)
-            zero += '0';
-    }
-    return zero + n;
-}
 
 module.exports = router;
