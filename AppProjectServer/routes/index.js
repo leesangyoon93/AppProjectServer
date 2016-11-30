@@ -1048,8 +1048,6 @@ Patient.find(function (err, patients) {
     var yesterday = new Date(today.valueOf() - (24*60*60*1000));
     var month2 = yesterday.getMonth()+1;
     var dateYesterday = yesterday.getFullYear() + "-" + month2 + "-" + yesterday.getDate();
-    console.log(dateNow);
-    console.log(dateYesterday);
     Category.find({date: dateNow}, function (err, tmps) {
         if (tmps.length == 0) {
             Category.find({date: dateYesterday}, function (err, categories) {
@@ -1085,8 +1083,6 @@ setInterval(function () {
         var yesterday = new Date(today.valueOf() - (24*60*60*1000));
         var month2 = yesterday.getMonth()+1;
         var dateYesterday = yesterday.getFullYear() + "-" + month2 + "-" + yesterday.getDate();
-        console.log(dateNow);
-        console.log(dateYesterday);
         Category.find({date: dateNow}, function (err, tmps) {
             if (tmps.length == 0) {
                 Category.find({date: dateYesterday}, function (err, categories) {
@@ -1113,6 +1109,6 @@ setInterval(function () {
             }
         })
     });
-}, 1000 * 60 * 60 * 12);
+}, 1000 * 60 * 60 * 24);
 
 module.exports = router;
