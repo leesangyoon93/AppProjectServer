@@ -1044,11 +1044,11 @@ router.post('/addCategory', function (req, res) {
 Patient.find(function (err, patients) {
     var today = new Date();
     var month1 = today.getMonth()+1;
-    var day1 = today.getDate()-2;
+    var day1 = today.getDate()-1;
     var dateNow = today.getFullYear().toString() + "-" + month1 + "-" + day1;
     var yesterday = new Date(today.valueOf() - (24*60*60*1000));
     var month2 = yesterday.getMonth()+1;
-    var day2 = yesterday.getDate()-2
+    var day2 = yesterday.getDate()-1;
     var dateYesterday = yesterday.getFullYear() + "-" + month2 + "-" + day2;
     Category.find({date: dateNow}, function (err, tmps) {
         if (tmps.length == 0) {
