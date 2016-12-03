@@ -228,6 +228,7 @@ public class ShowGallery extends AppCompatActivity {
         Map<String, String> postParam = new HashMap<String, String>();
         postParam.put("userId", User.getInstance().getUserId());
         postParam.put("articleId", GallerySingleton.getInstance().getId());
+        postParam.put("content", input_comment.getText().toString());
         postParam.put("path", "gallery");
 
         String URL = "http://52.41.19.232/saveComment";
