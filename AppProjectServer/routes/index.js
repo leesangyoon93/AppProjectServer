@@ -1050,9 +1050,9 @@ Patient.find(function (err, patients) {
     var month2 = yesterday.getMonth()+1;
     var day2 = yesterday.getDate()-1;
     var dateYesterday = yesterday.getFullYear() + "-" + month2 + "-" + yesterday.getDate();
-    Category.find({date: 2016-12-2}, function (err, tmps) {
+    Category.find({date: "2016-12-2"}, function (err, tmps) {
         if (tmps.length == 0) {
-            Category.find({date: 2016-12-1}, function (err, categories) {
+            Category.find({date: "2016-12-1"}, function (err, categories) {
                 for (var i in patients) {
                     var category = new Category();
                     var tmp = JSON.parse(JSON.stringify(categories[i]));
