@@ -1046,13 +1046,13 @@ Patient.find(function (err, patients) {
     var month1 = today.getMonth()+1;
     var day1 = today.getDate()-1;
     var dateNow = today.getFullYear().toString() + "-" + month1 + "-" + today.getDate();
-    var yesterday = new Date(today.valueOf() - (24*60*60*1000*2));
+    var yesterday = new Date(today.valueOf() - (24*60*60*1000));
     var month2 = yesterday.getMonth()+1;
     var day2 = yesterday.getDate()-1;
     var dateYesterday = yesterday.getFullYear() + "-" + month2 + "-" + yesterday.getDate();
-    Category.find({date: dateNow}, function (err, tmps) {
+    Category.find({date: 2016-12-2}, function (err, tmps) {
         if (tmps.length == 0) {
-            Category.find({date: dateYesterday}, function (err, categories) {
+            Category.find({date: 2016-12-1}, function (err, categories) {
                 for (var i in patients) {
                     var category = new Category();
                     var tmp = JSON.parse(JSON.stringify(categories[i]));
@@ -1060,7 +1060,7 @@ Patient.find(function (err, patients) {
                     category.custom = tmp.custom;
                     for (var j = 0; j < category.custom.length; j++)
                         category.custom[j].content = "";
-                    category.date = dateNow;
+                    category.date = 2016-12-2;
                     category.mealEnabled = tmp.mealEnabled;
                     category.cleanEnabled = tmp.cleanEnabled;
                     category.activityEnabled = tmp.activityEnabled;
