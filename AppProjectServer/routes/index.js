@@ -45,7 +45,6 @@ router.post('/sendMessage', function(req, res) {
     registrationIds.push(token);
 
     sender.send(message, registrationIds, 4, function (err, result) {
-        console.log(result);
         return res.json({'result': 'success'})
     });
 })
@@ -629,10 +628,6 @@ router.post('/deleteArticle', function (req, res) {
     }
 });
 
-router.post('/aaaa', function (req, res) {
-    console.log(req.body);
-    return res.json({'result': 'success'});
-});
 // 게시판 API 끝
 
 router.get('/getPatients', function (req, res) {
@@ -821,7 +816,6 @@ router.get('/getCategoryState', function (req, res) {
     Patient.findById(id, function (err, patient) {
         if (err) return res.json({'result': 'fail'});
         if (patient) {
-            console.log(req.query.date);
             Category.findOne({'patient': patient, 'date': req.query.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
@@ -885,7 +879,6 @@ router.get('/getCategoryState', function (req, res) {
                     });
                     //if(category.custom.length != 0) {
                     for (var i = 0; i < category.custom.length; i++) {
-                        console.log(i);
                         result.push({
                             'title': category.custom[i].title,
                             'content': category.custom[i].content,
@@ -893,7 +886,6 @@ router.get('/getCategoryState', function (req, res) {
                             'num': category.custom[i].num
                         });
                     }
-                    console.log(result);
                     return res.json(result);
                 }
                 else return res.json({'result': 'fail'})
@@ -912,7 +904,6 @@ router.post("/saveCategoryState", function (req, res) {
             Category.findOne({patient: patient, date: req.body.date}, function (err, category) {
                 if (err) return res.json({'result': 'fail'});
                 if (category) {
-                    console.log(req.body);
                     var length = Object.keys(req.body).length;
                     category.mealEnabled = req.body.state0 == 'true';
                     category.cleanEnabled = req.body.state1 == 'true';
@@ -1044,10 +1035,7 @@ router.post('/getProtector', function(req, res) {
     var id = new ObjectId(req.body.userId);
     User.findById(id, function(err, user) {
         if(err) return res.json({'result': 'fail'});
-        if(user) {
-            console.log(user);
-            return res.json(user);
-        }
+        if(user) return res.json(user);
         else return res.json({'result': 'fail'});
     })
 })
