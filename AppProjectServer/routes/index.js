@@ -1040,6 +1040,18 @@ router.post('/addCategory', function (req, res) {
     })
 });
 
+router.post('/getProtector', function(req, res) {
+    var id = new ObjectId(req.body.userId);
+    User.findById(id, function(err, user) {
+        if(err) return res.json({'result': 'fail'});
+        if(user) {
+            console.log(user);
+            return res.json(user);
+        }
+        else return res.json({'result': 'fail'});
+    })
+})
+
 
 Patient.find(function (err, patients) {
     var today = new Date();

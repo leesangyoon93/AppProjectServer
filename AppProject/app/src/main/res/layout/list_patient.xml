@@ -27,5 +27,63 @@
             android:textColor="#000000"
             android:gravity="left|center" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:id="@+id/textView24"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:gravity="left|center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_age"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:gravity="left|center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="/"
+            android:id="@+id/textView27"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:gravity="left|center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_patientRoomNumber"
+            android:layout_gravity="center_vertical"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:gravity="left|center"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center|right">
+
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/imageView2"
+                android:onClick="call"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/phone" />
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

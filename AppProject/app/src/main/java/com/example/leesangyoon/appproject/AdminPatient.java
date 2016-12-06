@@ -3,6 +3,7 @@ package com.example.leesangyoon.appproject;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -12,13 +13,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +30,8 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import whdghks913.tistory.floatingactionbutton.FloatingActionButton;
 
@@ -76,6 +82,15 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
         adapterPatientList.notifyDataSetChanged();
 
         patientList.setAdapter(adapterPatientList);
+    }
+
+    public void call(View v) throws Exception {
+        View parentRow = (View) v.getParent();
+        LinearLayout linearLayout = (LinearLayout) parentRow.getParent();
+        ListView listView = (ListView)linearLayout.getParent().getParent();
+        final int position = listView.getPositionForView(linearLayout);
+
+        getProtectorToServer(position);
     }
 
     @Override
@@ -144,6 +159,44 @@ public class AdminPatient extends AppCompatActivity implements AdapterView.OnIte
         });
 
         // Adding request to request queue
+        volley.getInstance().addToRequestQueue(req);
+    }
+
+    private void getProtectorToServer(final int position) throws Exception {
+
+        final String URL = "http://52.41.19.232/getProtector";
+
+        Map<String, String> postParam = new HashMap<String, String>();
+        postParam.put("userId", patients.get(position).getString("protector"));
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, URL,
+                new JSONObject(postParam), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.toString().contains("result")) {
+                        if (response.getString("result").equals("fail")) {
+                            Toast.makeText(AdminPatient.this, "알 수 없는 에러가 발생합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    else {
+                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + response.getString("phoneNumber")));
+                        startActivity(intent);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d("development", "Error: " + error.getMessage());
+                    }
+                });
+
         volley.getInstance().addToRequestQueue(req);
     }
 }
