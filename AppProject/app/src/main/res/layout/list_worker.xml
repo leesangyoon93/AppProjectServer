@@ -40,14 +40,14 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="right">
+            android:gravity="center|right">
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:id="@+id/imageView3"
-                android:src="@drawable/shape"
-                android:layout_gravity="right" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/workerCall"
+                android:src="@drawable/phone"
+                android:onClick="workerCall" />
         </LinearLayout>
 
     </LinearLayout>

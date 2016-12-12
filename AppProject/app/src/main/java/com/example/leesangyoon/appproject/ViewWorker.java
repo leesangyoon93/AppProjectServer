@@ -1,6 +1,7 @@
 package com.example.leesangyoon.appproject;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -68,6 +70,26 @@ public class ViewWorker extends AppCompatActivity implements AdapterView.OnItemC
         adapterWorkerList.notifyDataSetChanged();
 
         workerList.setAdapter(adapterWorkerList);
+    }
+
+    public void workerCall(View v) {
+        View parentRow = (View) v.getParent();
+        LinearLayout linearLayout = (LinearLayout) parentRow.getParent();
+        ListView listView = (ListView)linearLayout.getParent().getParent();
+        final int position = listView.getPositionForView(linearLayout);
+
+        Intent intent = null;
+        try {
+            intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + workers.get(position).getString("phoneNumber")));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(ViewWorker.this, "알 수 없는 에러가 발생했습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

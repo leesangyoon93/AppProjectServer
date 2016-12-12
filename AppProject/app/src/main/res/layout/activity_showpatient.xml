@@ -7,6 +7,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/genderLayout"
         android:background="#004589"
         android:layout_weight="8"
         android:gravity="center">

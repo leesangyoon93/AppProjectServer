@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9c47dfeb-e90c-4664-83e1-fbdc2c9707d8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/list_patient.xml" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/layout/list_patient.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../AppProject/app/src/main/res/drawable/phone.png" afterPath="$PROJECT_DIR$/../AppProject/app/src/main/res/drawable/phone.png" />
     </list>
     <ignored path="AppProjectServer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -362,12 +361,12 @@
       <workItem from="1480506140691" duration="622000" />
       <workItem from="1480518906603" duration="1485000" />
       <workItem from="1480748832295" duration="695000" />
-      <workItem from="1481026206984" duration="284000" />
+      <workItem from="1481026206984" duration="402000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82806000" />
+    <option name="totallyTimeSpent" value="82924000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="42" width="1440" height="817" extended-state="0" />

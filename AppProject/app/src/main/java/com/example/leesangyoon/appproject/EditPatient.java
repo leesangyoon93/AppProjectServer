@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -21,6 +22,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +60,7 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
     TextView roomNumber, birthday, date;
     ActionBar actionBar;
     CircleImageView patientImage;
+    LinearLayout genderLayout;
     int lyear, lmonth, lday;
 
     @Override
@@ -76,6 +79,7 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
         birthday = (TextView) findViewById(R.id.patient__birthday);
         patientImage = (CircleImageView) findViewById(R.id.image__patient);
         date = (TextView) findViewById(R.id.text__date);
+        genderLayout = (LinearLayout)findViewById(R.id.genderLayout2);
 
         try {
             setup();
@@ -141,6 +145,12 @@ public class EditPatient extends AppCompatActivity implements AdapterView.OnItem
         int age = getAgeFromBirthday(d) + 1;
         birthday.setText(String.valueOf(age) + "세");
         patientImage.setImageBitmap(StringToBitmap(Patient.getInstance().getImage()));
+        if(Patient.getInstance().getGender().equals("male")) {
+            genderLayout.setBackgroundColor(Color.parseColor("#004589"));
+        }
+        else {
+            genderLayout.setBackgroundColor(Color.parseColor("#FFBF101D"));
+        }
 
         GregorianCalendar calendar = new GregorianCalendar();
         lyear = calendar.get(Calendar.YEAR);

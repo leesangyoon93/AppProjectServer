@@ -13,11 +13,10 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:id="@+id/wrap_workerProfile">
+        android:id="@+id/wrap_workerProfile"
+        android:gravity="left|center">
 
         <LinearLayout
             android:orientation="vertical"
@@ -107,11 +106,10 @@
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:id="@+id/wrap_userProfile">
+        android:id="@+id/wrap_userProfile"
+        android:gravity="left|center">
 
         <LinearLayout
             android:orientation="vertical"
@@ -290,14 +288,15 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="비밀번호 변경"
         android:id="@+id/btn_changePassword"
-        android:padding="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:background="@drawable/shape"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="5dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp" />
 
 </LinearLayout>
