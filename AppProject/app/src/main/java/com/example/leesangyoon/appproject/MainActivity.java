@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
+
         actionBar.setTitle(User.getInstance().getNursingHomeName());
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayShowTitleEnabled(true);
